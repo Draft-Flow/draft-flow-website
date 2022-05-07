@@ -1,0 +1,5 @@
+node_modules/
+
+# Eleventy
+/web/_site/
+/web/.cache/

@@ -1,0 +1,30 @@
+{
+  "name": "perthshire-gravel-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "eleventy",
+		"dev": "npx eleventy --watch --serve",
+		"debug": "DEBUG=* npx eleventy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Highland-Perthshire-Cycling/perthshire-gravel.git"
+  },
+  "author": "Highland Perthshire Cycling",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel/issues"
+  },
+  "homepage": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.1",
+    "@sanity/block-content-to-markdown": "^0.0.5",
+    "@sanity/client": "^3.3.0",
+    "dotenv": "^16.0.0",
+    "groq": "^2.29.3"
+  }
+}
