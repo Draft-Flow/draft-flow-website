@@ -6,8 +6,8 @@
   "scripts": {
     "start": "npm run dev",
     "build": "eleventy",
-		"dev": "npx eleventy --watch --serve",
-		"debug": "DEBUG=* npx eleventy",
+    "dev": "npx eleventy --watch --serve",
+    "debug": "DEBUG=* npx eleventy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +24,9 @@
     "@11ty/eleventy": "^1.0.1",
     "@sanity/block-content-to-markdown": "^0.0.5",
     "@sanity/client": "^3.3.0",
+    "@sanity/image-url": "^0.140.22",
+    "clean-css": "^5.3.0",
+    "date-fns": "^2.28.0",
     "dotenv": "^16.0.0",
     "groq": "^2.29.3"
   }
