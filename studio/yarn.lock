@@ -1364,7 +1364,7 @@
 
 "@sanity/dashboard@^2.29.8":
   version "2.29.8"
-  resolved "https://registry.npmjs.org/@sanity/dashboard/-/dashboard-2.29.8.tgz"
+  resolved "https://registry.npmjs.org/@sanity/dashboard/-/dashboard-2.29.8.tgz#a722ecb825242cf5e59374a871957eed613ede10"
   integrity sha512-aLqL0W9aRdZCOx5xwermowaP3b5t7CEZ4s9JBgrV/LjmSVp8bxVLWsI71aKN++/8eBOgdDkAVV5I0i32MGdyaw==
   dependencies:
     "@sanity/icons" "^1.2.6"
