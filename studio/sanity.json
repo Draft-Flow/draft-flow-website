@@ -1,20 +1,20 @@
 {
   "root": true,
-  "project": {
-    "name": "perthshire-gravel"
-  },
   "api": {
     "projectId": "u8m9456v",
     "dataset": "production"
   },
+  "project": {
+    "name": "perthshire-gravel"
+  },
   "plugins": [
-    "@sanity/base",
-    "@sanity/default-layout",
-    "@sanity/default-login",
-    "@sanity/desk-tool",
-    "@sanity/dashboard",
-    "dashboard-widget-document-list",
-    "dashboard-widget-netlify"
+    // "@sanity/base",
+    // "@sanity/default-layout",
+    // "@sanity/default-login",
+    // "@sanity/desk-tool",
+    // "@sanity/dashboard",
+    // "dashboard-widget-document-list",
+    // "dashboard-widget-netlify"
   ],
   "env": {
     "development": {
