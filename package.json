@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.1",
     "lerna": "^4.0.0"
   }
 }
