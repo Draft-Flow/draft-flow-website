@@ -1,19 +1,22 @@
 {
   "root": true,
+  "project": {
+    "name": "perthshire-gravel"
+  },
   "api": {
     "projectId": "u8m9456v",
     "dataset": "production"
   },
-  "project": {
-    "name": "perthshire-gravel"
-  },
   "plugins": [
-  
+    "@sanity/base",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool"
   ],
   "env": {
     "development": {
       "plugins": [
-        
+        "@sanity/vision"
       ]
     }
   },
@@ -21,6 +24,10 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
+    },
+    {
+      "implements": "part:@sanity/base/root",
+      "path": "plugins/sanity-plugin-tutorial/CustomDefaultLayout"
     }
   ]
 }
