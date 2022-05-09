@@ -1,0 +1,9 @@
+<ol class="routeslist" style="counter-reset: start-from {{ routeslist.length + 1 }}">
+{% for route in collections.routes | reverse %}
+  {% set currentRoute = route.data.route %}
+  <li class="routelist-item{% if route.url == url %} routelist-item-active{% endif %}">
+    <a href="{{ route.url | url }}" class="routelist-link">{{ currentRoute.title }}</a>
+    <p class="routelist-excerpt">{{ currentRoute.excerpt }}</p>
+  </li>
+{% endfor %}
+</ol>

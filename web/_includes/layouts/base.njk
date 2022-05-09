@@ -3,8 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ renderData.title or title or metadata.title }}</title>
-    <meta name="Description" content="{{ renderData.description or description or metadata.description }}">
+    <title>{{ title or renderData.title or metadata.title }}</title>
+    <meta name="Description" content="{{ description or renderData.description or metadata.description }}">
+    <link rel="canonical" href={ page.url }/>
+    <meta property="og:title" content={ title or renderData.title or metadata.title }/>
+    <meta property="og:url" content={ page.url } />
+    <meta property="og:description" content={description or renderData.description} />
+    <meta property="og:image" content="/static/img/logo.png" />
+    <meta property="og:type" content="article" />
       {# <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}"> #}
     {% set css %}
       {% include "style.css" %}
@@ -15,7 +21,10 @@
   </head>
   <body>
     <header>
-      <h1 class="home"><a href="{{ '/' | url }}">{{ metadata.title }}</a></h1>
+      <h1 class="home">
+        <a href="{{ '/' | url }}">
+          <img src="{% imageUrlFor metadata.logo.asset._ref, 800 %}" alt="{{ metadata.logo.alt }}" />
+      </h1>
       <ul class="nav">
         {%- for nav in collections.nav | reverse -%}
         <li class="nav-item{% if nav.url == page.url %} nav-item-active{% endif %}"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
@@ -23,13 +32,11 @@
       </ul>
     </header>
 
-    <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
+    <main {% if templateClass %}class="{{ templateClass }}"{% endif %}>
       {{ content | safe }}
     </main>
-
+    
     <footer>
-        <p><em>This is an <a href="https://www.11ty.io/">Eleventy</a> + <a href="https://www.sanity.io">Sanity.io</a> project inspired by the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
+        {{ metadata | dump }}
     </footer>
-
-    <!-- Current page: {{ page.url | url }} -->
   </body>
