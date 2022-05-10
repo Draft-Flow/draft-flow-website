@@ -8,6 +8,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import author from './documents/author'
 import category from './documents/category'
 import route from './documents/route'
+import place from './documents/place'
 import siteSettings from './documents/siteSettings'
 
 // Object types
@@ -17,6 +18,7 @@ import bioPortableText from './objects/bioPortableText'
 import excerptPortableText from './objects/excerptPortableText'
 import mainImage from './objects/mainImage'
 import authorReference from './objects/authorReference'
+import placeReference from './objects/placeReference'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -27,6 +29,8 @@ export default createSchema({
     category,
     author,
     mainImage,
+    place,
+    placeReference,
     authorReference,
     bodyPortableText,
     basicPortableText,

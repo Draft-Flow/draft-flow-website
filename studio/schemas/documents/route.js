@@ -3,12 +3,36 @@ import { format } from 'date-fns'
 export default {
   name: 'route',
   type: 'document',
-	title: 'Route',
+	title: 'Routes',
+  groups: [
+    {
+      name: 'basics',
+      title: 'Basics',
+    },
+    {
+      name: 'description',
+      title: 'Description',
+    },
+    {
+      name: 'gpx',
+      title: 'GPX',
+    },
+    {
+      name: 'beta',
+      title: 'Beta',
+    },
+    {
+      name: 'stages',
+      title: 'Stages',
+    },
+  ],
   fields: [
+    // Basics
     {
       name: 'title',
       type: 'string',
-      title: 'Title'
+      title: 'Title',
+      group: ['basics'],
     },
     {
       name: 'slug',
@@ -18,25 +42,15 @@ export default {
       options: {
         source: 'title',
         maxLength: 96
-      }
+      },
+      group: ['basics'],
     },
     {
       name: 'publishedAt',
       type: 'date',
       title: 'Published at',
-      description: 'This can be used to schedule post for publishing'
-    },
-    {
-      name: 'mainImage',
-      type: 'mainImage',
-      title: 'Main image'
-    },
-    {
-      name: 'excerpt',
-      type: 'excerptPortableText',
-      title: 'Excerpt',
-      description:
-        'This ends up on summary pages, on Google, when people share your post in social media.'
+      description: 'This can be used to schedule post for publishing',
+      group: ['beta'],
     },
     {
       name: 'authors',
@@ -46,74 +60,142 @@ export default {
         {
           type: 'authorReference'
         }
-      ]
+      ],
+      group: ['basics'],
+    },
+    // Description
+    {
+      name: 'mainImage',
+      type: 'mainImage',
+      title: 'Main image',
+      group: ['description'],
     },
     {
-      name: 'categories',
-      type: 'array',
-      title: 'Categories',
-      of: [
-        {
-          type: 'reference',
-          to: {
-            type: 'category'
-          }
-        }
-      ]
+      name: 'excerpt',
+      type: 'excerptPortableText',
+      title: 'Excerpt',
+      group: ['description'],
+      description:
+        'This ends up on summary pages, on Google, when people share your post in social media.',
+      group: ['description'],
     },
+    {
+      name: 'body',
+      type: 'bodyPortableText',
+      title: 'Body',
+      group: ['description'],
+    },
+    // GPX
     {
       name: 'gpxRoute',
       type: 'file',
       title: 'GPX Route',
       description: 'A GPX of the route',
+      group: ['gpx'],
     },
+    // Beta
     {
       name: 'routeLength',
       type: 'number',
       title: 'Route Length',
-      description: 'Total distance in kilometers'
+      description: 'Total distance in kilometers',
+      initialValue: 0,
+      group: ['beta'],
     },
     {
       name: 'routeAscent',
       type: 'number',
       title: 'Route Ascent',
-      description: 'Total ascent in meters'
+      description: 'Total ascent in meters',
+      initialValue: 0,
+      group: ['beta'],
     },
     {
-      name: 'body',
-      type: 'bodyPortableText',
-      title: 'Body'
-    }
+      name: 'category',
+      type: 'reference',
+      title: 'Category',
+      to: {
+        type: 'category'
+      },
+      group: ['beta'],
+    },
+    {
+      name: 'time',
+      type: 'string',
+      title: 'Riding Time',
+      description: 'Estimated time to ride in hours. Ex "3-4 hrs"',
+      group: ['beta'],
+    },
+    {
+      name: 'osgridref',
+      type: 'string',
+      title: 'OS Grid Reference number',
+      description: 'The Open Street grid reference number',
+      validation: Rule => Rule.optional().custom(value => {
+        const regex = /^([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3}|\d{2}\s?\d{2}|\d{1}\s?\d{1})$/
+        return value.match(regex) ? true : 'Must be a valid OS Grid Reference number'
+      }),
+      group: ['beta'],
+    },
+    {
+      name: 'oslandrangermap',
+      type: 'array',
+      title: 'OS Landranger Maps',
+      description: 'The OS Landranger Map numbers. ',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags'
+      },
+      validation: Rule => Rule.optional().custom(values => {
+        const regex = /[0-9]{1,3}/
+        return values.every(value => value.match(regex)) ? true : 'Must be valid map numbers'
+      }),
+      group: ['beta'],
+    },
+    {
+      name: 'startFinish',
+      type: 'reference',
+      title: 'Start/Finish',
+      description: 'Recommended start/finish for the route',
+      to: {
+        type: 'place'
+      },
+      group: ['beta'],
+    },
+    {
+      name: 'parking',
+      type: 'reference',
+      title: 'Parking',
+      to: {
+        type: 'place'
+      },
+      group: ['beta'],
+    },
+    {
+      name: 'railway',
+      type: 'reference',
+      title: 'Railway',
+      to: {
+        type: 'place'
+      },
+      group: ['beta'],
+    },
+    // Stages
+    {
+      name: 'stages',
+      type: 'array',
+      title: 'Stages',
+      description: 'Add stages to the route, if desired.',
+      of: [{
+        type: 'reference',
+        to: {
+          type: 'route',
+        }
+      }],
+      group: ['stages'],
+    },
   ],
   orderings: [
-    {
-      name: 'publishingDateAsc',
-      title: 'Publishing date new–>old',
-      by: [
-        {
-          field: 'publishedAt',
-          direction: 'asc'
-        },
-        {
-          field: 'title',
-          direction: 'asc'
-        }
-      ]
-    },
-    {
-      name: 'publishingDateDesc',
-      title: 'Publishing date old->new',
-      by: [
-        {
-          field: 'publishedAt',
-          direction: 'desc'
-        },
-        {
-          field: 'title',
-          direction: 'asc'
-        }
-      ]
-    }
   ],
   preview: {
     select: {

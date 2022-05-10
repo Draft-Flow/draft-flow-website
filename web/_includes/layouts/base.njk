@@ -24,6 +24,7 @@
       <h1 class="home">
         <a href="{{ '/' | url }}">
           <img src="{% imageUrlFor metadata.logo.asset._ref, 800 %}" alt="{{ metadata.logo.alt }}" />
+        </a>
       </h1>
       <ul class="nav">
         {%- for nav in collections.nav | reverse -%}
