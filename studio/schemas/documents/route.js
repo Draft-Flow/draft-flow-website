@@ -196,19 +196,42 @@ export default {
     },
   ],
   orderings: [
+    {
+      name: 'distance',
+      title: 'Route Length short->long',
+      by: [
+        {
+          field: 'routeLength',
+          direction: 'asc'
+        },
+        {
+          field: 'title',
+          direction: 'asc'
+        }
+      ]
+    }
   ],
   preview: {
     select: {
       title: 'title',
-      slug: 'slug',
+      routeLength: 'routeLength',
+      routeTime: 'time',
+      routeAscent: 'routeAscent',
       media: 'mainImage'
     },
-    prepare ({title = 'No title', slug = {}, media}) {
-      const path = `/${slug.current}/`
+    prepare ({title = 'No title', routeLength = '', routeTime = '', routeAscent = '', media}) {
+      const attrArr = [
+        routeLength ? `${routeLength}km` :  null,
+        routeAscent ? `${routeAscent}m` : null,
+        routeTime ? routeTime : null,
+      ]
+
+      const attributes = attrArr.filter(n => n)
+
       return {
         title,
         media,
-        subtitle: slug ? path : 'Missing slug'
+        subtitle: attributes.length ? attributes.join(' | ') : null
       }
     }
   }
