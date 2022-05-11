@@ -22,12 +22,15 @@
   "homepage": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel#readme",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.1",
+    "@mapbox/togeojson": "^0.16.0",
     "@sanity/block-content-to-markdown": "^0.0.5",
     "@sanity/client": "^3.3.0",
     "@sanity/image-url": "^0.140.22",
     "clean-css": "^5.3.0",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.0",
-    "groq": "^2.29.3"
+    "groq": "^2.29.3",
+    "mapbox-gl": "^2.8.2",
+    "xmldom": "^0.6.0"
   }
 }

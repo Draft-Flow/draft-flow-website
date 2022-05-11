@@ -9,6 +9,7 @@ module.exports = function(eleventyConfig) {
     return urlFor(image)
       .width(width)
   })
+  
   // https://www.11ty.io/docs/quicktips/inline-css/
   eleventyConfig.addFilter("cssmin", function(code) {
     return new CleanCSS({}).minify(code).styles;

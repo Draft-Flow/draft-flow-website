@@ -1,0 +1,11 @@
+---
+layout: layouts/geoJSON
+tags:
+  - routes
+pagination:
+  alias: route
+  data: routes
+  size: 1
+  addAllPagesToCollections: false
+permalink: routes/{{ route.slug.current | slug }}/route.geojson
+---

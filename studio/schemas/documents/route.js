@@ -93,6 +93,12 @@ export default {
       description: 'A GPX of the route',
       group: ['gpx'],
     },
+    {
+      name: 'geoJSON',
+      type: 'string',
+      title: 'GEO JSON',
+      group: ['gpx'],
+    },
     // Beta
     {
       name: 'routeLength',

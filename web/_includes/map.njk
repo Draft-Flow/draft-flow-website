@@ -1,0 +1,78 @@
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+<section>
+  <div id='map' style="height:100vh; width:100vw;" ></div>
+  <script>
+
+      mapboxgl.accessToken = '{{ env.mapbox_token }}';
+      const map = new mapboxgl.Map({
+          container: 'map',
+          style: '{{ env.mapbox_style }}',
+          center: {lat: 56.5405969, lon: -3.7639374 },
+          zoom: 9,
+          cooperativeGestures: true,
+      });
+      map.scrollZoom.disable();
+      // Add zoom and rotation controls to the map.
+      map.addControl(new mapboxgl.NavigationControl());
+
+      map.on('load', () => {
+      {% for route in collections.routes | reverse %}
+        {% set currentRoute = route.data.route %}
+        {% if currentRoute.geoJSON %}
+        map.addSource('{{ currentRoute._id }}', {
+          'type': 'geojson',
+          'data': {{ currentRoute.geoJSON | dump | safe }}
+        })
+        map.addLayer({
+          'id': '{{ currentRoute._id }}-route',
+          'type': 'line',
+          'source': '{{ currentRoute._id }}',
+          'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          'paint': {
+            'line-color': '#ff00ff',
+            'line-width': 5
+          }
+        });
+        map.addLayer({
+          'id': '{{ currentRoute._id }}-fill',
+          'type': 'fill',
+          'source': '{{ currentRoute._id }}',
+          'layout': {},
+          'paint': {
+            'fill-color': '#627BC1',
+            'fill-opacity': [
+              'case',
+              ['boolean', ['feature-state', 'hover'], false],
+              1,
+              0.2
+            ]
+          }
+        });
+        map.on('mousemove', '{{ currentRoute._id }}-fill', (e) => {
+        console.log(e.features[0])
+            map.setFeatureState(
+              { source: '{{ currentRoute._id }}', id: e.features[0].layer.id },
+              { hover: true }
+            );
+        });
+          
+          // When the mouse leaves the state-fill layer, update the feature state of the
+          // previously hovered feature.
+        map.on('mouseleave', '{{ currentRoute._id }}-fill', (e) => {
+        console.log('out')
+            map.setFeatureState(
+              { source: '{{ currentRoute._id }}', id: '{{ currentRoute._id }}-fill'  },
+              { hover: false }
+            );
+        });
+         
+        {% endif %}
+      {% endfor %}
+      })
+  </script>
+</section>

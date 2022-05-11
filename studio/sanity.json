@@ -29,6 +29,10 @@
     {
       "implements": "part:@sanity/base/root",
       "path": "plugins/sanity-plugin-tutorial/CustomDefaultLayout"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./actions/resolveDocumentActions.js"
     }
   ]
 }
