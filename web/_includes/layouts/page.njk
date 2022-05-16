@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-page
+---
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
+<script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<article>
+  <h1>{{ page.title }}</h1>
+  <p><a href="{{ '/' | url }}">← Home</a></p>
+</article>
+
+<section>
+  {{ page.content }}
+</section>

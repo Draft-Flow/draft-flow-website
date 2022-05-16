@@ -90,7 +90,7 @@ export default {
       name: 'gpxRoute',
       type: 'file',
       title: 'GPX Route',
-      description: 'A GPX of the route',
+      description: 'A GPX of the route. Please ensure the GPX route contains elevation data.',
       group: ['gpx'],
     },
     {

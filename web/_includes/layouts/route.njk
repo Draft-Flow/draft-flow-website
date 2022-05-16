@@ -2,21 +2,31 @@
 layout: layouts/base.njk
 templateClass: tmpl-route
 ---
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
+<script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <article>
   <h1>{{ route.title }}</h1>
+  {% if route.authors %}
   <p>Written by {% for author in route.authors %}{{author.name}}{% endfor %}  </p>
+  {% endif %}
   {% if route.mainImage %}<img src="{% imageUrlFor route.mainImage.asset._ref, 800 %}" alt="{{ route.mainImage.alt }}">{% endif %}
   {{ route.body | markdownify | safe }}
+  {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
+  {{ route.elevationLoss }}
+  {{ route.totalDistance }} ({{ (route.totalDistance/1.609).toFixed(1) }}mi)
   {{ route.gpx }}
   <p><a href="{{ '/' | url }}">← Home</a></p>
 </article>
 
-<section >
+<section>
   <div id='map' style="height:75vh; width:100vw;" ></div>
+  <div id="chart_div" style="width: 100vw;"></div>
   <script>
+      const route = {{ route.geoJSON | dump | safe }}
+      const line = turf.lineString(route.features[0].geometry.coordinates)
 
       mapboxgl.accessToken = '{{ env.mapbox_token }}';
       const map = new mapboxgl.Map({
@@ -36,24 +46,110 @@ templateClass: tmpl-route
         });
       {% endif %}
 
+      // A single point that animates along the route.
+      // Coordinates are initially set to origin.
+      const point = {
+        'type': 'FeatureCollection',
+        'features': [
+          {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+              'type': 'Point',
+              'coordinates': ''
+            }
+          }
+        ]
+      };
+
       map.on('load', () => {
         map.addSource('route', {
           'type': 'geojson',
-          'data': '{{ page.url }}route.geojson'
+          'data': route
         })
+
         map.addLayer({
           'id': 'route',
           'type': 'line',
           'source': 'route',
           'layout': {
-          'line-join': 'round',
-          'line-cap': 'round'
+            'line-join': 'round',
+            'line-cap': 'round'
           },
           'paint': {
-          'line-color': '#ff00ff',
-          'line-width': 5
+            'line-color': '#ff00ff',
+            'line-width': 5
           }
         });
+
+        map.addSource('point', {
+          'type': 'geojson',
+          'data': point
+        });
+
+        map.addLayer({
+          'id': 'point',
+          'source': 'point',
+          'type': 'circle',
+          'paint': {
+            // Make circles larger as the user zooms from z12 to z22.
+            'circle-radius': 6.75,
+            // Color circles by ethnicity, using a `match` expression.
+            'circle-color': '#ff0000'
+          }
+        });
+        
       })
+
+      // Elevation Chart
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      const drawChart = () => {
+        const chartDiv = document.getElementById("chart_div");
+        const chart = new google.visualization.LineChart(chartDiv);
+        // Create the data table.
+        const data = new google.visualization.DataTable()
+        data.addColumn('number', 'km')
+        data.addColumn('number', 'm')
+        data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}})
+        data.addRows({{ route.elevation | dump | safe }})
+
+        // Set chart options
+        const options = {
+          'title': 'Route Elevation Profile',
+          'height': 300,
+          'width': 1000,
+          'titleX': 'Distance (km)',
+          'titleY': 'Elevation (m)',
+          'focusTarget': 'category',
+          'tooltip': {isHtml: true, trigger: 'both'}, 
+          'legend': 'none',
+        };
+        chart.draw(data, options);
+
+        google.visualization.events.addListener(chart, 'onmouseover', (data) => {
+          chart.setSelection()
+          point.features[0].geometry.coordinates = route.features[0].geometry.coordinates[data.row];
+          map.getSource('point').setData(point);
+        });
+
+        map.on('click', 'route', (e) => {
+          const selected = turf.point(e.lngLat.toArray())
+          const snapped = turf.nearestPointOnLine(line, selected, {units: 'miles'});
+
+          point.features[0].geometry.coordinates = snapped.geometry.coordinates;
+          map.getSource('point').setData(point);
+
+          chart.setSelection([{row: snapped.properties.index}])
+        
+        });
+      }
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
   </script>
 </section>

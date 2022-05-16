@@ -3,6 +3,7 @@ const groq = require('groq')
 const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
 const DOMParser = require('xmldom').DOMParser
+const turf = require('@turf/turf')
 
 const client = require('../utils/sanityClient.js')
 const serializers = require('../utils/serializers')
@@ -13,6 +14,10 @@ const generateRoute = async (route) => {
   try {
     let geoJSON = null
     let bounds = null
+    let elevation = null
+    let elevationGain = null
+    let elevationLoss = null
+    let totalDistance = null
     // If a GPX file has been added
     //   - convert the GPX (xml) to geoJSON
     //   - create a bounding box for centering the map
@@ -33,13 +38,46 @@ const generateRoute = async (route) => {
       }
 
       bounds = llBounds.toArray()
-    }
+      totalDistance = 0
+      elevationGain = 0
+      elevationLoss = 0
+      
+      elevation = geoJSON.features[0].geometry.coordinates.map(
+        (gpxPoint, idx, elevations) => {
+          const prevGPXPoint = elevations[idx-1]
+          let distanceDiff = 0
 
+          if (idx > 0) {
+            const from = turf.point([prevGPXPoint[0], prevGPXPoint[1]])
+            const to = turf.point([gpxPoint[0], gpxPoint[1]])
+            distanceDiff = turf.distance(from, to)
+            
+            const elevationDiff = gpxPoint[2] - prevGPXPoint[2]
+            if (elevationDiff >= 0) {
+              elevationGain += elevationDiff
+            } else {
+              elevationLoss -= elevationDiff
+            }
+
+          } 
+          totalDistance += distanceDiff
+
+          return [
+            Number(totalDistance.toFixed(2)),
+            Number(gpxPoint[2].toFixed(0)),
+            `<div style="font-family: Arial; padding:10px;">Distance: ${totalDistance.toFixed(2)}km<br>Elevation: ${gpxPoint[2].toFixed(0)}m</div>`
+          ]
+        })
+    }
 
     return {
       ...route,
       geoJSON: geoJSON,
       bounds: bounds,
+      elevation: elevation,
+      elevationGain: elevationGain ? Number(elevationGain.toFixed(0)) : elevationGain,
+      elevationLoss: elevationLoss ? Number(elevationLoss.toFixed(0)) : elevationLoss,
+      totalDistance: totalDistance ? Number(totalDistance.toFixed(1)) : totalDistance,
       body: BlocksToMarkdown(route.body, { serializers, ...client.config() })
     }
   } catch (err) {
