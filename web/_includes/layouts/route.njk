@@ -2,9 +2,7 @@
 layout: layouts/base.njk
 templateClass: tmpl-route
 ---
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />
-<script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <article>
@@ -22,11 +20,19 @@ templateClass: tmpl-route
 </article>
 
 <section>
-  <div id='map' style="height:75vh; width:100vw;" ></div>
+  <div id='map' style="height:75vh; width:100vw;"></div>
   <div id="chart_div" style="width: 100vw;"></div>
-  <script>
+
+  {% if route.geoJSON %}
+  {% jsbundle 'route', true | safe %}
+    <script>
+      import mapboxgl from 'mapbox-gl'
+      import 'mapbox-gl/dist/mapbox-gl.css'
+      import {point as turfPoint, lineString as turfLineString} from '@turf/helpers'
+      import turfNearestPointOnLine from '@turf/nearest-point-on-line'
+
       const route = {{ route.geoJSON | dump | safe }}
-      const line = turf.lineString(route.features[0].geometry.coordinates)
+      const line = turfLineString(route.features[0].geometry.coordinates)
 
       mapboxgl.accessToken = '{{ env.mapbox_token }}';
       const map = new mapboxgl.Map({
@@ -92,9 +98,7 @@ templateClass: tmpl-route
           'source': 'point',
           'type': 'circle',
           'paint': {
-            // Make circles larger as the user zooms from z12 to z22.
             'circle-radius': 6.75,
-            // Color circles by ethnicity, using a `match` expression.
             'circle-color': '#ff0000'
           }
         });
@@ -138,8 +142,8 @@ templateClass: tmpl-route
         });
 
         map.on('click', 'route', (e) => {
-          const selected = turf.point(e.lngLat.toArray())
-          const snapped = turf.nearestPointOnLine(line, selected, {units: 'miles'});
+          const selected = turfPoint(e.lngLat.toArray())
+          const snapped = turfNearestPointOnLine(line, selected, {units: 'miles'});
 
           point.features[0].geometry.coordinates = snapped.geometry.coordinates;
           map.getSource('point').setData(point);
@@ -151,5 +155,8 @@ templateClass: tmpl-route
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.charts.setOnLoadCallback(drawChart);
-  </script>
+    </script>
+  {% endjsbundle %}
+  {% endif %}
+
 </section>
