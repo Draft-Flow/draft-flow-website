@@ -10,3 +10,9 @@ yarn.lock
 # Eleventy
 /web/_site/
 /web/.cache/
+/web/static/bundles/*
+!/web/static/bundles/.gitkeep
+/web/tmp/*
+!/web/tmp/.gitkeep
+
+ 
