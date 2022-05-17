@@ -5,7 +5,7 @@ const CleanCSS = require('clean-css');
 const fs = require('fs')
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy('static/bundles/')
+  eleventyConfig.addPassthroughCopy('static/bundles')
 
   eleventyConfig.addShortcode('imageUrlFor', (image, width="600") => {
     return urlFor(image)
@@ -26,7 +26,7 @@ module.exports = function(eleventyConfig) {
     const bundles = require('esbuild').buildSync({
       entryPoints: [tmp],
       entryNames: '[name]-[hash]',
-      outdir: 'static/bundles/',
+      outdir: './static/bundles/',
       metafile: true,
       minify: true,
       bundle: true,
