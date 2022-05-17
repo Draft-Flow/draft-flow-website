@@ -3,9 +3,15 @@ const util = require('util');
 const urlFor = require('./utils/imageUrl');
 const CleanCSS = require('clean-css');
 const fs = require('fs')
+const fse = require('fs-extra')
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy('static/bundles')
+  eleventyConfig.addPassthroughCopy('static')
+  eleventyConfig.on('eleventy.after', async () => {
+    const srcDir = `./static`;
+    const destDir = `./_site/static`;
+    fse.copySync(srcDir, destDir)
+  });
 
   eleventyConfig.addShortcode('imageUrlFor', (image, width="600") => {
     return urlFor(image)
@@ -26,7 +32,7 @@ module.exports = function(eleventyConfig) {
     const bundles = require('esbuild').buildSync({
       entryPoints: [tmp],
       entryNames: '[name]-[hash]',
-      outdir: './static/bundles/',
+      outdir: 'static/bundles/',
       metafile: true,
       minify: true,
       bundle: true,
