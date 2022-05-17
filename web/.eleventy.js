@@ -37,6 +37,7 @@ module.exports = function(eleventyConfig) {
       bundles.outputFiles.forEach(bundle => {
         if (!fs.existsSync(bundle.path)) {
           fs.writeFileSync(bundle.path, bundle.contents)
+          console.log('Created ', bundle.path)
         }
       })
     } catch(err) {
