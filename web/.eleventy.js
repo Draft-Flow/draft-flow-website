@@ -5,7 +5,7 @@ const CleanCSS = require('clean-css');
 const fs = require('fs')
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("static")
+  eleventyConfig.addPassthroughCopy('static/bundles/')
 
   eleventyConfig.addShortcode('imageUrlFor', (image, width="600") => {
     return urlFor(image)
