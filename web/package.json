@@ -37,5 +37,8 @@
     "mapbox-gl": "^2.8.2",
     "rimraf": "^2.7.1",
     "xmldom": "^0.6.0"
+  },
+  "dependencies": {
+    "chart.js": "^3.8.0"
   }
 }

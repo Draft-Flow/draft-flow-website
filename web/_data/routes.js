@@ -62,11 +62,10 @@ const generateRoute = async (route) => {
           } 
           totalDistance += distanceDiff
 
-          return [
-            Number(totalDistance.toFixed(2)),
-            Number(gpxPoint[2].toFixed(0)),
-            `<div style="font-family: Arial; padding:10px;">Distance: ${totalDistance.toFixed(2)}km<br>Elevation: ${gpxPoint[2].toFixed(0)}m</div>`
-          ]
+          return {
+            x: Number(totalDistance.toFixed(2)),
+            y: Number(gpxPoint[2].toFixed(0)),
+          }
         })
     }
 

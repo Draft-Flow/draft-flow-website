@@ -3,8 +3,6 @@ layout: layouts/base.njk
 templateClass: tmpl-route
 ---
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 <article>
   <h1>{{ route.title }}</h1>
   {% if route.authors %}
@@ -21,11 +19,13 @@ templateClass: tmpl-route
 
 <section>
   <div id='map' style="height:75vh; width:100vw;"></div>
-  <div id="chart_div" style="width: 100vw;"></div>
+  <canvas id="chart_div" style="width: 100vw; height:250px;"></canvas>
 
   {% if route.geoJSON %}
   {% jsbundle 'route', true | safe %}
     <script>
+      import Chart from 'chart.js/auto'
+      import { getRelativePosition } from 'chart.js/helpers'
       import mapboxgl from 'mapbox-gl'
       import 'mapbox-gl/dist/mapbox-gl.css'
       import {point as turfPoint, lineString as turfLineString} from '@turf/helpers'
@@ -106,55 +106,76 @@ templateClass: tmpl-route
       })
 
       // Elevation Chart
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      const drawChart = () => {
-        const chartDiv = document.getElementById("chart_div");
-        const chart = new google.visualization.LineChart(chartDiv);
-        // Create the data table.
-        const data = new google.visualization.DataTable()
-        data.addColumn('number', 'km')
-        data.addColumn('number', 'm')
-        data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}})
-        data.addRows({{ route.elevation | dump | safe }})
-
-        // Set chart options
-        const options = {
-          'title': 'Route Elevation Profile',
-          'height': 300,
-          'width': 1000,
-          'titleX': 'Distance (km)',
-          'titleY': 'Elevation (m)',
-          'focusTarget': 'category',
-          'tooltip': {isHtml: true, trigger: 'both'}, 
-          'legend': 'none',
-        };
-        chart.draw(data, options);
-
-        google.visualization.events.addListener(chart, 'onmouseover', (data) => {
-          chart.setSelection()
-          point.features[0].geometry.coordinates = route.features[0].geometry.coordinates[data.row];
-          map.getSource('point').setData(point);
-        });
-
-        map.on('click', 'route', (e) => {
-          const selected = turfPoint(e.lngLat.toArray())
-          const snapped = turfNearestPointOnLine(line, selected, {units: 'miles'});
-
-          point.features[0].geometry.coordinates = snapped.geometry.coordinates;
-          map.getSource('point').setData(point);
-
-          chart.setSelection([{row: snapped.properties.index}])
-        
-        });
+      const ctx = document.getElementById('chart_div')
+      const labels = [{% for point in route.elevation %}{{ point.x }}{% if not loop.last %},{% endif %}{% endfor %}]
+      const data = {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Elevation',
+            data: [{% for point in route.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
+            fill: false,
+            tension: 0.25,
+            borderColor: '#ff0000',
+          }
+        ]
       }
+      const chart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        
+        options: {
+          //interaction: {
+          //  mode: 'x',
+          //  intersect: false,
+          //  position: 'nearest',
+          //},
+          plugins: {
+            tooltip: {
+              mode: 'x',
+              intersect: false,
+              position: 'nearest',
+              callbacks: {
+                beforeLabel: (e) => {
+                  // Highlight corresponding map point
+                  point.features[0].geometry.coordinates = route.features[0].geometry.coordinates[e.dataIndex]
+                  map.getSource('point').setData(point)
+                }
+              }
+            }
+          },
+          parsing: {
+            xAxisKey: 'x',
+            yAxisKey: 'y'
+          },
+          elements: {
+            point: {
+              pointRadius: 0
+            }
+          },
+        },
+      })
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      const chartArea = chart.chartArea
+      const tooltip = chart.tooltip
+      
+      // Highlight point on elevation line
+      map.on('click', 'route', (e) => {
+        const selected = turfPoint(e.lngLat.toArray())
+        const snapped = turfNearestPointOnLine(line, selected, {units: 'miles'});
+
+        point.features[0].geometry.coordinates = snapped.geometry.coordinates;
+        map.getSource('point').setData(point);
+
+        chart.setActiveElements([
+          {datasetIndex: 0, index: snapped.properties.index},
+        ])
+        tooltip.setActiveElements([
+          {datasetIndex: 0, index: snapped.properties.index}
+        ], {x: 0, y: 0})
+        chart.update()
+      })
+
     </script>
   {% endjsbundle %}
   {% endif %}
