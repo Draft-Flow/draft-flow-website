@@ -4,10 +4,10 @@ const CleanCSS = require('clean-css');
 const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
 
-const imageShortcode = require('./utils/shortcodeImage')
-const urlFor = require('./utils/imageUrl');
-const jsBundle = require('./utils/jsBundle')
-const minifyHTML = require('./utils/minifyHTML')
+const imageShortcode = require('./src/utils/shortcodeImage')
+const urlFor = require('./src/utils/imageUrl');
+const jsBundle = require('./src/utils/jsBundle')
+const minifyHTML = require('./src/utils/minifyHTML')
 
 module.exports = function(eleventyConfig) {
   // Pass through static copy
@@ -75,7 +75,7 @@ module.exports = function(eleventyConfig) {
     dataTemplateEngine: "njk",
     passthroughFileCopy: true,
     dir: {
-      input: ".",
+      input: "src",
       includes: "_includes",
       data: "_data",
       output: "_site"

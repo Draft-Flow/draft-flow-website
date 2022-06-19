@@ -8,7 +8,13 @@ templateClass: tmpl-route
   {% if route.authors %}
   <p>Written by {% for author in route.authors %}<a href="/architects/{{ author.slug.current }}">{{author.name}}</a>{% endfor %}  </p>
   {% endif %}
-  {% if route.mainImage %}<img src="{% imageUrlFor route.mainImage.asset._ref, 800 %}" alt="{{ route.mainImage.alt }}">{% endif %}
+  Main image
+  {% if route.mainImage %}
+    {% set mainImage %}
+      {% imageUrlFor route.mainImage.asset._ref, 800 %}
+    {% endset %}
+    {% image mainImage, route.mainImage.alt, "(min-width: 30em) 50vw, 100vw", ['avif', 'jpeg']  %}
+  {% endif %}
   {{ route.body | safe }}
   {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
   {{ route.elevationLoss }}

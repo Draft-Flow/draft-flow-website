@@ -1,7 +1,6 @@
 // resolveDocumentActions.js
 
 // import the default document actions
-import { prototype } from 'markdown-it/lib/token'
 import defaultResolve from 'part:@sanity/base/document-actions'
 
 import {SetAndPublishAction} from './HelloWorldAction'
