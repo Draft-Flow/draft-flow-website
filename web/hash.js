@@ -7,8 +7,9 @@ const assets = [
 
 const dataFile = 'src/_data/hash.json';
 
-const production = process.env.NODE_ENV === 'development' ? false:true;
+const production = process.env.NODE_ENV === 'development' ? false : true;
 
+console.log({env: process.env.NODE_ENV})
 let jsonValue = {};
 
 assets.forEach((asset) => {
