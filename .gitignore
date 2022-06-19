@@ -15,4 +15,6 @@ yarn.lock
 /web/tmp/*
 !/web/tmp/.gitkeep
 
+# Generated hash data
+/web/src/_data/hash.json
  

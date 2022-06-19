@@ -10,10 +10,5 @@
     <meta property="og:image" content="/static/img/logo.png" />
     <meta property="og:type" content="article" />
       {# <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}"> #}
-    {% set css %}
-      {% include "style.css" %}
-    {% endset %}
-    <style>
-      {{ css | cssmin | safe }}
-    </style>
+    <link rel="stylesheet" href="{{ hash['/css/styles.css'] | url }}"/>
   </head>

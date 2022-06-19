@@ -26,11 +26,6 @@ module.exports = function(eleventyConfig) {
 
   // Generate img tags with next-gen image formats
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
-  
-  // https://www.11ty.io/docs/quicktips/inline-css/
-  eleventyConfig.addFilter("cssmin", function(code) {
-    return new CleanCSS({}).minify(code).styles;
-  });
 
   // Bundle ES modules into a browser bundle
   eleventyConfig.addPairedShortcode("jsbundle", jsBundle)
