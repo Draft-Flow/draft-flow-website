@@ -2,7 +2,7 @@ const { format } = require('date-fns');
 const util = require('util');
 const CleanCSS = require('clean-css');
 const fse = require('fs-extra')
-const { toHTML } = require('@portableText/to-html')
+const { toHTML } = require('@portabletext/to-html')
 
 const imageShortcode = require('./utils/shortcodeImage')
 const urlFor = require('./utils/imageUrl');
