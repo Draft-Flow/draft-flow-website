@@ -8,5 +8,6 @@ pagination:
   size: 1
   addAllPagesToCollections: true
 permalink: supporters/{{ supporter.slug.current | slug }}/index.html
-title: {{ supporter.name }}
+eleventyComputed:
+  title: "{{ supporter.name }}"
 ---

@@ -8,5 +8,6 @@ pagination:
   size: 1
   addAllPagesToCollections: true
 permalink: architects/{{ architect.slug.current | slug }}/index.html
-title: {{ architect.name }}
+eleventyComputed:
+  title: "{{ architect.name }}"
 ---

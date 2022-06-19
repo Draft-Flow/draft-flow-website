@@ -1,26 +1,30 @@
 const { format } = require('date-fns');
 const util = require('util');
 const CleanCSS = require('clean-css');
-const fs = require('fs')
 const fse = require('fs-extra')
 const { toHTML } = require('@portableText/to-html')
 
 const imageShortcode = require('./utils/shortcodeImage')
 const urlFor = require('./utils/imageUrl');
+const jsBundle = require('./utils/jsBundle')
+const minifyHTML = require('./utils/minifyHTML')
 
 module.exports = function(eleventyConfig) {
+  // Pass through static copy
+  // https://www.11ty.dev/docs/copy/
   eleventyConfig.addPassthroughCopy('static')
+
   eleventyConfig.on('eleventy.after', async () => {
     const srcDir = `./static`;
     const destDir = `./_site/static`;
     fse.copySync(srcDir, destDir)
   });
 
-  eleventyConfig.addShortcode('imageUrlFor', (image, width="600") => {
-    return urlFor(image)
-      .width(width)
-  })
+  eleventyConfig.addFilter("debug", function(value) {
+    return util.inspect(value, {compact: false})
+  });
 
+  // Generate img tags with next-gen image formats
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
   
   // https://www.11ty.io/docs/quicktips/inline-css/
@@ -28,83 +32,30 @@ module.exports = function(eleventyConfig) {
     return new CleanCSS({}).minify(code).styles;
   });
 
-  eleventyConfig.addPairedShortcode("jsbundle", (code, name, defer ) => {
-    const tmp = `tmp/${name}.js`
-    const lines = code.split('\n')
-    const stripped = lines.slice(2, -2)
-    fs.writeFileSync(tmp, stripped.join('\n'))
-
-    const bundles = require('esbuild').buildSync({
-      entryPoints: [tmp],
-      entryNames: '[name]-[hash]',
-      outdir: 'static/bundles/',
-      metafile: true,
-      minify: true,
-      bundle: true,
-      write: false,
-    })
-
-    try {
-      bundles.outputFiles.forEach(bundle => {
-        if (!fs.existsSync(bundle.path)) {
-          fs.writeFileSync(bundle.path, bundle.contents)
-          console.log('Created ', bundle.path)
-        }
-      })
-    } catch(err) {
-      console.log(err)
-    }
-
-    const tags = Object.keys(bundles.metafile.outputs).map(file => {
-      const ext = file.split('.').pop()
-      if (ext === 'css') {
-        return `<link rel="stylesheet" href="/${file}" >`
-      }
-
-      return `<script src="/${file}" ${defer ? 'defer' : ''}></script>`
-    })
-
-    return tags.join('\n')
-  })
+  // Bundle ES modules into a browser bundle
+  eleventyConfig.addPairedShortcode("jsbundle", jsBundle)
  
-  eleventyConfig.addFilter("debug", function(value) {
-    return util.inspect(value, {compact: false})
-   });
+  // Convert Sanity image assets into URLs 
+  eleventyConfig.addShortcode('imageUrlFor', (image, width="600") => {
+    return urlFor(image)
+      .width(width)
+  })
 
-   eleventyConfig.addFilter("readableDate", dateObj => {
-    return new Date(dateObj).toDateString()
-  });
-
+  // Convert Sanity block content into HTML
   eleventyConfig.addFilter('blocksToHTML', function(value) {
     return toHTML(value)
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
-    return format(dateObj, 'yyyy-LL-dd');
+  eleventyConfig.addFilter('htmlDateString', (dateObj, format) => {
+    return format(dateObj, format || 'yyyy-LL-dd');
   });
 
-  let markdownIt = require('markdown-it');
-  let markdownItAnchor = require('markdown-it-anchor');
-  let options = {
-    html: true,
-    breaks: true,
-    linkify: true
-  };
-  let opts = {
-    permalink: true,
-    permalinkClass: "direct-link",
-    permalinkSymbol: "#"
-  };
+  // If production, minify HTML output
+  if (process.env.ELEVENTY_ENV == "production") {
+    eleventyConfig.addTransform("htmlmin", minifyHTML);
+  }
 
-  eleventyConfig.setLibrary("md", markdownIt(options)
-    .use(markdownItAnchor, opts)
-  );
-
-  eleventyConfig.addFilter("markdownify", function(value) {
-    const md = new markdownIt(options)
-    return md.render(value)
-  })
   return {
     templateFormats: [
       "md",

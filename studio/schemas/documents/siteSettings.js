@@ -10,6 +10,11 @@ export default {
       title: 'Title'
     },
     {
+      name: 'tagline',
+      type: 'string',
+      title: 'Tagline'
+    },
+    {
       name: 'description',
       type: 'text',
       title: 'Description',
