@@ -19,12 +19,15 @@ const generateSupporter = async (supporter) => {
 
 const getSupporters = async () => {
   // Learn more: https://www.sanity.io/docs/data-store/how-queries-work
-  const filter = groq`*[_type == "place" && defined(slug) && supporter == true]`
+  const filter = groq`*[_type == "place" && defined(slug) && supporter.isSupporter == true && supporter.expiration > now()]`
   const projection = groq`{
     _id,
     name,
     slug,
-    image,
+    supporter {
+      logo
+    },
+    website,
     description,
     "routes": *[_type == "route" && (references(startFinish._ref) || place._ref in stops[]->stop._id)]{
       title,

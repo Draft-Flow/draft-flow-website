@@ -26,17 +26,33 @@ export default {
     },
     {
       name: 'supporter',
-      type: 'boolean',
-      title: 'Supporter',
-      description: 'Is this place a paying supporter of Perthshire Gravel?',
+      type: 'object',
       group: ['supporter'],
+      fields: [
+        {
+          name: 'isSupporter',
+          type: 'boolean',
+          title: 'Supporter',
+          description: 'Is this place a paying supporter of Perthshire Gravel?',
+        },
+        {
+          name: 'expiration',
+          type: 'date',
+          title: 'Supporter Expiration',
+          hidden: ({document}) => !document?.supporter.isSupporter,
+        },
+        {
+          name: 'logo',
+          type: 'logoImage',
+          title: 'Supporter Logo',
+          hidden: ({document}) => !document?.supporter.isSupporter,
+        },
+      ]
     },
     {
-      name: 'expiration',
-      type: 'date',
-      title: 'Supporter Expiration',
-      hidden: ({document}) => !document?.supporter,
-      group: ['supporter'],
+      name: 'website',
+      type: 'url',
+      title: 'Website URL',
     },
     {
       name: 'location',

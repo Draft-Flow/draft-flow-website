@@ -23,7 +23,10 @@
     <header>
       <h1 class="home">
         <a href="{{ '/' | url }}">
-          <img src="{% imageUrlFor metadata.logo.asset._ref, 800 %}" alt="{{ metadata.logo.alt }}" />
+          {% set logoSrc %}
+            {% imageUrlFor metadata.logo.asset._ref, 600 %}
+          {% endset %}
+          {% image logoSrc, metadata.logo.alt, "(min-width: 30em) 50vw, 100vw"  %}
         </a>
       </h1>
       <ul class="nav">
@@ -38,13 +41,31 @@
     </main>
     
     <footer>
+      <ul class="supporterslist" style="counter-reset: start-from {{ supporterslist.length + 1 }}">
+      {% asyncEach supporter in collections.supporters | reverse %}
+        {% set currentSupporter = supporter.data.supporter %}
+        {% set imageSrc %}
+          {% imageUrlFor currentSupporter.supporter.logo.asset._ref, 400 %}
+        {% endset %}
+        <li class="supporterlist-item{% if supporter.url == url %} supporterlist-item-active{% endif %}">
+          <a href="{{ currentSupporter.website | url }}?ref=PerthshireGravel" class="supporterlist-link">
+            {% image imageSrc, currentSupporter.supporter.logo.alt  %}
+          </a>
+        </li>
+      {% endeach %}
+      </ul>
       {{ metadata.charityInfo | blocksToHTML | safe }}
       <div>
-        {% for funder in metadata.fundedBy %}
+        {% asyncEach funder in metadata.fundedBy %}
+          {% set imageSrc %}
+            {% imageUrlFor funder.asset._ref, 400 %}
+          {% endset %}
         <div>
-          <img src="{% imageUrlFor funder.asset._ref, 400 %}" alt="{{ funder.asset.alt }}" />
+          <a href="{{ funder.link }}">
+            {% image imageSrc, funder.alt %}
+          </a>
         </div>
-        {% endfor %}
+        {% endeach %}
       </div>
 
     </footer>

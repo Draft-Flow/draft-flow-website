@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel#readme",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy-img": "^2.0.1",
     "@googlemaps/google-maps-services-js": "^3.3.13",
     "@mapbox/togeojson": "^0.16.0",
     "@portabletext/to-html": "^1.0.3",

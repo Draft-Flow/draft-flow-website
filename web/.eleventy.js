@@ -1,10 +1,12 @@
 const { format } = require('date-fns');
 const util = require('util');
-const urlFor = require('./utils/imageUrl');
 const CleanCSS = require('clean-css');
 const fs = require('fs')
 const fse = require('fs-extra')
 const { toHTML } = require('@portableText/to-html')
+
+const imageShortcode = require('./utils/shortcodeImage')
+const urlFor = require('./utils/imageUrl');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('static')
@@ -18,6 +20,8 @@ module.exports = function(eleventyConfig) {
     return urlFor(image)
       .width(width)
   })
+
+  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
   
   // https://www.11ty.io/docs/quicktips/inline-css/
   eleventyConfig.addFilter("cssmin", function(code) {

@@ -17,6 +17,7 @@ import basicPortableText from './objects/basicPortableText'
 import bioPortableText from './objects/bioPortableText'
 import excerptPortableText from './objects/excerptPortableText'
 import mainImage from './objects/mainImage'
+import logoImage from './objects/logoImage'
 import authorReference from './objects/authorReference'
 import placeReference from './objects/placeReference'
 
@@ -29,13 +30,13 @@ export default createSchema({
     category,
     author,
     mainImage,
+    logoImage,
     place,
     placeReference,
     authorReference,
     bodyPortableText,
     basicPortableText,
     bioPortableText,
-    excerptPortableText
-,
+    excerptPortableText,
   ]),
 })
