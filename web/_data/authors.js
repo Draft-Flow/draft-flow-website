@@ -1,4 +1,4 @@
-const { toHTML } = require('@portableText/to-html')
+const { toHTML } = require('@portabletext/to-html')
 const groq = require('groq')
 
 const client = require('../utils/sanityClient.js')

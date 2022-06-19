@@ -1,4 +1,4 @@
-const { toHTML } = require('@portableText/to-html')
+const { toHTML } = require('@portabletext/to-html')
 const groq = require('groq')
 const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
