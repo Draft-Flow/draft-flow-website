@@ -1,0 +1,16 @@
+---
+layout: layouts/home.njk
+navtitle: Supporters
+permalink: /supporters/
+---
+
+<h1>Supporters</h1>
+
+<ol class="supporterslist" style="counter-reset: start-from {{ supporterslist.length + 1 }}">
+{% for supporter in collections.supporters | reverse %}
+  {% set currentSupporter = supporter.data.supporter %}
+  <li class="supporterlist-item{% if supporter.url == url %} supporterlist-item-active{% endif %}">
+    <a href="{{ supporter.url | url }}" class="supporterlist-link">{{ currentSupporter.name }}</a>
+  </li>
+{% endfor %}
+</ol>

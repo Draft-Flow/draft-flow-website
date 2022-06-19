@@ -4,6 +4,7 @@ const urlFor = require('./utils/imageUrl');
 const CleanCSS = require('clean-css');
 const fs = require('fs')
 const fse = require('fs-extra')
+const { toHTML } = require('@portableText/to-html')
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('static')
@@ -56,7 +57,7 @@ module.exports = function(eleventyConfig) {
         return `<link rel="stylesheet" href="/${file}" >`
       }
 
-      return `<script type="module" src="/${file}" ${defer ? 'defer' : ''}></script>`
+      return `<script src="/${file}" ${defer ? 'defer' : ''}></script>`
     })
 
     return tags.join('\n')
@@ -70,13 +71,17 @@ module.exports = function(eleventyConfig) {
     return new Date(dateObj).toDateString()
   });
 
+  eleventyConfig.addFilter('blocksToHTML', function(value) {
+    return toHTML(value)
+  });
+
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj) => {
     return format(dateObj, 'yyyy-LL-dd');
   });
 
-  let markdownIt = require("markdown-it");
-  let markdownItAnchor = require("markdown-it-anchor");
+  let markdownIt = require('markdown-it');
+  let markdownItAnchor = require('markdown-it-anchor');
   let options = {
     html: true,
     breaks: true,

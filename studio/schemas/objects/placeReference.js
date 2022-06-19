@@ -16,7 +16,6 @@ export default {
   preview: {
     select: {
       title: 'place.name',
-      subtitle: 'place.location',
     }
   }
 }

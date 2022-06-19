@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-supporter
+---
+
+{{ supporter.name }}
+
+{{ supporter.description | safe }}
+
+<h2>Related Routes</h2>
+<ul>
+  {% for route in supporter.routes %}
+    <li><a href="/routes/{{route.slug }}">{{ route.title }}</a></li>
+  {% endfor %}
+</ul>

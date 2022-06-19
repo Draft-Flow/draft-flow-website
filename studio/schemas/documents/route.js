@@ -74,7 +74,6 @@ export default {
       name: 'excerpt',
       type: 'excerptPortableText',
       title: 'Excerpt',
-      group: ['description'],
       description:
         'This ends up on summary pages, on Google, when people share your post in social media.',
       group: ['description'],
@@ -184,6 +183,17 @@ export default {
       to: {
         type: 'place'
       },
+      group: ['beta'],
+    },
+    {
+      name: 'stops',
+      type: 'array',
+      title: 'Stops',
+      of: [
+        {
+          type: 'placeReference'
+        }
+      ],
       group: ['beta'],
     },
     // Stages

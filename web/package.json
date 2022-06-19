@@ -24,6 +24,7 @@
     "@11ty/eleventy": "^1.0.1",
     "@googlemaps/google-maps-services-js": "^3.3.13",
     "@mapbox/togeojson": "^0.16.0",
+    "@portabletext/to-html": "^1.0.3",
     "@sanity/block-content-to-markdown": "^0.0.5",
     "@sanity/client": "^3.3.0",
     "@sanity/image-url": "^0.140.22",

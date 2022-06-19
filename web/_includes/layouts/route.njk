@@ -6,10 +6,10 @@ templateClass: tmpl-route
 <article>
   <h1>{{ route.title }}</h1>
   {% if route.authors %}
-  <p>Written by {% for author in route.authors %}{{author.name}}{% endfor %}  </p>
+  <p>Written by {% for author in route.authors %}<a href="/architects/{{ author.slug.current }}">{{author.name}}</a>{% endfor %}  </p>
   {% endif %}
   {% if route.mainImage %}<img src="{% imageUrlFor route.mainImage.asset._ref, 800 %}" alt="{{ route.mainImage.alt }}">{% endif %}
-  {{ route.body | markdownify | safe }}
+  {{ route.body | safe }}
   {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
   {{ route.elevationLoss }}
   {{ route.totalDistance }} ({{ (route.totalDistance/1.609).toFixed(1) }}mi)
@@ -116,7 +116,7 @@ templateClass: tmpl-route
             data: [{% for point in route.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
             fill: false,
             tension: 0.25,
-            borderColor: '#ff0000',
+            borderColor: '#ff00ff',
           }
         ]
       }

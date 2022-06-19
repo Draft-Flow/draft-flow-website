@@ -1,0 +1,17 @@
+---
+layout: layouts/home.njk
+navtitle: Architects
+permalink: /architects/
+---
+
+<h1>Route Architects</h1>
+
+<ol class="architectslist" style="counter-reset: start-from {{ architectslist.length + 1 }}">
+{% for architect in collections.architects | reverse %}
+  {% set currentArchitect = architect.data.architect %}
+  <li class="architectlist-item{% if architect.url == url %} architectlist-item-active{% endif %}">
+    <a href="{{ architect.url | url }}" class="architectlist-link">{{ currentArchitect.name }}</a>
+    <p class="architectlist-excerpt">{{ currentArchitect.excerpt }}</p>
+  </li>
+{% endfor %}
+</ol>

@@ -1,4 +1,4 @@
-const BlocksToMarkdown = require('@sanity/block-content-to-markdown')
+const { toHTML } = require('@portableText/to-html')
 const groq = require('groq')
 const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
@@ -77,7 +77,7 @@ const generateRoute = async (route) => {
       elevationGain: elevationGain ? Number(elevationGain.toFixed(0)) : elevationGain,
       elevationLoss: elevationLoss ? Number(elevationLoss.toFixed(0)) : elevationLoss,
       totalDistance: totalDistance ? Number(totalDistance.toFixed(1)) : totalDistance,
-      body: BlocksToMarkdown(route.body, { serializers, ...client.config() })
+      body: toHTML(route.body, { components: serializers })
     }
   } catch (err) {
     console.error(err)

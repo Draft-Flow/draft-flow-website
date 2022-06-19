@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title or renderData.title or metadata.title }}</title>
+    <title>{{ page.title or renderData.title or metadata.title }}</title>
     <meta name="Description" content="{{ description or renderData.description or metadata.description }}">
     <link rel="canonical" href="{{ page.url }}" />
     <meta property="og:title" content="{{ title or renderData.title or metadata.title }}" />
@@ -38,6 +38,14 @@
     </main>
     
     <footer>
-        {{ metadata | dump }}
+      {{ metadata.charityInfo | blocksToHTML | safe }}
+      <div>
+        {% for funder in metadata.fundedBy %}
+        <div>
+          <img src="{% imageUrlFor funder.asset._ref, 400 %}" alt="{{ funder.asset.alt }}" />
+        </div>
+        {% endfor %}
+      </div>
+
     </footer>
   </body>
