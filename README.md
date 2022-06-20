@@ -14,6 +14,10 @@ This repo (a monorepo) contains 2 projects:
 3. Run `npm run dev` to start both the website and Sanity Studio locally
 4. Open the website at [localhost:8080](http://localhost:8080)
 5. Open the CMS dashboard at [locahost:3333](https://localhost:3333)
+6. Edit the files in `/web` or `/studio` to edit the website or CMS
+
+### Styling
+Styling is done with [Tailwind CSS](https://tailwindcss.com/).
 
 ## Deployment
 The website and CMS dashboard are hosted on [Netlify](https://www.netlify.com/). 

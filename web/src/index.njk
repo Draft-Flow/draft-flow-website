@@ -1,6 +1,8 @@
 ---
 layout: layouts/home
 navtitle: Home
+tags: 
+  - nav
 eleventyComputed: 
   title: "{{ metadata.tagline }}"
   description: "{{ metadata.description }}" 
@@ -10,5 +12,3 @@ eleventyComputed:
 
 {% set routeslist = collections.routes %}
 {% include "routesList.njk" %}
-
-<p>More posts can be found in <a href="{{ '/routes/' | url }}">the archive</a>.</p>

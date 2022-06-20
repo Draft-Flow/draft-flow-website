@@ -1,0 +1,25 @@
+---
+layout: layouts/page
+navtitle: Categories
+permalink: /categories/
+tags:
+  - nav
+---
+
+<h1>Categories</h1>
+
+<ol class="architectslist" style="counter-reset: start-from {{ categories.length + 1 }}">
+{% for category in categories %}
+  <li class="categorylist-item">
+    {{ category.title }}
+    <p class="category-excerpt">{{ category.description }}</p>
+    <ul>
+      {% for route in category.routes %}
+      <li>
+        <a href="/routes/{{ route.slug }}">{{ route.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+{% endfor %}
+</ol>

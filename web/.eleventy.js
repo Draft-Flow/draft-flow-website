@@ -15,7 +15,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('static')
 
   eleventyConfig.on('eleventy.after', async () => {
-    const srcDir = `./static`;
+    const srcDir = `./src/static`;
     const destDir = `./_site/static`;
     fse.copySync(srcDir, destDir)
   });

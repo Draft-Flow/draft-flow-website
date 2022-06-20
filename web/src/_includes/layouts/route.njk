@@ -16,10 +16,12 @@ templateClass: tmpl-route
     {% image mainImage, route.mainImage.alt, "(min-width: 30em) 50vw, 100vw", ['avif', 'jpeg']  %}
   {% endif %}
   {{ route.body | safe }}
-  {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
+  <div class="text-xs"
+>  {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
   {{ route.elevationLoss }}
   {{ route.totalDistance }} ({{ (route.totalDistance/1.609).toFixed(1) }}mi)
   {{ route.gpx }}
+  </div>
   <p><a href="{{ '/' | url }}">← Home</a></p>
 </article>
 

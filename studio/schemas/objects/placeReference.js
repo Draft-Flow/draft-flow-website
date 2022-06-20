@@ -16,6 +16,7 @@ export default {
   preview: {
     select: {
       title: 'place.name',
+      media: 'place.type.0.placeType.icon'
     }
   }
 }

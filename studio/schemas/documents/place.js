@@ -25,6 +25,14 @@ export default {
       }
     },
     {
+      name: 'type',
+      type: 'array',
+      title: 'Type',
+      layout: 'tags',
+      of: [{type: 'placeTypeReference'}],
+      validation: Rule => Rule.min(1)
+    },
+    {
       name: 'supporter',
       type: 'object',
       group: ['supporter'],
@@ -68,14 +76,16 @@ export default {
   preview: {
     select: {
       title: 'name',
-      supporter: 'supporter'
+      supporter: 'supporter',
+      image: 'type.0.placeType.icon'
     },
-    prepare: ({title, supporter}) => {
+    prepare: ({title, supporter, image}) => {
       const subtitle = supporter ? 'Supporter' : ''
 
       return {
         title,
-        subtitle
+        subtitle,
+        media: image
       }
     }
   }

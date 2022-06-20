@@ -92,12 +92,6 @@ export default {
       description: 'A GPX of the route. Please ensure the GPX route contains elevation data.',
       group: ['gpx'],
     },
-    {
-      name: 'geoJSON',
-      type: 'string',
-      title: 'GEO JSON',
-      group: ['gpx'],
-    },
     // Beta
     {
       name: 'routeLength',
@@ -186,9 +180,10 @@ export default {
       group: ['beta'],
     },
     {
-      name: 'stops',
+      name: 'places',
       type: 'array',
-      title: 'Stops',
+      title: 'Places',
+      description: 'Relevant places/services/stops for this route',
       of: [
         {
           type: 'placeReference'
