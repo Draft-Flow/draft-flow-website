@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "sanity start",
     "build": "sanity build",
-    "eslint": "eslint --ext .js ."
+    "lint": "eslint --ext .js ."
   },
   "keywords": [
     "sanity"
