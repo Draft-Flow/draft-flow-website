@@ -1,4 +1,3 @@
-const { format } = require('date-fns');
 const util = require('util');
 const CleanCSS = require('clean-css');
 const fse = require('fs-extra')

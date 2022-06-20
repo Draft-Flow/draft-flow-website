@@ -1,18 +1,20 @@
 const { toHTML } = require('@portabletext/to-html')
 const groq = require('groq')
 
-const client = require('../utils/sanityClient.js')
+const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
 const overlayDrafts = require('../utils/overlayDrafts')
+
 const hasToken = !!client.config().token
 
 const generateSupporter = async (supporter) => {
   try {
     return {
       ...supporter,
-      body: toHTML(supporter.description, { serializers, ...client.config() })
+      body: toHTML(supporter.description, { serializers, ...client.config() }),
     }
   } catch (err) {
+    // eslint-disable-next-line
     console.error(err)
   }
 }
@@ -34,9 +36,10 @@ const getSupporters = async () => {
       "slug": slug.current,
     }
   }`
-  const order = `| order(name asc)`
+  const order = '| order(name asc)'
   const query = [filter, projection, order].join(' ')
-  const docs = await client.fetch(query).catch(err => console.error(err))
+  // eslint-disable-next-line
+  const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
   const prepareSupporters = await Promise.all(reducedDocs.map(async (doc) => {
     const supporter = await generateSupporter(doc)

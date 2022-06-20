@@ -1,18 +1,20 @@
 const { toHTML } = require('@portabletext/to-html')
 const groq = require('groq')
 
-const client = require('../utils/sanityClient.js')
+const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
 const overlayDrafts = require('../utils/overlayDrafts')
+
 const hasToken = !!client.config().token
 
 const generateAuthor = async (author) => {
   try {
     return {
       ...author,
-      body: toHTML(author.bio, { serializers, ...client.config() })
+      body: toHTML(author.bio, { serializers, ...client.config() }),
     }
   } catch (err) {
+    // eslint-disable-next-line
     console.error(err)
   }
 }
@@ -42,9 +44,10 @@ const getAuthors = async () => {
       "slug": slug.current,
     }
   }`
-  const order = `| order(name asc)`
+  const order = '| order(name asc)'
   const query = [filter, projection, order].join(' ')
-  const docs = await client.fetch(query).catch(err => console.error(err))
+  // eslint-disable-next-line
+  const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
   const prepareAuthors = await Promise.all(reducedDocs.map(async (doc) => {
     const author = await generateAuthor(doc)

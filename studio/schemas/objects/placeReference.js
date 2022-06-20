@@ -8,15 +8,15 @@ export default {
       type: 'reference',
       to: [
         {
-          type: 'place'
-        }
-      ]
-    }
+          type: 'place',
+        },
+      ],
+    },
   ],
   preview: {
     select: {
       title: 'place.name',
-      media: 'place.type.0.placeType.icon'
-    }
-  }
+      media: 'place.type.0.placeType.icon',
+    },
+  },
 }

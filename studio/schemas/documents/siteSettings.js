@@ -7,18 +7,18 @@ export default {
     {
       name: 'title',
       type: 'string',
-      title: 'Title'
+      title: 'Title',
     },
     {
       name: 'tagline',
       type: 'string',
-      title: 'Tagline'
+      title: 'Tagline',
     },
     {
       name: 'description',
       type: 'text',
       title: 'Description',
-      description: 'Describe your blog for search engines and social media.'
+      description: 'Describe your blog for search engines and social media.',
     },
     {
       name: 'logo',
@@ -31,22 +31,22 @@ export default {
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessiblity.',
-          validation: Rule => Rule.error('You have to fill out the alternative text.').required(),
+          validation: (Rule) => Rule.error('You have to fill out the alternative text.').required(),
           options: {
-            isHighlighted: true
-          }
+            isHighlighted: true,
+          },
         },
-      ]
+      ],
     },
     {
       name: 'keywords',
       type: 'array',
       title: 'Keywords',
       description: 'Add keywords that describes your blog.',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       options: {
-        layout: 'tags'
-      }
+        layout: 'tags',
+      },
     },
     {
       name: 'fundedBy',
@@ -62,30 +62,30 @@ export default {
               type: 'string',
               title: 'Alternative text',
               description: 'Important for SEO and accessiblity.',
-              validation: Rule => Rule.error('You have to fill out the alternative text.').required(),
+              validation: (Rule) => Rule.error('You have to fill out the alternative text.').required(),
               options: {
-                isHighlighted: true
-              }
+                isHighlighted: true,
+              },
             },
             {
               name: 'link',
               type: 'url',
               title: 'Link',
               options: {
-                isHighlighted: true
-              }
+                isHighlighted: true,
+              },
             },
-          ]
-        }
+          ],
+        },
       ],
       options: {
         sortable: true,
-      }
+      },
     },
     {
       name: 'charityInfo',
       type: 'basicPortableText',
-      title: 'Charity Info'
-    }
-  ]
+      title: 'Charity Info',
+    },
+  ],
 }

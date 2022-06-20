@@ -8,6 +8,8 @@ This repo (a monorepo) contains 2 projects:
 - `./studio` - The PerthshireGravel.com Content Management System (CMS)  
   Built with [Sanity](https://www.sanity.io/) - a structured content platform with an open-source CMS built with React
 
+When installing dependencies, ensure you're in the correct directory - either `/`, `/studio`, or `/web` - based on where the package should be installed. 
+
 ## Local Development
 1. Clone this repo
 2. Run `npm ci`

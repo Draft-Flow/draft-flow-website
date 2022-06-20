@@ -1,9 +1,7 @@
-import { format } from 'date-fns'
-
 export default {
   name: 'route',
   type: 'document',
-	title: 'Routes',
+  title: 'Routes',
   groups: [
     {
       name: 'basics',
@@ -41,7 +39,7 @@ export default {
       description: 'Some frontends will require a slug to be set to be able to show the post',
       options: {
         source: 'title',
-        maxLength: 96
+        maxLength: 96,
       },
       group: ['basics'],
     },
@@ -58,8 +56,8 @@ export default {
       type: 'array',
       of: [
         {
-          type: 'authorReference'
-        }
+          type: 'authorReference',
+        },
       ],
       group: ['basics'],
     },
@@ -114,7 +112,7 @@ export default {
       type: 'reference',
       title: 'Category',
       to: {
-        type: 'category'
+        type: 'category',
       },
       group: ['beta'],
     },
@@ -130,7 +128,7 @@ export default {
       type: 'string',
       title: 'OS Grid Reference number',
       description: 'The Open Street grid reference number',
-      validation: Rule => Rule.optional().custom(value => {
+      validation: (Rule) => Rule.optional().custom((value) => {
         const regex = /^([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3}|\d{2}\s?\d{2}|\d{1}\s?\d{1})$/
         return value.match(regex) ? true : 'Must be a valid OS Grid Reference number'
       }),
@@ -141,13 +139,13 @@ export default {
       type: 'array',
       title: 'OS Landranger Maps',
       description: 'The OS Landranger Map numbers. ',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       options: {
-        layout: 'tags'
+        layout: 'tags',
       },
-      validation: Rule => Rule.optional().custom(values => {
+      validation: (Rule) => Rule.optional().custom((values) => {
         const regex = /[0-9]{1,3}/
-        return values.every(value => value.match(regex)) ? true : 'Must be valid map numbers'
+        return values.every((value) => value.match(regex)) ? true : 'Must be valid map numbers'
       }),
       group: ['beta'],
     },
@@ -157,7 +155,7 @@ export default {
       title: 'Start/Finish',
       description: 'Recommended start/finish for the route',
       to: {
-        type: 'place'
+        type: 'place',
       },
       group: ['beta'],
     },
@@ -166,7 +164,7 @@ export default {
       type: 'reference',
       title: 'Parking',
       to: {
-        type: 'place'
+        type: 'place',
       },
       group: ['beta'],
     },
@@ -175,7 +173,7 @@ export default {
       type: 'reference',
       title: 'Railway',
       to: {
-        type: 'place'
+        type: 'place',
       },
       group: ['beta'],
     },
@@ -186,8 +184,8 @@ export default {
       description: 'Relevant places/services/stops for this route',
       of: [
         {
-          type: 'placeReference'
-        }
+          type: 'placeReference',
+        },
       ],
       group: ['beta'],
     },
@@ -201,7 +199,7 @@ export default {
         type: 'reference',
         to: {
           type: 'route',
-        }
+        },
       }],
       group: ['stages'],
     },
@@ -213,14 +211,14 @@ export default {
       by: [
         {
           field: 'routeLength',
-          direction: 'asc'
+          direction: 'asc',
         },
         {
           field: 'title',
-          direction: 'asc'
-        }
-      ]
-    }
+          direction: 'asc',
+        },
+      ],
+    },
   ],
   preview: {
     select: {
@@ -228,22 +226,24 @@ export default {
       routeLength: 'routeLength',
       routeTime: 'time',
       routeAscent: 'routeAscent',
-      media: 'mainImage'
+      media: 'mainImage',
     },
-    prepare ({title = 'No title', routeLength = '', routeTime = '', routeAscent = '', media}) {
+    prepare({
+      title = 'No title', routeLength = '', routeTime = '', routeAscent = '', media,
+    }) {
       const attrArr = [
-        routeLength ? `${routeLength}km` :  null,
+        routeLength ? `${routeLength}km` : null,
         routeAscent ? `${routeAscent}m` : null,
-        routeTime ? routeTime : null,
+        routeTime || null,
       ]
 
-      const attributes = attrArr.filter(n => n)
+      const attributes = attrArr.filter((n) => n)
 
       return {
         title,
         media,
-        subtitle: attributes.length ? attributes.join(' | ') : null
+        subtitle: attributes.length ? attributes.join(' | ') : null,
       }
-    }
-  }
+    },
+  },
 }

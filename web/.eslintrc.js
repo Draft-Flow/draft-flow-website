@@ -1,21 +1,25 @@
 module.exports = {
   ignorePatterns: [
     'node_modules',
-    'dist',
+    '_site',
+    'tmp',
+    'src/static/bundles',
   ],
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
   extends: [
     'airbnb-base',
-    '@sanity/eslint-config-studio',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
   },
   rules: {
     semi: [0, 'never'],
+    'consistent-return': [0, 'never'],
+    'no-underscore-dangle': [0, 'never'],
+    'default-param-last': [0, 'never'],
   },
 };

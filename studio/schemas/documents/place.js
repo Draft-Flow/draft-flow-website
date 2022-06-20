@@ -12,7 +12,7 @@ export default {
     {
       name: 'name',
       type: 'string',
-      title: 'Name'
+      title: 'Name',
     },
     {
       name: 'slug',
@@ -21,16 +21,16 @@ export default {
       description: 'Some frontends will require a slug to be set to be able to show the person',
       options: {
         source: 'name',
-        maxLength: 96
-      }
+        maxLength: 96,
+      },
     },
     {
       name: 'type',
       type: 'array',
       title: 'Type',
       layout: 'tags',
-      of: [{type: 'placeTypeReference'}],
-      validation: Rule => Rule.min(1)
+      of: [{ type: 'placeTypeReference' }],
+      validation: (Rule) => Rule.min(1),
     },
     {
       name: 'supporter',
@@ -47,15 +47,15 @@ export default {
           name: 'expiration',
           type: 'date',
           title: 'Supporter Expiration',
-          hidden: ({document}) => !document?.supporter.isSupporter,
+          hidden: ({ document }) => !document?.supporter.isSupporter,
         },
         {
           name: 'logo',
           type: 'logoImage',
           title: 'Supporter Logo',
-          hidden: ({document}) => !document?.supporter.isSupporter,
+          hidden: ({ document }) => !document?.supporter.isSupporter,
         },
-      ]
+      ],
     },
     {
       name: 'website',
@@ -65,28 +65,28 @@ export default {
     {
       name: 'location',
       type: 'geopoint',
-      title: 'Location'
+      title: 'Location',
     },
     {
       name: 'description',
       type: 'bodyPortableText',
-      title: 'Description'
-    }
+      title: 'Description',
+    },
   ],
   preview: {
     select: {
       title: 'name',
       supporter: 'supporter',
-      image: 'type.0.placeType.icon'
+      image: 'type.0.placeType.icon',
     },
-    prepare: ({title, supporter, image}) => {
+    prepare: ({ title, supporter, image }) => {
       const subtitle = supporter ? 'Supporter' : ''
 
       return {
         title,
         subtitle,
-        media: image
+        media: image,
       }
-    }
-  }
+    },
+  },
 }

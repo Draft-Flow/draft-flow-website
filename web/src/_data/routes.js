@@ -2,12 +2,13 @@ const { toHTML } = require('@portabletext/to-html')
 const groq = require('groq')
 const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
-const DOMParser = require('xmldom').DOMParser
+const { DOMParser } = require('xmldom')
 const turf = require('@turf/turf')
 
-const client = require('../utils/sanityClient.js')
+const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
 const overlayDrafts = require('../utils/overlayDrafts')
+
 const hasToken = !!client.config().token
 
 const generateRoute = async (route) => {
@@ -27,59 +28,58 @@ const generateRoute = async (route) => {
       const xml = new DOMParser().parseFromString(xmlString)
       geoJSON = toGeoJSON.gpx(xml)
 
-      const coordinates = geoJSON.features[0].geometry.coordinates;
+      const { coordinates } = geoJSON.features[0].geometry;
       const llBounds = new mapboxgl.LngLatBounds(
         coordinates[0],
-        coordinates[0]
+        coordinates[0],
       )
-      
-      for (const coord of coordinates) {
-        llBounds.extend(coord);
-      }
+
+      coordinates.foreach((coord) => llBounds.extend(coord))
 
       bounds = llBounds.toArray()
       totalDistance = 0
       elevationGain = 0
       elevationLoss = 0
-      
+
       elevation = geoJSON.features[0].geometry.coordinates.map(
         (gpxPoint, idx, elevations) => {
-          const prevGPXPoint = elevations[idx-1]
+          const prevGPXPoint = elevations[idx - 1]
           let distanceDiff = 0
 
           if (idx > 0) {
             const from = turf.point([prevGPXPoint[0], prevGPXPoint[1]])
             const to = turf.point([gpxPoint[0], gpxPoint[1]])
             distanceDiff = turf.distance(from, to)
-            
+
             const elevationDiff = gpxPoint[2] - prevGPXPoint[2]
             if (elevationDiff >= 0) {
               elevationGain += elevationDiff
             } else {
               elevationLoss -= elevationDiff
             }
-
-          } 
+          }
           totalDistance += distanceDiff
 
           return {
             x: Number(totalDistance.toFixed(2)),
             y: Number(gpxPoint[2].toFixed(0)),
           }
-        })
+        },
+      )
     }
 
     return {
       ...route,
-      geoJSON: geoJSON,
-      bounds: bounds,
-      elevation: elevation,
+      geoJSON,
+      bounds,
+      elevation,
       elevationGain: elevationGain ? Number(elevationGain.toFixed(0)) : elevationGain,
       elevationLoss: elevationLoss ? Number(elevationLoss.toFixed(0)) : elevationLoss,
       totalDistance: totalDistance ? Number(totalDistance.toFixed(1)) : totalDistance,
-      body: toHTML(route.body, { components: serializers })
+      body: toHTML(route.body, { components: serializers }),
     }
   } catch (err) {
+    // eslint-disable-next-line
     console.error(err)
   }
 }
@@ -110,9 +110,10 @@ const getRoutes = async () => {
     },
     "authors": authors[].author->
   }`
-  const order = `| order(publishedAt asc)`
+  const order = '| order(publishedAt asc)'
   const query = [filter, projection, order].join(' ')
-  const docs = await client.fetch(query).catch(err => console.error(err))
+  // eslint-disable-next-line
+  const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
   const prepareRoutes = await Promise.all(reducedDocs.map(async (doc) => {
     const route = await generateRoute(doc)
