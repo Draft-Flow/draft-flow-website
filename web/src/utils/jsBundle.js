@@ -37,7 +37,9 @@ const jsBundle = (code, name, defer) => {
       return `<link rel="stylesheet" href="/${file.replace(inputDir, '')}" >`
     }
 
-    return `<script src="/${file.replace(inputDir, '')}" ${defer ? 'defer' : ''}></script>`
+    return `<script src="/${file.replace(inputDir, '')}" ${
+      defer ? 'defer' : ''
+    }></script>`
   })
 
   return tags.join('\n')
