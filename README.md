@@ -21,5 +21,9 @@ When installing dependencies, ensure you're in the correct directory - either `/
 ### Styling
 Styling is done with [Tailwind CSS](https://tailwindcss.com/).
 
+## Production Build
+Building for production on local is generally not needed as the site is automatically deployed (see below). But sometimes useful if needing to test the production output.
+1. Run `npm run build` to build production bundles of the admin and website
+
 ## Deployment
-The website and CMS dashboard are hosted on [Netlify](https://www.netlify.com/). 
+Deployment is setup to happen automatically on [Netlify](https://www.netlify.com/) when the `main` branch of the repo is updated.
