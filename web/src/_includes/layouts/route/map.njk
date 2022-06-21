@@ -1,34 +1,6 @@
----
-layout: layouts/base/index.njk
-templateClass: tmpl-route
----
-
-<article>
-  <h1>{{ route.title }}</h1>
-  {% if route.authors %}
-  <p>Written by {% for author in route.authors %}<a href="/architects/{{ author.slug.current }}">{{author.name}}</a>{% endfor %}  </p>
-  {% endif %}
-  Main image
-  {% if route.mainImage %}
-    {% set mainImage %}
-      {% imageUrlFor route.mainImage.asset._ref, 800 %}
-    {% endset %}
-    {% image mainImage, route.mainImage.alt, "(min-width: 30em) 50vw, 100vw", ['avif', 'jpeg']  %}
-  {% endif %}
-  {{ route.body | safe }}
-  <div
->  {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
-  {{ route.elevationLoss }}
-  {{ route.totalDistance }} ({{ (route.totalDistance/1.609).toFixed(1) }}mi)
-  {{ route.gpx }}   
-  </div>
-  <p><a href="{{ '/' | url }}">← Home</a></p>
-</article>
-
-<section>
   <div id='map' style="height:75vh; width:100vw;"></div>
   <canvas id="chart_div" style="width: 100vw; height:250px;"></canvas>
-
+  
   {% if route.geoJSON %}
   {% jsbundle 'route', true | safe %}
     <script>
@@ -55,6 +27,12 @@ templateClass: tmpl-route
       map.scrollZoom.disable();
       // Add zoom and rotation controls to the map.
       map.addControl(new mapboxgl.NavigationControl());
+
+      // disable map rotation using right click + drag
+      map.dragRotate.disable();
+      
+      // disable map rotation using touch rotation gesture
+      map.touchZoomRotate.disableRotation();
 
       {% if route.bounds %}
         map.fitBounds({{ route.bounds | dump | safe }}, {
@@ -84,6 +62,23 @@ templateClass: tmpl-route
             }
           },
           {% endfor %}
+          {% endif %}
+          {% if route.startFinish %}
+          {% set iconImage %}
+            {% imageUrlFor route.startFinish.type.icon.asset._ref, 30 %}
+          {% endset %}
+          {
+            'type': 'Feature',
+            'properties': {
+              'message': '{{ route.startFinish.name }}',
+              'iconSize': ICON_SIZE,
+              'icon': `{{ iconImage }}`,
+            },
+            'geometry': {
+              'type': 'Point',
+              'coordinates': [{{ route.startFinish.location.lng }}, {{ route.startFinish.location.lat }}]
+            }
+          },
           {% endif %}
           {% if route.parking %}
           {% set iconImage %}
@@ -123,7 +118,6 @@ templateClass: tmpl-route
       }
 
       // Add markers to the map.
-      console.log(placesGeoJson)
       for (const marker of placesGeoJson.features) {
         // Create a DOM element for each marker.
         const el = document.createElement('div');
@@ -275,5 +269,3 @@ templateClass: tmpl-route
     </script>
   {% endjsbundle %}
   {% endif %}
-
-</section>

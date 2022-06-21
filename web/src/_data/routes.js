@@ -102,11 +102,11 @@ const getRoutes = async () => {
     excerpt,
     "categories": categories[]->{_id,title},
     "gpx": gpxRoute.asset->url,
-    "places": places[].place->{
+    "startFinish": startFinish->{
       _id,
       name,
       location, 
-      "type": type[].placeType->{title, icon}
+      "type": type[0].placeType->{title, icon}
     },
     "parking": parking->{
       _id,
@@ -119,6 +119,12 @@ const getRoutes = async () => {
       name,
       location, 
       "type": type[0].placeType->{title, icon}
+    },
+    "places": places[].place->{
+      _id,
+      name,
+      location, 
+      "type": type[].placeType->{title, icon}
     },
     body[]{
       ...,
