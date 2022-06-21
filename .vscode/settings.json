@@ -1,0 +1,4 @@
+{
+  "prettier.ignorePath": ".prettierignore/.",
+  "editor.formatOnSave": true
+}
