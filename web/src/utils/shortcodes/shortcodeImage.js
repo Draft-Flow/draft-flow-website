@@ -10,7 +10,7 @@ const imageShortcode = async (src, alt, sizes, formats, loading, decoding) => {
 
   const imageAttributes = {
     alt,
-    sizes,
+    sizes: sizes || '(min-width: 30em) 50vw, 100vw',
     loading: loading || 'lazy',
     decoding: decoding || 'async',
   }

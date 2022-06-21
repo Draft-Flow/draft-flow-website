@@ -1,5 +1,8 @@
 {
-  "prettier.ignorePath": ".prettierignore/.",
+  "prettier.ignorePath": ".prettierignore",
   "editor.formatOnSave": true,
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "[njk]": {
+    "editor.formatOnSave": false
+  },
 }
