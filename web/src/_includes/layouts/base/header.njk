@@ -4,7 +4,7 @@
       {% set logoSrc %}
         {% imageUrlFor metadata.logo.asset._ref, 600 %}
       {% endset %}
-      {% image logoSrc, metadata.logo.alt, "(min-width: 30em) 50vw, 100vw"  %}
+      {% image logoSrc, metadata.logo.alt, "(min-width: 30em) 50vw, 100vw", null, 'eager'  %}
     </a>
   </h1>
   <nav>

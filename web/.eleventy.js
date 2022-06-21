@@ -3,7 +3,7 @@ const CleanCSS = require('clean-css');
 const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
 
-const imageShortcode = require('./src/utils/shortcodeImage')
+const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const urlFor = require('./src/utils/imageUrl');
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')

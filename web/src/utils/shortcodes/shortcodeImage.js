@@ -1,7 +1,7 @@
 const Image = require('@11ty/eleventy-img');
 const path = require('path');
 
-const imageShortcode = async (src, alt, sizes, formats) => {
+const imageShortcode = async (src, alt, sizes, formats, loading, decoding) => {
   const metadata = await Image(src, {
     widths: [300, 600],
     formats: formats || ['avif', 'png'],
@@ -11,8 +11,8 @@ const imageShortcode = async (src, alt, sizes, formats) => {
   const imageAttributes = {
     alt,
     sizes,
-    loading: 'lazy',
-    decoding: 'async',
+    loading: loading || 'lazy',
+    decoding: decoding || 'async',
   };
 
   // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
