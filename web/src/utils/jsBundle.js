@@ -2,6 +2,7 @@ const fs = require('fs')
 const esbuild = require('esbuild')
 
 const jsBundle = (code, name, defer) => {
+  const inputDir = 'src/'
   const tmp = `tmp/${name}.js`
   const lines = code.split('\n')
   const stripped = lines.slice(2, -2)
@@ -10,7 +11,7 @@ const jsBundle = (code, name, defer) => {
   const bundles = esbuild.buildSync({
     entryPoints: [tmp],
     entryNames: '[name]-[hash]',
-    outdir: 'src/static/bundles/',
+    outdir: `${inputDir}static/bundles/`,
     metafile: true,
     minify: true,
     bundle: true,
@@ -33,10 +34,10 @@ const jsBundle = (code, name, defer) => {
   const tags = Object.keys(bundles.metafile.outputs).map((file) => {
     const ext = file.split('.').pop()
     if (ext === 'css') {
-      return `<link rel="stylesheet" href="/${file}" >`
+      return `<link rel="stylesheet" href="/${file.replace(inputDir, '')}" >`
     }
 
-    return `<script src="/${file}" ${defer ? 'defer' : ''}></script>`
+    return `<script src="/${file.replace(inputDir, '')}" ${defer ? 'defer' : ''}></script>`
   })
 
   return tags.join('\n')

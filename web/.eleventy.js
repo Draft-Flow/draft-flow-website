@@ -8,13 +8,15 @@ const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
 
+const INPUT = 'src'
+
 module.exports = function (eleventyConfig) {
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
   eleventyConfig.addPassthroughCopy('static')
 
   eleventyConfig.on('eleventy.after', async () => {
-    const srcDir = `./src/static`
+    const srcDir = `${INPUT}/static`
     const destDir = `./_site/static`
     fse.copySync(srcDir, destDir)
   })
@@ -63,7 +65,7 @@ module.exports = function (eleventyConfig) {
     dataTemplateEngine: 'njk',
     passthroughFileCopy: true,
     dir: {
-      input: 'src',
+      input: INPUT,
       includes: '_includes',
       data: '_data',
       output: '_site',
