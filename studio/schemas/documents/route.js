@@ -36,7 +36,8 @@ export default {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
-      description: 'Some frontends will require a slug to be set to be able to show the post',
+      description:
+        'Some frontends will require a slug to be set to be able to show the post',
       options: {
         source: 'title',
         maxLength: 96,
@@ -87,7 +88,8 @@ export default {
       name: 'gpxRoute',
       type: 'file',
       title: 'GPX Route',
-      description: 'A GPX of the route. Please ensure the GPX route contains elevation data.',
+      description:
+        'A GPX of the route. Please ensure the GPX route contains elevation data.',
       group: ['gpx'],
     },
     // Beta
@@ -128,10 +130,14 @@ export default {
       type: 'string',
       title: 'OS Grid Reference number',
       description: 'The Open Street grid reference number',
-      validation: (Rule) => Rule.optional().custom((value) => {
-        const regex = /^([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3}|\d{2}\s?\d{2}|\d{1}\s?\d{1})$/
-        return value.match(regex) ? true : 'Must be a valid OS Grid Reference number'
-      }),
+      validation: (Rule) =>
+        Rule.optional().custom((value) => {
+          const regex =
+            /^([STNHOstnho][A-Za-z]\s?)(\d{5}\s?\d{5}|\d{4}\s?\d{4}|\d{3}\s?\d{3}|\d{2}\s?\d{2}|\d{1}\s?\d{1})$/
+          return value.match(regex)
+            ? true
+            : 'Must be a valid OS Grid Reference number'
+        }),
       group: ['beta'],
     },
     {
@@ -143,10 +149,13 @@ export default {
       options: {
         layout: 'tags',
       },
-      validation: (Rule) => Rule.optional().custom((values) => {
-        const regex = /[0-9]{1,3}/
-        return values.every((value) => value.match(regex)) ? true : 'Must be valid map numbers'
-      }),
+      validation: (Rule) =>
+        Rule.optional().custom((values) => {
+          const regex = /[0-9]{1,3}/
+          return values.every((value) => value.match(regex))
+            ? true
+            : 'Must be valid map numbers'
+        }),
       group: ['beta'],
     },
     {
@@ -195,12 +204,14 @@ export default {
       type: 'array',
       title: 'Stages',
       description: 'Add stages to the route, if desired.',
-      of: [{
-        type: 'reference',
-        to: {
-          type: 'route',
+      of: [
+        {
+          type: 'reference',
+          to: {
+            type: 'route',
+          },
         },
-      }],
+      ],
       group: ['stages'],
     },
   ],
@@ -229,7 +240,11 @@ export default {
       media: 'mainImage',
     },
     prepare({
-      title = 'No title', routeLength = '', routeTime = '', routeAscent = '', media,
+      title = 'No title',
+      routeLength = '',
+      routeTime = '',
+      routeAscent = '',
+      media,
     }) {
       const attrArr = [
         routeLength ? `${routeLength}km` : null,

@@ -1,4 +1,4 @@
-const htmlmin = require('html-minifier');
+const htmlmin = require('html-minifier')
 
 const minifyHTML = (content, outputPath) => {
   // Eleventy 1.0+: use this.inputPath and this.outputPath instead
@@ -7,11 +7,11 @@ const minifyHTML = (content, outputPath) => {
       useShortDoctype: true,
       removeComments: true,
       collapseWhitespace: true,
-    });
-    return minified;
+    })
+    return minified
   }
 
-  return content;
+  return content
 }
 
 module.exports = minifyHTML

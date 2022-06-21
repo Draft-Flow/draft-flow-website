@@ -1,7 +1,7 @@
 const groq = require('groq')
 const client = require('../utils/sanityClient')
 
-const getCategories = async () => (
+const getCategories = async () =>
   client.fetch(groq`
     *[_type == "category"] {
       title,
@@ -13,6 +13,5 @@ const getCategories = async () => (
       }
     }
   `)
-)
 
 module.exports = getCategories

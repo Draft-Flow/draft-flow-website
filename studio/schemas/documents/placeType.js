@@ -12,7 +12,8 @@ export default {
       name: 'icon',
       type: 'image',
       title: 'Icon',
-      description: 'Upload an SVG icon for this place type. Preferrably from https://fonts.google.com/icons.',
+      description:
+        'Upload an SVG icon for this place type. Preferrably from https://fonts.google.com/icons.',
     },
   ],
 }

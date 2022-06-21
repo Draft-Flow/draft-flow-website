@@ -49,10 +49,12 @@ const getAuthors = async () => {
   // eslint-disable-next-line
   const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
-  const prepareAuthors = await Promise.all(reducedDocs.map(async (doc) => {
-    const author = await generateAuthor(doc)
-    return author
-  }))
+  const prepareAuthors = await Promise.all(
+    reducedDocs.map(async (doc) => {
+      const author = await generateAuthor(doc)
+      return author
+    })
+  )
   return prepareAuthors
 }
 

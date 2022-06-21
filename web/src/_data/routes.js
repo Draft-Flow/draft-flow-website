@@ -28,11 +28,8 @@ const generateRoute = async (route) => {
       const xml = new DOMParser().parseFromString(xmlString)
       geoJSON = toGeoJSON.gpx(xml)
 
-      const { coordinates } = geoJSON.features[0].geometry;
-      const llBounds = new mapboxgl.LngLatBounds(
-        coordinates[0],
-        coordinates[0],
-      )
+      const { coordinates } = geoJSON.features[0].geometry
+      const llBounds = new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
 
       // eslint-disable-next-line
       for (const coord of coordinates) {
@@ -67,7 +64,7 @@ const generateRoute = async (route) => {
             x: Number(totalDistance.toFixed(2)),
             y: Number(gpxPoint[2].toFixed(0)),
           }
-        },
+        }
       )
     }
 
@@ -76,9 +73,15 @@ const generateRoute = async (route) => {
       geoJSON,
       bounds,
       elevation,
-      elevationGain: elevationGain ? Number(elevationGain.toFixed(0)) : elevationGain,
-      elevationLoss: elevationLoss ? Number(elevationLoss.toFixed(0)) : elevationLoss,
-      totalDistance: totalDistance ? Number(totalDistance.toFixed(1)) : totalDistance,
+      elevationGain: elevationGain
+        ? Number(elevationGain.toFixed(0))
+        : elevationGain,
+      elevationLoss: elevationLoss
+        ? Number(elevationLoss.toFixed(0))
+        : elevationLoss,
+      totalDistance: totalDistance
+        ? Number(totalDistance.toFixed(1))
+        : totalDistance,
       body: toHTML(route.body, { components: serializers }),
     }
   } catch (err) {
@@ -118,10 +121,12 @@ const getRoutes = async () => {
   // eslint-disable-next-line
   const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
-  const prepareRoutes = await Promise.all(reducedDocs.map(async (doc) => {
-    const route = await generateRoute(doc)
-    return route
-  }))
+  const prepareRoutes = await Promise.all(
+    reducedDocs.map(async (doc) => {
+      const route = await generateRoute(doc)
+      return route
+    })
+  )
   return prepareRoutes
 }
 

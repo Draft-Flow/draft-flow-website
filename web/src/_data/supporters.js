@@ -41,10 +41,12 @@ const getSupporters = async () => {
   // eslint-disable-next-line
   const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
-  const prepareSupporters = await Promise.all(reducedDocs.map(async (doc) => {
-    const supporter = await generateSupporter(doc)
-    return supporter
-  }))
+  const prepareSupporters = await Promise.all(
+    reducedDocs.map(async (doc) => {
+      const supporter = await generateSupporter(doc)
+      return supporter
+    })
+  )
   return prepareSupporters
 }
 
