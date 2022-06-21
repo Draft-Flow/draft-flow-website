@@ -34,7 +34,10 @@ const generateRoute = async (route) => {
         coordinates[0],
       )
 
-      coordinates.foreach((coord) => llBounds.extend(coord))
+      // eslint-disable-next-line
+      for (const coord of coordinates) {
+        llBounds.extend(coord)
+      }
 
       bounds = llBounds.toArray()
       totalDistance = 0
