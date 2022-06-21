@@ -16,13 +16,14 @@ When installing dependencies, ensure you're in the correct directory - either `/
 ## Local Development
 
 1. Clone this repo
-2. Run `npm ci`
-3. Copy the `.env.development.template` file to `.env.development` for both the `/studio` and `/web` directories
-4. Fill in the necesssary environment variables in both `env.development` files
-5. Run `npm run dev` to start both the website and Sanity Studio locally
-6. Open the website at [localhost:8080](http://localhost:8080)
-7. Open the CMS dashboard at [locahost:3333](https://localhost:3333)
-8. Edit the files in `/web` or `/studio` to edit the website or CMS
+2. Ensure you're running the required `node` version based on what's in the `.nvmrc` file. Use `nvm` for swapping between `node` versions.
+3. Run `npm ci`
+4. Copy the `.env.development.template` file to `.env.development` for both the `/studio` and `/web` directories
+5. Fill in the necesssary environment variables in both `env.development` files
+6. Run `npm run dev` to start both the website and Sanity Studio locally
+7. Open the website at [localhost:8080](http://localhost:8080)
+8. Open the CMS dashboard at [locahost:3333](https://localhost:3333)
+9. Edit the files in `/web` or `/studio` to edit the website or CMS
 
 ### Styling
 
