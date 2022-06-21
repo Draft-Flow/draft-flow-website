@@ -10,6 +10,7 @@ module.exports = {
   extends: [
     'airbnb-base',
     '@sanity/eslint-config-studio',
+    'prettier',
   ],
   parserOptions: {
     ecmaVersion: 'latest',

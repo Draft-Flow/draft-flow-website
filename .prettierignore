@@ -1,0 +1,18 @@
+node_modules/
+.env.*
+!.env.*.template
+
+yarn.lock
+
+# Sanity
+/studio/dist/
+
+# Eleventy
+/web/_site/
+/web/.cache/
+/web/src/static/bundles/*
+/web/tmp/*
+
+# Generated hash data
+/web/src/_data/hash.json
+ 

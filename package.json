@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel#readme",
   "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "prettier": "2.7.1"
   }
 }
