@@ -167,6 +167,7 @@ export default {
         type: 'place',
       },
       group: ['beta'],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'parking',
@@ -176,6 +177,7 @@ export default {
         type: 'place',
       },
       group: ['beta'],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'railway',

@@ -9,15 +9,16 @@ const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
 
 const INPUT = 'src'
+const OUTPUT = '_site'
 
 module.exports = function (eleventyConfig) {
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
-  eleventyConfig.addPassthroughCopy('static')
+  eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
 
   eleventyConfig.on('eleventy.after', async () => {
-    const srcDir = `${INPUT}/static`
-    const destDir = `./_site/static`
+    const srcDir = `${INPUT}/static/bundles`
+    const destDir = `${OUTPUT}/static/bundles`
     fse.copySync(srcDir, destDir)
   })
 
@@ -68,7 +69,7 @@ module.exports = function (eleventyConfig) {
       input: INPUT,
       includes: '_includes',
       data: '_data',
-      output: '_site',
+      output: OUTPUT,
     },
   }
 }

@@ -4,17 +4,13 @@
   {% if route.geoJSON %}
   {% jsbundle 'route', true | safe %}
     <script>
+      import {Tooltip} from 'chart.js'
       import Chart from 'chart.js/auto'
       import { getRelativePosition } from 'chart.js/helpers'
       import mapboxgl from 'mapbox-gl'
       import 'mapbox-gl/dist/mapbox-gl.css'
-      import {point as turfPoint, lineString as turfLineString} from '@turf/helpers'
+      import {point as turfPoint} from '@turf/helpers'
       import turfNearestPointOnLine from '@turf/nearest-point-on-line'
-
-      const ICON_SIZE = [24, 24]
-
-      const route = {{ route.geoJSON | dump | safe }}
-      const line = turfLineString(route.features[0].geometry.coordinates)
 
       mapboxgl.accessToken = '{{ env.mapbox_token }}';
       const map = new mapboxgl.Map({
@@ -40,85 +36,8 @@
         });
       {% endif %}
 
-      // Add route places
-      const placesGeoJson = {
-        'type': 'FeatureCollection',
-        'features': [
-          {% if route.places %}
-          {% for place in route.places %}
-          {% set iconImage %}
-            {% imageUrlFor place.type[0].icon.asset._ref, 30 %}
-          {% endset %}
-          {
-            'type': 'Feature',
-            'properties': {
-              'message': '{{ place.name }}',
-              'iconSize': ICON_SIZE,
-              'icon': `{{ iconImage }}`,
-            },
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [{{ place.location.lng }}, {{ place.location.lat }}]
-            }
-          },
-          {% endfor %}
-          {% endif %}
-          {% if route.startFinish %}
-          {% set iconImage %}
-            {% imageUrlFor route.startFinish.type.icon.asset._ref, 30 %}
-          {% endset %}
-          {
-            'type': 'Feature',
-            'properties': {
-              'message': '{{ route.startFinish.name }}',
-              'iconSize': ICON_SIZE,
-              'icon': `{{ iconImage }}`,
-            },
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [{{ route.startFinish.location.lng }}, {{ route.startFinish.location.lat }}]
-            }
-          },
-          {% endif %}
-          {% if route.parking %}
-          {% set iconImage %}
-            {% imageUrlFor route.parking.type.icon.asset._ref, 30 %}
-          {% endset %}
-          {
-            'type': 'Feature',
-            'properties': {
-              'message': '{{ route.parking.name }}',
-              'iconSize': ICON_SIZE,
-              'icon': `{{ iconImage }}`,
-            },
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [{{ route.parking.location.lng }}, {{ route.parking.location.lat }}]
-            }
-          },
-          {% endif %}
-          {% if route.railway %}
-          {% set iconImage %}
-            {% imageUrlFor route.railway.type.icon.asset._ref, 30 %}
-          {% endset %}
-          {
-            'type': 'Feature',
-            'properties': {
-              'message': '{{ route.railway.name }}',
-              'iconSize': ICON_SIZE,
-              'icon': `{{ iconImage }}`,
-            },
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [{{ route.railway.location.lng }}, {{ route.railway.location.lat }}]
-            }
-          },
-          {% endif %}
-        ]
-      }
-
       // Add markers to the map.
-      for (const marker of placesGeoJson.features) {
+      {# for (const marker of placesGeoJson.features) {
         // Create a DOM element for each marker.
         const el = document.createElement('div');
         el.className = 'marker';
@@ -140,7 +59,7 @@
           )
         )
         .addTo(map);
-      }
+      } #}  
 
       // A single point that animates along the route.
       // Coordinates are initially set to origin.
@@ -158,14 +77,18 @@
         ]
       };
 
+      const lineString = {{ route.lineString | dump | safe }}
+
       map.on('load', () => {
+
+        // Add the route line
         map.addSource('route', {
           'type': 'geojson',
-          'data': route
+          'data': '{{ page.url }}route.geojson'
         })
 
         map.addLayer({
-          'id': 'route',
+          'id': 'routeLayer',
           'type': 'line',
           'source': 'route',
           'layout': {
@@ -178,6 +101,7 @@
           }
         });
 
+        // Add a point to animate along the route
         map.addSource('point', {
           'type': 'geojson',
           'data': point
@@ -192,78 +116,100 @@
             'circle-color': '#ff0000'
           }
         });
-        
-      })
 
-      // Elevation Chart
-      const ctx = document.getElementById('chart_div')
-      const labels = [{% for point in route.elevation %}{{ point.x }}{% if not loop.last %},{% endif %}{% endfor %}]
-      const data = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Elevation',
-            data: [{% for point in route.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
-            fill: false,
-            tension: 0.25,
-            borderColor: '#ff00ff',
+        // Add relevant places on the route
+        map.addSource('points', {
+          'type': 'geojson',
+          'data': '{{ page.url }}routePlaces.geojson',
+          // cluster: true,
+          // clusterMaxZoom: 14, // Max zoom to cluster points on
+          // clusterRadius: 30 // Radius of each cluster when clustering points (defaults to 50)
+        });
+
+        map.addLayer({
+          'id': 'points',
+          'type': 'symbol',
+          'source': 'points',
+          'layout': {
+            'icon-image': ['get', 'icon'],
+            // get the title name from the source's "title" property
+            'text-field': ['get', 'title'],
+            'text-font': [
+              'Open Sans Semibold',
+              'Arial Unicode MS Bold'
+            ],
+            'text-offset': [0, 1.25],
+            'text-anchor': 'top'
           }
-        ]
-      }
-      const chart = new Chart(ctx, {
-        type: 'line',
-        data: data,
+        });
         
-        options: {
-          //interaction: {
-          //  mode: 'x',
-          //  intersect: false,
-          //  position: 'nearest',
-          //},
-          plugins: {
-            tooltip: {
-              mode: 'x',
-              intersect: false,
-              position: 'nearest',
-              callbacks: {
-                beforeLabel: (e) => {
-                  // Highlight corresponding map point
-                  point.features[0].geometry.coordinates = route.features[0].geometry.coordinates[e.dataIndex]
-                  map.getSource('point').setData(point)
+        // Elevation Chart
+        const ctx = document.getElementById('chart_div')
+        const labels = [{% for point in route.elevation %}`{{ point.x }} kms`{% if not loop.last %},{% endif %}{% endfor %}]
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Elevation',
+              data: [{% for point in route.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
+              fill: false,
+              tension: 0.25,
+              borderColor: '#ff00ff',
+            }
+          ]
+        }
+
+        const chart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          
+          options: {
+            plugins: {
+              tooltip: {
+                mode: 'x',
+                intersect: false,
+                position: 'nearest',
+                callbacks: {
+                  beforeLabel: (e) => {
+                    // Highlight corresponding point on map
+                    const coords = lineString.geometry.coordinates[e.dataIndex].slice(0,2)
+                    point.features[0].geometry.coordinates = coords
+                    map.getSource('point').setData(point)
+                  },
                 }
+              }
+            },
+            parsing: {
+              xAxisKey: 'x',
+              yAxisKey: 'y'
+            },
+            elements: {
+              point: {
+                pointRadius: 0
               }
             }
           },
-          parsing: {
-            xAxisKey: 'x',
-            yAxisKey: 'y'
-          },
-          elements: {
-            point: {
-              pointRadius: 0
-            }
-          },
-        },
-      })
+        })
 
-      const chartArea = chart.chartArea
-      const tooltip = chart.tooltip
-      
-      // Highlight point on elevation line
-      map.on('click', 'route', (e) => {
-        const selected = turfPoint(e.lngLat.toArray())
-        const snapped = turfNearestPointOnLine(line, selected, {units: 'miles'});
+        const chartArea = chart.chartArea
+        const tooltip = chart.tooltip
+        
+        // Highlight point on elevation line
+        map.on('click', 'routeLayer', (e) => {
+          const selected = turfPoint(e.lngLat.toArray())
+          const snapped = turfNearestPointOnLine(lineString, selected, {units: 'miles'});
 
-        point.features[0].geometry.coordinates = snapped.geometry.coordinates;
-        map.getSource('point').setData(point);
+          point.features[0].geometry.coordinates = snapped.geometry.coordinates;
+          map.getSource('point').setData(point);
 
-        chart.setActiveElements([
-          {datasetIndex: 0, index: snapped.properties.index},
-        ])
-        tooltip.setActiveElements([
-          {datasetIndex: 0, index: snapped.properties.index}
-        ], {x: 0, y: 0})
-        chart.update()
+          chart.setActiveElements([
+            {datasetIndex: 0, index: snapped.properties.index},
+          ])
+          tooltip.setActiveElements([
+            {datasetIndex: 0, index: snapped.properties.index}
+          ], {x: 0, y: 0})
+          chart.update()
+        })
       })
 
     </script>

@@ -1,0 +1,71 @@
+{% set ICON_SIZE = [20, 20] %}
+
+{
+  "type": "FeatureCollection",
+  "features": [
+    {% if route.places %}
+    {% for place in route.places %}
+    {% set iconImage %}{% imageUrlFor place.type[0].icon.asset._ref, 30 %}{% endset %}
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "{{ place.name }}",
+        "iconSize": [{{ ICON_SIZE }}],
+        "iconURL": "{{- iconImage -}}"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ place.location.lng }}, {{ place.location.lat }}]
+      }
+    },
+    {% endfor %}
+    {% endif %}
+    {% if route.startFinish %}
+    {% set iconImage %}{% imageUrlFor route.startFinish.type.icon.asset._ref, 30 %}{% endset %}
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "{{ route.startFinish.name }}",
+        "iconSize": [{{ ICON_SIZE }}],
+        "iconURL": "{{- iconImage -}}"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ route.startFinish.location.lng }}, {{ route.startFinish.location.lat }}]
+      }
+    }
+    {% endif %}
+    {% if route.parking %}
+    ,
+    {% set iconImage %}{% imageUrlFor route.parking.type.icon.asset._ref, 30 %}{% endset %}
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "{{ route.parking.name }}",
+        "iconSize": [{{ ICON_SIZE }}],
+        "iconURL": "{{- iconImage -}}"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ route.parking.location.lng }}, {{ route.parking.location.lat }}]
+      }
+    }
+    {% endif %}
+    {% if route.railway %}
+    ,
+    {% set iconImage %}{% imageUrlFor route.railway.type.icon.asset._ref, 30 %}{% endset %}
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "{{ route.railway.name }}",
+        "iconSize": [{{ ICON_SIZE }}],
+        "iconURL": "{{- iconImage -}}"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ route.railway.location.lng }}, {{ route.railway.location.lat }}]
+      }
+    }
+    {% endif %}
+  ]
+}

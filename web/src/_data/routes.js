@@ -4,6 +4,7 @@ const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
 const { DOMParser } = require('xmldom')
 const turf = require('@turf/turf')
+const turfLineString = require('@turf/helpers').lineString
 
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
@@ -68,10 +69,16 @@ const generateRoute = async (route) => {
       )
     }
 
+    let lineString = null
+    if (geoJSON) {
+      lineString = turfLineString(geoJSON.features[0].geometry.coordinates)
+    }
+
     return {
       ...route,
       geoJSON,
       bounds,
+      lineString,
       elevation,
       elevationGain: elevationGain
         ? Number(elevationGain.toFixed(0))
