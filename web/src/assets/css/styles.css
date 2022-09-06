@@ -1,3 +1,87 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Variables */
+:root {
+  --color-lime: #99BF10;
+  --color-lime--dark: #293304;
+  --color-blue: #049DE0;
+  --color-blue--dark: #012433;
+  --color-green: #0D892D;
+  --color-green--dark: #053311;
+  --color-earth: #EDEAE0;
+  --color-earth--dark: #B2B0AA;
+  --color-earth--light: #FFFCF3;
+  --color-earch--lightest: #F3F0E8;
+}
+
+html {
+  font-size: 16px;
+}
+
+body.navOpen {
+  @apply h-screen overflow-hidden;
+}
+
+header.open,
+header.open.stuck {
+  @apply h-screen bg-pg-blue-dark; 
+}
+
+header.stuck {
+  @apply fixed top-0 bg-pg-blue-dark;
+}
+
+header.stuck #logo {
+  @apply w-28;
+}
+
+header.stuck #logobar,
+header.open.stuck #logobar {
+  @apply h-16 lg:h-20;
+}
+
+.nav-item-active {
+  @apply bg-tread-white bg-bottom bg-repeat-x bg-auto;
+}
+
+.divider {
+  @apply bg-tread bg-bottom bg-repeat-x h-2 mt-4 mb-4;
+}
+
+h1 {
+  @apply font-bold text-4xl lg:text-5xl;
+}
+
+.form-field {
+  @apply flex flex-col lg:flex-row lg:items-center w-full max-w-md lg:max-w-2xl mb-4 mt-4;
+}
+
+.form-field label {
+  @apply text-lg font-bold lg:w-24 mb-3 lg:mb-0;
+}
+
+.form-field input {
+  @apply h-11 bg-pg-tan/[.1] px-2 border-b border-pg-tan-light/[.4] grow;
+}
+
+.route-card {
+  @apply relative rounded-lg overflow-hidden bg-pg-blue-dark p-6 h-96 flex flex-col justify-end text-white bg-cover bg-no-repeat bg-center after:absolute after:top-0 after:left-0 after:w-full after:h-96 after:bg-pg-blue-dark/[.3];
+}
+
+.metrics {
+  @apply flex justify-between;
+}
+
+.metrics > div {
+  @apply flex flex-col;
+}
+
+.metrics > div > span:first-child {
+  @apply text-xs;
+}
+
+.linked {
+  @apply cursor-pointer;
+}

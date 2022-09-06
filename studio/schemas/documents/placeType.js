@@ -1,6 +1,9 @@
+import { FaMapSigns } from "react-icons/fa";
+
 export default {
   name: 'placeType',
   type: 'document',
+  icon: FaMapSigns,
   title: 'Place Types',
   fields: [
     {

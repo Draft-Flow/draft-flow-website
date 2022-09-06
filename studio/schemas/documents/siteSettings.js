@@ -1,6 +1,9 @@
+import { FaCog } from "react-icons/fa";
+
 export default {
   name: 'siteSettings',
   type: 'document',
+  icon: FaCog,
   title: 'Site Settings',
   __experimental_actions: ['update', /* 'create', 'delete', */ 'publish'],
   fields: [
@@ -90,6 +93,28 @@ export default {
       name: 'charityInfo',
       type: 'basicPortableText',
       title: 'Charity Info',
+    },
+    {
+      name: 'banner',
+      type: 'image',
+      title: 'Banner Image',
+      description: 'Banner image for the website',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessiblity.',
+          validation: (Rule) =>
+            Rule.error('You have to fill out the alternative text.').required(),
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
   ],
 }

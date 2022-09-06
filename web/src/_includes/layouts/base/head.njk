@@ -2,6 +2,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title or renderData.title or metadata.title }} | {{ metadata.title }}</title>
+
+    <style>
+      @font-face {
+        font-family: 'Jost';
+        src: url('/static/fonts/jost.woff2') format('woff2 supports variations'),
+            url('/static/fonts/jost.woff2') format('woff2-variations');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+    </style>
+
     <meta name="Description" content="{{ description or renderData.description or metadata.description }}">
     <link rel="canonical" href="{{ env.url }}{{ page.url }}" />
     <meta property="og:title" content="{{ title or renderData.title or metadata.title }}" />

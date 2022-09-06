@@ -1,6 +1,9 @@
+import { FaRoute } from 'react-icons/fa'
+
 export default {
   name: 'route',
   type: 'document',
+  icon: FaRoute,
   title: 'Routes',
   groups: [
     {

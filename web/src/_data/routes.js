@@ -109,6 +109,7 @@ const getRoutes = async () => {
     excerpt,
     "categories": categories[]->{_id,title},
     "gpx": gpxRoute.asset->url,
+    time,
     "startFinish": startFinish->{
       _id,
       name,

@@ -1,9 +1,9 @@
 const Image = require('@11ty/eleventy-img')
 const path = require('path')
 
-const imageShortcode = async (src, alt, sizes, formats, loading, decoding) => {
+const imageShortcode = async (src, alt, sizes, formats, loading, decoding, widths) => {
   const metadata = await Image(src, {
-    widths: [300, 600],
+    widths: widths || [300, 600],
     formats: formats || ['avif', 'png'],
     outputDir: path.join('_site', 'img'),
   })

@@ -1,28 +1,95 @@
+<section class="bg-pg-blue-dark text-pg-tan-light px-2 sm:px-20 lg:px-4 py-20 flex justify-center">
+  <div class="w-full max-w-6xl pt-52 lg:pt-0 text-pg-tan-light bg-email bg-no-repeat bg-top lg:bg-right bg-72 lg:bg-96">
+    <h4 class="text-4xl lg:text-5xl font-bold">Subscribe for the dirt!</h4>
+    <div class="divider w-40"></div>
+    <p class="text-lg">Subscribe to get all the latest dirt on new gravel biking routes.</p>
+    <form>
+      <div class="form-field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required >
+      </div>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required >
+      </div>
+      <p class="my-6">You can unsubscribe from our newsletter at any time by clicking the link in the footer of our emails.<br>
+    Please see full information in our <a href="/privacy-policy/" class="underline">privacy policy</a>.</p>
+      <button type="submit" class="bg-pg-lime px-5 py-2 text-pg-blue-dark font-bold rounded">Subscribe</button>
+    </form>
+  </div>
+</section>
 <footer>
-  <ul class="supporterslist" style="counter-reset: start-from {{ supporterslist.length + 1 }}">
-  {% asyncEach supporter in collections.supporters | reverse %}
-    {% set currentSupporter = supporter.data.supporter %}
-    {% set imageSrc %}
-      {% imageUrlFor currentSupporter.supporter.logo.asset._ref, 400 %}
-    {% endset %}
-    <li class="supporterlist-item{% if supporter.url == url %} supporterlist-item-active{% endif %}">
-      <a href="{{ currentSupporter.website | url }}?ref=PerthshireGravel" class="supporterlist-link">
-        {% image imageSrc, currentSupporter.supporter.logo.alt  %}
-      </a>
-    </li>
-  {% endeach %}
-  </ul>
-  {{ metadata.charityInfo | blocksToHTML | safe }}
-  <div>
+  {# <div class="bg-pg-tan">
+    <ul class="supporterslist" style="counter-reset: start-from {{ supporterslist.length + 1 }}">
+    {% asyncEach supporter in collections.supporters | reverse %}
+      {% set currentSupporter = supporter.data.supporter %}
+      {% set imageSrc %}
+        {% imageUrlFor currentSupporter.supporter.logo.asset._ref, 400 %}
+      {% endset %}
+      <li class="supporterlist-item{% if supporter.url == url %} supporterlist-item-active{% endif %}">
+        <a href="{{ currentSupporter.website | url }}?ref=PerthshireGravel" class="supporterlist-link">
+          {% image imageSrc, currentSupporter.supporter.logo.alt  %}
+        </a>
+      </li>
+    {% endeach %}
+    </ul>
+  <div> #}
+  <div class="bg-pg-tan flex flex-col items-center text-center px-2 lg:px-4 py-8 lg:py-20">
+    <h4 class="text-4xl lg:text-5xl font-bold">Valued partners</h4>
+    <div class='divider w-40'></div>
+    <p class="mt-4 max-w-prose">Perthshire Gravel is a Highland Perthshire Cycling project, and is only possible with the funding and support of our partners.</p>
+    <ul class="md:w-full max-w-6xl grid grid-cols-2 grid-rows-auto md:grid-cols-4 gap-8 md:gap-0 content-between mt-8">
     {% asyncEach funder in metadata.fundedBy %}
       {% set imageSrc %}
         {% imageUrlFor funder.asset._ref, 400 %}
       {% endset %}
-    <div>
-      <a href="{{ funder.link }}">
-        {% image imageSrc, funder.alt %}
-      </a>
-    </div>
+      <li class="flex justify-center">
+        <a href="{{ funder.link }}" class="w-28 sm:w-40 flex items-center">
+          {% image imageSrc, funder.alt %}
+        </a>
+      </li>
     {% endeach %}
+    </ul>
+  </div>
+  <div class="bg-pg-tan-light px-2 lg:px-4 py-8 pb-4 lg:pt-20 flex flex-col items-center">
+    <div class="max-w-6xl flex flex-col lg:flex-row w-full items-center lg:items-start lg:justify-between">
+      <div class="w-48 lg:order-2">
+        {% set logoSrc %}
+          {% imageUrlFor metadata.logo.asset._ref, 600 %}
+        {% endset %}
+        {% image logoSrc, metadata.logo.alt, "(min-width: 30em) 50vw, 100vw", null, 'eager'  %}
+      </div>
+      <div class="text-center lg:text-left mt-12 lg:mt-0 lg:order-1 lg:grid lg:grid-cols-3 gap-x-8">
+        <div> 
+          <div>Perthshire Gravel</div>
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+        <div>
+          <div>Routes</div>
+          <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+          </ul>
+        </div>
+        <div>
+          <div>Resources</div>
+          <ul>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12 lg:text-left w-full lg:flex lg:justify-between">
+      <div class="lg:flex">
+        <span class="font-bold">&copy; Highland Perthshire Cycling, {% year %}</span> • {{ metadata.charityInfo | blocksToHTML | safe }}
+      </div>
+      <div>
+        Website <a href="https://zenelements.com/">design by zen</a> and <a href="https://brettdewoody.com">built by Brett DeWoody</a>
+      </div>
+    </div>
   </div>
 </footer>

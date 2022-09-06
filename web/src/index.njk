@@ -1,14 +1,50 @@
 ---
 layout: layouts/home
 navtitle: Home
-tags: 
-  - nav
 eleventyComputed: 
   title: "{{ metadata.tagline }}"
   description: "{{ metadata.description }}" 
 ---
 
-<h1>Latest Posts</h1>
+{%- set bannerImageLg -%}
+  {%- imageUrlFor metadata.banner.asset._ref, 2000 -%}
+{%- endset -%}
 
-{% set routeslist = collections.routes %}
-{% include "routesList.njk" %}
+<section
+  class="relative w-full aspect-video bg-cover bg-no-repeat bg-center overflow-hidden max-h-200 min-h-[50rem] md:min-h-[400px] after:absolute after:top-0 after:left-0 after:w-full after:bg-pg-blue-dark/[.4] after:aspect-video after:max-h-200 after:min-h-[50rem] md:after:min-h-[400px] flex flex-col justify-end md:justify-center items-center"
+  style="background-image: url('{{ bannerImageLg }}')"
+>
+  <div class="flex flex-col z-10 text-white px-4 md:px-12 pb-20 md:pb-0 sm:w-4/5 2xl:w-1/2 text-center items-center">
+    <small class="uppercase text-base font-bold">Welcome to Perthshire Gravel</small>
+    <div class="divider w-40"></div>
+    <h1 class="leading-[1.1em]">Discover unforgettable gravel biking and bikepacking adventures in Perthshire</h1>
+    <div class="md:flex mt-12">
+      <a 
+        class="iconButton flex items-center rounded bg-pg-lime text-pg-blue-dark px-2 h-10 md:mr-4 mb-3 md:mb-0 font-bold"
+        href="/routes/"
+      >
+        {% svgIcon 'src/assets/icons/routeExplorerIcon.svg', 'mr-2 h-8 fill-pg-blue-dark' %}
+        Route Explorer
+      </a>
+      <a 
+        class="iconButton inline-flex items-center rounded bg-pg-blue-dark text-white px-2 h-10 font-bold"
+        href=""
+      >
+        {% svgIcon 'src/assets/icons/videoIcon.svg', 'mr-2 h-5' %}
+        Video Tour
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="flex justify-center px-2 lg:px-4 py-20">
+  <div class="max-w-6xl">
+    <div class="md:pl-16 pb-8">
+      <h1 class="max-w-2xl">Find your next gravel biking adventure in Perthshire!</h1>
+      <div class="divider w-40"></div>
+      <p class="max-w-prose">Explore our popular single and multi-day gravel biking routes below or bunny hop over to our <a href="/map/" class="underline">Route Map</a>.</p>
+    </div>
+    {% set routeslist = collections.routes %}
+    {% include "routesList.njk" %}
+  </div>
+</section>

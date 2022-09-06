@@ -1,6 +1,9 @@
+import { FaMapMarkerAlt } from 'react-icons/fa'
+
 export default {
   name: 'place',
   type: 'document',
+  icon: FaMapMarkerAlt,
   title: 'Places',
   groups: [
     {

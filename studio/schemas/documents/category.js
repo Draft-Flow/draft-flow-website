@@ -1,6 +1,9 @@
+import { FaTags } from "react-icons/fa";
+
 export default {
   name: 'category',
   type: 'document',
+  icon: FaTags,
   title: 'Categories',
   fields: [
     {

@@ -4,6 +4,8 @@ const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
+const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
+const shuffleFilter = require('./src/utils/filters/shuffle')
 const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
@@ -15,6 +17,8 @@ module.exports = function (eleventyConfig) {
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
+  eleventyConfig.addPassthroughCopy('src/static/fonts/**/*')
+  eleventyConfig.addPassthroughCopy('src/static/images/**/*')
 
   eleventyConfig.on('eleventy.after', async () => {
     const srcDir = `${INPUT}/static/bundles`
@@ -29,6 +33,12 @@ module.exports = function (eleventyConfig) {
   // Generate img tags with next-gen image formats
   eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
 
+  // Inline SVG
+  eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)
+
+  // Display the current year
+  eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`)
+
   // Bundle ES modules into a browser bundle
   eleventyConfig.addPairedShortcode('jsbundle', jsBundle)
 
@@ -41,6 +51,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('blocksToHTML', function (value) {
     return toHTML(value)
   })
+
+  eleventyConfig.addFilter('shuffle', shuffleFilter)
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj, format) => {

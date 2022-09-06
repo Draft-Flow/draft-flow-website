@@ -1,9 +1,32 @@
-<ul class="list-disc ml-4 pl-2 routeslist" style="counter-reset: start-from {{ routeslist.length + 1 }}">
-  {% for route in collections.routes | reverse %}
+<ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  {% for route in collections.routes | shuffle %}
     {% set currentRoute = route.data.route %}
-    <li class="routelist-item{% if route.url == url %} routelist-item-active{% endif %}">
-      <a href="{{ route.url | url }}" class="routelist-link">{{ currentRoute.title }}</a>
-      <p class="routelist-excerpt">{{ currentRoute.excerpt | blocksToHTML | safe }}</p>
+    {%- set routeMainImage -%}
+      {%- if currentRoute.mainImage -%}
+      {% imageUrlFor currentRoute.mainImage.asset._ref, 800 %}
+      {%- endif -%}
+    {%- endset -%}
+    <li
+      class="card route-card" 
+      {% if routeMainImage %}style="background-image:url('{{ routeMainImage }}')"{% endif %}
+    >
+      <div class="z-10">
+        <a href="{{ route.url | url }}" class="block text-xl font-bold leading-none mb-3">{{ currentRoute.title }}</a>
+        <div class="metrics">
+          <div>
+            <span>Distance</span>
+            <span>{{ currentRoute.totalDistance }} km</span>
+          </div>
+          <div>
+            <span>Ascent</span>
+            <span>{{ currentRoute.elevationGain }} m</span>
+          </div>
+          <div>
+            <span>Time</span>
+            <span>{{ currentRoute.time }}</span>
+          </div>
+        </div>
+      </div>
     </li>
   {% endfor %}
 </ul>
