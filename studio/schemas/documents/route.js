@@ -97,19 +97,27 @@ export default {
     },
     // Beta
     {
-      name: 'routeLength',
-      type: 'number',
-      title: 'Route Length',
-      description: 'Total distance in kilometers',
-      initialValue: 0,
+      name: 'terrain',
+      type: 'text',
+      title: 'Terrain',
+      rows: 2,
+      description: 'A description of the riding surfaces.',
       group: ['beta'],
     },
     {
-      name: 'routeAscent',
-      type: 'number',
-      title: 'Route Ascent',
-      description: 'Total ascent in meters',
-      initialValue: 0,
+      name: 'facilities',
+      type: 'text',
+      title: 'Facilities',
+      rows: 2,
+      description: 'A short description of the facilities located along the route.',
+      group: ['beta'],
+    },
+    {
+      name: 'keyPoints',
+      type: 'array',
+      of: [{type: 'string'}],
+      title: 'Key Points',
+      description: 'Other useful knowledge for the route, 1 per line.',
       group: ['beta'],
     },
     {
@@ -192,6 +200,18 @@ export default {
       group: ['beta'],
     },
     {
+      name: 'bikehire',
+      type: 'array',
+      title: 'Nearest Bike Hire',
+      description: 'Nearest location to hire cycles',
+      of: [
+        {
+          type: 'placeReference',
+        },
+      ],
+      group: ['beta'],
+    },
+    {
       name: 'places',
       type: 'array',
       title: 'Places',
@@ -246,14 +266,10 @@ export default {
     },
     prepare({
       title = 'No title',
-      routeLength = '',
       routeTime = '',
-      routeAscent = '',
       media,
     }) {
       const attrArr = [
-        routeLength ? `${routeLength}km` : null,
-        routeAscent ? `${routeAscent}m` : null,
         routeTime || null,
       ]
 

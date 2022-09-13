@@ -1,5 +1,18 @@
----
-layout: layouts/base/index.njk
----
+{% extends 'layouts/base/index.njk' %}
 
-{{ content | safe }}
+{%- set pageContent = pages | getPage(pageID) -%}
+{%- set bannerImageLg -%}
+  {%- imageUrlFor pageContent.banner.asset._ref, 2000 -%}
+{%- endset -%}
+
+{% set bannerTitle = pageContent.title %}
+
+{% block banner %}
+  {% if bannerImageLg %}
+    {% include "./includes/bannerSmall.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {{ content | safe }}
+{% endblock %}

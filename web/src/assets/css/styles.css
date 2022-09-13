@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Variables */
-:root {
-  --color-lime: #99BF10;
-  --color-lime--dark: #293304;
-  --color-blue: #049DE0;
-  --color-blue--dark: #012433;
-  --color-green: #0D892D;
-  --color-green--dark: #053311;
-  --color-earth: #EDEAE0;
-  --color-earth--dark: #B2B0AA;
-  --color-earth--light: #FFFCF3;
-  --color-earch--lightest: #F3F0E8;
-}
-
 html {
   font-size: 16px;
 }
@@ -29,21 +15,23 @@ header.open.stuck {
   @apply h-screen bg-pg-blue-dark; 
 }
 
+header.open #navbar {
+  @apply grow;
+}
+
+header.open #social {
+  @apply grid;
+}
+
 header.stuck {
   @apply fixed top-0 bg-pg-blue-dark;
 }
 
-header.stuck #logo {
-  @apply w-28;
+.logo-item-active {
+  @apply lg:bg-tread-white lg:bg-bottom lg:bg-repeat-x lg:bg-[length:auto_6px];
 }
-
-header.stuck #logobar,
-header.open.stuck #logobar {
-  @apply h-16 lg:h-20;
-}
-
 .nav-item-active {
-  @apply bg-tread-white bg-bottom bg-repeat-x bg-auto;
+  @apply bg-tread-white bg-bottom bg-no-repeat lg:bg-repeat-x bg-[length:auto_6px];
 }
 
 .divider {
@@ -63,7 +51,7 @@ h1 {
 }
 
 .form-field input {
-  @apply h-11 bg-pg-tan/[.1] px-2 border-b border-pg-tan-light/[.4] grow;
+  @apply h-11 bg-pg-tan/[.1] text-lg px-2 border-b border-pg-tan-light/[.4] grow;
 }
 
 .route-card {

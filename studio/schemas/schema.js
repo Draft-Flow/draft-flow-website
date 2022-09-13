@@ -13,12 +13,16 @@ import route from './documents/route'
 import place from './documents/place'
 import placeType from './documents/placeType'
 import siteSettings from './documents/siteSettings'
+import staticPages from './documents/staticPages'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
 import basicPortableText from './objects/basicPortableText'
 import bioPortableText from './objects/bioPortableText'
 import excerptPortableText from './objects/excerptPortableText'
+import seo from './objects/seo'
+import social from './objects/social'
+import linkBlock from './objects/linkblock'
 import mainImage from './objects/mainImage'
 import logoImage from './objects/logoImage'
 import authorReference from './objects/authorReference'
@@ -30,9 +34,13 @@ export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
     siteSettings,
+    staticPages,
     route,
     category,
     author,
+    seo,
+    social,
+    linkBlock,
     mainImage,
     logoImage,
     place,

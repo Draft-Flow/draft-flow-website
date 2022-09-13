@@ -1,35 +1,34 @@
----
-layout: layouts/base/index.njk
-templateClass: tmpl-route
----
+{% extends 'layouts/base/index.njk' %}
 
-<article class="flex justify-center">
-  <div class="max-w-6xl">
-    <h1>{{ route.title }}</h1>
-    {% if route.authors %}
-    <p>Written by {% for author in route.authors %}<a href="/architects/{{ author.slug.current }}">{{author.name}}</a>{% endfor %}  </p>
-    {% endif %}
-    Main image
-    {% if route.mainImage %}
-      {% set mainImage %}
-        {% imageUrlFor route.mainImage.asset._ref, 800 %}
-      {% endset %}
-      {% image mainImage, route.mainImage.alt, "(min-width: 30em) 50vw, 100vw", ['avif', 'jpeg']  %}
-    {% endif %}
-    {{ route.body | safe }}
-    <div
-  >  {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
-    {{ route.elevationLoss }}
-    {{ route.totalDistance }} ({{ (route.totalDistance/1.609).toFixed(1) }}mi)
-    {{ route.gpx }}
-    {{ route.time }}
+{% block content %}
+  <article class="flex justify-center">
+    <div class="max-w-6xl">
+      <h1>{{ route.title }}</h1>
+      {% if route.authors %}
+      <p>Written by {% for author in route.authors %}<a href="/architects/{{ author.slug.current }}">{{author.name}}</a>{% endfor %}  </p>
+      {% endif %}
+      Main image
+      {% if route.mainImage %}
+        {% set mainImage %}
+          {% imageUrlFor route.mainImage.asset._ref, 800 %}
+        {% endset %}
+        {% image mainImage, route.mainImage.alt, "(min-width: 30em) 50vw, 100vw", ['avif', 'jpeg']  %}
+      {% endif %}
+      {{ route.body | safe }}
+      <div
+    >  {{ route.elevationGain }} ({{ (route.elevationGain * 3.281).toFixed(0) }}ft)
+      {{ route.elevationLoss }}
+      {{ route.totalDistance }} ({{ (route.totalDistance/1.609).toFixed(1) }}mi)
+      {{ route.gpx }}
+      {{ route.time }}
+      </div>
+      <p><a href="{{ '/' | url }}">← Home</a></p>
     </div>
-    <p><a href="{{ '/' | url }}">← Home</a></p>
-  </div>
-</article>
+  </article>
 
-<section class="flex justify-center">
-  <div class="w-full max-w-6xl">
-    {% include './map.njk' %}
-  </div>
-</section>
+  <section class="flex justify-center">
+    <div class="w-full max-w-6xl">
+      {% include './map.njk' %}
+    </div>
+  </section>
+{% endblock %}

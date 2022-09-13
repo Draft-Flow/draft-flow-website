@@ -6,6 +6,8 @@ const { toHTML } = require('@portabletext/to-html')
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
 const shuffleFilter = require('./src/utils/filters/shuffle')
+const routesDataFilter = require('./src/utils/filters/routesData')
+const getPageFilter = require('./src/utils/filters/getPage')
 const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
@@ -52,7 +54,15 @@ module.exports = function (eleventyConfig) {
     return toHTML(value)
   })
 
+  // Shuffle collection into random order
   eleventyConfig.addFilter('shuffle', shuffleFilter)
+
+  // Extract route data
+    // Shuffle collection into random order
+    eleventyConfig.addFilter('routesData', routesDataFilter)
+
+  // Get page
+  eleventyConfig.addFilter('getPage', getPageFilter)
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj, format) => {
@@ -77,6 +87,7 @@ module.exports = function (eleventyConfig) {
     htmlTemplateEngine: 'njk',
     dataTemplateEngine: 'njk',
     passthroughFileCopy: true,
+    showAllHosts: false,
     dir: {
       input: INPUT,
       includes: '_includes',

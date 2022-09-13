@@ -25,7 +25,9 @@ const getAuthors = async () => {
   const projection = groq`{
     _id,
     name,
+    nickname,
     slug,
+    banner,
     image,
     bio[]{
       ...,
@@ -39,9 +41,11 @@ const getAuthors = async () => {
         }
       }
     },
-    "routes": *[_type == "route" && author._ref in authors[]->author._id ]{
+    "routes": *[_type == "route" && references(^._id) ]{
       title,
-      "slug": slug.current,
+      slug,
+      mainImage,
+      time
     }
   }`
   const order = '| order(name asc)'

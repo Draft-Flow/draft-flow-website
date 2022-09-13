@@ -1,8 +1,8 @@
-<div id="sentinel" class="absolute"></div>
-<header id="header" class="fixed z-50 top-0 w-full lg:absolute text-pg-tan-light flex justify-center lg:transition-all lg:duration-150 lg:ease-linear">
-  <div id="navbar" class="w-full mx-4 max-w-6xl  text-center lg:text-left flex flex-col lg:flex-row lg:justify-between lg:items-center">
+<div id="sentinel" class="absolute top-0"></div>
+<header id="header" class="fixed z-50 top-0 w-screen lg:absolute text-pg-tan-light flex justify-center transition-all duration-150 ease-linear">
+  <div id="navbar" class="w-full mx-4 max-w-6xl text-center lg:text-left flex flex-col lg:flex-row lg:justify-between lg:items-center">
     <div id="logobar" class="h-24 flex justify-between items-center transition-all duration-150 ease-linear">
-      <h1 class="home h-full flex items-center {% if page.url == '/' %} nav-item-active{% endif %}">
+      <h1 class="home h-full flex items-center {% if page.url == '/' %} logo-item-active{% endif %}">
         <a id="logo" href="{{ '/' | url }}" class="block w-40 grayscale contrast-200 brightness-200 transition-all duration-150 ease-linear">
           {% set logoSrc %}
             {% imageUrlFor metadata.logo.asset._ref, 600 %}
@@ -15,15 +15,26 @@
         <div id="navClose" class="hidden">{% svgIcon 'src/assets/icons/navClose.svg' %}</div>
       </button>
     </div>
-    <nav class="hidden lg:h-full lg:block" id="nav">
-      <ul class="nav lg:h-full pt-6 mt-6 lg:pt-0 lg:mt-0 grid grid-cols-1 grid-flow-row lg:grid-row-1 lg:grid-flow-col gap-y-12 lg:gap-x-20 font-bold lg:font-medium text-3xl lg:text-lg border-t-2 border-dashed lg:border-0">
+    <nav class="hidden lg:h-full lg:flex grow lg:grow-0" id="nav">
+      <ul class="nav lg:h-full pt-12 lg:pt-0 grid grid-cols-1 grid-flow-row lg:grid-row-1 lg:grid-flow-col gap-y-10 lg:gap-x-16 font-bold lg:font-medium text-3xl lg:text-lg border-t-2 border-dashed lg:border-0">
         {%- for nav in collections.nav | reverse -%}
-        <li class="lg:flex lg:items-center px-2 nav-item{% if nav.url == page.url %} nav-item-active{% endif %}">
-          <a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a>
+        <li class="h-full px-2 pb-3 lg:pb-0 {% if nav.url == page.url %} nav-item-active{% endif %}">
+          <a href="{{ nav.url | url }}" class="lg:flex lg:items-center h-full hover:text-pg-lime">{{ nav.data.navtitle }}</a>
         </li>
         {%- endfor -%}
       </ul>
     </nav>
+    <ul class="hidden justify-center lg:grid lg:grid-rows-1 grid-flow-col gap-12 lg:gap-6 lg:h-full pb-36 lg:py-0 justify-self-end" id="social">
+      <li class="lg:h-full">
+        <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full lg:flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-white w-8 lg:w-5 hover:fill-pg-lime' %}</a>
+      </li>
+      <li class="lg:h-full">
+        <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full lg:flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-white w-8 lg:w-5 hover:fill-pg-lime' %}</a>
+      </li>
+      <li class="lg:h-full">
+        <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full lg:flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-white w-8 lg:w-5 hover:fill-pg-lime' %}</a>
+      </li>
+    </ul>
   </div>
 </header>
 <script>
@@ -32,6 +43,7 @@
   /* Menu Toggle - START */
   const bodyEl = document.body
   const navEl = document.getElementById('nav')
+  const socialEl = document.getElementById('social')
   const toggleEl = document.getElementById('navToggle')
   const navOpenEl = document.getElementById('navOpen')
   const navCloseEl = document.getElementById('navClose')
@@ -40,6 +52,7 @@
     bodyEl.classList.toggle('navOpen')
     headerEl.classList.toggle('open')
     navEl.classList.toggle('hidden')
+    socialEl.classList.toggle('hidden')
     navOpenEl.classList.toggle('hidden')
     navCloseEl.classList.toggle('hidden')
   }

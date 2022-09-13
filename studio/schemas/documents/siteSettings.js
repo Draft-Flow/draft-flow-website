@@ -5,7 +5,7 @@ export default {
   type: 'document',
   icon: FaCog,
   title: 'Site Settings',
-  __experimental_actions: ['update', /* 'create', 'delete', */ 'publish'],
+  __experimental_actions: ['update', 'create', 'delete', 'publish'],
   fields: [
     {
       name: 'title',
@@ -51,6 +51,11 @@ export default {
       options: {
         layout: 'tags',
       },
+    },
+    {
+      name: 'social',
+      type: 'social',
+      title: 'Social Media'
     },
     {
       name: 'fundedBy',
@@ -99,9 +104,6 @@ export default {
       type: 'image',
       title: 'Banner Image',
       description: 'Banner image for the website',
-      options: {
-        hotspot: true,
-      },
       fields: [
         {
           name: 'alt',

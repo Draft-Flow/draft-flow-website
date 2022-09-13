@@ -1,8 +1,8 @@
----
-layout: layouts/home.njk
-navtitle: Supporters
-permalink: /supporters/
----
+{% extends  'layouts/base/index.njk' %}
+
+{%- set pageContent = pages | getPage('routes') -%}
+
+{{ pageContent | dump }}
 
 <h1>Supporters</h1>
 
@@ -14,3 +14,4 @@ permalink: /supporters/
   </li>
 {% endfor %}
 </ol>
+

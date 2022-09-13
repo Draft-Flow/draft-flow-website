@@ -12,6 +12,12 @@ export default {
       title: 'Name',
     },
     {
+      name: 'nickname',
+      type: 'string',
+      title: 'Nickname',
+      description: 'A nickname or their first name'
+    },
+    {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
@@ -21,6 +27,11 @@ export default {
         source: 'name',
         maxLength: 96,
       },
+    },
+    {
+      name: 'banner',
+      type: 'image',
+      title: 'Banner Image',
     },
     {
       name: 'image',

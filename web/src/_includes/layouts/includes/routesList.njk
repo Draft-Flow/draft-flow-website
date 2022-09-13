@@ -1,9 +1,8 @@
 <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  {% for route in collections.routes | shuffle %}
-    {% set currentRoute = route.data.route %}
+  {% for route in routesList %}
     {%- set routeMainImage -%}
-      {%- if currentRoute.mainImage -%}
-      {% imageUrlFor currentRoute.mainImage.asset._ref, 800 %}
+      {%- if route.mainImage -%}
+      {% imageUrlFor route.mainImage.asset._ref, 800 %}
       {%- endif -%}
     {%- endset -%}
     <li
@@ -11,19 +10,21 @@
       {% if routeMainImage %}style="background-image:url('{{ routeMainImage }}')"{% endif %}
     >
       <div class="z-10">
-        <a href="{{ route.url | url }}" class="block text-xl font-bold leading-none mb-3">{{ currentRoute.title }}</a>
+        <a href="{{ route.slug.current | url }}" class="block text-xl font-bold leading-none mb-3 ">
+          {{ route.title }}
+        </a>
         <div class="metrics">
           <div>
             <span>Distance</span>
-            <span>{{ currentRoute.totalDistance }} km</span>
+            <span>{{ route.totalDistance }} km</span>
           </div>
           <div>
             <span>Ascent</span>
-            <span>{{ currentRoute.elevationGain }} m</span>
+            <span>{{ route.elevationGain }} m</span>
           </div>
           <div>
             <span>Time</span>
-            <span>{{ currentRoute.time }}</span>
+            <span>{{ route.time }}</span>
           </div>
         </div>
       </div>
