@@ -2,7 +2,12 @@
     style="background-image: url('{{ bannerImageLg }}')"
   >
     <div class="z-10">
-      {% if bannerSubtitle %}<small class="text-base">{{ bannerSubtitle }}</small>{% endif %}
+      {% if bannerSubtitle %}
+        <small class="block text-base font-medium mb-2">
+          <a href="/">Home</a> >
+          {{ bannerSubtitle | safe }}
+        </small>
+        {% endif %}
       <h1 class="w-4/5 md:w-full">{{ bannerTitle }}</h1>
     </div>
   </section>

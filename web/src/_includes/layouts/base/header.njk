@@ -1,3 +1,5 @@
+{% set navPages = collections.all | eleventyNavigation %}
+
 <div id="sentinel" class="absolute top-0"></div>
 <header id="header" class="fixed z-50 top-0 w-screen lg:absolute text-pg-tan-light flex justify-center transition-all duration-150 ease-linear">
   <div id="navbar" class="w-full mx-4 max-w-6xl text-center lg:text-left flex flex-col lg:flex-row lg:justify-between lg:items-center">
@@ -17,11 +19,11 @@
     </div>
     <nav class="hidden lg:h-full lg:flex grow lg:grow-0" id="nav">
       <ul class="nav lg:h-full pt-12 lg:pt-0 grid grid-cols-1 grid-flow-row lg:grid-row-1 lg:grid-flow-col gap-y-10 lg:gap-x-16 font-bold lg:font-medium text-3xl lg:text-lg border-t-2 border-dashed lg:border-0">
-        {%- for nav in collections.nav | reverse -%}
-        <li class="h-full px-2 pb-3 lg:pb-0 {% if nav.url == page.url %} nav-item-active{% endif %}">
-          <a href="{{ nav.url | url }}" class="lg:flex lg:items-center h-full hover:text-pg-lime">{{ nav.data.navtitle }}</a>
-        </li>
-        {%- endfor -%}
+        {%- for item in navPages -%}
+          <li class="h-full px-2 pb-3 lg:pb-0 {% if item.url == page.url %} nav-item-active{% endif %}">
+            <a href="{{ item.url | url }}" class="lg:flex lg:items-center h-full hover:text-pg-lime">{{ item.title }}</a>
+          </li>
+        {% endfor %}
       </ul>
     </nav>
     <ul class="hidden justify-center lg:grid lg:grid-rows-1 grid-flow-col gap-12 lg:gap-6 lg:h-full pb-36 lg:py-0 justify-self-end" id="social">

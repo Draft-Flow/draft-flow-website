@@ -1,5 +1,9 @@
-  <div id='map' style="height:75vh; width:100%"></div>
-  <canvas id="chart_div" style="width: 100%; height:250px;"></canvas>
+  <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded-t">
+    <div id='map' class="aspect-square md:aspect-video w-full"></div>
+  </div>
+  <div class="relative p-2 lg:p-4 bg-pg-tan-lightest rounded-b w-full h-60">
+    <canvas id="chart_div"></canvas>
+  </div>
   
   {% if route.geoJSON %}
   {% jsbundle 'route', true | safe %}
@@ -32,7 +36,7 @@
 
       {% if route.bounds %}
         map.fitBounds({{ route.bounds | dump | safe }}, {
-          padding: 20
+          padding: 40
         });
       {% endif %}
 
@@ -96,7 +100,7 @@
             'line-cap': 'round'
           },
           'paint': {
-            'line-color': '#ff00ff',
+            'line-color': '#012433',
             'line-width': 5
           }
         });
@@ -113,7 +117,7 @@
           'type': 'circle',
           'paint': {
             'circle-radius': 6.75,
-            'circle-color': '#ff0000'
+            'circle-color': '#99BF10'
           }
         });
 
@@ -145,7 +149,7 @@
         
         // Elevation Chart
         const ctx = document.getElementById('chart_div')
-        const labels = [{% for point in route.elevation %}`{{ point.x }} kms`{% if not loop.last %},{% endif %}{% endfor %}]
+        const labels = [{% for point in route.elevation %}`{{ point.x }} km`{% if not loop.last %},{% endif %}{% endfor %}]
         const data = {
           labels: labels,
           datasets: [
@@ -154,7 +158,7 @@
               data: [{% for point in route.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
               fill: false,
               tension: 0.25,
-              borderColor: '#ff00ff',
+              borderColor: '#012433',
             }
           ]
         }
@@ -164,6 +168,7 @@
           data: data,
           
           options: {
+            maintainAspectRatio: false,
             plugins: {
               tooltip: {
                 mode: 'x',

@@ -38,6 +38,10 @@ header.stuck {
   @apply bg-tread bg-bottom bg-repeat-x h-2 mt-4 mb-4;
 }
 
+.divider.short {
+  @apply bg-[length:auto_6px];
+}
+
 h1 {
   @apply font-bold text-4xl lg:text-5xl;
 }
@@ -73,3 +77,16 @@ h1 {
 .linked {
   @apply cursor-pointer;
 }
+
+.description {
+  @apply flex flex-col items-center;
+}
+
+.description p {
+  @apply block max-w-2xl my-2 leading-7;
+}
+
+.description img {
+  @apply w-full my-8;
+}
+

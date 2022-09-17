@@ -81,10 +81,11 @@ export default {
     select: {
       title: 'name',
       supporter: 'supporter',
+      type: 'type.0.placeType.title',
       image: 'type.0.placeType.icon',
     },
-    prepare: ({ title, supporter, image }) => {
-      const subtitle = supporter ? 'Supporter' : ''
+    prepare: ({ title, type, supporter, image }) => {
+      const subtitle = `${type}${supporter === true ? ' - Supporter' : ''}`
 
       return {
         title,

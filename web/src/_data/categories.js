@@ -1,17 +1,23 @@
 const groq = require('groq')
 const client = require('../utils/sanityClient')
 
-const getCategories = async () =>
-  client.fetch(groq`
-    *[_type == "category"] {
+const getCategories = async () => {
+  const filter = groq`*[_type == "category"]`
+  const projection = groq`{
+    title,
+    slug,
+    orderRank,
+    description,
+    "routes": *[_type == "route" && references(^._id)]{
       title,
-      slug,
-      description,
-      "routes": *[_type == "route" && references(^._id)]{
-        title,
-        "slug": slug.current,
-      }
+      "slug": slug.current,
     }
-  `)
+  }`
+
+  const order = '| order(orderRank asc)'
+  const query = [filter, projection, order].join(' ')
+  const docs = await client.fetch(query).catch((err) => console.error(err))
+  return docs
+}
 
 module.exports = getCategories

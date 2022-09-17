@@ -16,8 +16,8 @@ module.exports = {
           dark: '#053311'
         },
         'pg-tan': {
-          lightest: '#F3F0E8',
-          light: '#FFFCF3',
+          lightest: '#FFFCF3',
+          light: '#F3F0E8',
           DEFAULT: '#EDEAE0',
           dark: '#B2B0AA'
         }

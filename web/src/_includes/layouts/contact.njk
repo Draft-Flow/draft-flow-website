@@ -1,0 +1,68 @@
+{% extends 'layouts/base/index.njk' %}
+
+{%- set pageContent = pages | getPage(pageID) -%}
+{%- set bannerImageLg -%}
+  {%- imageUrlFor pageContent.banner.asset._ref, 2000 -%}
+{%- endset -%}
+
+{% set bannerTitle = pageContent.title %}
+
+{% block banner %}
+  {% if bannerImageLg %}
+    {% include "./includes/bannerSmall.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4 text-lg">
+    <div class="max-w-3xl w-full py-20">
+      {{ pageContent.content | blocksToHTML | safe }}
+
+      <div class="mt-4 flex flex-col md:flex-row">
+        <div class="w-40 font-semibold">Email Us:</div>
+        <div><a href="mailto:{{metadata.contact.email}}">{{ metadata.contact.email }}</a></div>
+      </div>
+
+      <p class="mt-8 mb-2">Or complete the form below to contact us:</p>
+      <form id="formContact" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="company" class="w-full grid grid-cols-1 gap-4 text-lg">
+        <div class="hidden flex md:flex-row">
+          <label class="w-40">
+            Company: <input name="company" />
+          </label>
+        </div>
+        <div class="flex w-full flex-col md:flex-row md:items-center">
+          <label class="w-40 font-semibold">Your Name:</label>
+          <input type="text" name="name" class="grow p-2 border-b border-pg-tan-dark" required />
+        </div>
+        <div class="flex w-full flex-col md:flex-row md:items-center">
+          <label class="w-40 font-semibold">Your Email:</label>
+          <input type="email" name="email" class="grow p-2 border-b border-pg-tan-dark" required />
+        </div>
+        <div class="flex w-full flex-col md:flex-row">
+          <label class="w-40 pt-2 font-semibold">Message:</label>
+          <textarea name="message" rows="5" class="grow p-2 border-b border-pg-tan-dark" required></textarea>
+        </div>
+        <div class="flex justify-between m4-8">
+          <div data-netlify-recaptcha="true"></div>
+          <button type="submit" class="iconButton flex items-center rounded bg-pg-lime text-pg-blue-dark px-4 h-10 font-bold">Send</button>
+        </div>
+      </form>
+      <script>
+        document.getElementById('formContact').addEventListener("submit", (event) => {
+          event.preventDefault();
+          const result = document.querySelector(".result");
+          fetch("/", {
+            body: new FormData(event.target),
+            method: "POST",
+          })
+            .then(() => {
+              result.innerText = "Thank you for conctacting us, we'll be in touch soon.";
+            })
+            .catch((error) => {
+              result.innerText = `Failed: ${error}`;
+            });
+        });
+      </script>
+    </div>
+  </section>
+{% endblock %}

@@ -24,6 +24,11 @@ export default {
       description: 'Banner image for the page',
     },
     {
+      name: 'content',
+      type: 'bodyPortableText',
+      title: 'Content'
+    },
+    {
       name: 'linkBlock1',
       type: 'linkblock',
       title: 'Link Block #1',

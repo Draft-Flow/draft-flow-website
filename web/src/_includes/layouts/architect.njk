@@ -19,16 +19,15 @@
 {% block content %}
   <section class="flex justify-center px-2 lg:px-4">
     <div class="max-w-6xl w-full py-20">
-      <h2 class="font-bold text-5xl">Meet {{ architect.nickname }}!<h2>
-      <div class="divider w-40"></div>
-
-      <div class="flex flex-col md:flex-row justify-between">
-        <div class="md:pr-44 text-lg">
+      <div class="flex flex-col lg:flex-row justify-between">
+        <div class="lg:mr-28 xl:mr-44 text-lg">
+          <h2 class="font-bold text-5xl">Meet {{ architect.nickname }}!<h2>
+          <div class="divider w-40"></div>
           {{ architect.body | safe }}
         </div>
-        <div class="w-full max-w-sm">
-          {% image architectImage, architect.name %}
-          <div class="relative text-3xl font-bold mt-16 py-10 px-2 before:h-1 before:w-full before:bg-tread before:bg-repeat-x before:bg-[length:100%_6px] before:overflow-visible before:-mx-2 before:shadow-md before:shadow-gray-300 before:absolute before:top-0">
+        <div class="w-full px-12 lg:px-0 mt-16 lg:mt-0 flex flex-col justify-center sm:flex-row items-center lg:flex-col lg:justify-start lg:items-start lg:w-80">
+          <div class="w-full sm:w-60 flex justify-center lg:w-80 sm:mr-12 mb-12 sm:mb-0 lg:mr-0">{% image architectImage, architect.name %}</div>
+          <div class="relative text-3xl font-bold lg:mt-16 py-10 px-2 before:h-1 before:w-full before:bg-tread before:bg-repeat-x before:bg-[length:100%_6px] before:overflow-visible before:-mx-2 before:shadow-md before:shadow-gray-300 before:absolute before:bottom-0 after:h-1 after:w-full after:bg-tread after:bg-repeat-x after:bg-[length:100%_6px] after:overflow-visible after:-mx-2 after:shadow-md after:shadow-gray-300 after:absolute after:top-0">
             <blockquote class="">
               “A quote from Rosie”
             </blockquote>

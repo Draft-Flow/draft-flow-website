@@ -5,6 +5,9 @@ export default {
   type: 'document',
   icon: FaRoute,
   title: 'Routes',
+  initialValue: {
+    sameFinish: true
+  },
   groups: [
     {
       name: 'basics',
@@ -64,6 +67,7 @@ export default {
         },
       ],
       group: ['basics'],
+      validation: Rule => Rule.required().max(2)
     },
     // Description
     {
@@ -181,6 +185,25 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'sameFinish',
+      type: 'boolean',
+      title: 'Is the finish the same as the start? ',
+      description: 'Does the route start and end at the same point?',
+      initialValue: true,
+      group: ['beta'],
+    },
+    {
+      name: 'finish',
+      type: 'reference',
+      title: 'Finish',
+      hidden: ({document}) => document?.sameFinish,
+      description: 'Recommended finish for the route',
+      to: {
+        type: 'place',
+      },
+      group: ['beta'],
+    },
+    {
       name: 'parking',
       type: 'reference',
       title: 'Parking',
@@ -202,8 +225,8 @@ export default {
     {
       name: 'bikehire',
       type: 'array',
-      title: 'Nearest Bike Hire',
-      description: 'Nearest location to hire cycles',
+      title: 'Bike Services',
+      description: 'Bike services along the route',
       of: [
         {
           type: 'placeReference',

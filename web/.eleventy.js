@@ -2,6 +2,7 @@ const util = require('util')
 const CleanCSS = require('clean-css')
 const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
@@ -12,10 +13,14 @@ const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
 
+const portableComponents = require('./src/utils/portable/components')
+
 const INPUT = 'src'
 const OUTPUT = '_site'
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
@@ -50,7 +55,7 @@ module.exports = function (eleventyConfig) {
   })
 
   // Convert Sanity block content into HTML
-  eleventyConfig.addFilter('blocksToHTML', function (value) {
+  eleventyConfig.addFilter('blocksToHTML', (value) => {
     return toHTML(value)
   })
 
@@ -87,7 +92,7 @@ module.exports = function (eleventyConfig) {
     htmlTemplateEngine: 'njk',
     dataTemplateEngine: 'njk',
     passthroughFileCopy: true,
-    showAllHosts: false,
+    showAllHosts: true,
     dir: {
       input: INPUT,
       includes: '_includes',

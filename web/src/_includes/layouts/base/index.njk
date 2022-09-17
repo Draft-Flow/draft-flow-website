@@ -3,8 +3,9 @@
   {% include './head.njk' %}
   <body class="bg-pg-tan-light">
     {% include './header.njk' %}
+    {% block banner %}{% endblock %}
+    {% block subheader %}{% endblock %}
     <main>
-      {% block banner %}{% endblock %}
       {% block content %}{% endblock %}
     </main>
     {% include './footer.njk' %}

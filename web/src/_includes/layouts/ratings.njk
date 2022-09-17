@@ -1,0 +1,61 @@
+{% extends 'layouts/base/index.njk' %}
+
+{%- set pageContent = pages | getPage(pageID) -%}
+
+{%- set bannerImageLg -%}
+  {%- imageUrlFor pageContent.banner.asset._ref, 2000 -%}
+{%- endset -%}
+
+{% set bannerTitle = pageContent.title %}
+{% set bannerSubtitle %}
+  {% set delimiter = joiner(' > ') %}
+  {% for crumb in collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+    <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+    {{ delimiter() }}
+  {% endfor %}
+{% endset %}
+
+{% block banner %}
+  {% if bannerImageLg %}
+    {% include "./includes/bannerLarge.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full pt-20 mb-12">
+      {{ pageContent.content | blocksToHTML | safe }}
+    </div>
+  </section>
+
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center mb-12 text-xl relative z-10">
+        {% for category in categories %}
+          <a href="#{{ category.title | slug }}" class="text-center font-semibold px-4">{{ category.title }}</a>
+        {% endfor %}
+      </div>
+      <ul>
+        {% for category in categories %}
+          <li class="bg-pg-tan-lightest p-4 lg:p-8 mb-8 md:flex">
+            <div class="md:w-3/5">
+              <h3 class="font-bold text-3xl pt-40 -mt-40" id="{{ category.title | slug }}">{{ category.title }}</h3>
+              <div class="divider short w-28"></div>
+              <p class="leading-7">{{ category.description }}</p>
+            </div>
+            <div class="md:w-2/5 md:pl-8 lg:pl-20">
+              <h4 class="font-semibold mt-6 text-lg">{{ category.title }} Routes</h4>
+              <ul class="list-disc grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 ml-6 mt-2">
+                {% for route in category.routes %}
+                  <li>
+                    <a href="/routes/{{ route.slug }}">{{ route.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}

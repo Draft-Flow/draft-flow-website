@@ -1,7 +1,9 @@
 import S from "@sanity/desk-tool/structure-builder"
-import { FaFile } from "react-icons/fa"
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
-const hiddenDocTypes = listItem => !["siteSettings", "staticPages"].includes(listItem.getId())
+import { FaFile, FaTags } from "react-icons/fa"
+
+const hiddenDocTypes = listItem => !["siteSettings", "staticPages", "category"].includes(listItem.getId())
 
 export default () =>
   S.list()
@@ -107,5 +109,6 @@ export default () =>
                 )
             ])
         ),
+      orderableDocumentListDeskItem({type: 'category', icon: FaTags, title: "Difficulty Ratings" }),
       ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])

@@ -53,6 +53,23 @@ export default {
       },
     },
     {
+      name: 'contact',
+      type: 'object',
+      title: 'Contact',
+      fields: [
+        {
+          name: 'phone',
+          type: 'string',
+          title: 'Phone Number'
+        },
+        {
+          name: 'email',
+          type: 'string',
+          title: 'Email Address'
+        },
+      ],
+    },
+    {
       name: 'social',
       type: 'social',
       title: 'Social Media'

@@ -107,10 +107,19 @@ const getRoutes = async () => {
     slug,
     mainImage,
     excerpt,
-    "categories": categories[]->{_id,title},
+    "category": category->{_id,title,slug, description},
     "gpx": gpxRoute.asset->url,
     time,
+    osgridref,
+    oslandrangermap,
     "startFinish": startFinish->{
+      _id,
+      name,
+      location, 
+      "type": type[0].placeType->{title, icon}
+    },
+    sameFinish,
+    "finish": finish->{
       _id,
       name,
       location, 
@@ -128,11 +137,18 @@ const getRoutes = async () => {
       location, 
       "type": type[0].placeType->{title, icon}
     },
+    "bikeServices": bikehire[].place->{
+      _id,
+      name,
+      location, 
+      website,
+      "types": type[].placeType->{title, icon}
+    },
     "places": places[].place->{
       _id,
       name,
       location, 
-      "type": type[].placeType->{title, icon}
+      "types": type[].placeType->{title, icon}
     },
     body[]{
       ...,
@@ -146,7 +162,10 @@ const getRoutes = async () => {
         }
       }
     },
-    "authors": authors[].author->
+    "authors": authors[].author->,
+    terrain,
+    keyPoints,
+    facilities
   }`
   const order = '| order(publishedAt asc)'
   const query = [filter, projection, order].join(' ')

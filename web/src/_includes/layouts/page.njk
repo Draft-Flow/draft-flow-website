@@ -14,5 +14,9 @@
 {% endblock %}
 
 {% block content %}
-  {{ content | safe }}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full py-20">
+      {{ pageContent.content | blocksToHTML | safe }}
+    </div>
+  </section>
 {% endblock %}

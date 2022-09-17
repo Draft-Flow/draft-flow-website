@@ -10,7 +10,7 @@
       {% if routeMainImage %}style="background-image:url('{{ routeMainImage }}')"{% endif %}
     >
       <div class="z-10">
-        <a href="{{ route.slug.current | url }}" class="block text-xl font-bold leading-none mb-3 ">
+        <a href="/routes/{{ route.slug.current | url }}/" class="block text-xl font-bold leading-none mb-3 ">
           {{ route.title }}
         </a>
         <div class="metrics">
