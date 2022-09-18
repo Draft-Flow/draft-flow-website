@@ -8,6 +8,6 @@ module.exports = {
     supporterReference: ({ value }) =>
       `<a href="/supporters/${value.slug.current}">${value.name}</a>`,
     mainImage: ({ value }) =>
-      `<img src="${imageUrl(value).width(600).url()}" alt="${value.alt}" />`,
+      `<img src="${imageUrl(value).width(1000).url()}" alt="${value.alt}" />`,
   },
 }

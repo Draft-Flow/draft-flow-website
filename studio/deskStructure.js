@@ -75,13 +75,29 @@ export default () =>
                     .schemaType('staticPages')
                     .documentId('staticPages.about')
                 ),
-                S.listItem()
+              S.listItem()
                 .title('Categories')
                 .icon(FaFile)
                 .child(
                   S.document()
                     .schemaType('staticPages')
                     .documentId('staticPages.categories')
+                ),
+              S.listItem()
+                .title('Bikepacking Guide')
+                .icon(FaFile)
+                .child(
+                  S.document()
+                    .schemaType('staticPages')
+                    .documentId('staticPages.bikepackingGuide')
+                ),
+              S.listItem()
+                .title('Outdoor Access')
+                .icon(FaFile)
+                .child(
+                  S.document()
+                    .schemaType('staticPages')
+                    .documentId('staticPages.outdoorAccess')
                 ),
               S.listItem()
                 .title('Contact')

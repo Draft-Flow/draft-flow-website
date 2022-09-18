@@ -1,6 +1,6 @@
 <section class="bg-pg-blue-dark text-pg-tan-light px-2 sm:px-20 lg:px-4 py-20 flex justify-center">
   <div class="w-full max-w-6xl pt-52 lg:pt-0 text-pg-tan-light bg-email bg-no-repeat bg-top lg:bg-right bg-72 lg:bg-96">
-    <h4 class="text-4xl lg:text-5xl font-bold">Subscribe for the dirt!</h4>
+    <h4 class="text-4xl lg:text-5xl font-bold pt-40 -mt-40" id="newsletter">Subscribe for the dirt!</h4>
     <div class="divider w-40"></div>
     <p class="text-lg">Subscribe to get all the latest dirt on new gravel biking routes.</p>
     <form>
@@ -82,11 +82,11 @@
         <div>
           <div class="font-bold mb-2">Resources</div>
           <ul>
-            <li class="mb-1"><a href="/bikepacking-guide/">Bikepacking Guide</a></li>
-            <li class="mb-1"><a href="/difficulty-ratings/">Difficulty Ratings</a></li>
-            <li class="mb-1"><a href="/outdoor-access/">Outdoor Access</a></li>
-            <li class="mb-1"><a href="/newsletter/">Newsletter</a></li>
-            <li class="mb-1"><a href="/faqs/">FAQs</a></li>
+            {%- for post in collections.resources -%}
+              {%- set postContent = pages | getPage(post.data.pageID) -%}
+              <li class="mb-1"><a href="{{ post.url }}">{{ postContent.title }}</a></li>
+            {%- endfor %}
+            <li class="mb-1"><a href="#newsletter">Newsletter</a></li>
           </ul>
         </div>
       </div>

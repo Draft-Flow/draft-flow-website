@@ -13,7 +13,7 @@ const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
 
-const portableComponents = require('./src/utils/portable/components')
+const serializers = require('./src/utils/serializers')
 
 const INPUT = 'src'
 const OUTPUT = '_site'
@@ -56,7 +56,7 @@ module.exports = function (eleventyConfig) {
 
   // Convert Sanity block content into HTML
   eleventyConfig.addFilter('blocksToHTML', (value) => {
-    return toHTML(value)
+    return toHTML(value, {components: serializers})
   })
 
   // Shuffle collection into random order

@@ -83,7 +83,7 @@ h1 {
 }
 
 .description p {
-  @apply block max-w-2xl my-2 leading-7;
+  @apply text-lg block w-full max-w-2xl my-2 leading-8 text-left;
 }
 
 .description img {
