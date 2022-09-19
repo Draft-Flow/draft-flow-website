@@ -84,12 +84,12 @@ export default () =>
                     .documentId('staticPages.categories')
                 ),
               S.listItem()
-                .title('Bikepacking Guide')
+                .title('FAQs')
                 .icon(FaFile)
                 .child(
                   S.document()
                     .schemaType('staticPages')
-                    .documentId('staticPages.bikepackingGuide')
+                    .documentId('staticPages.faqs')
                 ),
               S.listItem()
                 .title('Outdoor Access')
