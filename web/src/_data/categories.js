@@ -7,6 +7,7 @@ const getCategories = async () => {
     title,
     slug,
     orderRank,
+    excerpt,
     description,
     "routes": *[_type == "route" && references(^._id)]{
       title,

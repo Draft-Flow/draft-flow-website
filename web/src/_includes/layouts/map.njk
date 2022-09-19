@@ -1,8 +1,26 @@
 {% extends  'layouts/base/index.njk' %}
 
+{%- set pageContent = pages | getPage(pageID) -%}
+{%- set bannerImageLg -%}
+  {%- imageUrlFor pageContent.banner.asset._ref, 2000 -%}
+{%- endset -%}
+
+{% set bannerTitle = pageContent.title %}
+
+{% block banner %}
+  {% if bannerImageLg %}
+    {% include "./includes/bannerSmall.njk" %}
+  {% endif %}
+{% endblock %}
+
 {% block content %}
-  <section>
-    <div id='map' style="height:100vh; width:100vw;" ></div>
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-7xl w-full py-20">
+      <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded">
+        <div id='map' class="aspect-square md:aspect-video w-full"></div>
+      </div>
+    </div>
+  </section>
     {% jsbundle 'route', true | safe %}
       <script>
         import mapboxgl from 'mapbox-gl'
@@ -12,7 +30,7 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: '{{ env.mapbox_style }}',
-            center: {lat: 56.5405969, lon: -3.7639374 },
+            center: {lat: 56.6405969, lon: -3.7639374 },
             zoom: 9,
             cooperativeGestures: true,
         });
@@ -20,64 +38,71 @@
         // Add zoom and rotation controls to the map.
         map.addControl(new mapboxgl.NavigationControl());
 
+        let hoveredStateId = null;
+
         map.on('load', () => {
-        {% for route in collections.routes | reverse %}
-          {% set currentRoute = route.data.route %}
-          {% if currentRoute.geoJSON %}
-          map.addSource('{{ currentRoute._id }}', {
-            'type': 'geojson',
-            'data': {{ currentRoute.geoJSON | dump | safe }}
+           map.addSource('routes', {
+            type: 'geojson',
+            data: '{{ env.url }}/routesGeoJSON.json',
+            generateId: true
           })
+
           map.addLayer({
-            'id': '{{ currentRoute._id }}-route',
+            'id': 'routes-layer',
             'type': 'line',
-            'source': '{{ currentRoute._id }}',
+            'source': 'routes',
             'layout': {
               'line-join': 'round',
               'line-cap': 'round'
             },
             'paint': {
-              'line-color': '#ff00ff',
-              'line-width': 5
-            }
-          });
-          map.addLayer({
-            'id': '{{ currentRoute._id }}-fill',
-            'type': 'fill',
-            'source': '{{ currentRoute._id }}',
-            'layout': {},
-            'paint': {
-              'fill-color': '#627BC1',
-              'fill-opacity': [
+              'line-width': 4,
+              'line-color': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false],
-                1,
-                0
+                '#b45309', '#404040'
               ]
             }
+          })
+
+          map.on('click', 'routes-layer', (e) => {
+            new mapboxgl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(`<a href="/routes/${e.features[0].properties.path}">${ e.features[0].properties.name}</a>`)
+            .addTo(map)
           });
-          map.on('mousemove', '{{ currentRoute._id }}-fill', (e) => {
-          console.log(e.features[0])
-              map.setFeatureState(
-                { source: '{{ currentRoute._id }}', id: e.features[0].layer.id },
-                { hover: true }
-              );
-          });
-            
-            // When the mouse leaves the state-fill layer, update the feature state of the
-            // previously hovered feature.
-          map.on('mouseleave', '{{ currentRoute._id }}-fill', (e) => {
-          console.log('out')
-              map.setFeatureState(
-                { source: '{{ currentRoute._id }}', id: '{{ currentRoute._id }}-fill'  },
-                { hover: false }
-              );
+
+          // Change the cursor to a pointer when
+          // the mouse is over the states layer.
+          map.on('mouseenter', 'routes-layer', (e) => {
+            map.getCanvas().style.cursor = 'pointer';
+            if (e.features.length > 0) {
+              if (hoveredStateId !== null) {
+                map.setFeatureState({
+                  source: 'states', id: hoveredStateId
+                }, { hover: false });
+              }
+            }
+            hoveredStateId = e.features[0].id
+            map.setFeatureState({ 
+              source: 'routes', id: hoveredStateId 
+            }, { hover: true });
+ 
           });
           
-          {% endif %}
-        {% endfor %}
+          // Change the cursor back to a pointer
+          // when it leaves the states layer.
+          map.on('mouseleave', 'routes-layer', (e) => {
+            map.getCanvas().style.cursor = '';
+            if (hoveredStateId !== null) {
+              map.setFeatureState({
+                source: 'routes', id: hoveredStateId
+                }, { hover: false });
+            }
+      
+            hoveredStateId = null;
+          });
         })
     </script>
     {% endjsbundle %}
-  </section>
 {% endblock %}

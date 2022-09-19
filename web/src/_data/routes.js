@@ -29,6 +29,9 @@ const generateRoute = async (route) => {
       const xml = new DOMParser().parseFromString(xmlString)
       geoJSON = toGeoJSON.gpx(xml)
 
+      // Remove the unused coordTimes to reduce filesize
+      delete geoJSON.features[0].properties.coordTimes
+
       const { coordinates } = geoJSON.features[0].geometry
       const llBounds = new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
 
@@ -71,7 +74,10 @@ const generateRoute = async (route) => {
 
     let lineString = null
     if (geoJSON) {
-      lineString = turfLineString(geoJSON.features[0].geometry.coordinates)
+      lineString = turfLineString(geoJSON.features[0].geometry.coordinates, {
+        name: route.title,
+        path: route.slug.current
+      })
     }
 
     return {

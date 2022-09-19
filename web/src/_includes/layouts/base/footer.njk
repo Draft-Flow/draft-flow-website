@@ -93,7 +93,11 @@
     </div>
     <div class="text-center mt-12 lg:text-left w-full lg:flex lg:justify-between">
       <div class="lg:flex">
-        <span class="font-bold">&copy; Highland Perthshire Cycling, {% year %}</span><span class="px-2">•</span>{{ metadata.charityInfo | blocksToHTML | safe }}
+        <span class="font-bold">&copy; Highland Perthshire Cycling, {% year %}</span>
+        <span class="px-2">•</span>
+        {{ metadata.charityInfo | blocksToHTML | safe }}
+        <span class="px-2">•</span>
+        <a href="/privacy-policy/">Privacy Policy</a>
       </div>
       <div>
         <span>Website <a href="https://zenelements.com/">design by zen</a></span><span class="px-2">•</span><a href="https://brettdewoody.com">Built by Brett DeWoody</a>

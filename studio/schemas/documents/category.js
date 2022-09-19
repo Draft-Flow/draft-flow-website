@@ -27,6 +27,12 @@ export default {
       },
     },
     {
+      name: 'excerpt',
+      type: 'text',
+      rows: 2,
+      title: 'Excerpt'
+    },
+    {
       name: 'description',
       type: 'text',
       title: 'Description',

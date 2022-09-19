@@ -88,7 +88,7 @@
         // Add the route line
         map.addSource('route', {
           'type': 'geojson',
-          'data': '{{ page.url }}route.geojson'
+          'data': lineString
         })
 
         map.addLayer({
@@ -101,7 +101,7 @@
           },
           'paint': {
             'line-color': '#012433',
-            'line-width': 5
+            'line-width': 4
           }
         });
 
@@ -117,7 +117,7 @@
           'type': 'circle',
           'paint': {
             'circle-radius': 6.75,
-            'circle-color': '#99BF10'
+            'circle-color': '#b91c1c'
           }
         });
 
@@ -145,6 +145,14 @@
             'text-offset': [0, 1.25],
             'text-anchor': 'top'
           }
+        });
+
+        map.on('mouseenter', 'routeLayer', (e) => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', 'routeLayer', (e) => {
+          map.getCanvas().style.cursor = '';
         });
         
         // Elevation Chart
