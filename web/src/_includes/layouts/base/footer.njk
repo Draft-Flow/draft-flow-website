@@ -63,20 +63,20 @@
         <div> 
           <div class="font-bold mb-2">Perthshire Gravel</div>
           <ul class="mb-8 lg:mb-0">
-            <li class="mb-1"><a href="/about/">About</a></li>
-            <li class="mb-1"><a href="/partners/">Partners</a></li>
-            <li class="mb-1"><a href="/annual-reports/">Annual Reports</a></li>
-            <li class="mb-1"><a href="press-media/">Press & Media</a></li>
-            <li class="mb-1"><a href="/contact/">Contact</a></li>
+            <li class="mb-1 py-1"><a href="/about/">About</a></li>
+            <li class="mb-1 py-1"><a href="/partners/">Partners</a></li>
+            <li class="mb-1 py-1"><a href="/annual-reports/">Annual Reports</a></li>
+            <li class="mb-1 py-1"><a href="press-media/">Press & Media</a></li>
+            <li class="mb-1 py-1"><a href="/contact/">Contact</a></li>
           </ul>
         </div>
         <div>
           <div class="font-bold mb-2">Routes</div>
           <ul class="mb-8 lg:mb-0">
-            <li class="mb-1"><a href="/routes/">Route Explorer</a></li>
-            <li class="mb-1"><a href="/map/">Route Map</a></li>
-            <li class="mb-1"><a href="/architects/">Route Architects</a></li>
-            <li class="mb-1"><a href="/contact/">Share a Route</a></li>
+            <li class="mb-1 py-1"><a href="/routes/">Route Explorer</a></li>
+            <li class="mb-1 py-1"><a href="/map/">Route Map</a></li>
+            <li class="mb-1 py-1"><a href="/architects/">Route Architects</a></li>
+            <li class="mb-1 py-1"><a href="/contact/">Share a Route</a></li>
           </ul>
         </div>
         <div>
@@ -84,9 +84,9 @@
           <ul>
             {%- for post in collections.resources -%}
               {%- set postContent = pages | getPage(post.data.pageID) -%}
-              <li class="mb-1"><a href="{{ post.url }}">{{ postContent.title }}</a></li>
+              <li class="mb-1 py-1"><a href="{{ post.url }}">{{ postContent.title }}</a></li>
             {%- endfor %}
-            <li class="mb-1"><a href="#newsletter">Newsletter</a></li>
+            <li class="mb-1 py-1"><a href="#newsletter">Newsletter</a></li>
           </ul>
         </div>
       </div>
