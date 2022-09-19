@@ -51,7 +51,7 @@ module.exports = function (eleventyConfig) {
 
   // Convert Sanity image assets into URLs
   eleventyConfig.addShortcode('imageUrlFor', (image, width = '600') => {
-    return urlFor(image).width(width)
+    return urlFor(image).width(width).url()
   })
 
   // Convert Sanity block content into HTML
