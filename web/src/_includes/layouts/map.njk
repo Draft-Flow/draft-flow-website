@@ -68,7 +68,10 @@
           map.on('click', 'routes-layer', (e) => {
             new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(`<a href="/routes/${e.features[0].properties.path}">${ e.features[0].properties.name}</a>`)
+            .setHTML(`
+              <a class="popup-title" href="/routes/${e.features[0].properties.path}">${ e.features[0].properties.name}</a>
+              <div>${e.features[0].properties.rating} • ${e.features[0].properties.distance.toFixed(2)} km</div>
+            `)
             .addTo(map)
           });
 

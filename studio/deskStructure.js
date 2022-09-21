@@ -76,6 +76,22 @@ export default () =>
                     .documentId('staticPages.about')
                 ),
               S.listItem()
+                .title('Press & Media')
+                .icon(FaFile)
+                .child(
+                  S.document()
+                    .schemaType('staticPages')
+                    .documentId('staticPages.pressMedia')
+                ),
+              S.listItem()
+                .title('Annual Reports')
+                .icon(FaFile)
+                .child(
+                  S.document()
+                    .schemaType('staticPages')
+                    .documentId('staticPages.annualReports')
+                ),
+              S.listItem()
                 .title('Categories')
                 .icon(FaFile)
                 .child(

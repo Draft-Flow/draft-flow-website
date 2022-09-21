@@ -93,7 +93,7 @@
           <div class="text-lg">
             <div class="mb-4">
               <div>
-                <span class="font-bold">Start{%if route.sameFinish %}/Finish{% endif %}: </span>{{ route.startFinish.name }}
+                <span class="font-bold">Start{%if route.sameFinish %}/Finish{% endif %}: </span><a class="underline" href="/towns/{{ route.startFinish.slug.current }}/">{{ route.startFinish.name }}</a>
               </div>
               {% if route.finish %}
                 <div><span class="font-bold">Finish: </span>{{ route.finish.name }}</div>
@@ -174,7 +174,7 @@
       <p>Discover and support local businesses along the route.</p>
     </div>
     <div class="max-w-7xl w-full pt-12 flex flex-col lg:flex-row">
-      <div class="bg-pg-tan-lightest lg:w-3/4 pt-28 py-12 pl-12 lg:pt-12 order-2 lg:order-none">
+      <div class="bg-pg-tan-lightest lg:w-3/4 pt-28 py-12 pl-4 lg:pl-12 lg:pt-12 order-2 lg:order-none">
         <div class="sm:w-3/4">
           <h4 class="font-bold text-2xl">Bike Services &amp; Rentals</h4>
           <div class="divider short w-28"></div>
@@ -192,7 +192,7 @@
                   {{ service.name }}
                 {% endif %}
                   {% set comma = joiner(', ') %}
-                 - {% for type in service.types %}{{ comma() }}{{ type.title }}{% endfor %}
+                <span class="px-2">-</span>{% for type in service.types %}{{ comma() }}{{ type.title }}{% endfor %}
               </li>
             {% endfor %}
           </ul>

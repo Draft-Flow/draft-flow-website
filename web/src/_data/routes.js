@@ -3,12 +3,12 @@ const groq = require('groq')
 const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
 const { DOMParser } = require('xmldom')
-const turf = require('@turf/turf')
 const turfLineString = require('@turf/helpers').lineString
 
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
 const overlayDrafts = require('../utils/overlayDrafts')
+const routeMeta = require('../utils/routeMeta')
 
 const hasToken = !!client.config().token
 
@@ -16,67 +16,36 @@ const generateRoute = async (route) => {
   try {
     let geoJSON = null
     let bounds = null
-    let elevation = null
-    let elevationGain = null
-    let elevationLoss = null
-    let totalDistance = null
     // If a GPX file has been added
     //   - convert the GPX (xml) to geoJSON
     //   - create a bounding box for centering the map
-    if (route.gpx) {
-      const response = await fetch(route.gpx)
-      const xmlString = await response.text()
-      const xml = new DOMParser().parseFromString(xmlString)
-      geoJSON = toGeoJSON.gpx(xml)
+    const response = await fetch(route.gpx)
+    const xmlString = await response.text()
+    const xml = new DOMParser().parseFromString(xmlString)
+    geoJSON = toGeoJSON.gpx(xml)
 
-      // Remove the unused coordTimes to reduce filesize
-      delete geoJSON.features[0].properties.coordTimes
+    // Remove the unused coordTimes to reduce filesize
+    delete geoJSON.features[0].properties.coordTimes
 
-      const { coordinates } = geoJSON.features[0].geometry
-      const llBounds = new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
+    const { coordinates } = geoJSON.features[0].geometry
+    const llBounds = new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
 
-      // eslint-disable-next-line
-      for (const coord of coordinates) {
-        llBounds.extend(coord)
-      }
-
-      bounds = llBounds.toArray()
-      totalDistance = 0
-      elevationGain = 0
-      elevationLoss = 0
-
-      elevation = geoJSON.features[0].geometry.coordinates.map(
-        (gpxPoint, idx, elevations) => {
-          const prevGPXPoint = elevations[idx - 1]
-          let distanceDiff = 0
-
-          if (idx > 0) {
-            const from = turf.point([prevGPXPoint[0], prevGPXPoint[1]])
-            const to = turf.point([gpxPoint[0], gpxPoint[1]])
-            distanceDiff = turf.distance(from, to)
-
-            const elevationDiff = gpxPoint[2] - prevGPXPoint[2]
-            if (elevationDiff >= 0) {
-              elevationGain += elevationDiff
-            } else {
-              elevationLoss -= elevationDiff
-            }
-          }
-          totalDistance += distanceDiff
-
-          return {
-            x: Number(totalDistance.toFixed(2)),
-            y: Number(gpxPoint[2].toFixed(0)),
-          }
-        }
-      )
+    // eslint-disable-next-line
+    for (const coord of coordinates) {
+      llBounds.extend(coord)
     }
+
+    bounds = llBounds.toArray()
+
+    const {elevation, elevationGain, elevationLoss, totalDistance} = routeMeta(geoJSON.features[0].geometry.coordinates)
 
     let lineString = null
     if (geoJSON) {
       lineString = turfLineString(geoJSON.features[0].geometry.coordinates, {
         name: route.title,
-        path: route.slug.current
+        path: route.slug.current,
+        rating: route.category.title,
+        distance: totalDistance
       })
     }
 
@@ -122,6 +91,7 @@ const getRoutes = async () => {
       _id,
       name,
       location, 
+      slug,
       "type": type[0].placeType->{title, icon}
     },
     sameFinish,
@@ -159,13 +129,7 @@ const getRoutes = async () => {
     body[]{
       ...,
       children[]{
-        ...,
-        // Join inline reference
-        _type == "authorReference" => {
-          // check /studio/documents/authors.js for more fields
-          "name": @.author->name,
-          "slug": @.author->slug
-        }
+        ...
       }
     },
     "authors": authors[].author->,

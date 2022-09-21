@@ -11,7 +11,7 @@ const generateAuthor = async (author) => {
   try {
     return {
       ...author,
-      body: toHTML(author.bio, { serializers, ...client.config() }),
+      body: toHTML(author.bio, { components: serializers, ...client.config() }),
     }
   } catch (err) {
     // eslint-disable-next-line

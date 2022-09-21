@@ -9,6 +9,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 // Document schemas
 import author from './documents/author'
 import category from './documents/category'
+import town from './documents/town'
 import route from './documents/route'
 import place from './documents/place'
 import placeType from './documents/placeType'
@@ -37,6 +38,7 @@ export default createSchema({
     staticPages,
     route,
     category,
+    town,
     author,
     seo,
     social,

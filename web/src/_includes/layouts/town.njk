@@ -1,0 +1,37 @@
+{% extends 'layouts/base/index.njk' %}
+
+{%- set bannerImageLg -%}
+  {%- imageUrlFor town.banner.asset._ref, 2000 -%}
+{%- endset -%}
+
+{% set bannerTitle = town.name %}
+
+{% block banner %}
+  {% if bannerImageLg %}
+    {% include "./includes/bannerLarge.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4 bg-pg-tan">
+    <div class="max-w-6xl w-full py-20">
+      <h2 class="font-bold text-4xl pt-44 -mt-44" id="description">{{ town.name }}</h2>
+      <div class="divider w-40"></div>
+      <div class="description">
+        {{ town.description | safe }}
+      </div>
+    </div>
+  </section>
+
+  <section class="flex justify-center px-2 lg:px-4 bg-pg-tan-light">
+    <div class="max-w-6xl w-full py-20 flex flex-col items-center">
+      <h2 class="font-bold text-4xl pt-44 -mt-44" id="routemap">Routes near {{ town.name }}</h2>
+      <div class="divider w-40"></div>
+      {% set routesList = town.routes %}
+      {% set showFilters = false %}
+      {% include "./includes/routesList.njk" %}
+    </div>
+  </section>
+{% endblock %}
+
+

@@ -82,11 +82,49 @@ h1 {
   @apply flex flex-col items-center;
 }
 
-.description p {
+.description p,
+.description ul,
+.description .file-wrapper {
   @apply text-lg block w-full max-w-2xl my-2 leading-8 text-left;
+}
+
+.description ul {
+  @apply list-disc ml-8;
+}
+
+.description a {
+  @apply text-lg inline-block self-start;
 }
 
 .description img {
   @apply w-full my-8;
 }
 
+/* Mapbox Styling */
+.popup-title {
+  @apply font-semibold;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  @apply border-b-pg-blue-dark !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  @apply border-r-pg-blue-dark !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  @apply border-t-pg-blue-dark !important;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  @apply border-l-pg-blue-dark !important;
+}
+
+.mapboxgl-popup-content {
+  @apply bg-pg-blue-dark text-pg-tan-lightest text-base p-4 !important;
+}
+
+.mapboxgl-popup-close-button {
+  @apply absolute top-0 right-2 w-4 h-2 !important;
+}

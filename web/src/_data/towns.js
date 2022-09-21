@@ -7,11 +7,11 @@ const overlayDrafts = require('../utils/overlayDrafts')
 
 const hasToken = !!client.config().token
 
-const generateSupporter = async (supporter) => {
+const generateTown = async (town) => {
   try {
     return {
-      ...supporter,
-      body: toHTML(supporter.description, { components: serializers, ...client.config() }),
+      ...town,
+      description: toHTML(town.description, { components: serializers, ...client.config() }),
     }
   } catch (err) {
     // eslint-disable-next-line
@@ -19,35 +19,39 @@ const generateSupporter = async (supporter) => {
   }
 }
 
-const getSupporters = async () => {
+const getTowns = async () => {
   // Learn more: https://www.sanity.io/docs/data-store/how-queries-work
-  const filter = groq`*[_type == "place" && defined(slug) && supporter.isSupporter == true && supporter.expiration > now()]`
+  const filter = groq`*[_type == "town" && defined(slug)]`
   const projection = groq`{
     _id,
     name,
     slug,
-    supporter {
-      logo
+    banner,
+    description[]{
+      ...
     },
-    website,
-    description,
-    "routes": *[_type == "route" && (references(startFinish._ref) || place._ref in stops[]->stop._id)]{
+    "routes": *[_type == "route" && geo::distance(startFinish->location, ^.location) < 1500 ]{
       title,
-      "slug": slug.current,
-    }
+      slug,
+      mainImage,
+      time
+    },
+    // "shops": *[_type == "place" && geo::distance(location, ^.location) < 1000 ]{
+    //   name
+    // }
   }`
   const order = '| order(name asc)'
   const query = [filter, projection, order].join(' ')
   // eslint-disable-next-line
   const docs = await client.fetch(query).catch((err) => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
-  const prepareSupporters = await Promise.all(
+  const prepareTowns = await Promise.all(
     reducedDocs.map(async (doc) => {
-      const supporter = await generateSupporter(doc)
-      return supporter
+      const town = await generateTown(doc)
+      return town
     })
   )
-  return prepareSupporters
+  return prepareTowns
 }
 
-module.exports = getSupporters
+module.exports = getTowns

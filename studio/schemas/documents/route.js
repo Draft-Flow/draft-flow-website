@@ -132,6 +132,7 @@ export default {
         type: 'category',
       },
       group: ['beta'],
+      validation: (Rule) => Rule.required()
     },
     {
       name: 'time',
@@ -139,6 +140,7 @@ export default {
       title: 'Riding Time',
       description: 'Estimated time to ride in hours. Ex "3-4 hrs"',
       group: ['beta'],
+      validation: (Rule) => Rule.required()
     },
     {
       name: 'osgridref',
@@ -176,10 +178,10 @@ export default {
     {
       name: 'startFinish',
       type: 'reference',
-      title: 'Start/Finish',
-      description: 'Recommended start/finish for the route',
+      title: 'Nearest Services',
+      description: 'Nearest town/village with services',
       to: {
-        type: 'place',
+        type: 'town',
       },
       group: ['beta'],
       validation: (Rule) => Rule.required(),
@@ -199,7 +201,7 @@ export default {
       hidden: ({document}) => document?.sameFinish,
       description: 'Recommended finish for the route',
       to: {
-        type: 'place',
+        type: 'town',
       },
       group: ['beta'],
     },
@@ -282,6 +284,7 @@ export default {
   preview: {
     select: {
       title: 'title',
+      rating: 'category.title',
       routeLength: 'routeLength',
       routeTime: 'time',
       routeAscent: 'routeAscent',
@@ -290,10 +293,12 @@ export default {
     prepare({
       title = 'No title',
       routeTime = '',
+      rating = '',
       media,
     }) {
       const attrArr = [
         routeTime || null,
+        rating || null
       ]
 
       const attributes = attrArr.filter((n) => n)

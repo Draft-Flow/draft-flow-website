@@ -2,12 +2,13 @@
 {% set RATING_ID = 'rating '%}
 {% set DISTANCE_ID = 'distance '%}
 
+{% if showFilters and showFilters === false %}
 <div class="w-full bg-pg-tan rounded p-4 lg:p-8 mb-12 grid grid-cols-1 md:grid-cols-2 gap-8">
   <div class="flex flex-col">
     <label for="rating" class="font-bold">Difficulty</label>
     <p>What level of difficulty are you looking for?</p>
     <select id="{{ RATING_ID }}" name="{{ RATING_ID }}" class="flex h-12 px-2 mt-2 shadow">
-      <option value="{{ ALL }}">Show All</option>
+      <option value="{{ ALL }}">Show All Difficulties</option>
       {% for rating in categories %}
         <option value="{{ rating.slug.current }}">{{ rating.title }}</option>
       {% endfor %}
@@ -17,14 +18,15 @@
     <label for="rating" class="font-bold">Distance</label>
     <p>How far would you like to ride?</p>
     <select id="{{ DISTANCE_ID }}" name="{{ DISTANCE_ID }}" class="flex h-12 px-2 mt-2 shadow">
-      <option value="{{ ALL }}">Show All</option>
-      <option value="0,15">0 - 15km</option>
-      <option value="16,40">16 - 40km</option>
-      <option value="41,75">41 - 75km</option>
-      <option value="75">75km +</option>
+      <option value="{{ ALL }}">Show All Distances</option>
+      <option value="0,15">0 - 15 km</option>
+      <option value="15,35">15 - 35 km</option>
+      <option value="35,60">35 - 60 km</option>
+      <option value="60">60 km +</option>
     </select>
   </div>
 </div>
+{% endif %}
 
 <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   {% for route in routesList %}
