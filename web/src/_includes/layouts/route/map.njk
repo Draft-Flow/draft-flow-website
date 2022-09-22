@@ -121,32 +121,6 @@
           }
         });
 
-        // Add relevant places on the route
-        map.addSource('points', {
-          'type': 'geojson',
-          'data': '{{ page.url }}routePlaces.geojson',
-          // cluster: true,
-          // clusterMaxZoom: 14, // Max zoom to cluster points on
-          // clusterRadius: 30 // Radius of each cluster when clustering points (defaults to 50)
-        });
-
-        map.addLayer({
-          'id': 'points',
-          'type': 'symbol',
-          'source': 'points',
-          'layout': {
-            'icon-image': ['get', 'icon'],
-            // get the title name from the source's "title" property
-            'text-field': ['get', 'title'],
-            'text-font': [
-              'Open Sans Semibold',
-              'Arial Unicode MS Bold'
-            ],
-            'text-offset': [0, 1.25],
-            'text-anchor': 'top'
-          }
-        });
-
         map.on('mouseenter', 'routeLayer', (e) => {
           map.getCanvas().style.cursor = 'pointer';
         });
@@ -154,6 +128,65 @@
         map.on('mouseleave', 'routeLayer', (e) => {
           map.getCanvas().style.cursor = '';
         });
+
+        // Add starting point
+        const start = map.addSource('start', {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': lineString.geometry.coordinates[0].slice(0,2)
+                },
+                'properties': {
+                  'title': 'Start'
+                }
+              }
+            ]
+          }
+        })
+
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.innerHTML = `{% svgIcon 'src/assets/icons/start.svg', 'w-8' %}`
+        new mapboxgl.Marker(el)
+          .setLngLat(lineString.geometry.coordinates[0].slice(0,2))
+          .addTo(map);
+
+        // Add parking point
+        {% if route.parking %}
+          const parking = map.addSource('parking', {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [
+                {
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [{{- route.parking.location.lng | safe -}}, {{- route.parking.location.lat | safe -}}]
+                  },
+                  'properties': {
+                    'title': 'Parking'
+                  }
+                }
+              ]
+            }
+          })
+
+          {% set markerIcon %}
+            {% imageUrlFor route.parking.type.icon.asset._ref %}
+          {% endset %}
+          const parkingEl = document.createElement('div');
+          parkingEl.className = 'marker';
+          parkingEl.innerHTML = `{% svgIcon markerIcon, 'w-8' %}`
+          new mapboxgl.Marker(parkingEl)
+            .setLngLat([{{- route.parking.location.lng | safe -}}, {{- route.parking.location.lat | safe -}}])
+            .addTo(map);
+        {% endif %}
         
         // Elevation Chart
         const ctx = document.getElementById('chart_div')

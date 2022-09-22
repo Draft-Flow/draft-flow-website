@@ -5,6 +5,7 @@ const inlineSVG = async (src, classes) => {
     formats: ['svg'],
     dryRun: true,
   })
+
   let svgString = metadata.svg[0].buffer.toString()
 
   if (classes) { 

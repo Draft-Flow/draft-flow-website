@@ -2,7 +2,7 @@
 {% set RATING_ID = 'rating '%}
 {% set DISTANCE_ID = 'distance '%}
 
-{% if showFilters and showFilters === false %}
+{% if showFilters !== false %}
 <div class="w-full bg-pg-tan rounded p-4 lg:p-8 mb-12 grid grid-cols-1 md:grid-cols-2 gap-8">
   <div class="flex flex-col">
     <label for="rating" class="font-bold">Difficulty</label>

@@ -101,6 +101,13 @@ h1 {
 }
 
 /* Mapbox Styling */
+.marker {
+  @apply relative -mt-6 overflow-visible bg-pg-blue-dark p-1 rounded after:border-x-8 after:w-0 after:h-0 after:absolute after:-bottom-[0.5rem] after:left-1/2 after:-ml-2 after:border-x-transparent after:border-t-8 after:border-t-pg-blue-dark;
+}
+.marker svg {
+  @apply fill-pg-tan-lightest w-4 h-4;
+}
+
 .popup-title {
   @apply font-semibold;
 }

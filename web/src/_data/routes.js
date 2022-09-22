@@ -9,6 +9,7 @@ const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
 const overlayDrafts = require('../utils/overlayDrafts')
 const routeMeta = require('../utils/routeMeta')
+const urlFor = require('../utils/imageUrl')
 
 const hasToken = !!client.config().token
 
@@ -51,6 +52,10 @@ const generateRoute = async (route) => {
 
     return {
       ...route,
+      parking: {
+        ...route.parking,
+        icon: urlFor(route.parking.type.icon.asset._ref).width(50).url()
+      },
       geoJSON,
       bounds,
       lineString,
@@ -104,7 +109,7 @@ const getRoutes = async () => {
     "parking": parking->{
       _id,
       name,
-      location, 
+      location,
       "type": type[0].placeType->{title, icon}
     },
     "railway": railway->{
