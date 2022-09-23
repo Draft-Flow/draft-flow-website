@@ -16,8 +16,16 @@
 {% block content %}
   <section class="flex justify-center px-2 lg:px-4">
     <div class="max-w-7xl w-full py-20">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-12 justify-center mb-12 text-xl relative z-10">
+        {% for category in categories %}
+          <div class="text-center px-4">
+            <div class="font-semibold pb-2 mb-2 border-b-4" style="border-bottom-color: {{ category.color }}">{{ category.title }}</div>
+            <div class="text-base">{{ category.excerpt }}</div>
+          </div>
+        {% endfor %}
+      </div>
       <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded">
-        <div id='map' class="aspect-square md:aspect-video w-full"></div>
+        <div id='map' class="aspect-square w-full"></div>
       </div>
     </div>
   </section>
@@ -26,11 +34,14 @@
         import mapboxgl from 'mapbox-gl'
         import 'mapbox-gl/dist/mapbox-gl.css'
 
+        const LAYER_ROUTES = 'routes-layer'
+        const LAYER_ACTIVE = 'routes-active'
+
         mapboxgl.accessToken = '{{ env.mapbox_token }}';
         const map = new mapboxgl.Map({
             container: 'map',
             style: '{{ env.mapbox_style }}',
-            center: {lat: 56.6405969, lon: -3.7639374 },
+            center: {lat: 56.6405969, lon: -3.8839374 },
             zoom: 9,
             cooperativeGestures: true,
         });
@@ -48,7 +59,7 @@
           })
 
           map.addLayer({
-            'id': 'routes-layer',
+            'id': LAYER_ROUTES,
             'type': 'line',
             'source': 'routes',
             'layout': {
@@ -56,28 +67,34 @@
               'line-cap': 'round'
             },
             'paint': {
-              'line-width': 4,
-              'line-color': [
+              'line-width': [
                 'case',
                 ['boolean', ['feature-state', 'hover'], false],
-                '#b45309', '#404040'
+                6, 5
+              ],
+              'line-color': [
+                'case',
+                {% for rating in categories %}
+                  ['==', ['get', 'rating'], '{{ rating.title }}'], '{{ rating.color }}',
+                {% endfor %}
+                '#404040'
               ]
             }
           })
 
-          map.on('click', 'routes-layer', (e) => {
+          map.on('click', LAYER_ROUTES, (e) => {
             new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(`
-              <a class="popup-title" href="/routes/${e.features[0].properties.path}">${ e.features[0].properties.name}</a>
-              <div>${e.features[0].properties.rating} • ${e.features[0].properties.distance.toFixed(2)} km</div>
-            `)
-            .addTo(map)
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <a class="popup-title" href="/routes/${e.features[0].properties.path}">${ e.features[0].properties.name}</a>
+                <div>${e.features[0].properties.rating} • ${e.features[0].properties.distance.toFixed(2)} km</div>
+              `)
+              .addTo(map)
           });
 
           // Change the cursor to a pointer when
           // the mouse is over the states layer.
-          map.on('mouseenter', 'routes-layer', (e) => {
+          map.on('mouseenter', LAYER_ROUTES, (e) => {
             map.getCanvas().style.cursor = 'pointer';
             if (e.features.length > 0) {
               if (hoveredStateId !== null) {
@@ -87,6 +104,7 @@
               }
             }
             hoveredStateId = e.features[0].id
+            drawActiveStateLayer(e.features[0])
             map.setFeatureState({ 
               source: 'routes', id: hoveredStateId 
             }, { hover: true });
@@ -95,8 +113,14 @@
           
           // Change the cursor back to a pointer
           // when it leaves the states layer.
-          map.on('mouseleave', 'routes-layer', (e) => {
+          map.on('mouseleave', LAYER_ROUTES, (e) => {
             map.getCanvas().style.cursor = '';
+            // If there's an active layer, remove it
+            if (map.getLayer(LAYER_ACTIVE) !== 'undefined') {
+              map.removeLayer(LAYER_ACTIVE)
+              map.removeSource(LAYER_ACTIVE)
+            }
+
             if (hoveredStateId !== null) {
               map.setFeatureState({
                 source: 'routes', id: hoveredStateId
@@ -105,6 +129,23 @@
       
             hoveredStateId = null;
           });
+
+          // Move the active layer to the top
+          const drawActiveStateLayer = (feature) => {
+            map
+              .addLayer({
+                id: LAYER_ACTIVE,
+                type: 'line',
+                source: {
+                  type: 'geojson',
+                  data: feature
+                },
+                paint: {
+                  'line-color': map.getPaintProperty(LAYER_ROUTES, 'line-color'),
+                  'line-width': 7,
+                },
+              });
+          }
         })
     </script>
     {% endjsbundle %}

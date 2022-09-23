@@ -16,6 +16,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'slug',
@@ -25,17 +26,29 @@ export default {
         source: 'title',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'color',
+      type: 'color',
+      title: 'Color',
+      options: {
+        disableAlpha: true
+      },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'excerpt',
       type: 'text',
       rows: 2,
-      title: 'Excerpt'
+      title: 'Excerpt',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'description',
       type: 'text',
       title: 'Description',
+      validation: (Rule) => Rule.required(),
     },
   ],
 }

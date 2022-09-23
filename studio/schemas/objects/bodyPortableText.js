@@ -53,7 +53,6 @@ export default {
     // as a block type.
     {
       type: 'mainImage',
-      options: { hotspot: true },
     },
     {
       type: 'file',

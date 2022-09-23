@@ -35,8 +35,8 @@ export default {
     },
     {
       name: 'image',
-      type: 'mainImage',
-      title: 'Image',
+      type: 'image',
+      title: 'Photo',
     },
     {
       name: 'bio',

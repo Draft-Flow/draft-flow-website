@@ -9,6 +9,7 @@ const getCategories = async () => {
     orderRank,
     excerpt,
     description,
+    "color":color.hex,
     "routes": *[_type == "route" && references(^._id)]{
       title,
       "slug": slug.current,
