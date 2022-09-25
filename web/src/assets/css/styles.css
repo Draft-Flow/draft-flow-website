@@ -108,8 +108,24 @@ h1 {
   @apply fill-pg-tan-lightest w-4 h-4;
 }
 
+.popup-rating {
+  @apply text-xs uppercase;
+}
+
 .popup-title {
   @apply font-semibold;
+}
+
+.popup-beta {
+  @apply grid grid-cols-3 mt-3;
+}
+
+.popup-beta > div > div:first-child {
+  @apply text-xs;
+}
+
+.popup-beta > div > div:last-child {
+  @apply whitespace-nowrap;
 }
 
 .mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
@@ -129,7 +145,7 @@ h1 {
 }
 
 .mapboxgl-popup-content {
-  @apply bg-pg-blue-dark text-pg-tan-lightest text-base p-4 !important;
+  @apply w-60 bg-pg-blue-dark text-pg-tan-lightest text-base p-4 !important;
 }
 
 .mapboxgl-popup-close-button {

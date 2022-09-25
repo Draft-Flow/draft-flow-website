@@ -36,34 +36,9 @@
 
       {% if route.bounds %}
         map.fitBounds({{ route.bounds | dump | safe }}, {
-          padding: 40
+          padding: 70
         });
-      {% endif %}
-
-      // Add markers to the map.
-      {# for (const marker of placesGeoJson.features) {
-        // Create a DOM element for each marker.
-        const el = document.createElement('div');
-        el.className = 'marker';
-        const width = marker.properties.iconSize[0];
-        const height = marker.properties.iconSize[1];
-        el.className = 'marker';
-        el.style.backgroundImage = `url(${marker.properties.icon})`;
-        el.style.width = `${width}px`;
-        el.style.height = `${height}px`;
-        el.style.backgroundSize = '100%';
-        
-        // Add markers to the map.
-        new mapboxgl.Marker(el)
-        .setLngLat(marker.geometry.coordinates)
-        .setPopup(
-          new mapboxgl.Popup({ offset: 25 }) // add popups
-          .setHTML(
-          `<h3>${marker.properties.message}</h3><p></p>`
-          )
-        )
-        .addTo(map);
-      } #}  
+      {% endif %} 
 
       // A single point that animates along the route.
       // Coordinates are initially set to origin.
@@ -101,7 +76,8 @@
           },
           'paint': {
             'line-color': '#012433',
-            'line-width': 4
+            'line-width': 2,
+            'line-opacity': 0.8
           }
         });
 
@@ -117,7 +93,7 @@
           'type': 'circle',
           'paint': {
             'circle-radius': 6.75,
-            'circle-color': '#b91c1c'
+            'circle-color': '#049DE0'
           }
         });
 
@@ -190,7 +166,7 @@
         
         // Elevation Chart
         const ctx = document.getElementById('chart_div')
-        const labels = [{% for point in route.elevation %}`{{ point.x }} km`{% if not loop.last %},{% endif %}{% endfor %}]
+        const labels = [{% for point in route.elevation %}{{ point.x }}{% if not loop.last %},{% endif %}{% endfor %}]
         const data = {
           labels: labels,
           datasets: [
@@ -207,15 +183,54 @@
         const chart = new Chart(ctx, {
           type: 'line',
           data: data,
-          
           options: {
+            scales: {
+              x: {
+                ticks: {
+                  autoSkip: false,
+                  minRotation: 45,
+                  callback: function(value, index, ticks) {
+                    const points = Math.floor(ticks.length/20)
+                    if (index % points === 0) {
+                        return this.getLabelForValue(value).toFixed(1) + ' km';
+                    } else {
+                      return null
+                    }
+                  }
+                }
+              },
+              y: {
+                ticks: {
+                  callback: function(value, index, ticks) {
+                    return this.getLabelForValue(value) + ' m';
+                  }
+                }
+              }
+            },
             maintainAspectRatio: false,
             plugins: {
               tooltip: {
                 mode: 'x',
                 intersect: false,
                 position: 'nearest',
+                filter: function (tooltipItem, currentIndex, tooltipItems) {
+                  return tooltipItems[currentIndex].datasetIndex !== tooltipItems[currentIndex - 1]?.datasetIndex
+                },
                 callbacks: {
+                  title: function(context) {
+                    let formattedTitle = context[0].label ? context[0].label + ' km' : '';
+                    return formattedTitle;
+                  },
+                  label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                      label += context.parsed.y.toFixed(0) + ' m';
+                    }
+                    return label;
+                  },
                   beforeLabel: (e) => {
                     // Highlight corresponding point on map
                     const coords = lineString.geometry.coordinates[e.dataIndex].slice(0,2)

@@ -46,7 +46,9 @@ const generateRoute = async (route) => {
         name: route.title,
         path: route.slug.current,
         rating: route.category.title,
-        distance: totalDistance
+        distance: totalDistance,
+        ascent: elevationGain,
+        time: route.time
       })
     }
 
