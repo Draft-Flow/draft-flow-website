@@ -172,7 +172,7 @@
       <div class="divider w-40"></div>
       <p>Discover and support local businesses along the route.</p>
     </div>
-    <div class="max-w-7xl w-full pt-12 flex flex-col lg:flex-row">
+    <div class="max-w-7xl w-full pt-12 flex flex-col lg:flex-row mb-12">
       <div class="bg-pg-tan-lightest lg:w-3/4 pt-28 py-12 pl-4 lg:pl-12 lg:pt-12 order-2 lg:order-none">
         <div class="sm:w-3/4">
           <h4 class="font-bold text-2xl">Bike Services &amp; Rentals</h4>
@@ -183,7 +183,7 @@
               {%- set serviceIcon -%}
                 {%- imageUrlFor service.types[0].icon.asset._ref, 40 -%}
               {%- endset -%}
-              <li class="flex items-center">
+              <li class="flex items-center mb-2">
                 {% svgIcon serviceIcon, 'mr-2 w-8' %}
                 {% if service.website %}
                   <a href="{{ service.website }}" class="underline">{{ service.name }}</a>
@@ -201,7 +201,7 @@
         {% image 'src/static/images/bikeservices.jpg', 'Bike Services' %}
       </div>
     </div>
-    <div class="max-w-7xl w-full pt-12 mb-12 flex flex-col lg:flex-row">
+    {# <div class="max-w-7xl w-full pt-12 mb-12 flex flex-col lg:flex-row">
       <div class="w-48 h-48 lg:w-72 lg:h-72 2xl:w-96 2xl:h-96 mr-auto -mb-24 lg:mb-8 lg:my-8 lg:-mr-24 z-10">
         {% image 'src/static/images/bars-restaurants.jpg', 'Bars &amp; Restaurants' %}
       </div>
@@ -223,6 +223,6 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> #}
   </section>
 {% endblock %}

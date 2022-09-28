@@ -96,8 +96,13 @@ h1 {
   @apply text-lg inline-block self-start;
 }
 
-.description img {
-  @apply w-full my-8;
+/* Image block */
+.image {
+  @apply text-center my-8 italic;
+}
+
+.image img {
+  @apply mb-3 w-full;
 }
 
 /* Mapbox Styling */

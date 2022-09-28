@@ -1,4 +1,8 @@
   <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded-t">
+    {# <div id="layerlist">
+      <button data-map-style="{{ env.mapbox_style }}" class="active">Outdoor</button>
+      <button data-map-style="{{ env.mapbox_style_satellite }}">Satellite</button>
+    </div> #}
     <div id='map' class="aspect-square md:aspect-video w-full"></div>
   </div>
   <div class="relative p-2 lg:p-4 bg-pg-tan-lightest rounded-b w-full h-60">
@@ -36,7 +40,7 @@
 
       {% if route.bounds %}
         map.fitBounds({{ route.bounds | dump | safe }}, {
-          padding: 70
+          padding: 120
         });
       {% endif %} 
 
@@ -59,6 +63,18 @@
       const lineString = {{ route.lineString | dump | safe }}
 
       map.on('load', () => {
+
+        /* // Change mapstyle - needs work
+        const layerList = document.getElementById('layerlist');
+        const buttons = layerList.getElementsByTagName('button');
+        
+        for (const button of buttons) {
+          button.onclick = (el) => {
+            const mapStyle = el.target.dataset.mapStyle;
+            map.setStyle(mapStyle);
+          };
+        }
+        */
 
         // Add the route line
         map.addSource('route', {
@@ -162,6 +178,41 @@
           new mapboxgl.Marker(parkingEl)
             .setLngLat([{{- route.parking.location.lng | safe -}}, {{- route.parking.location.lat | safe -}}])
             .addTo(map);
+        {% endif %}
+
+        // Add bike services
+        {% if route.bikeServices.length %}
+          {% set comma = joiner() %}
+          map.addSource('bikeServices', {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [{%- for service in route.bikeServices -%}{{ comma() }}{
+                'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [{{- service.location.lng | safe -}}, {{- service.location.lat | safe -}}]
+                  },
+                  'properties': {
+                    'title': '{{ service.name }}'
+                  }
+              }{%- endfor -%}
+              ]
+            }
+          })
+          
+          let sericeEl
+          {% for service in route.bikeServices %}
+            {% set markerIcon %}
+              {% imageUrlFor service.types[0].icon.asset._ref %}
+            {% endset %}
+            serviceEl = document.createElement('div');
+            serviceEl.className = 'marker';
+            serviceEl.innerHTML = `{% svgIcon markerIcon, 'w-8' %}`
+            new mapboxgl.Marker(serviceEl)
+              .setLngLat([{{- service.location.lng | safe -}}, {{- service.location.lat | safe -}}])
+              .addTo(map);
+          {% endfor %}
         {% endif %}
         
         // Elevation Chart

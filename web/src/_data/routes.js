@@ -120,13 +120,18 @@ const getRoutes = async () => {
       location, 
       "type": type[0].placeType->{title, icon}
     },
-    "bikeServices": bikehire[].place->{
+    "bikeServices": *[
+      _type == 'place' && references(['c49751c4-0879-4e0d-8099-b79153c3ac9d','24206fa5-6a8e-4a5c-a419-db53327f2442','19cb6bf2-1f45-4e39-a6ae-04044d1ddd70']) && geo::distance(^.startFinish->location, location) < 16093.4
+    ] {
       _id,
       name,
       location, 
       website,
-      "types": type[].placeType->{title, icon}
-    },
+      "types": type[].placeType-> {
+        title,
+        icon
+      }
+    } ,
     "places": places[].place->{
       _id,
       name,
