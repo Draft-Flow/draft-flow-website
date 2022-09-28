@@ -51,7 +51,7 @@ h1 {
 }
 
 .form-field label {
-  @apply text-lg font-bold lg:w-24 mb-3 lg:mb-0;
+  @apply text-lg font-bold lg:w-32 mb-3 lg:mb-0;
 }
 
 .form-field input {
