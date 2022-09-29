@@ -37,6 +37,11 @@
         const LAYER_ROUTES = 'routes-layer'
         const LAYER_ACTIVE = 'routes-active'
 
+        const bounds = [
+          [-8.753647457231656, 55.82850219537345],
+          [1.5709850395825953, 61.080390501274735]
+        ];
+
         mapboxgl.accessToken = '{{ env.mapbox_token }}';
         const map = new mapboxgl.Map({
             container: 'map',
@@ -44,6 +49,7 @@
             center: {lat: 56.6405969, lon: -3.8839374 },
             zoom: 9,
             cooperativeGestures: true,
+            maxBounds: bounds,
         });
         map.scrollZoom.disable();
         // Add zoom and rotation controls to the map.

@@ -19,6 +19,11 @@
       import 'mapbox-gl/dist/mapbox-gl.css'
       import {point as turfPoint} from '@turf/helpers'
       import turfNearestPointOnLine from '@turf/nearest-point-on-line'
+      
+      const bounds = [
+        [-8.753647457231656, 55.82850219537345],
+        [1.5709850395825953, 61.080390501274735]
+      ];
 
       mapboxgl.accessToken = '{{ env.mapbox_token }}';
       const map = new mapboxgl.Map({
@@ -27,6 +32,7 @@
           center: {lat: 56.5405969, lon: -4.1580719 },
           zoom: 11,
           cooperativeGestures: true,
+          maxBounds: bounds,
       });
       map.scrollZoom.disable();
       // Add zoom and rotation controls to the map.
