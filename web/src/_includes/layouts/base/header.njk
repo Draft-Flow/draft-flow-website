@@ -3,13 +3,13 @@
 <div id="sentinel" class="absolute top-0"></div>
 <header id="header" class="fixed z-50 top-0 w-screen lg:absolute text-pg-tan-light flex justify-center transition-all duration-150 ease-linear">
   <div id="navbar" class="w-full mx-4 max-w-6xl text-center lg:text-left flex flex-col lg:flex-row lg:justify-between lg:items-center">
-    <div id="logobar" class="h-24 flex justify-between items-center transition-all duration-150 ease-linear">
+    <div id="logobar" class="h-12 lg:h-20 2xl:h-24 flex justify-between items-center transition-all duration-150 ease-linear">
       <h1 class="home h-full flex items-center {% if page.url == '/' %} logo-item-active{% endif %}">
-        <a id="logo" href="{{ '/' | url }}" class="block w-40 grayscale contrast-200 brightness-200 transition-all duration-150 ease-linear">
+        <a id="logo" href="{{ '/' | url }}" class="block w-24 lg:w-32 2xl:w-40 grayscale contrast-200 brightness-200 transition-all duration-150 ease-linear">
           {% set logoSrc %}
             {% imageUrlFor metadata.logo.asset._ref, 600 %}
           {% endset %}
-          {% image logoSrc, metadata.logo.alt, "(min-width: 30em) 50vw, 100vw", null, 'eager'  %}
+          {% image logoSrc, metadata.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager'  %}
         </a>
       </h1>
       <button class="inline lg:hidden" id="navToggle" aria-haspopup="true" aria-controls="nav" aria-label="Menu">
