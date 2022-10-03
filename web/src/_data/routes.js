@@ -10,6 +10,7 @@ const serializers = require('../utils/serializers')
 const overlayDrafts = require('../utils/overlayDrafts')
 const routeMeta = require('../utils/routeMeta')
 const urlFor = require('../utils/imageUrl')
+const getImages = require('../utils/extractImages')
 
 const hasToken = !!client.config().token
 
@@ -72,6 +73,7 @@ const generateRoute = async (route) => {
         ? Number(totalDistance.toFixed(1))
         : totalDistance,
       body: toHTML(route.body, { components: serializers }),
+      images: getImages(route.body)
     }
   } catch (err) {
     // eslint-disable-next-line

@@ -124,6 +124,14 @@ export default () =>
                     .documentId('staticPages.contact')
                 ),
               S.listItem()
+                .title('Share a Route')
+                .icon(FaFile)
+                .child(
+                  S.document()
+                    .schemaType('staticPages')
+                    .documentId('staticPages.shareRoute')
+                ),
+              S.listItem()
                 .title('Supporters')
                 .icon(FaFile)
                 .child(

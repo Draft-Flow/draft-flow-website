@@ -207,7 +207,7 @@
             }
           })
           
-          let sericeEl
+          let serviceEl
           {% for service in route.bikeServices %}
             {% set markerIcon %}
               {% imageUrlFor service.types[0].icon.asset._ref %}
@@ -219,6 +219,55 @@
               .setLngLat([{{- service.location.lng | safe -}}, {{- service.location.lat | safe -}}])
               .addTo(map);
           {% endfor %}
+        {% endif %}
+
+        /* Images */
+        {% if route.images.length > 0 %}
+          {% set comma = joiner() %}
+          map.addSource('photos', {
+            'type': 'geojson',
+            'data': {
+              'type': 'FeatureCollection',
+              'features': [{%- for image in route.images -%}{{ comma() }}{
+                'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [{{- image.location.lng | safe -}}, {{- image.location.lat | safe -}}]
+                  },
+                  'properties': {
+                    'title': '{{ image.asset._ref }}'
+                  }
+              }{%- endfor -%}
+              ]
+            }
+          })
+
+          /*let imageEl
+          {% for image in route.images %}
+            {% set markerIcon %}
+              {% imageUrlFor service.types[0].icon.asset._ref %}
+            {% endset %}
+            imageEl = document.createElement('div');
+            imageEl.className = 'marker';
+            imageEl.innerHTML = `{% svgIcon 'src/assets/icons/image.svg' %}`
+            new mapboxgl.Marker(imageEl)
+              .setLngLat([{{- image.location.lng | safe -}}, {{- image.location.lat | safe -}}])
+              .addTo(map);
+          {% endfor %}
+*/
+          map.addLayer({
+            'id': 'photos-layer',
+            'type': 'symbol',
+            'source': 'photos',
+            'layout': {
+              'icon-image': 'image-regular',
+              'icon-allow-overlap': true,
+            }
+          });
+
+          map.on('click', 'photos-layer', (e) => {
+            console.log('click')
+          })
         {% endif %}
         
         // Elevation Chart
@@ -250,8 +299,6 @@
                     const points = Math.floor(ticks.length/20)
                     if (index % points === 0) {
                         return this.getLabelForValue(value).toFixed(1) + ' km';
-                    } else {
-                      return null
                     }
                   }
                 }

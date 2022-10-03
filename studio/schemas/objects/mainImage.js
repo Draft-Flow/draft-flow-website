@@ -7,6 +7,9 @@ export default {
       name: 'location',
       type: 'geopoint',
       title: 'Location',
+      options: {
+        isHighlighted: true,
+      },
     },
     {
       name: 'caption',

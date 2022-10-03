@@ -4,6 +4,7 @@
 
 html {
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body.navOpen {
@@ -89,7 +90,7 @@ h1 {
 }
 
 .description ul {
-  @apply list-disc ml-8;
+  @apply list-disc ml-8 pl-2;
 }
 
 .description a {
