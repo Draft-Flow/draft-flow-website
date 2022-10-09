@@ -55,6 +55,9 @@ export default {
       type: 'mainImage',
     },
     {
+      type: 'youtube'
+    },
+    {
       type: 'file',
       fields: [
         {

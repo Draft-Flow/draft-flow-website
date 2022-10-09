@@ -26,6 +26,7 @@
     "@sanity/google-maps-input": "^2.31.1",
     "@sanity/orderable-document-list": "^0.0.10",
     "@sanity/vision": "^2.31.1",
+    "get-youtube-id": "^1.0.1",
     "prop-types": "^15.7",
     "react": "^17.0",
     "react-dom": "^17.0",
@@ -40,6 +41,7 @@
     "esbuild": "^0.14.43",
     "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "react-lite-youtube-embed": "^2.3.1"
   }
 }

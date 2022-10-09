@@ -26,6 +26,7 @@ import social from './objects/social'
 import linkBlock from './objects/linkblock'
 import mainImage from './objects/mainImage'
 import logoImage from './objects/logoImage'
+import youtube from './objects/youtube'
 import authorReference from './objects/authorReference'
 import placeReference from './objects/placeReference'
 import placeTypeReference from './objects/placeTypeReference'
@@ -45,6 +46,7 @@ export default createSchema({
     linkBlock,
     mainImage,
     logoImage,
+    youtube,
     place,
     placeType,
     placeReference,

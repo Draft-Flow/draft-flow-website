@@ -23,6 +23,7 @@ module.exports = function (eleventyConfig) {
 
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
+  eleventyConfig.addPassthroughCopy('src/static/_redirects')
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
   eleventyConfig.addPassthroughCopy('src/static/fonts/**/*')
   eleventyConfig.addPassthroughCopy('src/static/images/**/*')
