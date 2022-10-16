@@ -62,11 +62,15 @@
       </div>
     </li>
   {% endfor %}
+  <li id="no-results" class="hidden text-lg text-center col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
+    There are no results for this search, try a different search
+  </li>
 </ul>
 
 <script>
   const ratingSelectEl = document.getElementById('{{ RATING_ID }}')
   const distanceSelectEl = document.getElementById('{{ DISTANCE_ID }}')
+  const noResultsEl = document.getElementById('no-results')
   const routeCardEls = document.querySelectorAll('.routeCard')
   const routeCardElsArr = Array.from(routeCardEls)
 
@@ -86,6 +90,8 @@
 
     // Show all 
     routeCardElsArr.forEach(el => el.style.display = null)
+    noResultsEl.classList.add('hidden')
+    let results = 0
 
     routeCardElsArr.forEach(el => {
       if (
@@ -94,8 +100,14 @@
         (max && Number(el.dataset.distance) > max)
       ) {
         el.style.display = 'none'
+      } else {
+        results += 1
       }
     })
+
+    if (results === 0) {
+      noResultsEl.classList.remove('hidden')
+    }
   }
 
   ratingSelectEl.addEventListener('change', event => {
