@@ -39,11 +39,11 @@ const generateRoute = async (route) => {
 
     bounds = llBounds.toArray()
 
-    const {elevation, elevationGain, elevationLoss, totalDistance} = routeMeta(geoJSON.features[0].geometry.coordinates)
+    const {elevation, elevationGain, elevationLoss, totalDistance} = routeMeta(coordinates)
 
     let lineString = null
     if (geoJSON) {
-      lineString = turfLineString(geoJSON.features[0].geometry.coordinates, {
+      lineString = turfLineString(coordinates, {
         name: route.title,
         path: route.slug.current,
         rating: route.category.title,

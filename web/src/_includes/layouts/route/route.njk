@@ -117,23 +117,26 @@
           </div>
         </div>
         <div class="bg-pg-blue-dark text-pg-tan-light w-full max-w-sm sm:max-w-none lg:w-80 rounded flex flex-initial flex-col items-center py-6 mt-12 lg:mt-0">
-          <div class="font-bold text-2xl">Route Architect{% if route.authors.length > 1 %}s{% endif %} </div>
+          {% set multiple = route.authors.length == 2 %}
+          <div class="font-bold text-2xl">Route Architect{% if multiple %}s{% endif %} </div>
           <div class="divider short w-32"></div>
-          <div class="w-full mt-2 flex flex-col sm:flex-row lg:flex-col items-center sm:justify-around">
+          <div class="w-full mt-2 flex flex-col justify-center items-center sm:justify-around">
+            <div class="grid {% if multiple %}grid-cols-2{% endif %} grid-rows-1">
             {% for architect in route.authors | shuffle %}
             {%- set architectImage -%}
               {%- imageUrlFor architect.image.asset._ref, 600-%}
             {%- endset -%}
-              <div class="w-56 flex flex-col items-center mb-8">
-                <div class="rounded-full overflow-hidden">
+              <div class="{%if multiple %}w-44 lg:w-36 -mx-3{% else %}w-56{% endif %} {% if loop.index == 2 %}mt-20{% endif %} flex {% if multiple and loop.index == 1%}flex-col-reverse justify-end{% else %}flex-col{% endif %} mb-8">
+                <div class="rounded-full border-4 border-pg-blue-dark overflow-hidden my-6">
                   {% image architectImage, architect.name %}
                 </div>
-                <a href="/architects/{{ architect.slug.current }}" class="font-bold flex mt-6">
+                <a href="/architects/{{ architect.slug.current }}" class="flex justify-center items-center font-bold px-2 leading-4">
                   {{architect.name}}
-                  {% svgIcon 'src/assets/icons/arrow.svg', 'ml-2 w-6' %}
+                  <div class="flex items-center">{% svgIcon 'src/assets/icons/arrow.svg', 'ml-2 w-6 h-6' %}</div>
                 </a>
               </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
@@ -141,7 +144,7 @@
   </section>
 
   <section class="flex justify-center px-2 lg:px-4 bg-pg-tan">
-    <div class="max-w-6xl w-full py-20">
+    <div class="max-w-6xl w-full py-12 lg:py-20">
       <h2 class="font-bold text-4xl pt-44 -mt-44" id="description">Route Description</h2>
       <div class="divider w-40"></div>
       <div class="description">
