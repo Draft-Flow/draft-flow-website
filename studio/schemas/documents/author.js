@@ -39,6 +39,11 @@ export default {
       title: 'Photo',
     },
     {
+      name: 'quote',
+      type: 'string',
+      title: 'Quote',
+    },
+    {
       name: 'bio',
       type: 'bioPortableText',
       title: 'Biography',
