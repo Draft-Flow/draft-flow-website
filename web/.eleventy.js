@@ -2,7 +2,8 @@ const util = require('util')
 const CleanCSS = require('clean-css')
 const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
-const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation")
+const getYouTubeId = require('get-youtube-id')
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
@@ -67,8 +68,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('shuffle', shuffleFilter)
 
   // Extract route data
-    // Shuffle collection into random order
-    eleventyConfig.addFilter('routesData', routesDataFilter)
+  // Shuffle collection into random order
+  eleventyConfig.addFilter('routesData', routesDataFilter)
+
+  // Get YouTube Video ID
+  eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url) )
 
   // Get page
   eleventyConfig.addFilter('getPage', getPageFilter)

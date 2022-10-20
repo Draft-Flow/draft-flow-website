@@ -126,9 +126,9 @@
             {%- set architectImage -%}
               {%- imageUrlFor architect.image.asset._ref, 600-%}
             {%- endset -%}
-              <div class="{%if multiple %}w-44 lg:w-36 -mx-3{% else %}w-56{% endif %} {% if loop.index == 2 %}mt-20{% endif %} flex {% if multiple and loop.index == 1%}flex-col-reverse justify-end{% else %}flex-col{% endif %} mb-8">
+              <div class="card {%if multiple %}w-44 lg:w-36 -mx-3{% else %}w-56{% endif %} {% if loop.index == 2 %}mt-20{% endif %} flex {% if multiple and loop.index == 1%}flex-col-reverse justify-end{% else %}flex-col{% endif %} mb-8">
                 <div class="rounded-full border-4 border-pg-blue-dark overflow-hidden my-6">
-                  {% image architectImage, architect.name %}
+                    {% image architectImage, architect.name %}
                 </div>
                 <a href="/architects/{{ architect.slug.current }}" class="flex justify-center items-center font-bold px-2 leading-4">
                   {{architect.name}}

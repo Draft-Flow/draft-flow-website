@@ -24,16 +24,95 @@
           {% svgIcon 'src/assets/icons/routeExplorerIcon.svg', 'mr-2 h-8 fill-pg-blue-dark' %}
           Route Explorer
         </a>
-        <a 
+        <button 
           class="iconButton inline-flex items-center rounded bg-pg-blue-dark text-pg-tan-light px-4 h-10 font-bold"
-          href=""
+          id="videoModalButton"
         >
           {% svgIcon 'src/assets/icons/videoIcon.svg', 'mr-2 h-5' %}
           Video Tour
-        </a>
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- Video Modal -->
+  <div class="modal hidden opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center" style="z-index: 1000000;">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    
+    <div class="modal-container bg-gray-200 w-3/4 md:max-w-5xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      
+      <div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
+
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6 relative">
+        <!--Title-->
+        <div class="flex justify-end items-center pb-3">
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="aspect-video">
+          <div class="videoWrapper">
+            <iframe width="560" height="315" class="youtube-video" src="https://www.youtube-nocookie.com/embed/{{pageContent.video.url | videoID}}?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <script>
+    const openmodal = document.getElementById('videoModalButton')
+    openmodal.addEventListener('click', function(event){
+      event.preventDefault()
+      toggleModal()
+    })
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    const closemodal = document.querySelectorAll('.modal-close')
+    for (let i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      const isEscape = false
+      if ("key" in evt) {
+    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+    	isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+    	toggleModal()
+      }
+    };
+    
+    
+    function toggleModal () {
+
+      if (document.body.classList.contains('modal-active')) {
+        document.querySelector('.youtube-video').contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+      }
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('hidden')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+    
+     
+  </script>
+  <!-- Video Modal - END -->
 
   <section class="flex justify-center px-2 lg:px-4 py-20">
     <div class="w-full max-w-6xl">

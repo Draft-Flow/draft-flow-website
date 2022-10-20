@@ -29,6 +29,12 @@ export default {
       title: 'Content'
     },
     {
+      name: 'video',
+      type: 'youtube',
+      title: 'Video',
+      hidden: ({document}) => !document._id.endsWith('staticPages.home')
+    },
+    {
       name: 'linkBlock1',
       type: 'linkblock',
       title: 'Link Block #1',
