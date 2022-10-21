@@ -127,7 +127,7 @@
           map.getCanvas().style.cursor = '';
         });
 
-        // Add starting point
+        // Add starting (and stopping if loop) point
         const start = map.addSource('start', {
           'type': 'geojson',
           'data': {
@@ -147,12 +147,41 @@
           }
         })
 
-        const el = document.createElement('div');
-        el.className = 'marker';
-        el.innerHTML = `{% svgIcon 'src/assets/icons/start.svg', 'w-8' %}`
-        new mapboxgl.Marker(el)
+        const startEl = document.createElement('div');
+        startEl.className = 'marker';
+        startEl.innerHTML = `{% if route.sameFinish != false %}{% svgIcon 'src/assets/icons/startstop.svg', 'w-8' %}{% else %}{% svgIcon 'src/assets/icons/start.svg', 'w-8' %}{% endif %}`
+        new mapboxgl.Marker(startEl)
           .setLngLat(lineString.geometry.coordinates[0].slice(0,2))
           .addTo(map);
+
+        {% if route.sameFinish == false %}
+        // Add stopping point, if necessary
+        const stop = map.addSource('stop', {
+          'type': 'geojson',
+          'data': {
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': lineString.geometry.coordinates.at(-1).slice(0,2)
+                },
+                'properties': {
+                  'title': 'Stop'
+                }
+              }
+            ]
+          }
+        })
+
+        const stopEl = document.createElement('div');
+        stopEl.className = 'marker';
+        stopEl.innerHTML = `{% svgIcon 'src/assets/icons/stop.svg', 'w-8' %}`
+        new mapboxgl.Marker(stopEl)
+          .setLngLat(lineString.geometry.coordinates.at(-1).slice(0,2))
+          .addTo(map);
+        {% endif %}
 
         // Add parking point
         {% if route.parking %}

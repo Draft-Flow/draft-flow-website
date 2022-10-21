@@ -96,6 +96,7 @@ const getRoutes = async () => {
     time,
     osgridref,
     oslandrangermap,
+    sameFinish,
     "startFinish": startFinish->{
       _id,
       name,
