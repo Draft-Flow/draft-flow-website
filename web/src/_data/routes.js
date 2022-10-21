@@ -140,6 +140,11 @@ const getRoutes = async () => {
       location, 
       "types": type[].placeType->{title, icon}
     },
+    "stages": stages[]->{
+      _id,
+      title,
+      slug,
+    },
     body[]{
       ...,
       children[]{

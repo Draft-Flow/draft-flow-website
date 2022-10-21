@@ -99,11 +99,19 @@
               {% endif %}
             </div>
             <div class="mb-4">
+              {% if route.osgridref %}
               <div><span class="font-bold">OS Grid Ref: </span>{{ route.osgridref }}</div>
+              {% endif %}
+              {% if route.oslandrangermap %}
               <div><span class="font-bold">OS Landranger Map: </span>{{ route.oslandrangermap }}</div>
+              {% endif %}
             </div>
+            {% if route.terrain %}
             <div class="mb-4"><span class="font-bold">Terrain: </span>{{ route.terrain }}</div>
+            {% endif %}
+            {% if route.facilities %}
             <div class="mb-4"><span class="font-bold">Facilities: </span>{{ route.facilities }}</div>
+            {% endif %}
             {% if route.keyPoints %}
             <div class="mb-4">
               <div class="font-bold">Key Points: </div>
@@ -149,6 +157,14 @@
       <div class="divider w-40"></div>
       <div class="description">
         {{ route.body | safe }}
+        {% if route.stages %}
+        <h2>Stages</h2>
+        <ul>
+          {% for stage in route.stages %}
+          <li><a href="/routes/{{ stage.slug.current }}">{{ stage.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
       </div>
     </div>
   </section>
