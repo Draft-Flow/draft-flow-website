@@ -1,6 +1,6 @@
 const Image = require("@11ty/eleventy-img");
 
-const bannerImageShortcode = async (src, alt = "", sizes = "100vw", classes = null) => {
+const bannerImageShortcode = async (src, alt = "", sizes = "100vw", classes = null, priority = 'auto') => {
   if(alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
     throw new Error(`Missing \`alt\` on myImage from: ${src}`);
@@ -27,7 +27,8 @@ const bannerImageShortcode = async (src, alt = "", sizes = "100vw", classes = nu
         ${classes !== null ? `class="${classes}"` : ""}
         alt="${alt}"
         loading="lazy"
-        decoding="async">
+        decoding="async"
+        fetchPriority="${priority}">
     </picture>`;
 }
 
