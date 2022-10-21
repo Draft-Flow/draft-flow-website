@@ -7,7 +7,7 @@
     "start": "npm run dev",
     "css-watch": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css -w",
     "css-build": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css --minify",
-    "build": "rimraf _site && concurrently \"npm:css-build\" && NODE_ENV=production node hash && ELEVENTY_ENV=production eleventy",
+    "build": "rimraf _site &&  npm run css-build && ELEVENTY_ENV=production eleventy",
     "dev": "rimraf ./static/bundles/* && NODE_ENV=development concurrently \"node hash\" \"npx eleventy --watch --serve\" \"npm:css-watch\"",
     "debug": "DEBUG=* npx eleventy",
     "lint": "eslint --ext .js .",
