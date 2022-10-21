@@ -1,13 +1,13 @@
 const Image = require("@11ty/eleventy-img");
 
-const cardImageShortcode = async (src, alt = "", sizes = '(min-width: 30em) 50vw, 100vw', classes = null) => {
+const bannerImageShortcode = async (src, alt = "", sizes = "100vw", classes = null) => {
   if(alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
     throw new Error(`Missing \`alt\` on myImage from: ${src}`);
   }
 
   let metadata = await Image(src, {
-    widths: [350, 700],
+    widths: [700, 1200, 2000],
     formats: ["avif", "jpeg"],
     outputDir: "./_site/img/",
     urlPath: "/img/",
@@ -31,4 +31,4 @@ const cardImageShortcode = async (src, alt = "", sizes = '(min-width: 30em) 50vw
     </picture>`;
 }
 
-module.exports = cardImageShortcode
+module.exports = bannerImageShortcode
