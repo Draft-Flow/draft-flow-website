@@ -13,6 +13,14 @@
       }
     </style>
 
+    <!-- CSS -->
+    {% set css %}
+    {% include "_site/css/styles.css" %}
+    {% endset %}
+    <style>
+        {{ css | cssmin | safe }}
+    </style>
+
     <meta name="Description" content="{{ description or renderData.description or metadata.description }}">
     <link rel="canonical" href="{{ env.url }}{{ page.url }}" />
     <meta property="og:title" content="{{ title or renderData.title or metadata.title }}" />
@@ -28,9 +36,6 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-
-    <link rel="stylesheet" href="{{ hash['/css/styles.css'] | url }}"/>
-
     
     <script defer data-domain="perthshiregravel.com" src="https://plausible.io/js/plausible.js"></script>
   </head>

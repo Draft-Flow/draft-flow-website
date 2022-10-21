@@ -73,6 +73,11 @@ module.exports = function (eleventyConfig) {
   // Shuffle collection into random order
   eleventyConfig.addFilter('routesData', routesDataFilter)
 
+  // Minify CSS
+  eleventyConfig.addFilter("cssmin", (code) => {
+    return new CleanCSS({}).minify(code).styles;
+  });
+
   // Get YouTube Video ID
   eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url) )
 

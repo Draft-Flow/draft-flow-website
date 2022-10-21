@@ -23,9 +23,9 @@ module.exports = {
         }
       },
       backgroundImage: {
-        'tread': "url('/static/images/bartread.png')",
-        'tread-white': "url('/static/images/bartread-white.png')",
-        'email': "url('/static/images/email.png')",
+        'tread': "url('/static/images/bartread.webp')",
+        'tread-white': "url('/static/images/bartread-white.webp')",
+        'email': "url('/static/images/email.webp')",
       },
       backgroundSize: {
         '72': '18rem',
