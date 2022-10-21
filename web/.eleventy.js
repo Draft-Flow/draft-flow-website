@@ -6,6 +6,7 @@ const eleventyNavigationPlugin = require("@11ty/eleventy-navigation")
 const getYouTubeId = require('get-youtube-id')
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
+const cardImageShortcode = require('./src/utils/shortcodes/shortcodeCardImage')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
 const shuffleFilter = require('./src/utils/filters/shuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
@@ -41,6 +42,7 @@ module.exports = function (eleventyConfig) {
 
   // Generate img tags with next-gen image formats
   eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
+  eleventyConfig.addNunjucksAsyncShortcode('cardImage', cardImageShortcode)
 
   // Inline SVG
   eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)

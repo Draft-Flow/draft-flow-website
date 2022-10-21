@@ -70,16 +70,15 @@
   <script>
     const openmodal = document.getElementById('videoModalButton')
     openmodal.addEventListener('click', function(event){
-      event.preventDefault()
       toggleModal()
-    })
+    }, {passive: true})
     
     const overlay = document.querySelector('.modal-overlay')
     overlay.addEventListener('click', toggleModal)
     
     const closemodal = document.querySelectorAll('.modal-close')
     for (let i = 0; i < closemodal.length; i++) {
-      closemodal[i].addEventListener('click', toggleModal)
+      closemodal[i].addEventListener('click', toggleModal, {passive: true})
     }
     
     document.onkeydown = function(evt) {

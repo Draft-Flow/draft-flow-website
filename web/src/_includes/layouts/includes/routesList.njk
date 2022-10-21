@@ -32,15 +32,17 @@
   {% for route in routesList %}
     {%- set routeMainImage -%}
       {%- if route.mainImage -%}
-      {% imageUrlFor route.mainImage.asset._ref, 800 %}
+      {% imageUrlFor route.mainImage.asset._ref, 1000 %}
       {%- endif -%}
     {%- endset -%}
     <li
-      class="routeCard card route-card" 
-      {% if routeMainImage %}style="background-image:url('{{ routeMainImage }}')"{% endif %}
+      class="routeCard card route-card relative" 
       data-difficulty="{{route.category.slug.current}}"
       data-distance="{{ route.totalDistance }}"
     >
+      <div class="absolute top-0 left-0 w-full h-full">
+        {% cardImage routeMainImage, route.title, null, 'object-cover object-center' %}
+      </div>
       <div class="z-10">
         <a href="/routes/{{ route.slug.current | url }}/" class="block text-xl font-bold leading-none mb-3 ">
           {{ route.title }}
