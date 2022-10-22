@@ -1,12 +1,12 @@
-const Image = require("@11ty/eleventy-img");
+const Image = require("@11ty/eleventy-img")
 
 const cardImageShortcode = async (src, alt = "", sizes = '(min-width: 30em) 50vw, 100vw', classes = null) => {
   if(alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
-    throw new Error(`Missing \`alt\` on myImage from: ${src}`);
+    throw new Error(`Missing \`alt\` on myImage from: ${src}`)
   }
 
-  let metadata = await Image(src, {
+  const metadata = await Image(src, {
     widths: [350, 700],
     formats: ["avif", "jpeg"],
     outputDir: "./_site/img/",
@@ -14,12 +14,12 @@ const cardImageShortcode = async (src, alt = "", sizes = '(min-width: 30em) 50vw
     cacheOptions: {
       duration: "1d"
     }
-  });
+  })
 
   return `<picture class="flex h-full">
-    ${Object.values(metadata).map(imageFormat => {
-      return `  <source type="${imageFormat[0].sourceType}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`;
-    }).join("\n")}
+    ${Object.values(metadata).map(imageFormat => (
+       `<source type="${imageFormat[0].sourceType}" srcset="${imageFormat.map(entry => entry.srcset).join(", ")}" sizes="${sizes}">`
+    )).join("\n")}
       <img
         src="${metadata.jpeg[0].url}"
         width="100%"
@@ -28,7 +28,7 @@ const cardImageShortcode = async (src, alt = "", sizes = '(min-width: 30em) 50vw
         alt="${alt}"
         loading="lazy"
         decoding="async">
-    </picture>`;
+    </picture>`
 }
 
 module.exports = cardImageShortcode

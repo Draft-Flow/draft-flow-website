@@ -8,6 +8,7 @@ const getYouTubeId = require('get-youtube-id')
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const cardImageShortcode = require('./src/utils/shortcodes/shortcodeCardImage')
 const bannerImageShortcode = require('./src/utils/shortcodes/shortcodeBannerImage')
+const bannerImageFromRefShortcode = require('./src/utils/shortcodes/shortcodeBannerImageFromRef')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
 const shuffleFilter = require('./src/utils/filters/shuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
@@ -45,6 +46,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('cardImage', cardImageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('bannerImage', bannerImageShortcode)
+  eleventyConfig.addNunjucksAsyncShortcode('bannerImageFromRef', bannerImageFromRefShortcode)
+  
 
   // Inline SVG
   eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)

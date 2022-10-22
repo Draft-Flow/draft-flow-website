@@ -1,8 +1,6 @@
 {% extends 'layouts/base/index.njk' %}
 
-{%- set bannerImageLg -%}
-  {%- imageUrlFor route.mainImage.asset._ref, 2000 -%}
-{%- endset -%}
+{% set bannerImageLg = route.mainImage.asset._ref %}
 
 {% set bannerTitle = route.title %}
 {% set bannerSubtitle %}
@@ -14,9 +12,7 @@
 {% endset %}
 
 {% block banner %}
-  {% if bannerImageLg %}
-    {% include "../includes/bannerLarge.njk" %}
-  {% endif %}
+  {% include "../includes/bannerLargeFromRef.njk" %}
 {% endblock %}
 
 {% block subheader %}
