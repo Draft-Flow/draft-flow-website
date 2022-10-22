@@ -25,6 +25,9 @@ const OUTPUT = '_site'
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
+  // Watch for changes on files to force refresh and see changes
+  eleventyConfig.addWatchTarget('./src/assets/css/styles.css');
+
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
   eleventyConfig.addPassthroughCopy('src/static/_redirects')
