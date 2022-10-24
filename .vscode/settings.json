@@ -4,5 +4,7 @@
   "files.insertFinalNewline": true,
   "[njk]": {
     "editor.formatOnSave": false
-  }
+  },
+  "prettier.configPath": ".prettierrc.json",
+  "prettier.requireConfig": true
 }

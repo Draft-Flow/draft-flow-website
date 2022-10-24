@@ -11,7 +11,10 @@ const generateTown = async (town) => {
   try {
     return {
       ...town,
-      description: toHTML(town.description, { components: serializers, ...client.config() }),
+      description: toHTML(town.description, {
+        components: serializers,
+        ...client.config(),
+      }),
     }
   } catch (err) {
     // eslint-disable-next-line

@@ -11,7 +11,10 @@ const generateSupporter = async (supporter) => {
   try {
     return {
       ...supporter,
-      body: toHTML(supporter.description, { components: serializers, ...client.config() }),
+      body: toHTML(supporter.description, {
+        components: serializers,
+        ...client.config(),
+      }),
     }
   } catch (err) {
     // eslint-disable-next-line

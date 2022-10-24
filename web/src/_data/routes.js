@@ -39,7 +39,8 @@ const generateRoute = async (route) => {
 
     bounds = llBounds.toArray()
 
-    const {elevation, elevationGain, elevationLoss, totalDistance} = routeMeta(coordinates)
+    const { elevation, elevationGain, elevationLoss, totalDistance } =
+      routeMeta(coordinates)
 
     let lineString = null
     if (geoJSON) {
@@ -49,7 +50,7 @@ const generateRoute = async (route) => {
         rating: route.category.title,
         distance: totalDistance,
         ascent: elevationGain,
-        time: route.time
+        time: route.time,
       })
     }
 
@@ -57,7 +58,7 @@ const generateRoute = async (route) => {
       ...route,
       parking: {
         ...route.parking,
-        icon: urlFor(route.parking.type.icon.asset._ref).width(50).url()
+        icon: urlFor(route.parking.type.icon.asset._ref).width(50).url(),
       },
       geoJSON,
       bounds,
@@ -73,7 +74,7 @@ const generateRoute = async (route) => {
         ? Number(totalDistance.toFixed(1))
         : totalDistance,
       body: toHTML(route.body, { components: serializers }),
-      images: getImages(route.body)
+      images: getImages(route.body),
     }
   } catch (err) {
     // eslint-disable-next-line

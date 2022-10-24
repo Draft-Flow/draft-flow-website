@@ -1,4 +1,4 @@
-import { FaFile } from "react-icons/fa"
+import { FaFile } from 'react-icons/fa'
 
 export default {
   name: 'staticPages',
@@ -26,25 +26,25 @@ export default {
     {
       name: 'content',
       type: 'bodyPortableText',
-      title: 'Content'
+      title: 'Content',
     },
     {
       name: 'video',
       type: 'youtube',
       title: 'Video',
-      hidden: ({document}) => !document._id.endsWith('staticPages.home')
+      hidden: ({ document }) => !document._id.endsWith('staticPages.home'),
     },
     {
       name: 'linkBlock1',
       type: 'linkblock',
       title: 'Link Block #1',
-      hidden: ({document}) => !document._id.endsWith('staticPages.home')
+      hidden: ({ document }) => !document._id.endsWith('staticPages.home'),
     },
     {
       name: 'linkBlock2',
       type: 'linkblock',
       title: 'Link Block #2',
-      hidden: ({document}) => !document._id.endsWith('staticPages.home')
+      hidden: ({ document }) => !document._id.endsWith('staticPages.home'),
     },
   ],
 }

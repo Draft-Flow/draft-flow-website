@@ -55,7 +55,7 @@ export default {
       type: 'mainImage',
     },
     {
-      type: 'youtube'
+      type: 'youtube',
     },
     {
       type: 'file',
@@ -67,9 +67,9 @@ export default {
           options: {
             isHighlighted: true,
           },
-          validation: (Rule) => Rule.required()
+          validation: (Rule) => Rule.required(),
         },
-      ]
+      ],
     },
   ],
 }

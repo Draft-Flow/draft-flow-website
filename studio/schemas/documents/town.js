@@ -1,4 +1,4 @@
-import { FaStoreAlt } from "react-icons/fa";
+import { FaStoreAlt } from 'react-icons/fa'
 
 export default {
   name: 'town',
@@ -16,8 +16,7 @@ export default {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
-      description:
-        'A URL-friendly version of the name',
+      description: 'A URL-friendly version of the name',
       options: {
         source: 'name',
         maxLength: 96,

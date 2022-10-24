@@ -13,29 +13,31 @@ const hasToken = !!client.config().token
 const generateAuthor = async (author) => {
   try {
     // TODO: DRY this up, very inefficient to regenerate for every author
-    const authorRoutes = await Promise.all(author.routes.map(async (route) => {
-      const response = await fetch(route.gpx)
-      const xmlString = await response.text()
-      const xml = new DOMParser().parseFromString(xmlString)
-      const geoJSON = toGeoJSON.gpx(xml)
+    const authorRoutes = await Promise.all(
+      author.routes.map(async (route) => {
+        const response = await fetch(route.gpx)
+        const xmlString = await response.text()
+        const xml = new DOMParser().parseFromString(xmlString)
+        const geoJSON = toGeoJSON.gpx(xml)
 
-      const { coordinates } = geoJSON.features[0].geometry
-      const { elevationGain,  totalDistance } = routeMeta(coordinates)
+        const { coordinates } = geoJSON.features[0].geometry
+        const { elevationGain, totalDistance } = routeMeta(coordinates)
 
-      return {
-        title: route.title,
-        slug: route.slug, 
-        mainImage: route.mainImage,
-        time: route.time,
-        elevationGain: elevationGain
-          ? Number(elevationGain.toFixed(0))
-          : elevationGain,
-        totalDistance: totalDistance
-          ? Number(totalDistance.toFixed(1))
-          : totalDistance,
-      }
-    }))
-    
+        return {
+          title: route.title,
+          slug: route.slug,
+          mainImage: route.mainImage,
+          time: route.time,
+          elevationGain: elevationGain
+            ? Number(elevationGain.toFixed(0))
+            : elevationGain,
+          totalDistance: totalDistance
+            ? Number(totalDistance.toFixed(1))
+            : totalDistance,
+        }
+      })
+    )
+
     return {
       ...author,
       routes: authorRoutes,

@@ -13,7 +13,7 @@ body.navOpen {
 
 header.open,
 header.open.stuck {
-  @apply h-screen bg-pg-blue-dark; 
+  @apply h-screen bg-pg-blue-dark;
 }
 
 header.open #navbar {

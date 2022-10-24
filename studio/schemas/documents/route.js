@@ -6,7 +6,7 @@ export default {
   icon: FaRoute,
   title: 'Routes',
   initialValue: {
-    sameFinish: true
+    sameFinish: true,
   },
   groups: [
     {
@@ -67,7 +67,7 @@ export default {
         },
       ],
       group: ['basics'],
-      validation: Rule => Rule.required().max(2)
+      validation: (Rule) => Rule.required().max(2),
     },
     // Description
     {
@@ -113,13 +113,14 @@ export default {
       type: 'text',
       title: 'Facilities',
       rows: 2,
-      description: 'A short description of the facilities located along the route.',
+      description:
+        'A short description of the facilities located along the route.',
       group: ['beta'],
     },
     {
       name: 'keyPoints',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       title: 'Key Points',
       description: 'Other useful knowledge for the route, 1 per line.',
       group: ['beta'],
@@ -132,7 +133,7 @@ export default {
         type: 'category',
       },
       group: ['beta'],
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'time',
@@ -140,7 +141,7 @@ export default {
       title: 'Riding Time',
       description: 'Estimated time to ride in hours. Ex "3-4 hrs"',
       group: ['beta'],
-      validation: (Rule) => Rule.required()
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'osgridref',
@@ -198,7 +199,7 @@ export default {
       name: 'finish',
       type: 'reference',
       title: 'Finish',
-      hidden: ({document}) => document?.sameFinish,
+      hidden: ({ document }) => document?.sameFinish,
       description: 'Recommended finish for the route',
       to: {
         type: 'town',
@@ -290,16 +291,8 @@ export default {
       routeAscent: 'routeAscent',
       media: 'mainImage',
     },
-    prepare({
-      title = 'No title',
-      routeTime = '',
-      rating = '',
-      media,
-    }) {
-      const attrArr = [
-        routeTime || null,
-        rating || null
-      ]
+    prepare({ title = 'No title', routeTime = '', rating = '', media }) {
+      const attrArr = [routeTime || null, rating || null]
 
       const attributes = attrArr.filter((n) => n)
 

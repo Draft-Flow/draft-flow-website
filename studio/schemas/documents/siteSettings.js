@@ -1,4 +1,4 @@
-import { FaCog } from "react-icons/fa";
+import { FaCog } from 'react-icons/fa'
 
 export default {
   name: 'siteSettings',
@@ -60,19 +60,19 @@ export default {
         {
           name: 'phone',
           type: 'string',
-          title: 'Phone Number'
+          title: 'Phone Number',
         },
         {
           name: 'email',
           type: 'string',
-          title: 'Email Address'
+          title: 'Email Address',
         },
       ],
     },
     {
       name: 'social',
       type: 'social',
-      title: 'Social Media'
+      title: 'Social Media',
     },
     {
       name: 'fundedBy',

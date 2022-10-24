@@ -1,4 +1,4 @@
-import { FaMapSigns } from "react-icons/fa";
+import { FaMapSigns } from 'react-icons/fa'
 
 export default {
   name: 'placeType',

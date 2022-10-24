@@ -30,11 +30,7 @@
 
 <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   {% for route in routesList %}
-    {%- set routeMainImage -%}
-      {%- if route.mainImage -%}
-      {% imageUrlFor route.mainImage.asset._ref, 1000 %}
-      {%- endif -%}
-    {%- endset -%}
+    {% set routeMainImage = route.mainImage %}
     <li
       class="routeCard card route-card relative" 
       data-difficulty="{{route.category.slug.current}}"

@@ -1,8 +1,8 @@
 import {
   orderRankField,
   orderRankOrdering,
-} from '@sanity/orderable-document-list';
-import { FaTags } from "react-icons/fa";
+} from '@sanity/orderable-document-list'
+import { FaTags } from 'react-icons/fa'
 
 export default {
   name: 'category',
@@ -33,7 +33,7 @@ export default {
       type: 'color',
       title: 'Color',
       options: {
-        disableAlpha: true
+        disableAlpha: true,
       },
       validation: (Rule) => Rule.required(),
     },

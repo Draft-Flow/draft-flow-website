@@ -1,21 +1,22 @@
-import S from "@sanity/desk-tool/structure-builder"
-import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
+import S from '@sanity/desk-tool/structure-builder'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
-import { FaFile, FaTags } from "react-icons/fa"
+import { FaFile, FaTags } from 'react-icons/fa'
 
-const hiddenDocTypes = listItem => !["siteSettings", "staticPages", "category"].includes(listItem.getId())
+const hiddenDocTypes = (listItem) =>
+  !['siteSettings', 'staticPages', 'category'].includes(listItem.getId())
 
 export default () =>
   S.list()
-    .title("Content")
+    .title('Content')
     .items([
       S.documentListItem()
-        .schemaType("siteSettings")
-        .title("Site settings")
+        .schemaType('siteSettings')
+        .title('Site settings')
         .child(
           S.document()
-            .schemaType("siteSettings")
-            .documentId("21987cfd-3189-4b89-82e9-b3df24e1f332")
+            .schemaType('siteSettings')
+            .documentId('21987cfd-3189-4b89-82e9-b3df24e1f332')
         ),
       S.listItem()
         .title('Static Pages')
@@ -146,9 +147,13 @@ export default () =>
                   S.document()
                     .schemaType('staticPages')
                     .documentId('staticPages.privacyPolicy')
-                )
+                ),
             ])
         ),
-      orderableDocumentListDeskItem({type: 'category', icon: FaTags, title: "Difficulty Ratings" }),
+      orderableDocumentListDeskItem({
+        type: 'category',
+        icon: FaTags,
+        title: 'Difficulty Ratings',
+      }),
       ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])

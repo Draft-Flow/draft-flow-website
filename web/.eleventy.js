@@ -2,7 +2,7 @@ const util = require('util')
 const CleanCSS = require('clean-css')
 const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
-const eleventyNavigationPlugin = require("@11ty/eleventy-navigation")
+const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 const getYouTubeId = require('get-youtube-id')
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
@@ -23,10 +23,11 @@ const INPUT = 'src'
 const OUTPUT = '_site'
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+  eleventyConfig.addPlugin(eleventyNavigationPlugin)
 
   // Watch for changes on files to force refresh and see changes
-  eleventyConfig.addWatchTarget('./src/assets/css/styles.css');
+  eleventyConfig.addWatchTarget('./src/assets/css/styles.css')
+  eleventyConfig.addWatchTarget('./src/utils/**/*')
 
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
@@ -49,8 +50,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('cardImage', cardImageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('bannerImage', bannerImageShortcode)
-  eleventyConfig.addNunjucksAsyncShortcode('bannerImageFromRef', bannerImageFromRefShortcode)
-  
+  eleventyConfig.addNunjucksAsyncShortcode(
+    'bannerImageFromRef',
+    bannerImageFromRefShortcode
+  )
 
   // Inline SVG
   eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)
@@ -62,16 +65,19 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPairedShortcode('jsbundle', jsBundle)
 
   // Convert Sanity image assets into URLs
-  eleventyConfig.addShortcode('imageUrlFor', (image, width = '600') => {
-    if (!image) {
-      return null
+  eleventyConfig.addShortcode(
+    'imageUrlFor',
+    (image, width = '600', options) => {
+      if (!image) {
+        return null
+      }
+      return urlFor(image).width(width).url()
     }
-    return urlFor(image).width(width).url()
-  })
+  )
 
   // Convert Sanity block content into HTML
   eleventyConfig.addFilter('blocksToHTML', (value) => {
-    return toHTML(value, {components: serializers})
+    return toHTML(value, { components: serializers })
   })
 
   // Shuffle collection into random order
@@ -82,12 +88,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('routesData', routesDataFilter)
 
   // Minify CSS
-  eleventyConfig.addFilter("cssmin", (code) => {
-    return new CleanCSS({}).minify(code).styles;
-  });
+  eleventyConfig.addFilter('cssmin', (code) => {
+    return new CleanCSS({}).minify(code).styles
+  })
 
   // Get YouTube Video ID
-  eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url) )
+  eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url))
 
   // Get page
   eleventyConfig.addFilter('getPage', getPageFilter)

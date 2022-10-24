@@ -1,4 +1,4 @@
-import { FaUser } from "react-icons/fa";
+import { FaUser } from 'react-icons/fa'
 
 export default {
   name: 'author',
@@ -15,7 +15,7 @@ export default {
       name: 'nickname',
       type: 'string',
       title: 'Nickname',
-      description: 'A nickname or their first name'
+      description: 'A nickname or their first name',
     },
     {
       name: 'slug',

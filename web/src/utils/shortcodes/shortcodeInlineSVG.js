@@ -8,7 +8,7 @@ const inlineSVG = async (src, classes) => {
 
   let svgString = metadata.svg[0].buffer.toString()
 
-  if (classes) { 
+  if (classes) {
     svgString = svgString.replace(/<svg /g, `<svg class="${classes}" `)
   }
 
