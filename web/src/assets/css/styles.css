@@ -90,7 +90,7 @@ h1 {
 }
 
 .description p a {
-  @apply underline font-medium color-pg-blue-dark;
+  @apply underline font-medium text-pg-blue-dark;
 }
 
 .description h2 {
