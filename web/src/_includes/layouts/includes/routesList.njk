@@ -39,7 +39,7 @@
       <div class="absolute top-0 left-0 w-full h-full">
         {% cardImage routeMainImage, route.title, null, 'object-cover object-center' %}
       </div>
-      <div class="z-10">
+      <div class="relative z-10 flex flex-col justify-between w-full">
         <a href="/routes/{{ route.slug.current | url }}/" class="block text-xl font-bold leading-none mb-3 ">
           {{ route.title }}
         </a>
