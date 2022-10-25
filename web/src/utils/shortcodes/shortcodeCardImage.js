@@ -17,12 +17,13 @@ const cardImageShortcode = async (
   const [type, id, dimensions] = ref.split(['-'])
   const [imageX, imageY] = dimensions.split('x')
 
-  const width = 500
+  const width = 1200
   const cropWidth = Math.floor(.5 * imageX)
   const left = image.hotspot && image.hotspot.x < 0.5 ? Math.floor(image.hotspot.x * imageX) - Math.floor(cropWidth/2) : cropWidth
 
   const imageURL = urlFor(ref)
     .rect(left, 0, cropWidth, imageY)
+    .dpr(2)
     .width(width)
     .url()
 
@@ -47,8 +48,8 @@ const cardImageShortcode = async (
       .join('\n')}
       <img
         src="${metadata.jpeg[0].url}"
-        width="100%"
-        height="auto"
+        width="${cropWidth}"
+        height="${imageY}"
         ${classes !== null ? `class="${classes}"` : ''}
         alt="${alt}"
         loading="lazy"
