@@ -32,7 +32,7 @@
   {% for route in routesList %}
     {% set routeMainImage = route.mainImage %}
     <li
-      class="routeCard card route-card relative" 
+      class="card route-card relative aspect-square" 
       data-difficulty="{{route.category.slug.current}}"
       data-distance="{{ route.totalDistance }}"
     >
@@ -69,7 +69,7 @@
   const ratingSelectEl = document.getElementById('{{ RATING_ID }}')
   const distanceSelectEl = document.getElementById('{{ DISTANCE_ID }}')
   const noResultsEl = document.getElementById('no-results')
-  const routeCardEls = document.querySelectorAll('.routeCard')
+  const routeCardEls = document.querySelectorAll('.route-card')
   const routeCardElsArr = Array.from(routeCardEls)
 
   const searchParams = new URLSearchParams(window.location.search);
