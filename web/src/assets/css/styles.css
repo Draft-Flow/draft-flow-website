@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
 body.navOpen {
   @apply h-screen overflow-hidden;
 }
