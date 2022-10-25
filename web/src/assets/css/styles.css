@@ -89,6 +89,10 @@ h1 {
   @apply text-lg block w-full max-w-2xl my-2 leading-8 text-left;
 }
 
+.description p a {
+  @apply underline font-medium color-pg-blue-dark;
+}
+
 .description h2 {
   @apply text-2xl font-medium;
 }
