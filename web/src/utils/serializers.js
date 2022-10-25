@@ -1,5 +1,5 @@
-const imageUrl = require('./imageUrl')
 const { getFileAsset } = require('@sanity/asset-utils')
+const imageUrl = require('./imageUrl')
 
 const { sanity } = require('../client-config')
 

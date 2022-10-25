@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "sanity start",
     "build": "sanity build",
-    "lint": "eslint --ext .js ."
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --ext .js . --fix"
   },
   "keywords": [
     "sanity"
@@ -31,7 +32,8 @@
     "react": "^17.0",
     "react-dom": "^17.0",
     "react-icons": "^4.4.0",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "react-lite-youtube-embed": "^2.3.1"
   },
   "repository": {
     "type": "git",
@@ -41,7 +43,6 @@
     "esbuild": "^0.14.43",
     "eslint": "^8.18.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "react-lite-youtube-embed": "^2.3.1"
+    "eslint-plugin-import": "^2.26.0"
   }
 }

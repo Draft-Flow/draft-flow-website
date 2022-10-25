@@ -9,7 +9,10 @@ const getStaticPages = async () => {
 
   const order = '| order(publishedAt asc)'
   const query = [filter, projection, order].join(' ')
-  const docs = await client.fetch(query).catch((err) => console.error(err))
+  const docs = await client.fetch(query).catch((err) => {
+    // eslint-disable-next-line
+    console.error(err)
+  })
   return docs
 }
 

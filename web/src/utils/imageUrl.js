@@ -9,6 +9,7 @@ const urlFor = (source) => {
     const imageURL = builder.image(source)
     return imageURL
   } catch (err) {
+    // eslint-disable-next-line
     console.log(err)
   }
 }

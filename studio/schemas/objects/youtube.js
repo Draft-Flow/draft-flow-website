@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import getYouTubeId from 'get-youtube-id'
 import LiteYouTubeEmbed from 'react-lite-youtube-embed'
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css'
@@ -26,4 +27,10 @@ export default {
     },
     component: Preview,
   },
+}
+
+Preview.propTypes = {
+  value: {
+    url: PropTypes.string
+  }
 }
