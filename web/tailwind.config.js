@@ -36,7 +36,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      pg: ['"Jost"', 'sans-serif'],
+      pg: ['"Jost"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
     },
   },
   plugins: [],
