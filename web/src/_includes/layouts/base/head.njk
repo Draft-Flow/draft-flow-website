@@ -11,7 +11,7 @@
         src: url('/static/fonts/jost.woff2') format('woff2 supports variations'),
             url('/static/fonts/jost.woff2') format('woff2-variations');
         font-weight: 100 900;
-        font-display: optional;
+        font-display: swap;
       }
     </style>
 
@@ -41,4 +41,11 @@
     <meta name="theme-color" content="#ffffff">
     
     <script defer data-domain="perthshiregravel.com" src="https://plausible.io/js/plausible.js"></script>
+    <script async>
+      if ('serviceWorker' in navigator) {
+		    window.addEventListener('load', () => {
+			    navigator.serviceWorker.register("/sw.js");
+		    });
+      }
+    </script>
   </head>

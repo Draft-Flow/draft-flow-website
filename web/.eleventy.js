@@ -27,11 +27,13 @@ module.exports = function (eleventyConfig) {
 
   // Watch for changes on files to force refresh and see changes
   eleventyConfig.addWatchTarget('./src/assets/css/styles.css')
+  eleventyConfig.addWatchTarget('./src/static/sw.js')
   eleventyConfig.addWatchTarget('./src/utils/**/*')
 
   // Pass through static copy
   // https://www.11ty.dev/docs/copy/
-  eleventyConfig.addPassthroughCopy('src/static/_redirects')
+  eleventyConfig.addPassthroughCopy({ 'src/static/_redirects': './_redirects' })
+  eleventyConfig.addPassthroughCopy({ 'src/static/sw.js': './sw.js' })
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
   eleventyConfig.addPassthroughCopy('src/static/fonts/**/*')
   eleventyConfig.addPassthroughCopy('src/static/images/**/*')
