@@ -60,7 +60,7 @@ h1 {
 }
 
 .route-card {
-  @apply w-full flex max-w-sm aspect-square justify-self-center relative rounded-lg overflow-hidden bg-pg-blue-dark px-4 py-6 text-white shadow-md shadow-neutral-400 after:absolute after:top-0 after:left-0 after:w-full after:aspect-square after:bg-pg-blue-dark/[.3];
+  @apply w-full flex max-w-sm aspect-square justify-self-center relative rounded-lg overflow-hidden bg-pg-blue-dark px-4 pt-6 pb-3 text-white shadow-md shadow-neutral-400 after:absolute after:top-0 after:left-0 after:w-full after:aspect-square after:bg-pg-blue-dark/[.3];
 }
 
 .metrics {
