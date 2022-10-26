@@ -1,0 +1,17 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set bannerTitle = "We're Lost" %}
+
+{% block banner %}
+  {% include "./includes/bannerSimple.njk" %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full py-20">
+      <div class="description">
+        Looks like we've sent you on off-route. We can't find this page, please head back to the [homepage](/).
+      </div>
+    </div>
+  </section>
+{% endblock %}
