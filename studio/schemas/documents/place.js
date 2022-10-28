@@ -70,6 +70,7 @@ export default {
       name: 'location',
       type: 'geopoint',
       title: 'Location',
+      validation: (Rule) => Rule.required(),
     },
     {
       name: 'description',
