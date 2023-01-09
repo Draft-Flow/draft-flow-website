@@ -29,7 +29,7 @@
         <!--<li><a href="#gallery" class="mr-14 hover:underline">Gallery</a></li>-->
         <li><a href="#services" class="mr-14 hover:underline">Local Services</a></li>
       </ul>
-      <a href="{{ route.gpx }}" download class="ml-auto iconButton inline-flex items-center rounded bg-pg-blue-dark text-pg-tan-light px-4 h-11 font-bold">
+      <a href="{{ route.gpx }}?dl={{route.title | slug}}.gpx" download class="ml-auto iconButton inline-flex items-center rounded bg-pg-blue-dark text-pg-tan-light px-4 h-11 font-bold">
           {% svgIcon 'src/assets/icons/gpxdownload.svg', 'mr-2 h-7' %}Download GPX
         </a>
     </div>
