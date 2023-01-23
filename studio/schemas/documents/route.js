@@ -57,18 +57,6 @@ export default {
       description: 'This can be used to schedule post for publishing',
       group: ['beta'],
     },
-    {
-      name: 'authors',
-      title: 'Authors',
-      type: 'array',
-      of: [
-        {
-          type: 'authorReference',
-        },
-      ],
-      group: ['basics'],
-      validation: (Rule) => Rule.required().max(2),
-    },
     // Description
     {
       name: 'mainImage',
@@ -126,16 +114,6 @@ export default {
       group: ['beta'],
     },
     {
-      name: 'category',
-      type: 'reference',
-      title: 'Category',
-      to: {
-        type: 'category',
-      },
-      group: ['beta'],
-      validation: (Rule) => Rule.required(),
-    },
-    {
       name: 'time',
       type: 'string',
       title: 'Riding Time',
@@ -176,77 +154,13 @@ export default {
         }),
       group: ['beta'],
     },
-    {
-      name: 'startFinish',
-      type: 'reference',
-      title: 'Nearest Services',
-      description: 'Nearest town/village with services',
-      to: {
-        type: 'town',
-      },
-      group: ['beta'],
-      validation: (Rule) => Rule.required(),
-    },
+
     {
       name: 'sameFinish',
       type: 'boolean',
       title: 'Is the finish the same as the start? ',
       description: 'Does the route start and end at the same point?',
       initialValue: true,
-      group: ['beta'],
-    },
-    {
-      name: 'finish',
-      type: 'reference',
-      title: 'Finish',
-      hidden: ({ document }) => document?.sameFinish,
-      description: 'Recommended finish for the route',
-      to: {
-        type: 'town',
-      },
-      group: ['beta'],
-    },
-    {
-      name: 'parking',
-      type: 'reference',
-      title: 'Parking',
-      to: {
-        type: 'place',
-      },
-      group: ['beta'],
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: 'railway',
-      type: 'reference',
-      title: 'Railway',
-      to: {
-        type: 'place',
-      },
-      group: ['beta'],
-    },
-    {
-      name: 'bikehire',
-      type: 'array',
-      title: 'Bike Services',
-      description: 'Bike services along the route',
-      of: [
-        {
-          type: 'placeReference',
-        },
-      ],
-      group: ['beta'],
-    },
-    {
-      name: 'places',
-      type: 'array',
-      title: 'Places',
-      description: 'Relevant places/services/stops for this route',
-      of: [
-        {
-          type: 'placeReference',
-        },
-      ],
       group: ['beta'],
     },
     // Stages

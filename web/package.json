@@ -1,5 +1,5 @@
 {
-  "name": "perthshire-gravel-website",
+  "name": "draft-and-flow-website",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/Highland-Perthshire-Cycling/perthshire-gravel.git"
   },
-  "author": "Highland Perthshire Cycling",
+  "author": "Draft & Flow",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel/issues"

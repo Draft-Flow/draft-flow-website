@@ -1,139 +1,24 @@
-<section class="bg-pg-blue-dark text-pg-tan-light px-2 sm:px-20 lg:px-4 py-20 flex justify-center">
-  <div class="w-full max-w-6xl pt-52 lg:pt-0 text-pg-tan-light bg-email bg-no-repeat bg-top lg:bg-right bg-72 lg:bg-96">
-    <h3 class="text-4xl lg:text-5xl font-bold pt-40 -mt-40" id="newsletter">Subscribe for the dirt!</h3>
-    <div class="divider w-40"></div>
-    <p class="text-lg">Subscribe to get all the latest dirt on new gravel biking routes.</p>
-    <div class="textwidget custom-html-widget">
-      <!-- Begin Mailchimp Signup Form -->
-      <div id="mc_embed_signup">
-       <form action="https://perthshiregravel.us5.list-manage.com/subscribe/post?u=b5a1fa8d16159313ef6ed94bc&amp;id=ee2c553842" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-        <div id="mc_embed_signup_scroll">
-          <div class="indicates-required"><sup>*</sup> indicates required</div>
-          <div class="mc-field-group form-field">
-            <label for="mce-EMAIL">Email<sup>*</sup></label>
-            <input type="email" required value="" name="EMAIL" class="required email" id="mce-EMAIL" aria-required="true">
-          </div>
-          <div class="mc-field-group form-field">
-            <label for="mce-FNAME">First Name </label>
-            <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-          </div>
-          <div class="mc-field-group form-field">
-            <label for="mce-LNAME">Last Name </label>
-            <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-          </div>
-          <div id="mergeRow-gdpr" class="mergeRow gdpr-mergeRow content__gdprBlock mc-field-group">
-            <div class="content__gdpr">
-              <label class="font-medium">Marketing Permissions</label>
-              <p>Please select all the ways you would like to hear from Highland Perthshire Cycling:</p>
-              <fieldset class="mc_fieldset gdprRequired mc-field-group my-2" name="interestgroup_field">
-                <label class="checkbox subfield" for="gdpr_14365"><input type="checkbox" required id="gdpr_14365" name="gdpr[14365]" value="Y" class="av-checkbox mr-2 "><span>Email</span><sup>*</sup> </label>
-              </fieldset>
-              <p>You can unsubscribe at any time by clicking the link in the footer of our emails. For information about our privacy practices, please visit our website.</p>
+<footer class="text-center text-stone-100">
+    <div class="bg-df-blue px-4 lg:px-8 pt-4 pt-12 lg:pt-20 pb-12">
+        {# <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-90">
+            <ul class="grid grid-rows-1 grid-flow-col gap-4">
+                <li>Company #{{ metadata.company.number }}</li>
+                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
+            </ul>
+            <div class="flex items-center text-right">
+                <span>Crafted in Aberfeldy, Scotland<br>by Brett DeWoody</span>
+                {% svgIcon 'src/assets/icons/scotland.svg', 'w-16 sm:w-20 lg:w-28 fill-white' %}
             </div>
-            <div class="content__gdprLegal">
-              <p>We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank" rel="noopener">Learn more about Mailchimp's privacy practices here.</a></p>
-            </div>
-          </div>
-          <div id="mce-responses" class="clear">
-            <div class="response" id="mce-error-response" style="display:none"></div>
-            <div class="response text-pg-green" id="mce-success-response" style="display:none"></div>
-          </div>
-          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b5a1fa8d16159313ef6ed94bc_ee2c553842" tabindex="-1" value=""></div>
-          <div class="mt-6">
-            <button type="submit" class="bg-pg-lime px-5 py-2 text-pg-blue-dark font-bold rounded" id="mc-embedded-subscribe">Subscribe</button>
-          </div>
         </div>
-      </form>
-    </div>
-    <!--End mc_embed_signup-->
-    </div>
-  </div>
-</section>
-<footer>
-  {# <div class="bg-pg-tan">
-    <ul class="supporterslist" style="counter-reset: start-from {{ supporterslist.length + 1 }}">
-    {% asyncEach supporter in collections.supporters | reverse %}
-      {% set currentSupporter = supporter.data.supporter %}
-      {% set imageSrc %}
-        {% imageUrlFor currentSupporter.supporter.logo.asset._ref, 400 %}
-      {% endset %}
-      <li class="supporterlist-item{% if supporter.url == url %} supporterlist-item-active{% endif %}">
-        <a href="{{ currentSupporter.website | url }}?ref=PerthshireGravel" class="supporterlist-link">
-          {% image imageSrc, currentSupporter.supporter.logo.alt  %}
-        </a>
-      </li>
-    {% endeach %}
-    </ul>
-  <div> #}
-  <div class="bg-pg-tan flex flex-col items-center text-center px-2 lg:px-4 py-8 lg:py-20">
-    <h4 class="text-4xl lg:text-5xl font-bold">Valued partners</h4>
-    <div class='divider w-40'></div>
-    <p class="mt-4 max-w-prose">Perthshire Gravel is a Highland Perthshire Cycling project, and is only possible with the funding and support of our partners.</p>
-    <ul class="md:w-full max-w-6xl grid grid-cols-2 grid-rows-auto md:grid-cols-4 gap-8 md:gap-0 content-between mt-8">
-    {% asyncEach funder in metadata.fundedBy %}
-      {% set imageSrc %}
-        {% imageUrlFor funder.asset._ref, 400 %}
-      {% endset %}
-      <li class="flex justify-center">
-        <a href="{{ funder.link }}" class="w-28 sm:w-40 flex items-center">
-          {% image imageSrc, funder.alt %}
-        </a>
-      </li>
-    {% endeach %}
-    </ul>
-  </div>
-  <div class="bg-pg-tan-light px-2 lg:px-4 py-8 pb-4 lg:pt-20 flex flex-col items-center">
-    <div class="max-w-6xl flex flex-col lg:flex-row w-full items-center lg:items-start lg:justify-between">
-      <div class="w-48 lg:order-2">
-        {% set logoSrc %}
-          {% imageUrlFor metadata.logo.asset._ref, 600 %}
-        {% endset %}
-        {% image logoSrc, metadata.logo.alt, "(min-width: 30em) 50vw, 100vw", null, 'eager'  %}
-      </div>
-      <div class="text-center lg:text-left mt-12 lg:mt-0 lg:order-1 md:grid md:grid-cols-3 gap-x-12 lg:gap-x-20">
-        <div> 
-          <div class="font-bold mb-2">Perthshire Gravel</div>
-          <ul class="mb-8 lg:mb-0">
-            <li class="mb-1 py-1"><a href="/about/">About</a></li>
-            <!--<li class="mb-1 py-1"><a href="/about/partners/">Partners</a></li>-->
-            <li class="mb-1 py-1"><a href="/about/annual-reports/">Annual Reports</a></li>
-            <li class="mb-1 py-1"><a href="/about/press-media/">Press & Media</a></li>
-            <li class="mb-1 py-1"><a href="/contact/">Contact</a></li>
-          </ul>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-between mt-16 opacity-90">
+            <ul class="grid grid-cols-2 sm:grid-cols-4 gap-y-4 justify-center order-1 lg:order-2 mb-4 lg:mb-0">
+                <li><a class="mx-2 sm:mx-4" href="/accessibility/">Accessibility</a></li>
+                <li><a class="mx-2 sm:mx-4" href="/privacy-policy/">Privacy Policy</a></li>
+                <li><a class="mx-2 sm:mx-4" href="/terms-and-conditions/">Terms & Conditions</a></li>
+            </ul>
+        </div> #}
+        <div class="text-sm text-center opacity-90 mt-8 pb-20">
+            &copy; {% year %} {{ metadata.company.name }}<br/>
         </div>
-        <div>
-          <div class="font-bold mb-2">Routes</div>
-          <ul class="mb-8 lg:mb-0">
-            <li class="mb-1 py-1"><a href="/routes/">Route Explorer</a></li>
-            <li class="mb-1 py-1"><a href="/map/">Route Map</a></li>
-            <li class="mb-1 py-1"><a href="/architects/">Route Architects</a></li>
-            <li class="mb-1 py-1"><a href="/share-a-route/">Share a Route</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="font-bold mb-2">Resources</div>
-          <ul>
-            {%- for post in collections.resources -%}
-              {%- set postContent = pages | getPage(post.data.pageID) -%}
-              <li class="mb-1 py-1"><a href="{{ post.url }}">{{ postContent.title }}</a></li>
-            {%- endfor %}
-            <li class="mb-1 py-1"><a href="#newsletter">Newsletter</a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-    <div class="text-center mt-12 lg:text-left w-full lg:flex lg:justify-between">
-      <div class="lg:flex">
-        <span class="font-bold">&copy; Highland Perthshire Cycling, {% year %}</span>
-        <span class="px-2">•</span>
-        {{ metadata.charityInfo | blocksToHTML | safe }}
-        <span class="px-2">•</span>
-        <a href="/privacy-policy/">Privacy Policy</a>
-      </div>
-      <div>
-        <span>Website <a href="https://zenelements.com/">design by zen</a></span><span class="px-2">•</span><a href="https://brettdewoody.com">Built by Brett DeWoody</a>
-      </div>
-    </div>
-  </div>
 </footer>

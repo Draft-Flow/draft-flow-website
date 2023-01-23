@@ -1,6 +1,6 @@
-# Perthshire Gravel
+# Draft & Flow
 
-The home of gravel adventures in Highland Perthshire
+The website for Draft & Flow
 
 ## Project Setup
 

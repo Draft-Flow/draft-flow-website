@@ -1,47 +1,13 @@
 <!doctype html>
-<html lang="en" class="antialiased text-pg-blue-dark font-pg">
+<html lang="en" class="antialiased text-df-blue-dark font-pg">
   {% include './head.njk' %}
-  <body class="bg-pg-tan-light">
+  <body class="bg-df-tan-light flex flex-col min-h-screen">
     {% include './header.njk' %}
     {% block banner %}{% endblock %}
     {% block subheader %}{% endblock %}
-    <main>
+    <main class="flex-1 bg-df-blue text-white">
       {% block content %}{% endblock %}
     </main>
     {% include './footer.njk' %}
   </body>
-  <script>
-    const linkBoxes = () => {
-      const boxes = document.querySelectorAll(".card");
-
-      boxes.forEach((box) => {
-        const link = box.querySelector("a");
-        if (link) {
-          const url = link.getAttribute("href");
-          const clickHandler = link.onclick;
-          box.addEventListener("click", () => {
-            if (clickHandler) {
-              clickHandler();
-            } 
-            
-            location.href = url;
-            link.preventDefault;
-          });
-          box.classList.add("linked");
-          link.addEventListener("focus", () => {
-            box.classList.add("isfocused");
-          });
-          link.addEventListener("blur", () => {
-            box.classList.remove("isfocused");
-          });
-        }
-      })
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-      if ("querySelector" in document) {
-        linkBoxes();
-      }
-    });
-  </script>
 </html>

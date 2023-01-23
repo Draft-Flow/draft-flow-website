@@ -3,19 +3,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'pg-lime': {
-          DEFAULT: '#99BF10',
-          dark: '#293304',
+        'df-blue': {
+          DEFAULT: '#121E44',
+          dark: '#121E44'
         },
-        'pg-blue': {
-          DEFAULT: '#049DE0',
-          dark: '#012433',
-        },
-        'pg-green': {
-          DEFAULT: '#0D892D',
-          dark: '#053311',
-        },
-        'pg-tan': {
+        'df-tan': {
           lightest: '#FFFCF3',
           light: '#F3F0E8',
           DEFAULT: '#EDEAE0',

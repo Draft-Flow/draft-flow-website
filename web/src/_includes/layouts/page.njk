@@ -1,17 +1,6 @@
 {% extends 'layouts/base/index.njk' %}
 
 {%- set pageContent = pages | getPage(pageID) -%}
-{%- set bannerImageLg -%}
-  {%- imageUrlFor pageContent.banner.asset._ref, 2000 -%}
-{%- endset -%}
-
-{% set bannerTitle = pageContent.title %}
-
-{% block banner %}
-  {% if bannerImageLg %}
-    {% include "./includes/bannerSmall.njk" %}
-  {% endif %}
-{% endblock %}
 
 {% block content %}
   <section class="flex justify-center px-2 lg:px-4">

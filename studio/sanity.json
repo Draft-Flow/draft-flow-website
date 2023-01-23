@@ -1,10 +1,10 @@
 {
   "root": true,
   "project": {
-    "name": "perthshire-gravel"
+    "name": "draft-and-flow"
   },
   "api": {
-    "projectId": "u8m9456v",
+    "projectId": "0y7bneb2",
     "dataset": "production"
   },
   "plugins": [

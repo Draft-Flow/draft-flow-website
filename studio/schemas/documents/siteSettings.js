@@ -24,6 +24,16 @@ export default {
       description: 'Describe your blog for search engines and social media.',
     },
     {
+      name: 'keywords',
+      type: 'array',
+      title: 'Keywords',
+      description: 'Add keywords that describes your blog.',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
+    },
+    {
       name: 'logo',
       type: 'image',
       title: 'Logo',
@@ -43,14 +53,26 @@ export default {
       ],
     },
     {
-      name: 'keywords',
-      type: 'array',
-      title: 'Keywords',
-      description: 'Add keywords that describes your blog.',
-      of: [{ type: 'string' }],
-      options: {
-        layout: 'tags',
-      },
+      name: 'company',
+      type: 'object',
+      title: 'Company',
+      fields: [
+        {
+          name: 'name',
+          type: 'string',
+          title: 'Company Name',
+        },
+        {
+          name: 'number',
+          type: 'string',
+          title: 'Company Number',
+        },
+        {
+          name: 'vat',
+          type: 'string',
+          title: 'VAT Number',
+        },
+      ],
     },
     {
       name: 'contact',
@@ -73,67 +95,6 @@ export default {
       name: 'social',
       type: 'social',
       title: 'Social Media',
-    },
-    {
-      name: 'fundedBy',
-      type: 'array',
-      title: 'Funded By',
-      description: 'Current funders of Perthshire Gravel',
-      of: [
-        {
-          type: 'image',
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: 'Alternative text',
-              description: 'Important for SEO and accessiblity.',
-              validation: (Rule) =>
-                Rule.error(
-                  'You have to fill out the alternative text.'
-                ).required(),
-              options: {
-                isHighlighted: true,
-              },
-            },
-            {
-              name: 'link',
-              type: 'url',
-              title: 'Link',
-              options: {
-                isHighlighted: true,
-              },
-            },
-          ],
-        },
-      ],
-      options: {
-        sortable: true,
-      },
-    },
-    {
-      name: 'charityInfo',
-      type: 'basicPortableText',
-      title: 'Charity Info',
-    },
-    {
-      name: 'banner',
-      type: 'image',
-      title: 'Banner Image',
-      description: 'Banner image for the website',
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-          description: 'Important for SEO and accessiblity.',
-          validation: (Rule) =>
-            Rule.error('You have to fill out the alternative text.').required(),
-          options: {
-            isHighlighted: true,
-          },
-        },
-      ],
     },
   ],
 }

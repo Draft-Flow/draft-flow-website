@@ -1,10 +1,10 @@
 {
-  "name": "perthshire-gravel",
+  "name": "draft-and-flow-admin",
   "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "package.json",
-  "author": "Highland Perthshire Cycling",
+  "author": "Draft & Flow",
   "license": "UNLICENSED",
   "scripts": {
     "dev": "sanity start",
