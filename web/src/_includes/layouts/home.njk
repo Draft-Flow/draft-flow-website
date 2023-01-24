@@ -3,7 +3,15 @@
 {%- set pageContent = pages | getPage(pageID) -%}
 
 {% block content %}
-  <div class="text-center text-2xl">
+  <div class="text-center text-3xl">
   {{ pageContent.content | blocksToHTML | safe }}
+  <ul class="w-full mt-4 list-style-none flex flex-col md:flex-row justify-center text-lg">
+    <li class="mx-4">Bike Kitchen</li>
+    <li class="mx-4">Custom Builds & Servicing</li>
+    <li class="mx-4">Guided Cycle Tours</li>
+  </ul>
+  <ul class="w-full mt-4 list-style-none flex justify-center text-lg">
+    <li class="mx-4">Aberfeldy</li>
+  </ul>
   </div>
 {% endblock %}
