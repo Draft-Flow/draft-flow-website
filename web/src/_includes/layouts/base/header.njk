@@ -1,9 +1,97 @@
+{% set navPages = collections.main | eleventyNavigation %}
+
 {% set logoSrc %}
   {% imageUrlFor metadata.logo.asset._ref, 600 %}
 {% endset %}
 
-<header class="bg-df-blue flex justify-center py-12">
-  <div class="rounded-full overflow-hidden w-40 md:w-60">
-  {% image logoSrc, metadata.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager'  %}
+<div id="sentinel" class="absolute top-0"></div>
+<header id="header" class="fixed z-50 top-0 w-screen md:absolute bg-df-blue text-pg-tan-light flex justify-center transition-all duration-150 ease-linear">
+  <div id="navbar" class="w-full relative mx-4 max-w-6xl text-center lg:text-left flex flex-col lg:justify-between md:items-center">
+    <div id="logobar" class="relative md:absolute lg:top-0 h-20 md:h-28 2xl:h-36 flex justify-between items-center transition-all duration-150 ease-linear z-10">
+      <h1 class="home h-full flex items-center {% if page.url == '/' %} logo-item-active{% endif %}">
+        <a id="logo" href="{{ '/' | url }}" class="block rounded-full overflow-hidden w-16 md:w-24 2xl:w-32 transition-all duration-150 ease-linear">
+          {% set logoSrc %}
+            {% imageUrlFor metadata.logo.asset._ref, 600 %}
+          {% endset %}
+          {% image logoSrc, metadata.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager'  %}
+        </a>
+      </h1>
+      <button class="inline md:hidden w-6 h-6" id="navToggle" aria-haspopup="true" aria-controls="nav" aria-label="Menu">
+        <div class="w-6 h-6" id="navOpen">{% svgIcon 'src/assets/icons/navToggle.svg', 'w-6 h-6' %}</div>
+        <div class="w-6 h-6 hidden" id="navClose">{% svgIcon 'src/assets/icons/navClose.svg', 'w-6 h-6' %}</div>
+      </button>
+    </div>
+    <nav class="hidden w-full md:absolute md:top-0 h-20 md:h-28 2xl:h-36 md:flex grow md:grow-0 text-white" id="nav">
+      <ul class="nav md:h-full w-full pt-12 md:pt-0 flex flex-col md:flex-row justify-between font-bold md:font-medium text-2xl md:text-base lg:text-lg border-t-2 border-dashed md:border-0">
+        {%- for item in navPages -%}
+          <li class="flex md:justify-center md:items-center h-full pb-3 lg:pb-0 w-28 lg:w-36 leading-6 {% if item.url == page.url %} nav-item-active{% endif %} {% if loop.index == 2 %}md:mr-24 lg:mr-32{% endif %} {% if loop.index == 3 %}md:ml-24 lg:ml-32{% endif %}">
+            <a href="{{ item.url | url }}" class="text-center w-full flex justify-center items-start hover:text-pg-lime">{{ item.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <ul class="md:hidden justify-center grid grid-rows-1 grid-flow-col gap-12 lg:gap-6 lg:h-full pb-36 lg:py-0 justify-self-end" id="social">
+        <li class="lg:h-full">
+          <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full lg:flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-white w-8 lg:w-5 hover:fill-pg-lime' %}</a>
+        </li>
+        <li class="lg:h-full">
+          <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full lg:flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-white w-8 lg:w-5 hover:fill-pg-lime' %}</a>
+        </li>
+        <li class="lg:h-full">
+          <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full lg:flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-white w-8 lg:w-5 hover:fill-pg-lime' %}</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </header>
+<script>
+  const headerEl = document.getElementById('header')
+
+  /* Menu Toggle - START */
+  const bodyEl = document.body
+  const navEl = document.getElementById('nav')
+  const toggleEl = document.getElementById('navToggle')
+  const navOpenEl = document.getElementById('navOpen')
+  const navCloseEl = document.getElementById('navClose')
+
+  const toggleNav = () => {
+    bodyEl.classList.toggle('navOpen')
+    headerEl.classList.toggle('open')
+    navEl.classList.toggle('hidden')
+    navOpenEl.classList.toggle('hidden')
+    navCloseEl.classList.toggle('hidden')
+  }
+
+  // Toggle menu on toggle click
+  toggleEl.addEventListener('click', () => {
+    toggleNav()
+  })
+
+  // Close menu on Escape, if open
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      if (bodyEl.classList.contains('navOpen')) {
+        toggleNav()
+      }
+    }
+  })
+  /* Menu Toggle - END */
+
+  /* Fixed Nav - START */
+  const sentinelEl = document.getElementById('sentinel')
+  const stuckClass = 'stuck'
+
+  const handler = (entries) => {
+    if (headerEl) {
+      if (!entries[0].isIntersecting) {
+        headerEl.classList.add(stuckClass)
+      } else {
+        headerEl.classList.remove(stuckClass)
+      }
+    }
+  }
+
+  const observer = new window.IntersectionObserver(handler)
+  observer.observe(sentinelEl)
+  /* Fixed Nav - END */
+
+</script>
