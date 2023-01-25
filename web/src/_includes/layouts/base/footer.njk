@@ -1,23 +1,41 @@
+{% set secondaryNavPages = collections.secondary | eleventyNavigation %}
+
 <footer class="text-center text-stone-100">
-    <div class="bg-df-blue px-4 lg:px-8 pt-4 pt-12 lg:pt-20 pb-12">
-        {# <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-90">
-            <ul class="grid grid-rows-1 grid-flow-col gap-4">
-                <li>Company #{{ metadata.company.number }}</li>
-                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
+    <div class="bg-slate-900 px-4 lg:px-8 pt-4 pt-12 pb-12">
+        <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <ul class="grid grid-rows-1 grid-flow-col gap-4 mb-12 md:mb-0">
+                <li>
+                    <a href="https://www.cycleassociation.uk/" class="w-24">
+                        {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-20 w-auto grayscale'  %}
+                    </a>
+                </li>
             </ul>
-            <div class="flex items-center text-right">
+            <div class="flex items-center text-right text-sm md:text-base  opacity-80">
                 <span>Crafted in Aberfeldy, Scotland<br>by Brett DeWoody</span>
-                {% svgIcon 'src/assets/icons/scotland.svg', 'w-16 sm:w-20 lg:w-28 fill-white' %}
+                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-white' %}
             </div>
         </div>
-        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-between mt-16 opacity-90">
-            <ul class="grid grid-cols-2 sm:grid-cols-4 gap-y-4 justify-center order-1 lg:order-2 mb-4 lg:mb-0">
-                <li><a class="mx-2 sm:mx-4" href="/accessibility/">Accessibility</a></li>
-                <li><a class="mx-2 sm:mx-4" href="/privacy-policy/">Privacy Policy</a></li>
-                <li><a class="mx-2 sm:mx-4" href="/terms-and-conditions/">Terms & Conditions</a></li>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start mt-16 opacity-80">
+            <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
+                <li class="lg:h-full">
+                    <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-white w-4 hover:fill-df-orange' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-white w-4 hover:fill-df-orange' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-white w-4 hover:fill-df-orange' %}</a>
+                </li>
+                <li class="h-full flex items-center">Company #{{ metadata.company.number }}</li>
+                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
             </ul>
-        </div> #}
-        <div class="text-sm text-center opacity-90 mt-8 pb-20">
+            <ul class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+                {%- for item in secondaryNavPages -%}
+                <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="text-sm text-center opacity-80 mt-8">
             &copy; {% year %} {{ metadata.company.name }}<br/>
         </div>
     </div>

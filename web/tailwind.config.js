@@ -7,6 +7,9 @@ module.exports = {
           DEFAULT: '#121E44',
           dark: '#121E44'
         },
+        'df-orange':  {
+          DEFAULT: '#F85707'
+        },
         'df-tan': {
           lightest: '#FFFCF3',
           light: '#F3F0E8',
@@ -15,8 +18,6 @@ module.exports = {
         },
       },
       backgroundImage: {
-        tread: "url('/static/images/bartread.webp')",
-        'tread-white': "url('/static/images/bartread-white.webp')",
         email: "url('/static/images/email.webp')",
       },
       backgroundSize: {

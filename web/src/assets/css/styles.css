@@ -29,18 +29,10 @@ header.stuck {
 }
 
 .logo-item-active {
-  @apply lg:bg-tread-white lg:bg-bottom lg:bg-repeat-x lg:bg-[length:auto_6px];
+  
 }
 .nav-item-active {
-  @apply bg-tread-white bg-bottom bg-no-repeat lg:bg-repeat-x bg-[length:auto_6px];
-}
-
-.divider {
-  @apply bg-tread bg-bottom bg-repeat-x h-2 mt-4 mb-4;
-}
-
-.divider.short {
-  @apply bg-[length:auto_6px];
+  
 }
 
 h1 {
