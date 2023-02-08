@@ -37,6 +37,7 @@
     "eslint-plugin-import": "^2.26.0",
     "fs-extra": "^10.1.0",
     "get-youtube-id": "^1.0.1",
+    "markdown-it": "^13.0.1",
     "rimraf": "^2.7.1",
     "tailwindcss": "^3.1.3"
   },
