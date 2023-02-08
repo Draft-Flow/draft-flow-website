@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="en" class="antialiased text-df-blue-dark font-pg">
+<html lang="en" class="antialiased">
   {% include './head.njk' %}
-  <body class="bg-df-blue flex flex-col min-h-screen pt-20 md:pt-28 2xl:pt-36">
+  <body class="flex flex-col min-h-screen pt-20 md:pt-28 2xl:pt-36 font-sans bg-df-tan">
     {% include './header.njk' %}
     {% block banner %}{% endblock %}
     {% block subheader %}{% endblock %}
-    <main class="flex-1 bg-df-blue text-white">
+    <main class="flex-1 text-white text-df-blue-dark">
       {% block content %}{% endblock %}
     </main>
     {% include './footer.njk' %}
+    {% block scripts %}{% endblock %}
   </body>
 </html>

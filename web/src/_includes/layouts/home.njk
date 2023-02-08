@@ -3,15 +3,111 @@
 {%- set pageContent = pages | getPage(pageID) -%}
 
 {% block content %}
-  <div class="text-center text-3xl">
-  {{ pageContent.content | blocksToHTML | safe }}
-  <ul class="w-full mt-4 list-style-none flex flex-col md:flex-row justify-center text-lg">
-    <li class="mx-4">Bike Kitchen</li>
-    <li class="mx-4">Custom Builds & Servicing</li>
-    <li class="mx-4">Guided Cycle Tours</li>
-  </ul>
-  <ul class="w-full mt-4 list-style-none flex justify-center text-lg">
-    <li class="mx-4">Aberfeldy</li>
-  </ul>
+  <div>
+    <div class="h-[75vh] flex sticky top-48 self-start"> 
+      <div class="w-1/2 h-full flex p-4 bg-zinc">
+          Service & Repairs
+      </div>
+      <div class="flex items-center bg-white-50">
+        Tools
+      </div>
+    </div>
+    <div class="h-[75vh] flex sticky top-48 self-start"> 
+      <div class="w-1/2 h-full flex p-4 bg-zinc-200">
+          Parts & Components
+      </div>
+      <div class="flex items-center bg-white-50">
+        Parts
+      </div>
+    </div>
+    <div class="h-[75vh] flex  sticky top-48 self-start"> 
+      <div class="w-1/2 h-full flex p-4 bg-zinc-400">
+          Custom Builds
+      </div>
+      <div class="flex items-center bg-white-50">
+        Frame
+      </div>
+    </div>
   </div>
+  <div class="text-center text-3xl">
+    {{ pageContent.content | blocksToHTML | safe }}
+    <div>
+      <h1>Bike Fixin'</h1>
+    </div>
+    <div>
+      Custom Builds
+    </div>
+    <div>
+      Guided Tours
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bike Store",
+  "image": [
+    "https://example.com/photos/1x1/photo.jpg",
+    "https://example.com/photos/4x3/photo.jpg",
+    "https://example.com/photos/16x9/photo.jpg"
+   ],
+  "@id": "{{ metadata.url }}",
+  "name": "{{ metadata.title }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ metadata.contact.address }}",
+    "addressLocality": "{{ metadata.contact.city }}",
+    "addressRegion": "{{ metadata.contact.region }}",
+    "postalCode": "{{ metadata.contact.postalCode }}",
+    "addressCountry": "{{ metadata.contact.country }}"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 56.619729,
+    "longitude": -3.866270
+  },
+  "foundingDate": "2023-04-01",
+  "founder": {
+    "givenName": "Brett",
+    "familyName": "DeWoody"
+  },
+  "url": "{{ metadata.url }}",
+  "telephone": "+12122459600",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday"
+      ],
+      "opens": "11:30",
+      "closes": "22:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "11:30",
+      "closes": "23:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "16:00",
+      "closes": "23:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Sunday",
+      "opens": "16:00",
+      "closes": "22:00"
+    }
+  ],
+}
+</script>
 {% endblock %}

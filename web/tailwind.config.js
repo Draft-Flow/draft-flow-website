@@ -7,18 +7,23 @@ module.exports = {
           DEFAULT: '#121E44',
           dark: '#121E44'
         },
+        'df-yellow': {
+          DEFAULT: '#E8AD14'
+        },
         'df-orange':  {
           DEFAULT: '#F85707'
         },
+        'df-gray': {
+          DEFAULT: '#2f2f2f',
+          dark: '#282829'
+        },
         'df-tan': {
-          lightest: '#FFFCF3',
-          light: '#F3F0E8',
-          DEFAULT: '#EDEAE0',
-          dark: '#B2B0AA',
+          DEFAULT: '#f0eee3',
+          dark: '#EBE8E1',
+          darkest: '#B2AC9F'
         },
       },
       backgroundImage: {
-        email: "url('/static/images/email.webp')",
       },
       backgroundSize: {
         72: '18rem',
@@ -27,9 +32,10 @@ module.exports = {
       spacing: {
         200: '50rem',
       },
-    },
-    fontFamily: {
-      pg: ['"Jost"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
+      fontFamily: {
+        df: ['"Roundlane"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
+        gill: ['"Gill Sans"', '"Gill Sans MT"', 'Calibri', 'sans-serif']
+      },
     },
   },
   plugins: [],

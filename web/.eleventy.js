@@ -4,6 +4,7 @@ const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
 const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 const getYouTubeId = require('get-youtube-id')
+const markdownIt = require('markdown-it')
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const cardImageShortcode = require('./src/utils/shortcodes/shortcodeCardImage')
@@ -77,6 +78,14 @@ module.exports = function (eleventyConfig) {
       return urlFor(image).width(width).url()
     }
   )
+
+   // Markdown filter
+   eleventyConfig.addFilter('md', function (content = '') {
+    return markdownIt({
+      html: true ,
+      breaks: true,
+    }).render(content);
+  });
 
   // Convert Sanity block content into HTML
   eleventyConfig.addFilter('blocksToHTML', (value) => {

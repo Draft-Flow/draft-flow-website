@@ -1,33 +1,41 @@
 {% set secondaryNavPages = collections.secondary | eleventyNavigation %}
+{% set tertiaryNavPages = collections.tertiary | eleventyNavigation %}
 
-<footer class="text-center text-stone-100">
-    <div class="bg-slate-900 px-4 lg:px-8 pt-4 pt-12 pb-12">
-        <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <ul class="grid grid-rows-1 grid-flow-col gap-4 mb-12 md:mb-0">
+
+<footer class="text-center text-df-gray">
+    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-2 border-solid border-df-gray">
+        <div class="max-w-3xl mx-auto flex flex-col">
+            <h3 class="font-df uppercase text-4xl tracking-wide">Need Assistance?</h3>
+            <p>We're always up for talkin' bikes, adventure, and gear. Especially over a great cup of coffee or pint of beer. Get in touch and we'd be thrilled to learn what you're looking for and how we can help.</p>
+            <a href="{{ metadata.contact.url }}">GET IN TOUCH</a>
+        </div>
+    </div>
+    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-2 border-solid border-df-gray">
+        <div class="mx-auto flex flex-col">
+            <h3 class="font-df uppercase text-4xl tracking-wide">Agents for the Finest</h3>
+            <ul class="list-style-none mt-8 w-full flex justify-center items-center grayscale contrast-50 h-8 md:h-14">
                 <li>
-                    <a href="https://www.cycleassociation.uk/" class="w-24">
-                        {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-20 w-auto grayscale'  %}
-                    </a>
+                    {% image 'src/static/logos/shimano.png', 'Shimano', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+                </li>
+                <li>DT Swiss</li>
+                <li>
+                    {% image 'src/static/logos/maxxis.png', 'Maxxis', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
                 </li>
             </ul>
-            <div class="flex items-center text-right text-sm md:text-base  opacity-80">
-                <span>Crafted in Aberfeldy, Scotland<br>by Brett DeWoody</span>
-                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-white' %}
-            </div>
         </div>
-        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start mt-16 opacity-80">
+    </div>
+    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-2 border-solid border-df-gray ">
+        <div class="text-lg max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start opacity-80">
             <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
                 <li class="lg:h-full">
-                    <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-white w-4 hover:fill-df-orange' %}</a>
+                    <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-df-gray w-5' %}</a>
                 </li>
                 <li class="lg:h-full">
-                    <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-white w-4 hover:fill-df-orange' %}</a>
+                    <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-df-gray w-5' %}</a>
                 </li>
                 <li class="lg:h-full">
-                    <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-white w-4 hover:fill-df-orange' %}</a>
+                    <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-df-gray w-5' %}</a>
                 </li>
-                <li class="h-full flex items-center">Company #{{ metadata.company.number }}</li>
-                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
             </ul>
             <ul class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
                 {%- for item in secondaryNavPages -%}
@@ -35,8 +43,37 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="text-sm text-center opacity-80 mt-8">
-            &copy; {% year %} {{ metadata.company.name }}<br/>
+        <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <ul class="grid grid-rows-1 grid-flow-col gap-8 mb-12 md:mb-0 grayscale opacity-80">
+                <li>
+                    <a href="https://www.cytech.training/">
+                        {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cycleassociation.uk/">
+                        {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                    </a>
+                </li>
+            </ul>
+            <div class="flex items-center text-right text-sm md:text-base opacity-80">
+                <span>Made in Aberfeldy, Scotland<br>Website by Brett DeWoody</span>
+                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-df-gray' %}
+            </div>
+        </div>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-16 opacity-80">
+            <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+                {%- for item in tertiaryNavPages -%}
+                <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="flex justify-center text-sm opacity-80 mt-8">
+            <ul class="list-style-none grid grid-flow-row sm:grid-flow-col auto-cols-min whitespace-nowrap gap-x-4 gap-y-2">
+                <li>&copy; {% year %} {{ metadata.company.name }}</li>
+                <li>Company #{{ metadata.company.number }}</li>
+                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
+            </ul>
         </div>
     </div>
 </footer>
