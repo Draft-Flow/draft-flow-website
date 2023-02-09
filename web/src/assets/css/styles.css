@@ -63,12 +63,18 @@ header.stuck #logo {
   
 }
 
-
+/* Utility Styles */
+.text-shadow {
+  letter-spacing: 3px;
+  -webkit-text-stroke: 2px #000000;
+  text-shadow: -1px 0px 0 #000000, -2px 0px 0 #000000;
+}
 
 /* Mapbox Styling */
 .marker {
   @apply relative -mt-6 overflow-visible bg-df-blue-dark p-1 rounded after:border-x-8 after:w-0 after:h-0 after:absolute after:-bottom-[0.5rem] after:left-1/2 after:-ml-2 after:border-x-transparent after:border-t-8 after:border-t-df-blue-dark;
 }
+
 .marker svg {
   @apply w-4 h-4;
 }

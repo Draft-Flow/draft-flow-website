@@ -2,7 +2,36 @@
 
 {%- set pageContent = pages | getPage(pageID) -%}
 
+{% set features = [
+  {text: 'All Makes & Models', color: 'bg-df-black'},
+  {text: 'Full Service', color: 'bg-df-orange-dark'},
+  {text: 'Genuine Parts', color: 'bg-df-blue'},
+  {text: 'Quality Guaranteed', color: 'bg-df-black'}
+]%}
+
 {% block content %}
+  <div class="relative aspect-[3/1] mt-24 sm:mt-32 md:mt-38 lg:mt-44 w-screen flex flex-col items-center">
+    <h1 class="text-center text-5xl sm:text-5xl lg:text-6xl flex flex-col sm:flex-row font-gill z-20 rotate-[-6deg] skew-x-[-10deg]">
+      <span class="text-shadow text-df-orange font-bold">SERVICE</span>
+      <span class="block leading-8 sm:leading-none mx-2 font-script -rotate-12 skew-x-12">and</span>
+      <span class="text-shadow text-df-orange font-bold">REPAIRS</span>
+    </h1>
+     <ul class="mt-6 rotate-[-6deg] skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg"> 
+      {% for feature in features %}
+      <li class="py-1 md:py-3 px-2 md:px-4 {{ feature.color }}">
+        <span class="block opacity-80 skew-x-[-6deg]">{{ feature.text }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="w-full sepia-[.75] grayscale contrast-150 opacity-70 blur-[0.5px]">
+      {% image 'src/static/images/bikes4.png', 'Service & Repairs for All Makes & Models', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [600, 1000, 2000], 'w-full' %}
+    </div>
+  </div>
+  <div class="mx-auto max-w-6xl flex justify-end rotate-[-10deg] skew-x-[4deg] -translate-y-4 md:-translate-y-12 xl:-translate-y-20">
+    <blockquote class="font-script text-2xl pl-4 md:text-4xl xl:text-6xl text-right leading-6 w-full mr-4 text-gray-700">
+     Quality service supplied for whatever&nbsp;you&nbsp;ride
+    </blockquote>
+  </div>
   <div>
     <div class="h-[75vh] flex sticky top-48 self-start"> 
       <div class="w-1/2 h-full flex p-4 bg-zinc">
@@ -10,7 +39,7 @@
       </div>
       <div class="flex items-center bg-white-50">
         Tools
-      </div>
+    </div>
     </div>
     <div class="h-[75vh] flex sticky top-48 self-start"> 
       <div class="w-1/2 h-full flex p-4 bg-zinc-200">

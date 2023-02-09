@@ -3,15 +3,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'df-black': {
+          DEFAULT: '#131319'
+        },
         'df-blue': {
-          DEFAULT: '#121E44',
+          DEFAULT: '#1F3579',
           dark: '#121E44'
         },
         'df-yellow': {
           DEFAULT: '#E8AD14'
         },
         'df-orange':  {
-          DEFAULT: '#F85707'
+          DEFAULT: '#F85707',
+          dark: '#C24D13'
         },
         'df-gray': {
           DEFAULT: '#2f2f2f',
@@ -34,7 +38,8 @@ module.exports = {
       },
       fontFamily: {
         df: ['"Roundlane"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
-        gill: ['"Gill Sans"', '"Gill Sans MT"', 'Calibri', 'sans-serif']
+        gill: ['Futura', '"Trebuchet MS"', 'Arial', 'sans-serif'],
+        script: ['"Brush Script MT"', 'cursive']
       },
     },
   },
