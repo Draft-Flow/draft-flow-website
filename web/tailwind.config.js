@@ -39,7 +39,7 @@ module.exports = {
       fontFamily: {
         df: ['"Roundlane"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
         gill: ['Futura', '"Trebuchet MS"', 'Arial', 'sans-serif'],
-        script: ['"Brush Script MT"', 'cursive']
+        script: ['Yellowtail', '"Brush Script MT"', 'cursive']
       },
     },
   },
