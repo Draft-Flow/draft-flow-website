@@ -10,25 +10,25 @@
 ]%}
 
 {% block content %}
-  <div class="relative aspect-[3/1] mt-24 sm:mt-32 md:mt-38 lg:mt-44 w-screen flex flex-col items-center">
-    <h1 class="text-center text-5xl sm:text-5xl lg:text-6xl flex flex-col sm:flex-row font-gill z-20 rotate-[-6deg] skew-x-[-10deg]">
+  <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
+    <h1 class="text-center text-4xl sm:text-5xl lg:text-6xl flex flex-col md:flex-row font-gill z-20 rotate-[-6deg] skew-x-[-10deg]">
       <span class="text-shadow text-df-orange font-bold uppercase">Service</span>
       <span class="block leading-8 font-normal sm:leading-none ml-1 mr-2 font-script -rotate-12 skew-x-12 scale-75">and</span>
       <span class="text-shadow text-df-orange font-bold uppercase">Repairs</span>
     </h1>
-     <ul class="mt-6 rotate-[-6deg] skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg"> 
+     <ul class="relative mt-6 rotate-[-6deg] skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}
       <li class="py-1 md:py-3 px-2 md:px-4 {{ feature.color }}">
         <span class="block opacity-80 skew-x-[-6deg]">{{ feature.text }}</span>
       </li>
       {% endfor %}
     </ul>
-    <div class="w-full sepia-[.75] grayscale contrast-150 opacity-70 blur-[0.5px]">
-      {% image 'src/static/images/bikes4.png', 'Service & Repairs for All Makes & Models', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [600, 1000, 2000], 'w-full' %}
+    <div class="w-full mt-2 lg:mt-0 sepia-[.75] grayscale contrast-150 opacity-70 blur-[0.5px] z-10">
+      {% image 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [600, 1000, 2000], 'w-full' %}
     </div>
   </div>
-  <div class="mx-auto max-w-6xl px-2 lg:px-4 flex justify-end rotate-[-10deg]  -translate-y-4 md:-translate-y-12 xl:-translate-y-20">
-    <blockquote class="font-script skew-x-[10deg] text-2xl md:text-4xl xl:text-6xl text-right leading-6 w-full text-gray-700">
+  <div class="mx-auto max-w-6xl px-4 lg:px-6 flex justify-center rotate-[-10deg] -translate-y-4 md:-translate-y-12 xl:-translate-y-24">
+    <blockquote class="font-script skew-x-[10deg] text-2xl md:text-4xl xl:text-6xl text-center leading-6 w-full text-gray-700 whitespace-pre-line">
      Top-notch service supplied, for&nbsp;whatever&nbsp;you&nbsp;ride
     </blockquote>
   </div>
@@ -36,6 +36,18 @@
     <a class="skew-x-[-12deg] border-double border-8 p-4 border-white bg-df-blue text-white" href="/contact/">
       <span class="block skew-x-[12deg] text-2xl">Book A Service</span>
     </a>
+  </div>
+  <div class="max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 grid-flow-row">
+    <div>
+      <h1 class="text-center w-full text-4xl sm:text-5xl lg:text-6xl font-gill">
+        <span class="text-shadow text-df-orange font-bold uppercase">Builds</span>
+      </h1>
+    </div>
+    <div>
+      <h1 class="text-center w-full text-4xl sm:text-5xl lg:text-6xl font-gill">
+        <span class="text-shadow text-df-orange font-bold uppercase">Upgrades</span>
+      </h1>
+    </div>
   </div>
   <div>
     <div class="h-[75vh] flex sticky top-48 self-start"> 
