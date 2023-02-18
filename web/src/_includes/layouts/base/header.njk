@@ -22,14 +22,14 @@
       </button>
     </div>
     <nav class="hidden w-full sm:absolute sm:top-0 h-20 sm:h-28 sm:flex sm:items-end grow sm:grow-0 text-df-gray transition-all duration-150 ease-linear" id="nav">
-      <ul class="nav w-full px-6 pt-12 sm:pt-0 flex flex-col sm:flex-row justify-between sm:font-medium text-4xl border-t-2 border-dashed sm:border-0 mb-12 sm:mb-[2px] font-df uppercase tracking-widest leading-tight">
+      <ul class="nav w-full px-6 pt-12 sm:pt-0 flex flex-col sm:flex-row justify-between text-3xl lg:text-4xl border-t-2 border-dashed sm:border-0 mb-12 sm:mb-[2px] font-df uppercase leading-tight">
         {%- for item in navPages -%}
         {% set firstHalf = loop.index <= 2 %}
           {% if loop.index == 3 %}<li class="hidden sm:block w-24"></li> {% endif %}
           <li class="nav-item relative sm:flex-1 flex flex-col sm:flex-row leading-6 hover:z-40 focus-within:z-40 {% if firstHalf %}sm:justify-start{% else %}sm:justify-end{% endif %} {% if item.url == page.url %}nav-item-active{% endif %}">
             <a href="{{ item.url | url }}" class="text-center relative inline-flex justify-center sm:pt-4 sm:pb-4 sm:px-3 z-20 hover:bg-df-tan border-transparent border-t-2 border-l-2 border-r-2 sm:items-center items-start" {% if item.url == page.url %}aria-current="page"{% endif %}>{{ item.title }}</a>
             {% if item.children.length > 0 %}
-            <ul class="subnav list-style-none flex justify-center sm:justify-start sm:hidden sm:flex-col sm:absolute sm:top-[calc(100%-2px)] sm:px-4 sm:py-2 font-gill tracking-wide border-double border-transparent border-b-2 border-l-2 border-t-2 border-r-2 bg-df-tan text-base sm:text-2xl leading-none z-10">
+            <ul class="subnav list-style-none flex justify-center sm:justify-start sm:hidden sm:flex-col sm:absolute sm:top-[calc(100%-2px)] sm:px-4 sm:py-2 font-df-sans tracking-wide border-double border-transparent border-b-2 border-l-2 border-t-2 border-r-2 bg-df-tan text-base sm:text-2xl leading-none z-10">
               {% for child in item.children %}
                 <li class="flex-1 sm:flex-none mx-3 sm:mx-0 flex justify-center {% if firstHalf %}sm:justify-start{% else %}sm:justify-end{% endif %} py-2 sm:whitespace-nowrap"">
                   <a class="" href="{{ child.url }}">{{ child.title }}</a>

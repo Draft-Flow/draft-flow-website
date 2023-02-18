@@ -63,11 +63,32 @@ header.stuck #logo {
   
 }
 
+/* Images */
+.vintage {
+  @apply sepia-[.75] grayscale contrast-150 blur-[0.5px];
+}
+
+.shape-tire {
+  shape-outside: circle(75% at 80% 90%);
+}
+.shape-ellipse {
+  shape-outside: ellipse(40px 50px at 50% 50%);
+}
+
+.hide {
+  @apply opacity-0;
+}
+
 /* Utility Styles */
 .text-shadow {
   letter-spacing: 3px;
   -webkit-text-stroke: 2px #000000;
-  text-shadow: -1px 0px 0 #000000, -2px 0px 0 #000000;
+  text-shadow: -1px 0px 0 #000000, -1px 1px 0 #000000;
+}
+
+.text-justify-center {
+  text-align-last: center;
+  @apply text-justify;
 }
 
 /* Mapbox Styling */

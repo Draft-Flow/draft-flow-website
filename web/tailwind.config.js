@@ -37,8 +37,8 @@ module.exports = {
         200: '50rem',
       },
       fontFamily: {
-        df: ['"Roundlane"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
-        gill: ['Futura', '"Trebuchet MS"', 'Arial', 'sans-serif'],
+        df: ['Houstone', 'Arial', 'sans-serif'],
+        'df-sans': ['Overpass', 'sans-serif'],
         script: ['Yellowtail', '"Brush Script MT"', 'cursive']
       },
     },
