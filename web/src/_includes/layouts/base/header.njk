@@ -7,19 +7,17 @@
 <div id="sentinel" class="absolute top-0"></div>
 <header id="header" class="fixed z-50 top-0 w-screen h-20 sm:h-auto bg-df-tan text-pg-tan-light flex flex-col items-center transition-all duration-150 ease-linear">
   <div id="navbar" class="w-full relative mx-4 max-w-6xl text-center lg:text-left flex flex-col lg:justify-between sm:items-center">
-    <div id="logobar" class="relative sm:absolute p-4 sm:p-0 h-16 sm:h-auto flex justify-between lg:justify-center items-center z-10">
-      <h1 class="home h-full flex items-center {% if page.url == '/' %} logo-item-active{% endif %}">
-        <a id="logo" href="{{ '/' | url }}" class="block opacity-80 overflow-hidden w-12 sm:w-28 lg:w-40 transition-all duration-150 ease-linear origin-top">
-          {% set logoSrc %}
-            {% imageUrlFor metadata.logo.asset._ref, 600 %}
-          {% endset %}
-          {% image logoSrc, metadata.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager'  %}
-        </a>
-      </h1>
+    <div id="logobar" class="relative sm:absolute p-4 sm:p-0 h-16 sm:h-auto flex justify-between lg:justify-center items-center z-10 transition-all duration-150 ease-linear origin-top">
       <button class="inline sm:hidden w-6 h-6" id="navToggle" aria-haspopup="true" aria-controls="nav" aria-label="Menu">
         <div class="w-6 h-6" id="navOpen">{% svgIcon 'src/assets/icons/navToggle.svg', 'w-full h-full' %}</div>
         <div class="w-6 h-6 hidden" id="navClose">{% svgIcon 'src/assets/icons/navClose.svg', 'w-auto h-auto' %}</div>
       </button>
+      <a id="logo" href="{{ '/' | url }}" class="block opacity-80 overflow-hidden w-12 sm:w-28 lg:w-40 ">
+        {% set logoSrc %}
+          {% imageUrlFor metadata.logo.asset._ref, 600 %}
+        {% endset %}
+        {% image logoSrc, metadata.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager'  %}
+      </a>
     </div>
     <nav class="hidden w-full sm:absolute sm:top-0 h-20 sm:h-28 sm:flex sm:items-end grow sm:grow-0 text-df-gray transition-all duration-150 ease-linear" id="nav">
       <ul class="nav w-full px-6 pt-12 sm:pt-0 flex flex-col sm:flex-row justify-between text-3xl lg:text-4xl border-t-2 border-dashed sm:border-0 mb-12 sm:mb-[2px] font-df uppercase leading-tight">
@@ -29,10 +27,10 @@
           <li class="nav-item relative sm:flex-1 flex flex-col sm:flex-row leading-6 hover:z-40 focus-within:z-40 {% if firstHalf %}sm:justify-start{% else %}sm:justify-end{% endif %} {% if item.url == page.url %}nav-item-active{% endif %}">
             <a href="{{ item.url | url }}" class="text-center relative inline-flex justify-center sm:pt-4 sm:pb-4 sm:px-3 z-20 hover:bg-df-tan border-transparent border-t-2 border-l-2 border-r-2 sm:items-center items-start" {% if item.url == page.url %}aria-current="page"{% endif %}>{{ item.title }}</a>
             {% if item.children.length > 0 %}
-            <ul class="subnav list-style-none flex justify-center sm:justify-start sm:hidden sm:flex-col sm:absolute sm:top-[calc(100%-2px)] sm:px-4 sm:py-2 font-df-sans tracking-wide border-double border-transparent border-b-2 border-l-2 border-t-2 border-r-2 bg-df-tan text-base sm:text-2xl leading-none z-10">
+            <ul class="subnav list-style-none flex justify-center sm:justify-start sm:hidden sm:flex-col sm:absolute sm:top-[calc(100%-2px)] sm:px-4 sm:py-2 font-df-sans font-black border-double border-transparent border-b-2 border-l-2 border-t-2 border-r-2 bg-df-tan text-base sm:text-2xl leading-none z-10">
               {% for child in item.children %}
-                <li class="flex-1 sm:flex-none mx-3 sm:mx-0 flex justify-center {% if firstHalf %}sm:justify-start{% else %}sm:justify-end{% endif %} py-2 sm:whitespace-nowrap"">
-                  <a class="" href="{{ child.url }}">{{ child.title }}</a>
+                <li class="flex-1 sm:flex-none mx-3 sm:mx-0 flex justify-center {% if firstHalf %}sm:justify-start{% else %}sm:justify-end{% endif %} sm:whitespace-nowrap"">
+                  <a class="py-2 " href="{{ child.url }}">{{ child.title }}</a>
                 </li>
               {% endfor %}
             </ul>

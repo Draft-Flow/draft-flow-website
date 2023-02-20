@@ -1,3 +1,0 @@
-{
-  "permalink": "/bikes/{{ title | slugify }}/"
-}

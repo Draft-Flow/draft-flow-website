@@ -4,8 +4,8 @@
 
 {% set features = [
   {text: 'Full Service', color: 'bg-df-black'},
-  {text: 'Simple Pricing', color: 'bg-df-orange-dark'},
-  {text: 'Genuine Parts', color: 'bg-df-blue'},
+  {text: 'Genuine Parts', color: 'bg-df-orange-dark'},
+  {text: 'Simple Pricing', color: 'bg-df-blue'},
   {text: 'Quality Guaranteed', color: 'bg-df-black'}
 ]%}
 
@@ -32,10 +32,10 @@
      Top-notch service supplied, for&nbsp;whatever&nbsp;you&nbsp;ride
     </blockquote>
   </div>
-  <div class="mx-auto max-w-6xl px-2 lg:px-4 flex justify-center lg:justify-end mt-8 lg:mt-0 lg:-translate-y-12">
-    <a class="skew-x-[-12deg] border-double border-8 p-4 border-white bg-df-blue text-white" href="/contact/">
-      <span class="block skew-x-[12deg] text-2xl">Book A Service</span>
-    </a>
+  <div class="mx-auto max-w-6xl px-2 lg:px-4 flex justify-center lg:justify-end my-8 lg:my-0 lg:-translate-y-12">
+    <a class="cta large lg:mr-4" href="/contact/">
+      Book A Service
+    </a> 
   </div>
   {% set services = [
   {title: 'Repairs', description: 'All makes and models serviced. All types of issues fixed. Make your bike as good as new again with a quick, cost-effective tune-up completed by a CyTech<sup>&reg;</sup> certified mechanic.', image: 'src/static/images/conewrench.png', imageClasses: 'float-right shape-tire w-16 mt-10 mb-2'},
@@ -46,8 +46,8 @@
   {title: 'Hires', description: 'No bike, no problem. Enjoy Aberfeldy\'s miles of amazing road, gravel and mtb trails with a hire bike. Available from a few hours, to a full day. Variety of bike styles.'}
 ]%}
   <div class="mx-auto max-w-7xl px-2 lg:px-4">
-    <h2 class="bg-gray-800 py-1 text-gray-400 w-auto mx-auto font-df-sans font-medium text-center uppercase leading-4 md:text-lg xl:text-xl border-b-4 lg:border-b-8 border-white border-double lg:flex items-center justify-center flex-wrap whitespace-nowrap">
-      Local Bike Shop in Aberfeldy
+    <h2 class="my-2 py-2 mx-auto text-df-gray w-auto font-df-sans font-bold text-center uppercase md:text-xl xl:text-2xl border-t-4 border-b-4 border-df-gray border-double lg:flex items-center justify-center flex-wrap whitespace-nowrap">
+      Local Bike Shop <span class="inline-block mx-2 scale-75">in</span> Aberfeldy
     </h2>
   </div>
   <div class="mx-auto max-w-7xl px-2 lg:px-4 mt-4">
@@ -59,11 +59,12 @@
               {% image service.image, '', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [50, 201, 401], 'w-full' %}
               </div>
             {% endif %}
-            <h2 class="underline underline-offset-2 decoration-2 decoration-stone-500 font-df-sans font-semibold uppercase text-2xl float-left mr-2 whitespace-pre-line">{{ service.title | safe }}</h2>
-            <p class="block relative leading-5 mt-3 text-justify">
+            <a href="/" class="underline underline-offset-8 decoration-2 decoration-stone-500 font-df-sans font-semibold uppercase text-3xl float-left mr-2 relative z-20 hover:text-df-blue hover:decoration-df-blue ">
+              {{ service.title | safe }}
+            </a>
+            <p class="block relative leading-5 text-justify z-10">
               {{ service.description | safe }}
             </p>
-            <a class="float-right bg-inherit" href="">Link</a>
         </li>
       {% endfor %}
     </ul>
@@ -75,24 +76,24 @@
     <p class="max-w-prose mx-auto text-justify-center mt-2">We accept donations of bikes and bike components, refurbish them, and offer the bikes back to the community at minimal price (or for free) to give everyone the opportunity to get cycling and make Aberfeldy <a href="https://www.healthiesttown.org/">Scotland's&nbsp;Healthiest&nbsp;Town</a></p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
       {% set program = [
-          {title: '1. Donate', description: 'Drop-off your old and unused bikes', image: 'src/static/images/workshop.jpg', imageAlt: 'Workshop with bike'},
+          {title: '1. Donate', description: 'Drop-off your old and unused bikes', image: 'src/static/images/workshop.jpg', imageAlt: 'Workshop with bike', buttonText: 'Donate a Bike', buttonLink: '/bikes/donate/'},
           {title: '2. Refurb', description: 'We\'ll get them into safe, working order', image1: 'src/static/images/refurb-before.png', image2: 'src/static/images/refurb-after.png', id: 'refurb', image1Alt: 'Broken Bike', image2Alt: 'Fixed Bike' },
-          {title: '3. Ride', description: 'And back to use in the community', image: 'src/static/images/riding-still.jpg', imageAlt: 'Riding a bicycle'}
+          {title: '3. Ride', description: 'And back to use in the community', image: 'src/static/images/riding-still.jpg', imageAlt: 'Riding a bicycle', buttonText: 'Refurbed Bikes', buttonLink: '/bikes/refurbs/'}
         ]%}
       {% for step in program %}
-      <div>
+      <div class="mb-8 lg:mb-0">
         <div class="relative md:aspect-square text-center">
           <h3 class="font-df-sans font-bold uppercase text-3xl sm:text-2xl xl:text-4xl">{{ step.title }}</h3>
           <p class="mt-2 lg:mt-6 leading-5">{{ step.description }}</p>
           {% if step.image %}
-            <div class="md:absolute mx-auto mt-4 bottom-0 md:bottom-4 lg:bottom-12 left-0 w-1/2 md:w-full aspect-video">
+            <div class="mx-auto mt-4 left-0 w-1/2 md:w-full aspect-video">
               <div class="p-1 md:p-2 border-double border-4 border-df-gray top-0 left-0 w-full transition-opacity duration-500">
               {% image step.image, step.imageAlt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 400], 'w-full vintage' %}
               </div>
             </div>
           {% endif %}
           {% if step.image1 and step.image2 %}
-            <div class="md:absolute mx-auto left-0 vintage w-1/2 md:w-full aspect-square">
+            <div class="mx-auto left-0 vintage w-1/2 md:w-full aspect-square">
               <div {% if step.id %}id="{{ step.id }}-1"{% endif %} class="absolute top-0 left-0 w-full transition-opacity duration-500">
               {% image step.image1, step.image1Alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 800], 'w-full' %}
               </div>
@@ -101,15 +102,13 @@
               </div>
             </div>
           {% endif %}
+          {% if step.buttonText %}
+            <a class="cta mt-6" href="{{ step.buttonLink | url }}">{{ step.buttonText }}</a>
+          {% endif %}
         </div>
         <div id="sentinel-{{ step.id }}"></div>
       </div>
       {% endfor %}
-    </div>
-    <div class="flex justify-center flex-col sm:flex-row justify-center items-center mt-8">
-      <a href="">Donate</a>
-      <span class="inline-block text-4xl mx-2 font-script rotate-[-20deg] skew-x-[-10deg]">or</span>
-      <a href="">View Refurbed Bikes</a>
     </div>
     <script>
 

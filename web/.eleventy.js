@@ -20,7 +20,8 @@ const minifyHTML = require('./src/utils/minifyHTML')
 
 const serializers = require('./src/utils/serializers')
 
-const INPUT = 'src'
+const SRC = './src'
+const INPUT = 'src/content'
 const OUTPUT = '_site'
 
 module.exports = function (eleventyConfig) {
@@ -41,7 +42,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({'src/static/apple-developer-merchantid-domain-association': './.well-known/apple-developer-merchantid-domain-association'})
 
   eleventyConfig.on('eleventy.after', async () => {
-    const srcDir = `${INPUT}/static/bundles`
+    const srcDir = `${SRC}/static/bundles`
     const destDir = `${OUTPUT}/static/bundles`
     fse.copySync(srcDir, destDir)
   })
@@ -136,8 +137,8 @@ module.exports = function (eleventyConfig) {
     showAllHosts: true,
     dir: {
       input: INPUT,
-      includes: '_includes',
-      data: '_data',
+      includes: '../_includes',
+      data: '../_data',
       output: OUTPUT,
     },
   }
