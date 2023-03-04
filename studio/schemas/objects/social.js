@@ -18,5 +18,10 @@ export default {
       type: 'text',
       rows: 1,
     },
+    {
+      name: 'whatsapp',
+      type: 'text',
+      rows: 1,
+    },
   ],
 }

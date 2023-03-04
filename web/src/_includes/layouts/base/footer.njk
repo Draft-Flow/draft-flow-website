@@ -1,18 +1,17 @@
 {% set secondaryNavPages = collections.secondary | eleventyNavigation %}
 {% set tertiaryNavPages = collections.tertiary | eleventyNavigation %}
 
-
 <footer class="text-center text-df-gray">
-    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-2 border-solid border-df-gray">
+    <div class="mx-2 lg:mx-4 py-6 my-6 border-t-4 border-double border-df-gray">
         <div class="max-w-prose mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide mb-2">Quality Customer Service</h3>
             <p class="text-lg leading-6 text-justify-center">We're always up for talkin' bikes, adventure, and gear. Give us a ring or schedule a chat over a great cup of coffee / pint of beer. We're thrilled to learn what you're looking for and how we&nbsp;can&nbsp;help.</p>
             <div class="mt-8">
-                <a class="cta" href="{{ '/contact/' | url }}">GET IN TOUCH</a>
+                <a class="cta" href="{{ '/contact/' | url }}">Let's Chat</a>
             </div>
         </div>
     </div>
-    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-2 border-solid border-df-gray">
+    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-4 border-double border-df-gray">
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods</h3>
             <ul class="list-style-none mt-8 w-full flex justify-center items-center grayscale contrast-50 h-8 md:h-14">
@@ -23,10 +22,13 @@
                 <li>
                     {% image 'src/static/logos/maxxis.png', 'Maxxis', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
                 </li>
+                <li>
+                    {% image 'src/static/logos/surly.png', 'Surly', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+                </li>
             </ul>
         </div>
     </div>
-    <div class="mx-2 lg:mx-4 py-4 pt-4 pt-6 pb-6 mt-6 mb-6 border-t-2 border-solid border-df-gray ">
+    <div class="mx-2 lg:mx-4 py-4 py-6 my-6 border-t-4 border-double border-df-gray ">
         <div class="text-lg max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start opacity-80">
             <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
                 <li class="lg:h-full">
@@ -37,6 +39,9 @@
                 </li>
                 <li class="lg:h-full">
                     <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-df-gray w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://wa.me/message/{{ metadata.social.whatsapp }}" title="WhatsApp - {{ metadata.social.whatsapp }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-df-gray w-5 h-5' %}</a>
                 </li>
             </ul>
             <ul class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
