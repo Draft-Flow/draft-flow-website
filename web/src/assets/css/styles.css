@@ -46,7 +46,7 @@ header.open #social {
 }
 
 header.stuck {
-  @apply h-16 border-b border-df-gray/25 bg-df-black;
+  @apply h-16 sm:h-24 border-b border-df-gray/25 bg-df-black;
 }
 
 header.stuck #nav {
@@ -68,6 +68,10 @@ header.stuck #logobar svg {
 header.stuck #logo span {
   @apply text-df-black;
   -webkit-text-stroke: 1px #f0eee3;
+}
+
+header.stuck .icons svg {
+  @apply fill-df-tan;
 }
 
 .logo-item-active {
