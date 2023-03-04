@@ -37,7 +37,7 @@ module.exports = {
         200: '50rem',
       },
       fontFamily: {
-        df: ['Houstone', 'Arial', 'sans-serif'],
+        df: ['Norwester', 'Arial', 'sans-serif'],
         'df-sans': ['Overpass', 'sans-serif'],
         script: ['Yellowtail', '"Brush Script MT"', 'cursive']
       },

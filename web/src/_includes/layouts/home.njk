@@ -11,15 +11,15 @@
 
 {% block content %}
   <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
-    <h1 class="text-center text-4xl sm:text-5xl lg:text-6xl flex flex-col md:flex-row font-df-sans z-20 rotate-[-6deg] skew-x-[-10deg]">
-      <span class="text-shadow text-df-orange font-black uppercase">Cycle Servicing</span>
+    <h1 class="text-center text-4xl sm:text-5xl lg:text-6xl flex flex-col md:flex-row font-df-sans z-20 rotate-[-6deg] skew-x-[-6deg]">
+      <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
       <span class="block leading-none font-normal sm:leading-none ml-1 mr-2 -mt-2 font-script -rotate-12 skew-x-12 scale-[0.65]">and</span>
       <span class="text-shadow text-df-orange font-black uppercase">Sales</span>
     </h1>
-     <ul class="relative mt-6 rotate-[-6deg] skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
+     <ul class="relative mt-4 lg:mt-2 rotate-[-6deg] skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}
       <li class="py-1 md:py-3 px-2 md:px-4 {{ feature.color }}">
-        <span class="block opacity-80 skew-x-[-6deg]">{{ feature.text }}</span>
+        <span class="block opacity-80">{{ feature.text }}</span>
       </li>
       {% endfor %}
     </ul>
@@ -27,8 +27,8 @@
       {% image 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [600, 1000, 2000], 'w-full' %}
     </div>
   </div>
-  <div class="mx-auto max-w-6xl px-4 lg:px-6 flex justify-center rotate-[-10deg] -translate-y-4 md:-translate-y-12 xl:-translate-y-24">
-    <blockquote class="font-script skew-x-[10deg] text-2xl md:text-4xl xl:text-6xl text-center leading-6 w-full text-gray-800 whitespace-pre-line">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 flex justify-center rotate-[-10deg] -translate-y-4 md:-translate-y-12 xl:-translate-y-32">
+    <blockquote class="font-script skew-x-[10deg] text-3xl md:text-4xl xl:text-6xl text-center leading-6 w-full text-gray-800 whitespace-pre-line">
      Top-notch service supplied, for&nbsp;whatever&nbsp;you&nbsp;ride
     </blockquote>
   </div>
@@ -37,47 +37,35 @@
       Book A Service
     </a> 
   </div>
+
   {% set services = [
-  {title: 'Repairs', description: 'All makes and models serviced. All types of issues fixed. Make your bike as good as new again with a quick, cost-effective tune-up completed by a CyTech<sup>&reg;</sup> certified mechanic.', image: 'src/static/images/conewrench.png', imageClasses: 'float-right shape-tire w-16 mt-10 mb-2'},
-  {title: 'Upgrades', description: 'Take your bike, and your riding, to the next level. A quick, single upgrade can completely change your bike. We supply a wide range of components from top manufacturers - from tires to .', image: 'src/static/images/tire-quarter.png', imageClasses: 'float-right shape-tire w-24 mt-8 ml-2 mb-2'},
-  {title: 'D-I-Y', description: 'Are you a Do-It-Yourself\'er? Our planned \'bike kitchen\' is just the spot for you. A variety of tools and supplies to do quick fixes on your own bike.'},
-  {title: 'Dream Builds', description: 'Nothing can beat a fully-custom bike built just for you. We supply a range of makes and models, components, parts and wheels to build your dream ride.'},
-  {title: 'Refurbs', description: 'What\'s old is new again. Great for getting around town. Donated bikes fixed and re-sold for minimum price, or donated, back to the community. Contact us for current stock.'},
-  {title: 'Hires', description: 'No bike, no problem. Enjoy Aberfeldy\'s miles of amazing road, gravel and mtb trails with a hire bike. Available from a few hours, to a full day. Variety of bike styles.'}
-]%}
-  <div class="mx-auto max-w-7xl px-2 lg:px-4">
-    <h2 class="my-2 py-2 mx-auto text-df-gray w-auto font-df-sans font-bold text-center uppercase md:text-xl xl:text-2xl border-t-4 border-b-4 border-df-gray border-double lg:flex items-center justify-center flex-wrap whitespace-nowrap">
-      Local Bike Shop <span class="inline-block mx-2 scale-75">in</span> Aberfeldy
-    </h2>
-  </div>
+    {title: 'Custom', description: 'Your dream bike,'},
+    {title: 'New Bikes', description: 'From stock to custom, we can source or build a bike to suit your needs. '},
+    {title: 'Parts', description: 'Take your bike, and your riding, to the next level. A quick, single upgrade can completely change your bike. Wide range of components from top manufacturers.'}
+  ]%}
   <div class="mx-auto max-w-7xl px-2 lg:px-4 mt-4">
-    <ul class="lg:mx-auto w-full max-w-7xl grid gap-2 md:gap-4 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row">
+    <ul class="lg:mx-auto w-full max-w-7xl mt-12 grid gap-12 md:gap-8 lg:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row">
       {% for service in services %}
-        <li class="inline-block align-text-top">
-            {% if service.image %}
-              <div class="{{ service.imageClasses }} vintage opacity-90">
-              {% image service.image, '', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [50, 201, 401], 'w-full' %}
-              </div>
-            {% endif %}
-            <a href="/" class="underline underline-offset-8 decoration-2 decoration-stone-500 font-df-sans font-semibold uppercase text-3xl float-left mr-2 relative z-20 hover:text-df-blue hover:decoration-df-blue ">
+        <li class="align-text-top p-2 flex flex-col items-center">
+            <a href="/" class="inline-block mx-auto text-center font-df-sans font-semibold uppercase text-xl lg:text-3xl hover:text-df-blue border-4 border-zinc-500 border-double pt-2 px-2 lg:px-4 pb-1 -mt-8 lg:-mt-10 mb-3 bg-df-tan leading-none">
               {{ service.title | safe }}
             </a>
-            <p class="block relative leading-5 text-justify z-10">
+            <p class="leading-5 text-justify">
               {{ service.description | safe }}
             </p>
         </li>
       {% endfor %}
     </ul>
   </div>
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 border-t-4 border-double border-df-gray">
+  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-16 border-t-2 border-df-gray">
     <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
       <span class="text-shadow text-df-orange font-black uppercase">Community Up-Cycle Program</span>
     </h2>
-    <p class="max-w-prose mx-auto text-justify-center mt-2">We accept donations of bikes and bike components, refurbish them, and offer the bikes back to the community at minimal price (or for free) to give everyone the opportunity to get cycling and make Aberfeldy <a href="https://www.healthiesttown.org/">Scotland's&nbsp;Healthiest&nbsp;Town</a></p>
+    <p class="max-w-prose mx-auto text-justify-center mt-2">We accept donations of bikes and bike components, refurbish them, and put them back into Aberfeldy to give everyone the opportunity to get cycling</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
       {% set program = [
-          {title: '1. Donate', description: 'Drop-off your old and unused bikes', image: 'src/static/images/workshop.jpg', imageAlt: 'Workshop with bike', buttonText: 'Donate a Bike', buttonLink: '/bikes/donate/'},
-          {title: '2. Refurb', description: 'We\'ll get them into safe, working order', image1: 'src/static/images/refurb-before.png', image2: 'src/static/images/refurb-after.png', id: 'refurb', image1Alt: 'Broken Bike', image2Alt: 'Fixed Bike' },
+          {title: '1. Donate', description: 'Drop-off your old and unused bike', image: 'src/static/images/workshop.jpg', imageAlt: 'Workshop with bike', buttonText: 'Donate a Bike', buttonLink: '/bikes/donate/'},
+          {title: '2. Refurb', description: 'We\'ll get it into safe, working order', image1: 'src/static/images/refurb-before.png', image2: 'src/static/images/refurb-after.png', id: 'refurb', image1Alt: 'Broken Bike', image2Alt: 'Fixed Bike' },
           {title: '3. Ride', description: 'And back to use in the community', image: 'src/static/images/riding-still.jpg', imageAlt: 'Riding a bicycle', buttonText: 'Refurbed Bikes', buttonLink: '/bikes/refurbs/'}
         ]%}
       {% for step in program %}
@@ -134,6 +122,18 @@
       refurbObserver.observe(refurbSentinelEl)
       /* Refurb Images - END */
     </script>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-8 border-t border-zinc-400 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-8">
+    <div class="col-span-3">
+      <h2>Social Rides</h2>
+    </div>
+    <div class="mx-auto w-2/3 sm:w-1/2 md:w-full col-span-2">
+    {% image 'src/static/images/daftandslow.png', '', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [500, 1000], 'w-full' %}
+    </div>
+    <div class="col-span-3">
+      <h2>Social Rides</h2>
+    </div>
   </div>
 {% endblock %}
 
