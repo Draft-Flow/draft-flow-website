@@ -2,6 +2,8 @@
 import route from './documents/route'
 import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
+import brands from './documents/brands'
+import shop from './documents/shop'
 
 // Object types
 import bodyPortableText from './objects/bodyPortableText'
@@ -19,6 +21,8 @@ export default [
   siteSettings,
   staticPages,
   route,
+  brands,
+  shop,
   seo,
   social,
   linkBlock,

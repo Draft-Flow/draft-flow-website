@@ -1,6 +1,8 @@
 import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
+import {taxonomyManager} from 'sanity-plugin-taxonomy-manager'
+
 import schemas from './schemas/schema'
 import deskStructure from './deskStructure'
 import Logo from './logo/Logo'
@@ -14,7 +16,8 @@ export default defineConfig({
     deskTool({
       structure: deskStructure
     }),
-    visionTool()
+    visionTool(),
+    taxonomyManager()
   ],
   tools: (prev, context) => {
     const isAdmin = context.currentUser.roles
