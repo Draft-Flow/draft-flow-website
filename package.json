@@ -31,5 +31,8 @@
     "husky": "^8.0.1",
     "lerna": "^4.0.0",
     "prettier": "2.7.1"
+  },
+  "dependencies": {
+    "@sanity/vision": "^3.5.1"
   }
 }

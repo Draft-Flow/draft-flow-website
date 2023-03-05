@@ -66,7 +66,7 @@ header.stuck #logobar svg {
 } 
 
 header.stuck #logo span {
-  @apply text-df-black;
+  @apply text-transparent;
   -webkit-text-stroke: 1px #f0eee3;
 }
 
@@ -86,7 +86,7 @@ header.stuck .icons svg {
 .nav-item:hover > .subnav,
 .nav-item > a:hover + .subnav,
 .nav-item:focus-within > .subnav {
-  @apply flex ;
+  @apply flex;
 }
 
 .nav-item-active {
@@ -105,7 +105,7 @@ header.stuck .icons svg {
 /* Utility Styles */
 .outlined {
   -webkit-text-stroke: 1px #000000;
-  @apply text-df-tan;
+  @apply text-transparent;
 }
 
 .text-shadow {
