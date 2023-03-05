@@ -1,12 +1,36 @@
-import { FaFile, FaTags } from 'react-icons/fa'
-
-const hiddenDocTypes = (listItem) =>
-  !['siteSettings', 'staticPages', 'category'].includes(listItem.getId())
+import { FaFile, FaShoppingCart, FaTags } from 'react-icons/fa'
+import {TreeView} from 'sanity-plugin-taxonomy-manager' 
 
 export default (S) =>
   S.list()
     .title('Content')
     .items([
+      S.listItem()
+        .title('Concept Schemes')
+        .schemaType('skosConceptScheme')
+        .child(
+          S.documentTypeList('skosConceptScheme')
+            .title('Concept Schemes')
+            .child(id =>
+              S.document()
+                .schemaType('skosConceptScheme')
+                .documentId(id)
+                .views([
+                  S.view.component(TreeView).title('Tree View'),
+                  S.view.form()
+                ]) 
+            )
+      ),
+      S.documentTypeListItem("skosConcept").title("Concepts"),
+      S.divider(),
+      S.listItem()
+        .title('Shop')
+        .icon(FaShoppingCart)
+        .schemaType('shop')
+        .child(id => 
+            S.documentTypeList('shop')
+            .title('Product')
+        ),
       S.documentListItem()
         .schemaType('siteSettings')
         .title('Site settings')
@@ -35,5 +59,7 @@ export default (S) =>
                 ),
             ])
         ),
-      ...S.documentTypeListItems().filter(hiddenDocTypes),
+      ...S.documentTypeListItems().filter(
+        (listItem) => !['siteSettings', 'shop', 'staticPages', 'category','skosConcept', 'skosConceptScheme'].includes(listItem.getId())
+      )
     ])
