@@ -1,12 +1,9 @@
-import S from '@sanity/desk-tool/structure-builder'
-import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
-
 import { FaFile, FaTags } from 'react-icons/fa'
 
 const hiddenDocTypes = (listItem) =>
   !['siteSettings', 'staticPages', 'category'].includes(listItem.getId())
 
-export default () =>
+export default (S) =>
   S.list()
     .title('Content')
     .items([
