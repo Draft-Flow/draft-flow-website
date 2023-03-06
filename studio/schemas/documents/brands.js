@@ -25,6 +25,16 @@ export default {
       }
     },
     {
+      name: 'logo',
+      type: 'basicImage',
+      title: 'Logo Image',
+    },
+    {
+      name: 'website',
+      type: 'url',
+      title: 'Website',
+    },
+    {
       name: 'seo',
       type: 'seo',
       title: 'SEO',

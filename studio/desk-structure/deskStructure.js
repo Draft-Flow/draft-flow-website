@@ -1,27 +1,11 @@
-import { FaFile, FaShoppingCart, FaTags } from 'react-icons/fa'
-import {TreeView} from 'sanity-plugin-taxonomy-manager' 
+import { FaFile, FaShoppingCart } from 'react-icons/fa'
+import parentChild from './parentChild'
 
-export default (S) =>
+export default (S, { documentStore }) =>
   S.list()
     .title('Content')
     .items([
-      S.listItem()
-        .title('Concept Schemes')
-        .schemaType('skosConceptScheme')
-        .child(
-          S.documentTypeList('skosConceptScheme')
-            .title('Concept Schemes')
-            .child(id =>
-              S.document()
-                .schemaType('skosConceptScheme')
-                .documentId(id)
-                .views([
-                  S.view.component(TreeView).title('Tree View'),
-                  S.view.form()
-                ]) 
-            )
-      ),
-      S.documentTypeListItem("skosConcept").title("Concepts"),
+      parentChild(S, documentStore, 'category'),
       S.divider(),
       S.listItem()
         .title('Shop')
@@ -29,7 +13,7 @@ export default (S) =>
         .schemaType('shop')
         .child(id => 
             S.documentTypeList('shop')
-            .title('Product')
+            .title('Products')
         ),
       S.documentListItem()
         .schemaType('siteSettings')
@@ -60,6 +44,6 @@ export default (S) =>
             ])
         ),
       ...S.documentTypeListItems().filter(
-        (listItem) => !['siteSettings', 'shop', 'staticPages', 'category','skosConcept', 'skosConceptScheme'].includes(listItem.getId())
+        (listItem) => !['siteSettings', 'shop', 'staticPages', 'category'].includes(listItem.getId())
       )
     ])

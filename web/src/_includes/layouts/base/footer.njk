@@ -15,30 +15,16 @@
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods</h3>
             <ul class="list-style-none mt-8 w-full flex justify-center items-center h-8 md:h-14">
+                {% for brand in collections.brands %}
+                {% set imageSrc %}
+                    {% imageUrlFor brand.data.brand.logo.asset._ref, 400 %}
+                {% endset %}
                 <li>
-                    {% image 'src/static/logos/shimano.png', 'Shimano', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+                    <a href="{{ brand.url }}">
+                        {% image imageSrc, brand.data.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+                    </a>
                 </li>
-                <li>
-                    {% image 'src/static/logos/dtswiss.png', 'DT Swiss', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
-                <li>
-                    {% image 'src/static/logos/maxxis.png', 'Maxxis', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
-                <li>
-                    {% image 'src/static/logos/surly.png', 'Surly', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
-                <li>
-                    {% image 'src/static/logos/whiskypartsco.png', 'Whisky', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
-                <li>
-                    {% image 'src/static/logos/parktool.png', 'Park Tool', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
-                <li>
-                    {% image 'src/static/logos/thule.jpeg', 'Thule', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
-                <li>
-                    {% image 'src/static/logos/schwalbe.png', 'Schwalbe', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
