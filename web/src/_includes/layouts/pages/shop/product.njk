@@ -1,0 +1,18 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full py-20">
+      {{ collections.shop | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) | eleventyNavigationToHtml | safe }}
+
+      {{ title }}
+      {{ product.category.parent.title }}
+      {{ product.category.title }}
+      {{ product.brand.name }}
+      
+      <div class="description">
+        {{ product.body | safe }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

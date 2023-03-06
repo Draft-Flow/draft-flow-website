@@ -78,6 +78,12 @@ module.exports = function (eleventyConfig) {
     }
   )
 
+  // Inspect content
+  eleventyConfig.addFilter('console', function(value) {
+    const str =  util.inspect(value);
+    return `<div style="white-space: pre-wrap;">${unescape(str)}</div>;`
+  });
+
    // Markdown filter
    eleventyConfig.addFilter('md', function (content = '') {
     return markdownIt({

@@ -1,0 +1,15 @@
+---
+layout: layouts/pages/brands/brand
+tags:
+  - brands
+pagination:
+  alias: brand
+  data: brands
+  size: 1
+  addAllPagesToCollections: true
+permalink: brands/{{ brand.slug.current | slugify }}/index.html
+eleventyComputed:
+  title: "{{ brand.name }}"
+  content: "{{ brand.content }}"
+  website: "{{ brand.website }}"
+---

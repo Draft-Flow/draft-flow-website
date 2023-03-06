@@ -1,0 +1,14 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full py-20">
+
+      {{ title }}
+      {{ website }}
+      <div class="description">
+        {{ brand.body | safe }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

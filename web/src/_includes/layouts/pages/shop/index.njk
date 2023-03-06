@@ -1,0 +1,19 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-6xl w-full py-20">
+      {{ title }}
+
+      <ul class="w-full grid grid-cols-1">
+      {% for category in collections.categories %}
+        {# Only show top-level categories #}
+        {% if category.data.eleventyNavigation.parent == "Shop" %}
+        <li class="">
+          <a class="h-24 flex justify-center items-center"  href="{{ category.url }}">{{ category.data.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}

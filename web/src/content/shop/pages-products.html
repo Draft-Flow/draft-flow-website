@@ -1,0 +1,21 @@
+---
+layout: layouts/pages/shop/product
+tags:
+  - shop
+  - products
+pagination:
+  alias: product
+  data: products
+  size: 1
+  addAllPagesToCollections: true
+permalink: shop/{{ product.slug }}/index.html
+eleventyComputed:
+  title: "{{ product.name }}"
+  body: "{{ product.body }}"
+  category: "{{ product.category }}"
+  brand: "{{ product.brand }}"
+  eleventyNavigation:
+    parent: "{{ product.category.title }}"
+    key: "{{ title }}"
+    title: "{{ title }}"
+---
