@@ -1,11 +1,15 @@
 const groq = require('groq')
 const client = require('../utils/sanityClient')
 
-const getProductCategories = async () => {
-  const filter = groq`*[_type == "category"] && !defined(parent)`
+const getProductSubCategories = async () => {
+  const filter = groq`*[_type == "category"] && defined(parent)`
   const projection = groq`{
     title,
-    "slug": slug.current
+    "slug": parent->slug.current + "/" + slug.current,
+    "parent": select(defined(parent) => {
+      "title": parent->title,
+      "slug": parent->slug.current
+    })
   }`
 
   const order = ''
@@ -14,7 +18,8 @@ const getProductCategories = async () => {
     // eslint-disable-next-line
     console.error(err)
   })
+  
   return docs
 }
 
-module.exports = getProductCategories
+module.exports = getProductSubCategories

@@ -6,7 +6,6 @@ export default (S, { documentStore }) =>
     .title('Content')
     .items([
       parentChild(S, documentStore, 'category'),
-      S.divider(),
       S.listItem()
         .title('Shop')
         .icon(FaShoppingCart)
@@ -15,6 +14,7 @@ export default (S, { documentStore }) =>
             S.documentTypeList('shop')
             .title('Products')
         ),
+      S.divider(),
       S.documentListItem()
         .schemaType('siteSettings')
         .title('Site settings')
