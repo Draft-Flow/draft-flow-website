@@ -5,7 +5,7 @@
 {% endset %}
 
 <div id="sentinel" class="absolute top-0"></div>
-<header id="header" class="fixed z-50 top-0 w-screen h-20 sm:h-auto bg-df-tan text-pg-tan-light flex flex-col items-center transition-all duration-150 ease-linear">
+<header id="header" class="fixed z-50 top-0 w-screen h-16 sm:h-auto text-pg-tan-light flex flex-col items-center transition-all duration-150 ease-linear">
   <div id="navbar" class="w-full relative mx-4 max-w-7xl text-center lg:text-left flex flex-col lg:justify-between sm:items-center">
     <div id="logobar" class="relative sm:absolute sm:top-8 md:top-6 p-4 sm:p-0 h-16 sm:h-auto flex justify-between lg:justify-center items-center z-10 transition-all duration-150 ease-linear origin-top">
       <button class="inline sm:hidden w-6 h-6" id="navToggle" aria-haspopup="true" aria-controls="nav" aria-label="Menu">
@@ -17,7 +17,7 @@
       </a>
     </div>
     <nav class="hidden w-full sm:absolute sm:top-0 xl:top-2 h-20 sm:flex flex-wrap sm:items-end grow sm:grow-0 text-df-tan sm:text-df-gray transition-all duration-150 ease-linear" id="nav">
-      <ul class="nav-items transition-all w-full px-3 md:px-6 pt-12 sm:pt-0 flex flex-col flex-wrap sm:flex-row justify-between text-xl sm:text-2xl lg:text-4xl mb-12 sm:mb-[2px] font-df-sans font-bold uppercase leading-tight">
+      <ul class="nav-items transition-all w-full px-3 xl:px-0 md:px-6 xl:mx-0 pt-12 sm:pt-0 flex flex-col flex-wrap sm:flex-row justify-between text-xl sm:text-2xl lg:text-4xl mb-12 sm:mb-[2px] font-df-sans font-bold uppercase leading-tight">
         {%- for item in navPages -%}
         {% set firstHalf = loop.index <= 2 %}
           {% if loop.index == 3 %}<li class="hidden sm:block w-24 sm:w-32 lg:w-72"></li> {% endif %}
@@ -39,8 +39,8 @@
             {% endif %}
           </li>
         {% endfor %}
-        <li class="icons w-full sm:absolute sm:-bottom-7 sm:left-0" id="social">
-          <ul class="w-full justify-center sm:items-center grid grid-rows-1 grid-flow-col gap-8 pb-12 sm:pb-0 justify-self-end sm:justify-self-center">
+        <li class="icons nav-item relative sm:flex-1 flex flex-col sm:flex-row mb-4 sm:mb-0 pb-1 sm:pb-0 leading-6 hover:z-40 focus-within:z-40" id="social">
+          <ul class="w-full justify-center sm:justify-end grid grid-rows-1 grid-flow-col gap-8 sm:gap-1 lg:gap-4 items-center">
             <li class="sm:hidden">
               <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-df-tan sm:fill-df-black w-6 sm:w-4 hover:fill-black' %}</a>
             </li>
@@ -50,14 +50,14 @@
             <li class="sm:hidden">
               <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full  items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-df-tan sm:fill-df-black w-6 sm:w-4 hover:fill-black' %}</a>
             </li>
-            <li >
-              <a href="https://wa.me/message/{{ metadata.social.whatsapp }}" title="WhatsApp" class="h-full items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-df-tan sm:fill-df-black w-6 sm:w-auto sm:h-5 hover:fill-black sm:opacity-50 hover:opacity-100' %}</a>
+            <li class="sm:h-full" >
+              <a href="https://wa.me/message/{{ metadata.social.whatsapp }}" title="WhatsApp" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-df-tan sm:px-3 sm:-mt-1 sm:fill-df-black w-6 sm:w-auto sm:h-6 hover:fill-black' %}</a>
             </li>
-            <li >
-              <a href="tel:{{ metadata.contact.phone }}" title="Phone - {{ metadata.contact.phone }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan sm:fill-df-black w-6 sm:w-auto sm:h-5 hover:fill-black sm:opacity-50 hover:opacity-100' %}</a>
+            <li class="sm:h-full" >
+              <a href="tel:{{ metadata.contact.phone }}" title="Phone - {{ metadata.contact.phone }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan sm:px-3 sm:-mt-1 sm:fill-df-black w-6 sm:w-auto sm:h-6 hover:fill-black' %}</a>
             </li>
-            <li >
-              <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-df-tan sm:fill-df-black w-6 sm:w-auto sm:h-6 hover:fill-black sm:opacity-50 hover:opacity-100' %}</a>
+            <li class="sm:h-full" >
+              <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-df-tan sm:px-3 sm:-mt-1 sm:fill-df-black w-6 sm:w-auto sm:h-7 hover:fill-black' %}</a>
             </li>
           </ul>
         </li>

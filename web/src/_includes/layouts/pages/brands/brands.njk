@@ -8,6 +8,21 @@
       <div class="description">
         {{ pageContent.content | blocksToHTML | safe }}
       </div>
+      <div>
+        <ul>
+          {% for brand in collections.brand_pages %}
+          {% set imageSrc %}
+              {% imageUrlFor brand.data.brand.logo.ref, 400 %}
+          {% endset %}
+          <li>
+              <a href="{{ brand.url }}">
+                  {{ brand.data.title }}
+                  {% image imageSrc, brand.data.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+              </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </section>
 {% endblock %}

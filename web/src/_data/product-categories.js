@@ -2,7 +2,7 @@ const groq = require('groq')
 const client = require('../utils/sanityClient')
 
 const getProductCategories = async () => {
-  const filter = groq`*[_type == "category"] && !defined(parent)`
+  const filter = groq`*[_type == "category" && !defined(parent)]`
   const projection = groq`{
     title,
     "slug": slug.current

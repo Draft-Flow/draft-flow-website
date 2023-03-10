@@ -15,9 +15,9 @@
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods</h3>
             <ul class="list-style-none mt-8 w-full flex justify-center items-center h-8 md:h-14">
-                {% for brand in collections.brands %}
+                {% for brand in collections.brand_pages %}
                 {% set imageSrc %}
-                    {% imageUrlFor brand.data.brand.logo.asset._ref, 400 %}
+                    {% imageUrlFor brand.data.brand.logo.ref, 400 %}
                 {% endset %}
                 <li>
                     <a href="{{ brand.url }}">

@@ -11,6 +11,7 @@ export default {
       name: 'name',
       type: 'string',
       title: 'Name',
+      validation: Rule =>Rule.required()
     },
     {
       name: 'slug',
@@ -28,11 +29,13 @@ export default {
       name: 'logo',
       type: 'basicImage',
       title: 'Logo Image',
+      validation: Rule =>Rule.required()
     },
     {
       name: 'website',
       type: 'url',
       title: 'Website',
+      validation: Rule =>Rule.required()
     },
     {
       name: 'seo',
@@ -40,9 +43,34 @@ export default {
       title: 'SEO',
     },
     {
-      name: 'content',
+      name: 'review',
+      type: 'review',
+      title: 'Review',
+      validation: Rule =>Rule.required()
+    },
+    {
+      name: 'banner',
+      type: 'mainImage',
+      title: 'Banner Image',
+      validation: Rule =>Rule.required()
+    },
+    {
+      name: 'oneLiner',
+      type: 'string',
+      title: 'One-liner',
+      validation: Rule =>Rule.required().max(50).error('A one-liner of max 50 characters is required'),
+    },
+    {
+      name: 'ourDescription',
       type: 'bodyPortableText',
-      title: 'Content',
+      title: 'Our Description',
+      validation: Rule =>Rule.required()
+    },
+    {
+      name: 'theirDescription',
+      type: 'bodyPortableText',
+      title: 'Their Description',
+      validation: Rule =>Rule.required()
     },
   ],
 }

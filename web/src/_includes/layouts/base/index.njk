@@ -11,4 +11,37 @@
     {% include './footer.njk' %}
     {% block scripts %}{% endblock %}
   </body>
+
+  <script>
+    const linkBoxes = () => {
+      const boxes = document.querySelectorAll('[data-type="card"]');
+      boxes.forEach((box) => {
+        const link = box.querySelector("a");
+        if (link) {
+          const url = link.getAttribute("href");
+          const clickHandler = link.onclick;
+          box.addEventListener("click", () => {
+            if (clickHandler) {
+              clickHandler();
+            } 
+            
+            location.href = url;
+            link.preventDefault;
+          });
+          box.classList.add("linked");
+          link.addEventListener("focus", () => {
+            box.classList.add("isfocused");
+          });
+          link.addEventListener("blur", () => {
+            box.classList.remove("isfocused");
+          });
+        }
+      })
+    };
+    document.addEventListener("DOMContentLoaded", () => {
+      if ("querySelector" in document) {
+        linkBoxes();
+      }
+    });
+  </script>
 </html>

@@ -2,6 +2,7 @@ const groq = require('groq')
 const { toHTML } = require('@portabletext/to-html')
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
+const generateProductSlug = require('./utils/generateProductSlug')
 
 const generateDoc = async (doc) => {
   try {
@@ -23,10 +24,7 @@ const getProducts = async () => {
       title, 
       description
     },
-    "slug": select(
-      defined(category->parent) => category->parent->slug.current + "/" + category->slug.current + "/" + slug.current,
-      category->slug.current + "/" + slug.current
-    ),
+    "slug": ${generateProductSlug()},
     category->{
       title,
       "slug": slug.current,
@@ -36,7 +34,13 @@ const getProducts = async () => {
       }
     },
     brand->{
-      name
+      name,
+      website,
+      "slug": slug.current,
+      logo {
+        "ref": asset._ref,
+        alt
+      }
     },
     content
   }`
