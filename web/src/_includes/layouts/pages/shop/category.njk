@@ -4,9 +4,13 @@
   <section class="flex justify-center px-2 lg:px-4">
     <div class="max-w-6xl w-full py-20">
        {{ collections.shop | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) | eleventyNavigationToHtml | safe }}
-      {{ title }}
+      {{ title | safe }}
       <ul>
-      
+      {% for category in collections.subcategories %}
+        {% if category.data.eleventyNavigation.parent == eleventyNavigation.key %}
+        <li><a href="{{ category.url }}">{{ category.data.title | safe }}</a></li>
+        {% endif %}
+      {% endfor %}
       </ul>
       <div class="description">
         

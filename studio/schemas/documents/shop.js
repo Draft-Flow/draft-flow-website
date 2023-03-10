@@ -30,6 +30,12 @@ export default {
       title: 'SEO',
     },
     {
+      name: 'oneLiner',
+      type: 'string',
+      title: 'One-Liner',
+      validation: Rule =>Rule.required().max(50).error('A one-liner of max 50 characters is required')
+    },
+    {
       title: 'Brand',
       name: 'brand',
       type: 'reference',
@@ -43,9 +49,21 @@ export default {
       options: {filter: 'defined(parent)'},
     },
     {
+      name: 'banner',
+      type: 'mainImage',
+      title: 'Banner Image',
+      validation: Rule =>Rule.required()
+    },
+    {
       name: 'content',
       type: 'bodyPortableText',
       title: 'Content',
+    },
+    {
+      name: 'options',
+      type: 'array',
+      title: 'Options',
+      of: [{type: 'productOptions'}]
     },
   ],
   preview: {

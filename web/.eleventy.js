@@ -11,6 +11,7 @@ const cardImageShortcode = require('./src/utils/shortcodes/shortcodeCardImage')
 const bannerImageShortcode = require('./src/utils/shortcodes/shortcodeBannerImage')
 const bannerImageFromRefShortcode = require('./src/utils/shortcodes/shortcodeBannerImageFromRef')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
+const crumbShortcode = require('./src/utils/shortcodes/shortcodeCrumbs')
 const shuffleFilter = require('./src/utils/filters/shuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
 const getPageFilter = require('./src/utils/filters/getPage')
@@ -61,6 +62,9 @@ module.exports = function (eleventyConfig) {
   // Inline SVG
   eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)
 
+  // Breadcrumbs
+  eleventyConfig.addShortcode('crumbs', crumbShortcode)
+      
   // Display the current year
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`)
 
@@ -75,6 +79,16 @@ module.exports = function (eleventyConfig) {
         return null
       }
       return urlFor(image).width(width).url()
+    }
+  )
+
+  eleventyConfig.addShortcode(
+    'imageBannerUrlFor',
+    (image, width = '600', options) => {
+      if (!image) {
+        return null
+      }
+      return urlFor(image).blur(2).saturation(-100).width(width).url()
     }
   )
 

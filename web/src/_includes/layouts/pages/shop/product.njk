@@ -9,6 +9,15 @@
       {{ product.category.parent.title }}
       {{ product.category.title }}
       {{ product.brand.name }}
+
+       {% set imageSrc %}
+         {% imageUrlFor product.brand.logo.ref, 400 %}
+        {% endset %}
+       
+                    <a href="/brands/{{ product.brand.slug }}/">
+                        {% image imageSrc, product.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+                    </a>
+          
       
       <div class="description">
         {{ product.body | safe }}

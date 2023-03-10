@@ -46,7 +46,7 @@ header.open #social {
 }
 
 header.stuck {
-  @apply h-16 sm:h-24 border-b border-df-gray/25 bg-df-black;
+  @apply h-16 sm:h-16 border-b border-df-gray/25 bg-df-black;
 }
 
 header.stuck #nav {
@@ -96,6 +96,10 @@ header.stuck .icons svg {
 /* Images */
 .vintage {
   @apply sepia-[.75] grayscale contrast-150 blur-[0.5px];
+}
+
+.vintage-banner {
+  @apply sepia-[.50];
 }
 
 .hide {

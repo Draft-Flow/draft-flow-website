@@ -10,7 +10,9 @@
         {# Only show top-level categories #}
         {% if category.data.eleventyNavigation.parent == "Shop" %}
         <li class="">
-          <a class="h-24 flex justify-center items-center"  href="{{ category.url }}">{{ category.data.title }}</a></li>
+          <a class="h-24 flex justify-center items-center" href="{{ category.url }}">
+            {{ category.data.title | safe }}
+          </a></li>
         {% endif %}
       {% endfor %}
       </ul>

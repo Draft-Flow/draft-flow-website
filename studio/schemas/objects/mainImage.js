@@ -7,16 +7,6 @@ export default {
   },
   fields: [
     {
-      name: 'location',
-      type: 'geopoint',
-      title: 'Location',
-    },
-    {
-      name: 'caption',
-      type: 'string',
-      title: 'Caption',
-    },
-    {
       name: 'alt',
       type: 'string',
       title: 'Alternative text',

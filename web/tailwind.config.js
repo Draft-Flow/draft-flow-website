@@ -1,10 +1,11 @@
 module.exports = {
-  content: ['./src/**/*.njk', './src/**/*.md'],
+  content: ['./src/**/*.njk', './src/**/*.md', './src/utils/shortcodes/**/*.js'],
   theme: {
     extend: {
       colors: {
         'df-black': {
-          DEFAULT: '#131319'
+          DEFAULT: '#131319',
+          light: '#333333'
         },
         'df-blue': {
           DEFAULT: '#1F3579',
