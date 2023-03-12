@@ -1,28 +1,41 @@
 {% extends 'layouts/base/index.njk' %}
 
-{%- set pageContent = pages | getPage(pageID) -%}
-
 {% block content %}
+<section class="w-full overflow-hidden h-[10em] md:h-[14em] lg:h-[18em] relative">
+  <div class="w-full h-full absolute bottom-0 vintage-banner flex">
+      {% image 'src/static/images/banner-brands.jpg', 'Brands', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [700, 'auto'], 'h-full object-cover' %}
+    </div>
+  <div class="w-full h-full absolute top-0 left-0 flex bg-gradient-to-b from-df-tan via-df-tan/90 to-df-tan/90 items-end">
+    <div class="w-full px-2 lg:px-4 flex justify-center mb-4 lg:mb-12 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
+    Brands
+    </div>
+  </div>
+</section>
+<div class="bg-df-black-light -mt-[1vw] -skew-y-[1deg] h-[3vw] min-h-[30px] max-h-[40px] flex flex-col justify-center items-center px-2 lg:px-4">
+  <div class="max-w-7xl w-full -skew-x-[1deg]">
+    {% set crumbsJSON = collections.brands | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+    {% crumbs crumbsJSON %}
+  </div>
+</div>
+
   <section class="flex justify-center px-2 lg:px-4">
-    <div class="max-w-6xl w-full py-20">
-      <div class="description">
-        {{ pageContent.content | blocksToHTML | safe }}
+    <div class="max-w-7xl w-full py-20">
+      <div class="pageContent">
+        <p> We believe in the brands we sell, and rely on them ourselves. The brands below make quality gear that we highly recommend. Click a brand to learn more.</p>
       </div>
-      <div>
-        <ul>
-          {% for brand in collections.brand_pages %}
-          {% set imageSrc %}
-              {% imageUrlFor brand.data.brand.logo.ref, 400 %}
-          {% endset %}
-          <li>
-              <a href="{{ brand.url }}">
-                  {{ brand.data.title }}
-                  {% image imageSrc, brand.data.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-              </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 lg:gap-12">
+        {% for brand in collections.brand_pages %}
+        {% set imageSrc %}
+            {% imageUrlFor brand.data.brand.logo.ref, 900 %}
+        {% endset %}
+        <li class="flex justify-center items-center px-8 sm:px-0">
+            <a href="{{ brand.url }}" title="{{ brand.name }}">
+                {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
+            </a>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="max-w-md mx-auto text-sm mt-8 text-center">Looking for a brand you don't see above? We have relationships with a range of other brands we can order from. Please <a class="font-bold text-df-blue hover:underline" href="/contact/">get in touch</a> if you're looking for something else.</p>
     </div>
   </section>
 {% endblock %}

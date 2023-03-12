@@ -172,6 +172,19 @@ header.stuck .icons svg {
   }
 }
 
+/* Page content */
+.pageContent {
+  @apply mb-12;
+}
+.pageContent p {
+  @apply md:text-xl lg:text-2xl max-w-prose mx-auto;
+  text-align-last: center;
+}
+
+.pageContent + * {
+  @apply mt-6;
+}
+
 /* Mapbox Styling */
 .marker {
   @apply relative -mt-6 overflow-visible bg-df-blue-dark p-1 rounded after:border-x-8 after:w-0 after:h-0 after:absolute after:-bottom-[0.5rem] after:left-1/2 after:-ml-2 after:border-x-transparent after:border-t-8 after:border-t-df-blue-dark;

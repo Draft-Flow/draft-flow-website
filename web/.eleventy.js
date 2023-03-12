@@ -53,7 +53,7 @@ module.exports = function (eleventyConfig) {
   // Generate img tags with next-gen image formats
   eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('cardImage', cardImageShortcode)
-  eleventyConfig.addNunjucksAsyncShortcode('bannerImage', bannerImageShortcode)
+  eleventyConfig.addNunjucksShortcode('bannerImage', bannerImageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode(
     'bannerImageFromRef',
     bannerImageFromRefShortcode
