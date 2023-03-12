@@ -22,7 +22,7 @@ const bannerImageShortcode = async (
     },
   })
 
-  return `<picture class="w-full h-full>
+  return `<picture class="w-full h-full">
     ${Object.values(metadata)
       .map(
         (imageFormat) =>
