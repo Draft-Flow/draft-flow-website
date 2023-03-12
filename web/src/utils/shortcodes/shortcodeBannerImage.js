@@ -4,8 +4,8 @@ const bannerImageShortcode = async (
   src,
   alt = '',
   sizes = '100vw',
-  classes = null,
-  priority = 'auto'
+  classes = 'w-full h-full object-cover',
+  priority = 'high'
 ) => {
   if (alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
@@ -22,13 +22,13 @@ const bannerImageShortcode = async (
     },
   })
 
-  return `<picture class="flex h-full">
+  return `<picture class="w-full h-full>
     ${Object.values(metadata)
       .map(
         (imageFormat) =>
           `<source type="${imageFormat[0].sourceType}" srcset="${imageFormat
             .map((entry) => entry.srcset)
-            .join(', ')}" sizes="${sizes}">`
+            .join(', ')}" sizes="${sizes !== null ? sizes :  '(max-width: 0px) 100vw'}">`
       )
       .join('\n')}
       <img
