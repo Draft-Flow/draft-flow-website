@@ -3,10 +3,10 @@
 {% block content %}
 <section class="w-full overflow-hidden h-[10em] md:h-[14em] lg:h-[18em] relative">
   <div class="w-full h-full absolute bottom-0 vintage-banner flex">
-      {% image 'src/static/images/banner-brands.jpg', 'Brands', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [700, 'auto'], 'h-full object-cover' %}
+      {% bannerImage 'src/static/images/banner-brands.jpg', 'Brands' %}
     </div>
   <div class="w-full h-full absolute top-0 left-0 flex bg-gradient-to-b from-df-tan via-df-tan/90 to-df-tan/90 items-end">
-    <div class="w-full px-2 lg:px-4 flex justify-center mb-4 lg:mb-12 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
+    <div class="w-full px-2 lg:px-4 flex justify-center mb-4 lg:mb-12 text-5xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
     Brands
     </div>
   </div>
@@ -23,7 +23,7 @@
       <div class="pageContent">
         <p> We believe in the brands we sell, and rely on them ourselves. The brands below make quality gear that we highly recommend. Click a brand to learn more.</p>
       </div>
-      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 lg:gap-12">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
         {% for brand in collections.brand_pages %}
         {% set imageSrc %}
             {% imageUrlFor brand.data.brand.logo.ref, 900 %}
