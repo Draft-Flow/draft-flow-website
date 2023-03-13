@@ -12,8 +12,10 @@ pagination:
 permalink: shop/{{ subcategory.slug }}/index.html
 eleventyComputed: 
   title: "{{ subcategory.title }}"
+  parentTitle: "{{ subcategory.parent.title }}"
+  products: "{{ subcategory.products }}"
   eleventyNavigation:
-    parent: "{{ subcategory.parent.title }}"
-    key: "{{ subcategory.title }}"
+    parent: "{{ subcategory.parent.categoryID }}"
+    key: "{{ subcategory.categoryID }}"
     title: "{{ subcategory.title }}"
 ---

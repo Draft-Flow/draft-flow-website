@@ -14,8 +14,12 @@ eleventyComputed:
   body: "{{ product.body }}"
   category: "{{ product.category }}"
   brand: "{{ product.brand }}"
+  banner:
+    ref: "{{ product.banner.ref }}"
+    alt: "{{ product.banner.alt }}"
+  oneLiner: "{{ product.oneLiner }}"
   eleventyNavigation:
-    parent: "{{ product.category.title }}"
-    key: "{{ title }}"
+    parent: "{{ product.category.id }}"
+    key: "{{ product.id }}"
     title: "{{ title }}"
 ---

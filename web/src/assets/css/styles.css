@@ -172,6 +172,11 @@ header.stuck .icons svg {
   }
 }
 
+/* Cards */
+[data-type="card"] {
+  cursor: pointer;
+}
+
 /* Page content */
 .pageContent {
   @apply mb-12;

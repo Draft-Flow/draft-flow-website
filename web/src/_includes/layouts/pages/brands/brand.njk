@@ -9,6 +9,8 @@
   {% imageUrlFor brand.logo.ref, 600 %}
 {% endset %}
 
+{% set crumbsJSON = collections.brands | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+
 {% block content %}
   <section class="w-full overflow-hidden md:h-[30em] lg:h-[35em] relative">
     <div class="w-full md:absolute bottom-0 vintage-banner">
@@ -24,7 +26,6 @@
   </section>
   <div class="bg-df-black-light -mt-[1vw] -skew-y-[1deg] h-[3vw] min-h-[30px] max-h-[40px] flex flex-col justify-center items-center px-2 lg:px-4">
     <div class="max-w-7xl w-full -skew-x-[1deg]">
-      {% set crumbsJSON = collections.brands | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
       {% crumbs crumbsJSON %}
     </div>
   </div>

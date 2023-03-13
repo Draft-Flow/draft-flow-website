@@ -5,6 +5,7 @@ const getProductCategories = async () => {
   const filter = groq`*[_type == "category" && !defined(parent)]`
   const projection = groq`{
     title,
+    "categoryID": _id,
     "slug": slug.current
   }`
 
