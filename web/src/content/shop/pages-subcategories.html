@@ -13,7 +13,9 @@ permalink: shop/{{ subcategory.slug }}/index.html
 eleventyComputed: 
   title: "{{ subcategory.title }}"
   parentTitle: "{{ subcategory.parent.title }}"
-  products: "{{ subcategory.products }}"
+  banner:
+    ref: "{{ subcategory.banner.ref }}"
+    alt: "{{ subcategory.banner.alt }}"
   eleventyNavigation:
     parent: "{{ subcategory.parent.categoryID }}"
     key: "{{ subcategory.categoryID }}"

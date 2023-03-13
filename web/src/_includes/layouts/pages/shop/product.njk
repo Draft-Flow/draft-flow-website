@@ -21,10 +21,11 @@
   </div>
   <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-df-tan via-df-tan/50 to-df-tan/20 flex items-center">
     <div class="w-full px-2 lg:px-4 flex flex-col items-center mt-12 sm:mt-0">
-      {% image logoSrc, product.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 900], 'w-28 md:w-44 lg:w-60' %}
-      <h1 class="w-full px-2 lg:px-4 text-center mt-2 text-5xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
+      {% image logoSrc, product.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 900], 'w-24 md:w-40 lg:w-56' %}
+      <h1 class="w-full px-2 lg:px-4 text-center mt-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
       {{ title }}
       </h1>
+      <span class="px-2 bg-df-black/50 text-df-tan-dark font-df md:text-xl lg:text-2xl uppercase tracking-wide">{{ oneLiner }}</span>
     </div>
   </div>
 </section>
