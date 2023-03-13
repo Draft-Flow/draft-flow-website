@@ -2,10 +2,7 @@ const Image = require('@11ty/eleventy-img')
 
 const bannerImageShortcode = async (
   src,
-  alt = '',
-  sizes = '100vw',
-  classes = 'w-full h-full object-cover',
-  priority = 'high'
+  alt = ''
 ) => {
   if (alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
@@ -28,18 +25,18 @@ const bannerImageShortcode = async (
         (imageFormat) =>
           `<source type="${imageFormat[0].sourceType}" srcset="${imageFormat
             .map((entry) => entry.srcset)
-            .join(', ')}" sizes="${sizes !== null ? sizes :  '(max-width: 0px) 100vw'}">`
+            .join(', ')}" sizes="(max-width: 0px) 100vw">`
       )
       .join('\n')}
       <img
         src="${metadata.jpeg[0].url}"
         width="100%"
         height="auto"
-        ${classes !== null ? `class="${classes}"` : ''}
+        class="w-full h-full object-cover"
         alt="${alt}"
         loading="lazy"
         decoding="async"
-        fetchPriority="${priority}">
+        fetchPriority="high">
     </picture>`
 }
 

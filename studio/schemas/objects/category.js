@@ -44,6 +44,12 @@ export default {
         } 
       },
     },
+    {
+      name: 'banner',
+      type: 'mainImage',
+      title: 'Banner Image',
+      validation: Rule =>Rule.required()
+    }
   ],
   // Customise the preview so parents are visualised in the studio
   preview: {

@@ -1,6 +1,5 @@
 const groq = require('groq')
 const client = require('../utils/sanityClient')
-const generateProductSlug = require('./utils/generateProductSlug')
 
 const getProductSubCategories = async () => {
   const filter = groq`*[_type == "category" && defined(parent)]`
@@ -11,8 +10,12 @@ const getProductSubCategories = async () => {
     "parent": select(defined(parent) => {
       "title": parent->title,
       "categoryID": parent->_id,
-      "slug": parent->slug.current
-    }) 
+      "slug": parent->slug.current,
+    }),
+    banner {
+      "ref": asset._ref,
+      alt
+    },
   }`
 
   const order = ''
