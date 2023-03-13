@@ -125,6 +125,13 @@ module.exports = function (eleventyConfig) {
     return new CleanCSS({}).minify(code).styles
   })
 
+  // Category Filter
+  eleventyConfig.addFilter('categoryFilter', (collection, category) => {
+    if (!category) return collection;
+      const filtered = collection.filter(item => item.data.eleventyNavigation.parent == category)
+      return filtered;
+  })
+
   // Get YouTube Video ID
   eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url))
 

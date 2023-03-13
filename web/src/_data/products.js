@@ -20,6 +20,7 @@ const getProducts = async () => {
   const filter = groq`*[_type == "shop"]`
   const projection = groq`{
     name,
+    "id": _id,
     seo {
       title, 
       description
@@ -27,11 +28,18 @@ const getProducts = async () => {
     "slug": ${generateProductSlug()},
     category->{
       title,
+      "id": _id,
       "slug": slug.current,
       parent->{
         title,
+        "id": _id,
         "slug": slug.current
       }
+    },
+    oneLiner,
+    banner {
+      "ref": asset._ref,
+      alt
     },
     brand->{
       name,
