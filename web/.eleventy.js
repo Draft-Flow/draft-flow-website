@@ -4,12 +4,14 @@ const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
 const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 const getYouTubeId = require('get-youtube-id')
+const markdownIt = require('markdown-it')
 
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const cardImageShortcode = require('./src/utils/shortcodes/shortcodeCardImage')
 const bannerImageShortcode = require('./src/utils/shortcodes/shortcodeBannerImage')
 const bannerImageFromRefShortcode = require('./src/utils/shortcodes/shortcodeBannerImageFromRef')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
+const crumbShortcode = require('./src/utils/shortcodes/shortcodeCrumbs')
 const shuffleFilter = require('./src/utils/filters/shuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
 const getPageFilter = require('./src/utils/filters/getPage')
@@ -19,7 +21,8 @@ const minifyHTML = require('./src/utils/minifyHTML')
 
 const serializers = require('./src/utils/serializers')
 
-const INPUT = 'src'
+const SRC = './src'
+const INPUT = 'src/content'
 const OUTPUT = '_site'
 
 module.exports = function (eleventyConfig) {
@@ -35,11 +38,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/static/_redirects': './_redirects' })
   eleventyConfig.addPassthroughCopy({ 'src/static/sw.js': './sw.js' })
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
-  eleventyConfig.addPassthroughCopy('src/static/fonts/**/*')
-  eleventyConfig.addPassthroughCopy('src/static/images/**/*')
+  eleventyConfig.addPassthroughCopy({'src/static': './static'})
 
   eleventyConfig.on('eleventy.after', async () => {
-    const srcDir = `${INPUT}/static/bundles`
+    const srcDir = `${SRC}/static/bundles`
     const destDir = `${OUTPUT}/static/bundles`
     fse.copySync(srcDir, destDir)
   })
@@ -60,6 +62,9 @@ module.exports = function (eleventyConfig) {
   // Inline SVG
   eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)
 
+  // Breadcrumbs
+  eleventyConfig.addShortcode('crumbs', crumbShortcode)
+      
   // Display the current year
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`)
 
@@ -77,6 +82,30 @@ module.exports = function (eleventyConfig) {
     }
   )
 
+  eleventyConfig.addShortcode(
+    'imageBannerUrlFor',
+    (image, width = '600', options) => {
+      if (!image) {
+        return null
+      }
+      return urlFor(image).blur(2).saturation(-100).width(width).url()
+    }
+  )
+
+  // Inspect content
+  eleventyConfig.addFilter('console', function(value) {
+    const str =  util.inspect(value);
+    return `<div style="white-space: pre-wrap;">${unescape(str)}</div>;`
+  });
+
+   // Markdown filter
+   eleventyConfig.addFilter('md', function (content = '') {
+    return markdownIt({
+      html: true ,
+      breaks: true,
+    }).render(content);
+  });
+
   // Convert Sanity block content into HTML
   eleventyConfig.addFilter('blocksToHTML', (value) => {
     return toHTML(value, { components: serializers })
@@ -92,6 +121,13 @@ module.exports = function (eleventyConfig) {
   // Minify CSS
   eleventyConfig.addFilter('cssmin', (code) => {
     return new CleanCSS({}).minify(code).styles
+  })
+
+  // Category Filter
+  eleventyConfig.addFilter('categoryFilter', (collection, category) => {
+    if (!category) return collection;
+      const filtered = collection.filter(item => item.data.eleventyNavigation.parent == category)
+      return filtered;
   })
 
   // Get YouTube Video ID
@@ -126,8 +162,8 @@ module.exports = function (eleventyConfig) {
     showAllHosts: true,
     dir: {
       input: INPUT,
-      includes: '_includes',
-      data: '_data',
+      includes: '../_includes',
+      data: '../_data',
       output: OUTPUT,
     },
   }

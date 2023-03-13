@@ -1,16 +1,11 @@
-const shuffle = (array) => {
-  const newArray = array
-  let i
-  let j
-  let x
-  for (i = newArray.length - 1; i > 0; i -= 1) {
-    j = Math.floor(Math.random() * (i + 1))
-    x = newArray[i]
-    newArray[i] = newArray[j]
-    newArray[j] = x
-  }
+const shuffle = (array, limit) => {
+  const shuffledArray = [...array]
+  shuffledArray.sort(() => {
+    return 0.5 - Math.random()
+  })
 
-  return newArray
+  // Returns array items up to limit
+  return shuffledArray.slice(0, limit)
 }
 
 module.exports = shuffle

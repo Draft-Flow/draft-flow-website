@@ -1,13 +1,47 @@
 <!doctype html>
-<html lang="en" class="antialiased text-df-blue-dark font-pg">
+<html lang="en" class="antialiased">
   {% include './head.njk' %}
-  <body class="bg-df-tan-light flex flex-col min-h-screen">
+  <body class="flex flex-col min-h-screen font-sans bg-df-tan">
     {% include './header.njk' %}
     {% block banner %}{% endblock %}
     {% block subheader %}{% endblock %}
-    <main class="flex-1 bg-df-blue text-white">
+    <main class="flex-1 text-white text-df-blue-dark">
       {% block content %}{% endblock %}
     </main>
     {% include './footer.njk' %}
+    {% block scripts %}{% endblock %}
   </body>
+
+  <script>
+    const linkBoxes = () => {
+      const boxes = document.querySelectorAll('[data-type="card"]');
+      boxes.forEach((box) => {
+        const link = box.querySelector("a");
+        if (link) {
+          const url = link.getAttribute("href");
+          const clickHandler = link.onclick;
+          box.addEventListener("click", () => {
+            if (clickHandler) {
+              clickHandler();
+            } 
+            
+            location.href = url;
+            link.preventDefault;
+          });
+          box.classList.add("linked");
+          link.addEventListener("focus", () => {
+            box.classList.add("isfocused");
+          });
+          link.addEventListener("blur", () => {
+            box.classList.remove("isfocused");
+          });
+        }
+      })
+    };
+    document.addEventListener("DOMContentLoaded", () => {
+      if ("querySelector" in document) {
+        linkBoxes();
+      }
+    });
+  </script>
 </html>

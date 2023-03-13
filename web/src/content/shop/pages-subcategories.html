@@ -1,0 +1,23 @@
+---
+layout: layouts/pages/shop/subcategory
+tags:
+  - shop
+  - categories
+  - subcategories
+pagination: 
+  alias: subcategory
+  data: product-subcategories
+  size: 1
+  addAllPagesToCollections: true
+permalink: shop/{{ subcategory.slug }}/index.html
+eleventyComputed: 
+  title: "{{ subcategory.title }}"
+  parentTitle: "{{ subcategory.parent.title }}"
+  banner:
+    ref: "{{ subcategory.banner.ref }}"
+    alt: "{{ subcategory.banner.alt }}"
+  eleventyNavigation:
+    parent: "{{ subcategory.parent.categoryID }}"
+    key: "{{ subcategory.categoryID }}"
+    title: "{{ subcategory.title }}"
+---

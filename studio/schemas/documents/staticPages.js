@@ -13,6 +13,29 @@ export default {
       title: 'Title',
     },
     {
+      name: 'slug',
+      type: 'slug',
+      title: 'Slug',
+      options: {
+        source: 'title',
+        slugify: input => input
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .slice(0, 200)
+      }
+    },
+    {
+      name: 'layout',
+      type: 'string',
+      title: 'Layout',
+      options: {
+        list: [
+          {title: 'Sci-Fi', value: 'sci-fi'},
+          {title: 'Western', value: 'western'}
+        ]
+      }
+    },
+    {
       name: 'seo',
       type: 'seo',
       title: 'SEO',
@@ -27,24 +50,6 @@ export default {
       name: 'content',
       type: 'bodyPortableText',
       title: 'Content',
-    },
-    {
-      name: 'video',
-      type: 'youtube',
-      title: 'Video',
-      hidden: ({ document }) => !document._id.endsWith('staticPages.home'),
-    },
-    {
-      name: 'linkBlock1',
-      type: 'linkblock',
-      title: 'Link Block #1',
-      hidden: ({ document }) => !document._id.endsWith('staticPages.home'),
-    },
-    {
-      name: 'linkBlock2',
-      type: 'linkblock',
-      title: 'Link Block #2',
-      hidden: ({ document }) => !document._id.endsWith('staticPages.home'),
     },
   ],
 }

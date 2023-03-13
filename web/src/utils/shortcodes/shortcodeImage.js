@@ -9,12 +9,16 @@ const imageShortcode = async (
   loading,
   decoding,
   widths,
-  classes
+  classes,
+  animated
 ) => {
   const metadata = await Image(src, {
     widths: widths || [300, 600],
-    formats: formats || ['avif', 'png'],
+    formats: animated ? ['webp', 'gif'] : formats || ['avif', 'png'],
     outputDir: path.join('_site', 'img'),
+    sharpOptions: {
+      animated: animated || false
+    }
   })
 
   const imageAttributes = {

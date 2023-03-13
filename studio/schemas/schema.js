@@ -1,44 +1,46 @@
-// First, we must import the schema creator
-// eslint-disable-next-line
-import createSchema from 'part:@sanity/base/schema-creator'
-
-// Then import schema types from any plugins that might expose them
-// eslint-disable-next-line
-import schemaTypes from 'all:part:@sanity/base/schema-type'
-
 // Document schemas
 import route from './documents/route'
 import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
+import brands from './documents/brands'
+import shop from './documents/shop'
 
 // Object types
+import category from './objects/category'
 import bodyPortableText from './objects/bodyPortableText'
 import basicPortableText from './objects/basicPortableText'
 import bioPortableText from './objects/bioPortableText'
 import excerptPortableText from './objects/excerptPortableText'
 import seo from './objects/seo'
+import review from './objects/review'
 import social from './objects/social'
 import linkBlock from './objects/linkblock'
 import mainImage from './objects/mainImage'
+import basicImage from './objects/basicImage'
 import logoImage from './objects/logoImage'
-import youtube from './objects/youtube'
+
+import productOptions from './objects/productOptions'
+import sku from './objects/sku'
 
 // Then we give our schema to the builder and provide the result to Sanity
-export default createSchema({
-  name: 'default',
-  types: schemaTypes.concat([
-    siteSettings,
-    staticPages,
-    route,
-    seo,
-    social,
-    linkBlock,
-    mainImage,
-    logoImage,
-    youtube,
-    bodyPortableText,
-    basicPortableText,
-    bioPortableText,
-    excerptPortableText,
-  ]),
-})
+export default [
+  siteSettings,
+  staticPages,
+  route,
+  brands,
+  shop,
+  seo,
+  review,
+  social,
+  linkBlock,
+  mainImage,
+  basicImage,
+  logoImage,
+  category,
+  bodyPortableText,
+  basicPortableText,
+  bioPortableText,
+  excerptPortableText,
+  productOptions,
+  sku,
+]
