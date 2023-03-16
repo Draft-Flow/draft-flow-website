@@ -6,10 +6,11 @@ const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 const getYouTubeId = require('get-youtube-id')
 const markdownIt = require('markdown-it')
 
+const imageURL = require('./src/utils/shortcodes/shortcodeImageURL')
+const bannerImageURL = require('./src/utils/shortcodes/shortcodeBannerURL')
 const imageShortcode = require('./src/utils/shortcodes/shortcodeImage')
 const cardImageShortcode = require('./src/utils/shortcodes/shortcodeCardImage')
 const bannerImageShortcode = require('./src/utils/shortcodes/shortcodeBannerImage')
-const bannerImageFromRefShortcode = require('./src/utils/shortcodes/shortcodeBannerImageFromRef')
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
 const crumbShortcode = require('./src/utils/shortcodes/shortcodeCrumbs')
 const shuffleFilter = require('./src/utils/filters/shuffle')
@@ -54,10 +55,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('cardImage', cardImageShortcode)
   eleventyConfig.addNunjucksAsyncShortcode('bannerImage', bannerImageShortcode)
-  eleventyConfig.addNunjucksAsyncShortcode(
-    'bannerImageFromRef',
-    bannerImageFromRefShortcode
-  )
 
   // Inline SVG
   eleventyConfig.addNunjucksAsyncShortcode('svgIcon', inlineSVGShortcode)
@@ -72,25 +69,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPairedShortcode('jsbundle', jsBundle)
 
   // Convert Sanity image assets into URLs
-  eleventyConfig.addShortcode(
-    'imageUrlFor',
-    (image, width = '600', options) => {
-      if (!image) {
-        return null
-      }
-      return urlFor(image).width(width).url()
-    }
-  )
+  eleventyConfig.addShortcode('imageUrlFor', imageURL)
 
-  eleventyConfig.addShortcode(
-    'imageBannerUrlFor',
-    (image, width = '600', options) => {
-      if (!image) {
-        return null
-      }
-      return urlFor(image).blur(2).saturation(-100).width(width).url()
-    }
-  )
+  // Get URL for banner image
+  eleventyConfig.addShortcode('imageBannerUrlFor',  bannerImageURL)
 
   // Inspect content
   eleventyConfig.addFilter('console', function(value) {
@@ -127,6 +109,13 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('categoryFilter', (collection, category) => {
     if (!category) return collection;
       const filtered = collection.filter(item => item.data.eleventyNavigation.parent == category)
+      return filtered;
+  })
+
+  // Parent Category Filter
+  eleventyConfig.addFilter('categoryParentFilter', (collection, category) => {
+    if (!category) return collection;
+      const filtered = collection.filter(item => item.data.mainCategory.key == category)
       return filtered;
   })
 

@@ -1,5 +1,19 @@
 const groq = require('groq')
+const { toHTML } = require('@portabletext/to-html')
+const serializers = require('../utils/serializers')
 const client = require('../utils/sanityClient')
+
+const generateDoc = async (doc) => {
+  try {
+  return {
+    ...doc,
+    body: toHTML(doc.description, { components: serializers })
+  }
+  } catch (err) {
+    // eslint-disable-next-line
+    console.error(err)
+  }
+}
 
 const getProductSubCategories = async () => {
   const filter = groq`*[_type == "category" && defined(parent)]`
@@ -16,6 +30,7 @@ const getProductSubCategories = async () => {
       "ref": asset._ref,
       alt
     },
+    description
   }`
 
   const order = ''
@@ -25,7 +40,14 @@ const getProductSubCategories = async () => {
     console.error(err)
   })
   
-  return docs
+  const prepareDocs = await Promise.all(
+    docs.map(async (doc) => {
+      const preparedDoc = await generateDoc(doc)
+      return preparedDoc
+    })
+  )
+  
+  return prepareDocs
 }
 
 module.exports = getProductSubCategories

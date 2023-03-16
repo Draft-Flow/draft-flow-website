@@ -55,6 +55,17 @@ export default {
       validation: Rule =>Rule.required()
     },
     {
+      name: 'images',
+      type: 'array',
+      title: 'Images',
+      of: [
+        {
+          type: 'basicImage',
+        }
+      ],
+      validation: Rule =>Rule.required().min(1)
+    },
+    {
       name: 'content',
       type: 'bodyPortableText',
       title: 'Content',

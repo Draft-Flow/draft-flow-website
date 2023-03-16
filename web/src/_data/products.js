@@ -50,7 +50,18 @@ const getProducts = async () => {
         alt
       }
     },
-    content
+    content,
+    options[] {
+      name,
+      skus[] {
+        name,
+        partNumber,
+        price,
+      },
+      images[] {
+        "ref": asset._ref
+      }
+    }
   }`
 
   const order = ''

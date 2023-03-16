@@ -49,7 +49,12 @@ export default {
       type: 'mainImage',
       title: 'Banner Image',
       validation: Rule =>Rule.required()
-    }
+    },
+    {
+      name: 'description',
+      type: 'bodyPortableText',
+      title: 'Description'
+    },
   ],
   // Customise the preview so parents are visualised in the studio
   preview: {

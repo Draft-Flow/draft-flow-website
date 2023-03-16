@@ -1,5 +1,4 @@
 const { getFileAsset } = require('@sanity/asset-utils')
-const imageUrl = require('./imageUrl')
 
 const { sanity } = require('../client-config')
 
@@ -8,13 +7,6 @@ module.exports = {
   types: {
     supporterReference: ({ value }) =>
       `<a href="/supporters/${value.slug.current}">${value.name}</a>`,
-    mainImage: ({ value }) =>
-      `<figure class="image">
-        <img src="${imageUrl(value.asset._ref).width(1000).url()}" alt="${
-        value.alt
-      }" title="${value.caption}" async />
-        <figcaption>${value.caption}</figcaption>
-      </figure>`,
     youtube: ({ value }) =>
       `<div class="videoWrapper">
         <iframe width="560" height="315" src="${value.url}" title="YouTube video" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
