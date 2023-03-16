@@ -6,47 +6,53 @@
 {% endset %}
 {% endif %}
 
-{% set logoSrc %}
-  {% imageUrlFor product.brand.logo.ref, 900 %}
-{% endset %}
-
 {% set crumbsJSON = collections.shop | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+{% set logoSrc %}{% imageUrlFor product.brand.logo.ref, 900 %}{% endset %}
+{% set logoAlt = product.brand.logo.alt %}
+{% set tertiaryTitle = oneLiner %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerLarge.njk' %}
+{% endblock %}
 
 {% block content %}
-<section class="w-full overflow-hidden md:h-[30em] lg:h-[35em] relative">
-  <div class="w-full md:absolute md:top-1/2 md:-translate-y-1/2 vintage-banner">
-    {% if bannerSrc %}
-      {% bannerImage bannerSrc, product.banner.alt %}
-    {% endif %}
-  </div>
-  <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-df-tan via-df-tan/50 to-df-tan/20 flex items-center">
-    <div class="w-full px-2 lg:px-4 flex flex-col items-center mt-12 sm:mt-0">
-      {% image logoSrc, product.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 900], 'w-24 md:w-40 lg:w-56' %}
-      <h1 class="w-full px-2 lg:px-4 text-center mt-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
-      {{ title }}
-      </h1>
-      <span class="px-2 bg-df-black/50 text-df-tan-dark font-df md:text-xl lg:text-2xl uppercase tracking-wide">{{ oneLiner }}</span>
-    </div>
-  </div>
-</section>
-<div class="bg-df-black-light -mt-[1vw] -skew-y-[1deg] h-[3vw] min-h-[30px] max-h-[40px] flex flex-col justify-center items-center px-2 lg:px-4">
-  <div class="max-w-7xl w-full -skew-x-[1deg]">
-    {% crumbs crumbsJSON %}
-  </div>
-</div>
-  <section class="flex justify-center px-2 lg:px-4">
-    <div class="max-w-6xl w-full py-20">
-      {{ title }}
-
-       
-       
-                    <a href="/brands/{{ product.brand.slug }}/">
-                        {% image logoSrc, product.brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-                    </a>
-          
-      
-      <div class="description">
-        {{ product.body | safe }}
+  <section class="flex justify-center px-2 lg:px-4 bg-white">
+    <div class="max-w-7xl w-full py-20 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+      <div>
+        <div>
+          {% if options[0].images[0] %}
+            {% image options[0].images[0], title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [1500, 1000], 'object-cover w-full' %}
+          {% endif %}
+        </div>
+        <ul class="grid grid-cols-4 gap-4">
+          {% if options.length > 1 %}
+          {% for option in options %}
+            {% for image in option.images  %}
+            <li>
+              {% image image, option.name, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [200, 400], 'object-cover w-full' %}
+            </li>
+            {% endfor %}
+          {% endfor %}
+          {% endif %}
+        </ul>
+        <a href="/brands/{{ brand.slug }}/">
+            {% image logoSrc, brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
+        </a>
+      </div>
+      <div class="">
+        <h2 class="text-3xl font-bold font-df-sans uppercase">
+          <span class="text-zinc-500">{{ brand.name }}</span> {{ title }}
+        </h2>
+        
+        <div class="">
+          {{ body | safe }}
+        </div>
+        <div>
+          {{ options | dump }}
+          {% for option in options %}
+          {{ option | dump}}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </section>

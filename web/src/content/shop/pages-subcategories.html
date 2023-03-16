@@ -13,6 +13,7 @@ permalink: shop/{{ subcategory.slug }}/index.html
 eleventyComputed: 
   title: "{{ subcategory.title }}"
   parentTitle: "{{ subcategory.parent.title }}"
+  body: "{{ subcategory.body }}"
   banner:
     ref: "{{ subcategory.banner.ref }}"
     alt: "{{ subcategory.banner.alt }}"

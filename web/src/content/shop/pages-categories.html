@@ -11,6 +11,7 @@ pagination:
 permalink: shop/{{ category.slug }}/index.html
 eleventyComputed:
   title: "{{ category.title }}"
+  body: "{{ subcategory.body }}"
   eleventyNavigation:
     parent: "Shop"
     key: "{{ category.categoryID }}"

@@ -1,16 +1,9 @@
 {% extends 'layouts/base/index.njk' %}
 
-{%- set pageContent = pages | getPage(pageID) -%}
-{%- set bannerImageLg -%}
-  {%- imageUrlFor pageContent.banner.asset._ref, 2000 -%}
-{%- endset -%}
-
-{% set bannerTitle = pageContent.title %}
+{% set bannerTitle = "Contact" %}
 
 {% block banner %}
-  {% if bannerImageLg %}
-    {% include "../includes/bannerSmall.njk" %}
-  {% endif %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
 {% endblock %}
 
 {% block content %}
