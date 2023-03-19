@@ -3,7 +3,7 @@ import route from './documents/route'
 import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
 import brands from './documents/brands'
-import shop from './documents/shop'
+import shop from './documents/products'
 
 // Object types
 import category from './objects/category'

@@ -12,7 +12,7 @@ export default {
       title: 'Alternative text',
       description: 'Important for SEO and accessiblity.',
       validation: (Rule) =>
-        Rule.error('You have to fill out the alternative text.').required(),
+        Rule.custom((value, { parent }) => parent?.asset && !value ? 'Alt text is required' : true) 
     },
   ],
   preview: {

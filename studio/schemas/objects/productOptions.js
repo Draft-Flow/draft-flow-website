@@ -13,7 +13,7 @@ export default {
       name: 'images',
       type: 'array',
       title: 'Images',
-      of: [{type: 'image'}],
+      of: [{type: 'basicImage'}],
       validation: Rule =>Rule.required().min(1)
     },
     {
@@ -24,7 +24,6 @@ export default {
       validation: Rule =>Rule.required().min(1)
     }
   ],
-  // Customise the preview so parents are visualised in the studio
   preview: {
     select: {
       title: 'name',

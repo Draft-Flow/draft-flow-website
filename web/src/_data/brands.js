@@ -21,6 +21,7 @@ const generateDoc = async (doc) => {
 const getBrands = async () => {
   const filter = groq`*[_type == "brand"]`
   const projection = groq`{
+    "id": _id,
     name,
     "slug": slug.current,
     logo {
@@ -37,15 +38,6 @@ const getBrands = async () => {
       alt
     },
     review,
-    "products": *[_type=='shop' && references(^._id)]{
-      name,
-      "slug":${generateProductSlug()},
-      banner {
-        "ref": asset._ref,
-        alt
-      },
-      oneLiner
-    },
     oneLiner,
     ourDescription,
     theirDescription

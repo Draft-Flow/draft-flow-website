@@ -10,13 +10,13 @@ pagination:
   addAllPagesToCollections: true
 permalink: brands/{{ brand.slug | slugify }}/index.html
 eleventyComputed:
+  id: "{{ brand.id }}"
   title: "{{ brand.name }}"
   oneLiner: "{{ brand.oneLiner }}"
   intro: "{{ brand.intro }}"
   ourDescription: "{{ brand.ourDescription }}"
   theirDescription: "{{ brand.theirDescription }}"
   website: "{{ brand.website }}"
-  products: "{{ brand.products }}"
   banner: "{{ brand.banner }}"
   review: "{{ brand.review }}"
   eleventyNavigation:

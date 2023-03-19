@@ -10,60 +10,38 @@
 {% endset %}
 
 {% set crumbsJSON = collections.brands | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+{% set logoAlt = title %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerLarge.njk' %}
+{% endblock %}
 
 {% block content %}
-  <section class="w-full overflow-hidden md:h-[30em] lg:h-[35em] relative">
-    <div class="w-full md:absolute bottom-0 vintage-banner">
-      {% if bannerSrc %}
-        {% image bannerSrc, brand.banner.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [700, 'auto'], 'w-full' %}
-      {% endif %}
-    </div>
-    <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-df-tan via-df-tan/50 to-df-tan/20 flex items-center">
-      <div class="w-full px-2 lg:px-4 flex justify-center md:mb-8">
-      {% image logoSrc, brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 900], 'w-full max-w-lg' %}
-      </div>
-    </div>
-  </section>
-  <div class="bg-df-black-light -mt-[1vw] -skew-y-[1deg] h-[3vw] min-h-[30px] max-h-[40px] flex flex-col justify-center items-center px-2 lg:px-4">
-    <div class="max-w-7xl w-full -skew-x-[1deg]">
-      {% crumbs crumbsJSON %}
-    </div>
-  </div>
   <section class="flex justify-center px-2 lg:px-4">
     <div class="max-w-7xl w-full mt-8 sm:mt-12 lg:mt-16">
-      <h1 class="sm:float-left text-black mr-4 mb-2 sm:-mb-2 lg:-mb-6 text-5xl sm:text-6xl lg:text-9xl font-bold font-df-sans uppercase tracking-tighter">
-        {{ title }}
-      </h1>
-      <div class="text-base sm:text-lg lg:text-3xl -mt-1 max-w-prose leading-relaxed mb-8 lg:mb-16">
+      <div class="text-base sm:text-lg lg:text-3xl text-center -mt-1 max-w-prose mx-auto leading-relaxed mb-8 lg:mb-16">
         {{ brand.intro | safe }}
         <a href="#info">Read More</a>
       </div>
-      {% if brand.products.length > 0 %}
       <h2 class="clear-both text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-shadow text-df-orange font-black uppercase text-center -rotate-3 -skew-x-3 mb-4 lg:mb-8 font-df-sans">Products</h2>
       <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-8">
-      {% for product in brand.products %}
-        <li data-type="card" class="relative aspect-square overflow-hidden border border-df-black">
-          {% if product.banner.ref %}
-            <div class="absolute h-full flex">
-            {% set productSrc %}
-              {% imageUrlFor product.banner.ref, 1000 %}
-            {% endset %}
-            {% image productSrc, product.banner.alt, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [1500, 1000], 'object-cover h-full' %}
-            </div>
-          {% endif %}
-          <div class="relative z-10 flex w-full h-full flex flex-col justify-between">
-          <a class="block w-full text-center font-df-sans font-bold uppercase bg-df-black/90 text-lg text-df-orange py-1 px-2" href="/shop/{{ product.slug }}">
-            {{ product.name }}
+      {% for product in collections.products | brandFilter(brand.id) %}
+        <li data-type="card" class="bg-white pt-2 pb-1 px-2 rounded-sm relative flex flex-col overflow-hidden">
+          <a class="block w-full text-center font-df-sans font-bold uppercase text-2xl text-df-orange py-1" href="{{ product.url }}">
+            {{ product.data.title }}
           </a>
-          <div class="text-center bg-df-black/90 text-white text-sm text-zinc-300 py-1 px-2">
-            {{ product.oneLiner }}
+          <div class="aspect-video mt-auto">
+          {% if product.data.options[0].images[0] %}
+            {% image product.data.options[0].images[0], product.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [1500, 1000], 'object-cover w-full' %}
+          {% endif %}
           </div>
+          <div class="text-center font-df uppercase text-sm text-df-gray py-1">
+            {{ product.data.oneLiner }}
           </div>
         </li>
       {% endfor %}
       </ul>
       <div class="mx-auto text-sm text-center max-w-sm mt-4">Looking for something else from {{ title }}? We'd be happy to get it in stock. Please <a class="font-bold text-df-blue" href="/contact/">get in touch</a></div>
-      {% endif %}
       <div class="clear-both mt-8 lg:mt-16">
         <h2 id="info" class="pt-24 -mt-24 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-shadow font-df-sans text-df-orange font-black uppercase text-center -rotate-3 -skew-x-3 mb-4 lg:mb-8">
           About

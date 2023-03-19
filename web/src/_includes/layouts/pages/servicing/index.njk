@@ -1,0 +1,14 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set bannerSrc =  'src/static/images/banner-service.jpg' %}
+{% set bannerTitle = title %}
+
+{% set crumbsJSON = collections.main | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
+
+{% block content %}
+{{ pageContent }}
+{% endblock %}

@@ -16,7 +16,7 @@ export default defineConfig({
     deskTool({
       structure: deskStructure
     }),
-    visionTool()
+    visionTool(),
   ],
   tools: (prev, context) => {
     const isAdmin = context.currentUser.roles

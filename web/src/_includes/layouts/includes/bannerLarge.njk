@@ -1,3 +1,11 @@
+{% set logoSize %}
+  {% if not bannerTitle %}
+    w-full max-w-lg
+  {% else %}
+    w-24 md:w-40 lg:w-56
+  {% endif %}
+{% endset %}
+
 <section class="w-full overflow-hidden md:h-[30em] lg:h-[35em] relative">
   <div class="w-full md:absolute md:top-1/2 md:-translate-y-1/2 vintage-banner">
     {% if bannerImage %}
@@ -9,13 +17,13 @@
   <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-df-tan via-df-tan/50 to-df-tan/20 flex items-center">
     <div class="w-full px-2 lg:px-4 flex flex-col items-center mt-12 sm:mt-0">
       {% if logoSrc and logoAlt %}
-        {% image logoSrc, logoAlt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 900], 'w-24 md:w-40 lg:w-56' %}
+        {% image logoSrc, logoAlt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 900], logoSize %}
       {% endif %}
       <h1 class="w-full px-2 lg:px-4 text-center mt-2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-shadow font-df-sans text-df-orange font-black uppercase">
-      {{ title }}
+      {{ bannerTitle }}
       </h1>
       {% if tertiaryTitle %}
-      <span class="px-2 bg-df-black/50 text-df-tan-dark font-df md:text-xl lg:text-2xl uppercase tracking-wide">
+      <span class="px-2 bg-df-black/70 text-df-tan-dark font-df md:text-xl lg:text-2xl uppercase tracking-wide">
         {{ tertiaryTitle }}
       </span>
       {% endif %}

@@ -35,9 +35,9 @@
           <a class="block w-full text-center font-df-sans font-bold uppercase text-2xl text-df-orange py-1" href="{{ product.url }}">
             {{ product.data.title }}
           </a>
-          <div class="aspect-square mt-auto">
-          {% if product.data.images[0] %}
-            {% image product.data.images[0], product.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [1500, 1000], 'object-cover h-full' %}
+          <div class="aspect-video mt-auto">
+          {% if product.data.options[0].images[0] %}
+            {% image product.data.options[0].images[0], product.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [1500, 1000], 'object-cover w-full' %}
           {% endif %}
           </div>
           <div class="text-center font-df uppercase text-sm text-df-gray py-1">

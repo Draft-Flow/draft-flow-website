@@ -38,26 +38,6 @@
     </a> 
   </div>
 
-  {% set services = [
-    {title: 'Custom', description: 'Your dream bike,'},
-    {title: 'New Bikes', description: 'From stock to custom, we can source or build a bike to suit your needs. '},
-    {title: 'Parts', description: 'Take your bike, and your riding, to the next level. A quick, single upgrade can completely change your bike. Wide range of components from top manufacturers.'}
-  ]%}
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 mt-4">
-    <ul class="lg:mx-auto w-full max-w-7xl mt-12 grid gap-12 md:gap-8 lg:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row">
-      {% for service in services %}
-        <li class="align-text-top p-2 flex flex-col items-center">
-            <a href="/" class="inline-block mx-auto text-center font-df-sans font-semibold uppercase text-xl lg:text-3xl hover:text-df-blue border-4 border-zinc-500 border-double pt-2 px-2 lg:px-4 pb-1 -mt-8 lg:-mt-10 mb-3 bg-df-tan leading-none">
-              {{ service.title | safe }}
-            </a>
-            <p class="leading-5 text-justify">
-              {{ service.description | safe }}
-            </p>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-  
   {# Shop #}
   <div>
     <a class="flex justify-center items-center h-48 text-4xl" href="/shop/">Shop</a>
