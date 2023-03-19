@@ -121,6 +121,13 @@ module.exports = function (eleventyConfig) {
       return filtered;
   })
 
+  // Brand Filter
+  eleventyConfig.addFilter('brandFilter', (collection, brand) => {
+    if (!brand) return collection;
+      const filtered = collection.filter(item => item.data.brand.id == brand)
+      return filtered;
+  })
+
   // Get YouTube Video ID
   eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url))
 

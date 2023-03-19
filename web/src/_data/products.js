@@ -42,6 +42,7 @@ const getProducts = async () => {
       alt
     },
     brand->{
+      "id": _id,
       name,
       website,
       "slug": slug.current,
@@ -54,7 +55,7 @@ const getProducts = async () => {
     options[] {
       name,
       skus[] {
-        name,
+        attributes,
         partNumber,
         price,
       },

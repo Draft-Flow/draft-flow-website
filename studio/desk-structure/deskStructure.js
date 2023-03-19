@@ -5,16 +5,6 @@ export default (S, { documentStore }) =>
   S.list()
     .title('Content')
     .items([
-      parentChild(S, documentStore, 'category'),
-      S.listItem()
-        .title('Shop')
-        .icon(FaShoppingCart)
-        .schemaType('shop')
-        .child(id => 
-            S.documentTypeList('shop')
-            .title('Products')
-        ),
-      S.divider(),
       S.documentListItem()
         .schemaType('siteSettings')
         .title('Site settings')
@@ -23,6 +13,17 @@ export default (S, { documentStore }) =>
             .schemaType('siteSettings')
             .documentId('21987cfd-3189-4b89-82e9-b3df24e1f332')
         ),
+      S.divider(),
+      parentChild(S, documentStore, 'category'),
+      S.listItem()
+        .title('Products')
+        .icon(FaShoppingCart)
+        .schemaType('shop')
+        .child(id => 
+            S.documentTypeList('shop')
+            .title('Products')
+        ),
+      S.divider(),
       S.listItem()
         .title('Static Pages')
         .icon(FaFile)
