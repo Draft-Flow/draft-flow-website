@@ -107,6 +107,13 @@ module.exports = function (eleventyConfig) {
     return new CleanCSS({}).minify(code).styles
   })
 
+   // Page Child Filter
+   eleventyConfig.addFilter('childFilter', (collection, key) => {
+    if (!key) return collection;
+      const filtered = collection.filter(item => item.data.eleventyNavigation.parent == key)
+      return filtered;
+  })
+
   // Category Filter
   eleventyConfig.addFilter('categoryFilter', (collection, category) => {
     if (!category) return collection;

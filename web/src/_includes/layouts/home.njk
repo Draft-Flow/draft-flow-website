@@ -3,10 +3,10 @@
 {%- set pageContent = pages | getPage(pageID) -%}
 
 {% set features = [
-  {text: 'Full Service', color: 'bg-df-black'},
+  {text: 'Quality Guaranteed', color: 'bg-df-black'},
   {text: 'Genuine Parts', color: 'bg-df-orange-dark'},
   {text: 'Simple Pricing', color: 'bg-df-blue'},
-  {text: 'Quality Guaranteed', color: 'bg-df-black'}
+  {text: 'Fully Insured', color: 'bg-df-black'}
 ]%}
 
 {% block content %}
@@ -23,19 +23,21 @@
       </li>
       {% endfor %}
     </ul>
-    <div class="w-full mt-2 lg:mt-0 vintage opacity-80 z-10">
-      {% image 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', "(min-width: 0em) 100vw", null, 'eager', null, [600, 1000, 2000], 'w-full' %}
+    <div class="relative">
+      <div class="w-full mt-2 lg:mt-0 vintage opacity-60 z-10">
+        {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models' %}
+      </div>
+      <div class="w-full bottom-0 md:bottom-[15%] absolute px-2 lg:px-4 flex flex-col justify-end items-center bg-gradient-to-b from-df-tan/0 via-df-tan/50 to-df-tan/80 pt-12 pb-20 -mb-20">
+        <a class="cta large" href="/bike-servicing/servicing/">
+          View Services
+        </a> 
+        <div class="justify-self-end">
+          <blockquote class="font-script rotate-[-6deg] skew-x-[6deg] text-3xl md:text-4xl xl:text-6xl text-center leading-6 text-gray-800 whitespace-pre-line">
+          Top-notch service supplied, for&nbsp;whatever&nbsp;you&nbsp;ride
+          </blockquote>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="mx-auto px-4 max-w-6xl px-4 sm:px-6 flex justify-center rotate-[-10deg] -translate-y-4 md:-translate-y-12 xl:-translate-y-32">
-    <blockquote class="font-script skew-x-[10deg] text-3xl md:text-4xl xl:text-6xl text-center leading-6 text-gray-800 whitespace-pre-line">
-     Top-notch service supplied, for&nbsp;whatever&nbsp;you&nbsp;ride
-    </blockquote>
-  </div>
-  <div class="mx-auto max-w-6xl px-2 lg:px-4 flex justify-center lg:justify-end my-8 lg:my-0 lg:-translate-y-12">
-    <a class="cta large lg:mr-4" href="/contact/">
-      Book A Service
-    </a> 
   </div>
 
   {# Shop #}
@@ -111,7 +113,7 @@
     </script>
   </div>
 
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-8 border-t border-zinc-400 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-8">
+  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:py-8 border-t border-zinc-400 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-8">
     <div class="col-span-3">
       <h2>Social Rides</h2>
     </div>

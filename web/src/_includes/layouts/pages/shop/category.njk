@@ -14,7 +14,7 @@
       {% for subcategory in collections.subcategories | categoryFilter(eleventyNavigation.key) %}
         <li data-type="card" class="relative aspect-video overflow-hidden">
           {% if subcategory.data.banner.ref %}
-            <div class="absolute h-full flex">
+            <div class="absolute h-full flex vintage-banner">
             {% set imageSrc %}
               {% imageBannerUrlFor subcategory.data.banner.ref, 1000 %}
             {% endset %}

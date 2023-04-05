@@ -106,6 +106,22 @@ header.stuck .icons svg {
   @apply opacity-0;
 }
 
+@layer components {
+  /* Parent description */
+  .parent-description {
+    @apply mx-auto text-lg md:text-xl lg:text-2xl mb-8 ;
+  }
+
+  .parent-description p {
+    @apply mb-4 lg:mb-6 leading-snug;
+  }
+
+  .parent-description p a,
+  .parent-description p li {
+    @apply underline text-df-orange-xdark italic font-medium hover:text-df-orange-dark;
+  }
+}
+
 /* Utility Styles */
 .outlined {
   -webkit-text-stroke: 1px #000000;
@@ -124,7 +140,7 @@ header.stuck .icons svg {
 }
 
 .cta {
-  @apply h-[1.8em] inline-flex items-center font-df-sans font-bold text-lg lg:text-2xl pl-[0.5em] pr-[0.25em] pt-[0.2em] uppercase relative bg-df-blue text-white whitespace-nowrap transition-colors duration-100;
+  @apply h-[1.8em] inline-flex flex-col justify-center items-center text-center font-df-sans font-bold text-lg lg:text-2xl pl-[0.5em] pr-[0.25em] pt-[0.2em] uppercase relative bg-df-blue text-white whitespace-nowrap transition-colors duration-100;
 }
 
 .cta:hover {

@@ -1,6 +1,6 @@
 ---
-layout: layouts/pages/page.njk
-pageID: staticPages.about
+layout: layouts/page.njk
+bannerImage: src/static/images/banner-upgrades.jpg
 title: Parts & Upgrades
 tags:
   - main
@@ -10,3 +10,22 @@ eleventyNavigation:
   title: Parts & Upgrades
   order: 2
 ---
+
+_**Take your bike and riding to the next level**_
+
+Looking to upgrade your riding? An update to your bike's components can completely change your riding. A fresh set of wheels or tyres, updated drivetrain, hydraulic brakes, new suspension, bike bags for a big adventure, or even a different handlebar can drastically change how your bike performs. 
+
+We're an official dealer for a [wide range of top bike and outdoor brands](/brands/) and can help with any bike modifications desired. We highly recommend the brands we carry and are more than happy to give honest gear advice. Click a brand below to learn more. 
+<ul class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-4 md:gap-8">
+{% for brand in collections.brand_pages %}
+{% set imageSrc %}
+    {% imageUrlFor brand.data.brand.logo.ref, 900 %}
+{% endset %}
+<li class="flex justify-center items-center px-8 sm:px-0">
+    <a href="{{ brand.url }}" title="{{ brand.data.title }}">
+        {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
+    </a>
+</li>
+{% endfor %}
+</ul>
+
