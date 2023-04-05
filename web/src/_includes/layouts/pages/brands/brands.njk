@@ -20,7 +20,7 @@
             {% imageUrlFor brand.data.brand.logo.ref, 900 %}
         {% endset %}
         <li class="flex justify-center items-center px-8 sm:px-0">
-            <a href="{{ brand.url }}" title="{{ brand.name }}">
+            <a href="{{ brand.url }}" title="{{ brand.data.title }}">
                 {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
             </a>
         </li>

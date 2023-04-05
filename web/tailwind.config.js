@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.njk', './src/**/*.md', './src/utils/shortcodes/**/*.js'],
+  content: ['./src/**/*.njk', './src/**/*.md', './src/**/*.html', './src/utils/shortcodes/**/*.js'],
   theme: {
     extend: {
       colors: {
@@ -16,7 +16,8 @@ module.exports = {
         },
         'df-orange':  {
           DEFAULT: '#F85707',
-          dark: '#C24D13'
+          dark: '#C24D13',
+          xdark: '#A14010'
         },
         'df-gray': {
           DEFAULT: '#2f2f2f',
