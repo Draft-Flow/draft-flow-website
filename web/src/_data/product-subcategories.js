@@ -30,7 +30,8 @@ const getProductSubCategories = async () => {
       "ref": asset._ref,
       alt
     },
-    description
+    description,
+    oneLiner
   }`
 
   const order = ''

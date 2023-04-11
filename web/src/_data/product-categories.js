@@ -21,7 +21,8 @@ const getProductCategories = async () => {
     title,
     "categoryID": _id,
     "slug": slug.current,
-    description
+    description,
+    oneLiner
   }`
 
   const order = ''

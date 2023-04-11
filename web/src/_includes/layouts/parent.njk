@@ -12,9 +12,9 @@
     {% if children.length == 2 %}
       sm:grid-cols-2
     {% elif children.length == 3 %}
-      sm:grid-cols-3
+      sm:grid-cols-2 md:grid-cols-3
     {% else %}
-      sm:grid-cols-4
+       sm:grid-cols-2 xl:grid-cols-4
     {% endif %}
     ">
     {% for child in children %}
