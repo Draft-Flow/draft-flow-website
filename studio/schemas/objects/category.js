@@ -55,6 +55,11 @@ export default {
       type: 'bodyPortableText',
       title: 'Description'
     },
+    {
+      name: 'oneLiner',
+      type: 'string',
+      title: 'One-Liner'
+    },
   ],
   // Customise the preview so parents are visualised in the studio
   preview: {
