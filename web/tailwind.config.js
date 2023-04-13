@@ -9,7 +9,8 @@ module.exports = {
         },
         'df-blue': {
           DEFAULT: '#1F3579',
-          dark: '#121E44'
+          dark: '#121E44',
+          light: '#2A3C77'
         },
         'df-yellow': {
           DEFAULT: '#E8AD14'
@@ -21,7 +22,8 @@ module.exports = {
         },
         'df-gray': {
           DEFAULT: '#2f2f2f',
-          dark: '#282829'
+          dark: '#282829',
+          light: '#636363'
         },
         'df-tan': {
           DEFAULT: '#f0eee3',

@@ -117,7 +117,7 @@ header.stuck .icons svg {
   }
 
   .parent-description p a,
-  .parent-description p li {
+  .parent-description li a {
     @apply underline text-df-orange-xdark italic font-medium hover:text-df-orange-dark;
   }
 
@@ -177,11 +177,19 @@ header.stuck .icons svg {
 }
 
 .cta.small {
-  @apply text-sm  lg:text-base;
+  @apply text-sm lg:text-base;
 }
 
 .cta.xsmall {
   @apply text-sm;
+}
+
+.cta.tan {
+  @apply text-df-tan;
+}
+
+.cta.light {
+  @apply bg-df-blue-light hover:bg-df-blue;
 }
 
 .cta:after {
@@ -201,6 +209,10 @@ header.stuck .icons svg {
   animation-iteration-count: infinite;
   animation-direction: normal; */
   @apply border-l-df-blue-dark;
+}
+
+.subscribe-email::placeholder {
+  @apply text-gray-700;
 }
 
 @keyframes animateCTA {

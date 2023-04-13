@@ -1,17 +1,8 @@
 {% set secondaryNavPages = collections.secondary | eleventyNavigation %}
 {% set tertiaryNavPages = collections.tertiary | eleventyNavigation %}
 
-<footer class="text-center text-df-gray">
-    <div class="px-2 lg:px-4 py-6 mb-6 border-t-2 border-df-gray">
-        <div class="max-w-prose mx-auto flex flex-col">
-            <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide mb-2">Quality Customer Service</h3>
-            <p class="text-lg leading-6 text-justify-center">We're always up for talkin' bikes, adventure, and gear. Give us a ring or let's have a chat over a great cup of coffee / pint of beer. We're thrilled to learn what you're looking for and how we&nbsp;can&nbsp;help.</p>
-            <div class="mt-8">
-                <a class="cta" href="{{ '/contact/' | url }}">Let's Chat</a>
-            </div>
-        </div>
-    </div>
-    <div class="px-2 lg:px-4 py-4 py-6 lg:py-10 border-t border-df-gray">
+<footer class="text-df-gray">
+    <div class="px-2 lg:px-4 py-4 py-6 lg:py-10 border-t border-df-gray text-center">
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods from</h3>
             <ul class="list-style-none mt-4 md:mt-8 w-full flex justify-center flex-wrap items-center mb-8">
@@ -31,7 +22,20 @@
             </div>
         </div>
     </div>
-    <div class="px-2 lg:px-4 py-6 bg-df-gray text-neutral-100">
+    <div id="subscribe" class="px-2 lg:px-4 py-12 md:py-16 border-t-2 border-df-gray bg-df-gray">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-center lg:items-center text-center lg:text-left">
+            <h3 class="font-df-sans leading-7 text-df-tan flex flex-col lg:justify-center font-black uppercase text-2xl tracking-wide mb-2">
+                <span class="text-base font-medium">Subscribe to  the</span>
+                {{ metadata.title }} Flyer
+                <span class="text-sm uppercase font-normal">For discounts, events, and more</span>
+            </h3>
+            {% include 'src/_includes/layouts/includes/newsletterForm.njk' %}
+        </div>
+        <div class="subscribe-notice hidden max-w-prose mx-auto text-center my-4 text-df-tan font-sans text-xs uppercase ">
+            {% include 'src/_includes/layouts/includes/newsletterNotice.njk' %}
+        </div>
+    </div>
+    <div class="px-2 lg:px-4 py-6 bg-df-black text-neutral-100">
         <div class="text-lg max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start opacity-80">
             <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
                 <li class="lg:h-full">
@@ -53,7 +57,7 @@
                     <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-neutral-100 w-6 h-6' %}</a>
                 </li>
             </ul>
-            <ul class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+            <ul class="grid grid-cols-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
                 {%- for item in secondaryNavPages -%}
                 <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}
@@ -77,14 +81,14 @@
                 {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
             </div>
         </div>
-        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-16 opacity-80">
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-16 opacity-80 text-center">
             <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
                 {%- for item in tertiaryNavPages -%}
                 <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="flex justify-center text-sm opacity-80 mt-8">
+        <div class="flex justify-center text-sm opacity-80 mt-8 text-center">
             <ul class="list-style-none grid grid-flow-row sm:grid-flow-col auto-cols-min whitespace-nowrap gap-x-4 gap-y-2">
                 <li>&copy; {% year %} {{ metadata.company.name }}</li>
                 <li>
@@ -94,3 +98,14 @@
         </div>
     </div>
 </footer>
+
+<script>
+    const subscribeEmail = document.querySelector('#subscribe .subscribe-email')
+    const subscribeNotice = document.querySelector('#subscribe .subscribe-notice')
+
+    subscribeEmail.addEventListener('input', (e) => {
+        if (e.target.validity.valid) {
+            subscribeNotice.classList.remove('hidden')
+        }
+    })
+</script>
