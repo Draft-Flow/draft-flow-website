@@ -2,7 +2,6 @@ const groq = require('groq')
 const { toHTML } = require('@portabletext/to-html')
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
-const generateProductSlug = require('./utils/generateProductSlug')
 
 const generateDoc = async (doc) => {
   try {

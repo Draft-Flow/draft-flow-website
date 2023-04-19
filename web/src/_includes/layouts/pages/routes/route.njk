@@ -1,0 +1,22 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% if route.mainImage.ref %}
+{% set bannerSrc %}
+  {% imageBannerUrlFor route.mainImage.ref, 2000 %}
+{% endset %}
+{% endif %}
+{% set bannerTitle = title %}
+
+{% set crumbsJSON = collections.main | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerLarge.njk' %}
+{% endblock %}
+
+{% block content %}
+Route
+{% for path in route.paths %}
+{{ path | dump }}
+{% endfor %}
+
+{% endblock %}
