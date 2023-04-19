@@ -1,10 +1,10 @@
 const urlFor = require('../imageUrl')
 
-const bannerURL = (src, width = '600') => {
-  if (!src) {
+const bannerURL = (ref, width = '600') => {
+  if (!ref) {
     return null
   }
-  return urlFor(src).blur(2).saturation(-100).width(width).url()
+  return urlFor(ref).blur(2).saturation(-100).width(width).url()
 }
 
 module.exports = bannerURL
