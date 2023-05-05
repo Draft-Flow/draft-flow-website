@@ -1,11 +1,18 @@
 {
   "type": "FeatureCollection",
   "features": [
-{%- set comma = joiner(',') -%}
 {%- for route in collections.route_pages -%}
-  {%- set currentRoute = route.data.route -%}
-  {{ currentRoute.lineString | dump | safe }}
-  {%- if not loop.last -%},{% endif %}
+  {%- set parentLoop = loop -%}
+  {% if route.data.route.area %}
+    {{ route.data.route.area | dump | safe }}
+  {% else %}
+  {%- set paths = route.data.route.paths -%}
+    {% for path in paths %}
+    {{ path.simpleLineString | dump | safe }}
+    {%- if not loop.last -%},{% endif %}
+    {% endfor %}
+  {% endif %}
+  {%- if not parentLoop.last -%},{% endif %}
 {%- endfor -%}
   ]
 }

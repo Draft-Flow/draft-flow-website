@@ -3,67 +3,94 @@ const toGeoJSON = require('@mapbox/togeojson')
 const mapboxgl = require('mapbox-gl')
 const { DOMParser } = require('xmldom')
 const turfLineString = require('@turf/helpers').lineString
+const turfMultiLineString = require('@turf/helpers').multiLineString
+const turfSimplify = require('@turf/simplify')
 const { toHTML } = require('@portabletext/to-html')
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
-//const routeMeta = require('./utils/routeMeta')
+const generateRouteMeta = require('../utils/generateRouteMeta')
 
-const generateDoc = async (route) => {
+const generateRoute = async (route) => {
   try {
-    // let bounds
-    // let llBounds = null
-    // let paths = []
+    let bounds
+    let llBounds = null
+    let paths = []
+    const multiLineStringCoords = []
+    let maxLength = null
+    let maxLengthIDX = null
     
-    // if (route && !!route.paths?.length) {
-    //   paths = await Promise.all(route.paths.map(async (path) => {
-    //     const response = await fetch(path.gpx)
-    //     const xmlString = await response.text()
-    //     const xml = new DOMParser().parseFromString(xmlString)
-    //     const geoJSON = toGeoJSON.gpx(xml)
+    if (route && !!route.paths?.length) {
+      paths = await Promise.all(route.paths.map(async (path, idx) => {
+        const response = await fetch(path.gpx)
+        const xmlString = await response.text()
+        const xml = new DOMParser().parseFromString(xmlString)
+        const geoJSON = toGeoJSON.gpx(xml)
 
-    //     // Remove the unused coordTimes to reduce filesize
-    //     delete geoJSON.features[0].properties.coordTimes
+        // Remove the unused coordTimes to reduce filesize
+        delete geoJSON.features[0].properties.coordTimes
 
-    //     const { coordinates } = geoJSON.features[0].geometry
+        const { coordinates } = geoJSON.features[0].geometry
+        multiLineStringCoords.push(coordinates)
         
-    //     if (!llBounds) {
-    //       llBounds = new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
-    //     }
+        if (!llBounds) {
+          llBounds = new mapboxgl.LngLatBounds(coordinates[0], coordinates[0])
+        }
         
-    //     // eslint-disable-next-line
-    //     for (const coord of coordinates) {
-    //       llBounds.extend(coord)
-    //     }
-    //     console.log('getting meta', path.title)
-    //     const { elevation, elevationGain, elevationLoss, totalDistance } =
-    //       routeMeta(coordinates)
+        // eslint-disable-next-line
+        for (const coord of coordinates) {
+          llBounds.extend(coord)
+        }
+        const { elevation, elevationGain, elevationLoss, totalDistance } =
+        generateRouteMeta(coordinates)
 
-    //     let lineString = null
-    //     if (geoJSON) {
-    //       lineString = turfLineString(coordinates, {
-    //         name: path.title,
-    //         distance: totalDistance,
-    //         ascent: elevationGain,
-    //       })
-    //     }
+        if (!maxLength || elevation.length > maxLength.length) {
+          maxLength = elevation
+          maxLengthIDX = idx
+        }
 
-    //     return {
-    //       elevation,
-    //       elevationGain,
-    //       elevationLoss,
-    //       totalDistance,
-    //       geoJSON,
-    //       lineString,
-    //     }
-    //   }))
+        let lineString = null
+        if (geoJSON) {
+          lineString = turfLineString(coordinates, {
+            name: path.title,
+            slug: route.slug,
+            distance: totalDistance,
+            ascent: elevationGain,
+            color: path.category.color,
+          })
+        }
 
-    //   bounds = llBounds.toArray()
-    // }
+        return {
+          elevation,
+          elevationGain,
+          elevationLoss,
+          totalDistance,
+          geoJSON,
+          lineString,
+          simpleLineString: turfSimplify(lineString, {tolerance: 0.0003, highQuality: false}),
+        }
+      }))
+
+      bounds = llBounds.toArray()
+    }
+
+    const multiLineString = turfMultiLineString(multiLineStringCoords)
+
+    let areaGeoJSON = null
+    if (route.area) {
+      const areaResponse = await fetch(route.area)
+      areaGeoJSON = await areaResponse.json()
+      areaGeoJSON.properties.name = route.title
+      areaGeoJSON.properties.slug = route.slug
+    }
 
     return ({
       ...route,
-      // paths,
-      // bounds,
+      area: areaGeoJSON,
+      paths,
+      multiLineString,
+      maxLength,
+      maxLengthIDX,
+      bounds,
       excerpt: route.excerpt ? toHTML(route.excerpt[0], { components: serializers }) : '', 
       body: route.body ? toHTML(route.body.slice(1), { components: serializers }) : '',
     })
@@ -88,8 +115,14 @@ const getRoutes = async () => {
       title,
       description,
       "gpx": gpxRoute.asset->url,
+      "category": category->{
+        "color": color.hex,
+        "slug": slug.current,
+        title
+      },
     },
     excerpt,
+    "area": area.asset->url,
     body,
   }`
 
@@ -99,14 +132,15 @@ const getRoutes = async () => {
     // eslint-disable-next-line
     console.error(err)
   })
-  const prepareDocs = await Promise.all(
+  
+  const preparedRoutes = await Promise.all(
     docs.map(async (doc) => {
-      const route = await generateDoc(doc)
-      return route
+      const preparedRoute = await generateRoute(doc)
+      return preparedRoute
     })
   )
   
-  return prepareDocs
+  return preparedRoutes
 }
 
 module.exports = getRoutes

@@ -17,6 +17,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/color-input": "^3.0.2",
     "@sanity/eslint-config-studio": "^2.0.1",
     "@sanity/vision": "^3.5.1",
     "prop-types": "^15.7",

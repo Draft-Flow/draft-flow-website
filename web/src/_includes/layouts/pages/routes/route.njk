@@ -14,9 +14,10 @@
 {% endblock %}
 
 {% block content %}
-Route
-{% for path in route.paths %}
-{{ path | dump }}
-{% endfor %}
+<section class="flex justify-center px-2 lg:px-4">
+  <div class="max-w-7xl w-full mt-8 sm:mt-12 lg:mt-16">
+    {% include './map.njk' %}
+  </div>
+</section>
 
 {% endblock %}

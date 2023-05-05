@@ -39,7 +39,8 @@ const getBrands = async () => {
     review,
     oneLiner,
     ourDescription,
-    theirDescription
+    theirDescription,
+    showProducts
   }`
 
   const order = ''

@@ -1,0 +1,239 @@
+  <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded-t">
+    {# <div id="layerlist">
+      <button data-map-style="{{ env.mapbox_style }}" class="active">Outdoor</button>
+      <button data-map-style="{{ env.mapbox_style_satellite }}">Satellite</button>
+    </div> #}
+    <div id='map' class="aspect-square md:aspect-video w-full"></div>
+  </div>
+  <div class="relative p-2 lg:p-4 bg-pg-tan-lightest rounded-b w-full h-60">
+    <canvas id="chart_div"></canvas>
+  </div>
+  
+  {% if route.paths %}
+  {% jsbundle 'route', true | safe %}
+    <script>
+      import {Tooltip} from 'chart.js'
+      import Chart from 'chart.js/auto'
+      import { getRelativePosition } from 'chart.js/helpers'
+      import mapboxgl from 'mapbox-gl'
+      import 'mapbox-gl/dist/mapbox-gl.css'
+      import {point as turfPoint} from '@turf/helpers'
+      import turfNearestPointOnLine from '@turf/nearest-point-on-line'
+      
+      const bounds = [
+        [-8.753647457231656, 55.82850219537345],
+        [1.5709850395825953, 61.080390501274735]
+      ];
+
+      mapboxgl.accessToken = '{{ env.mapbox_token }}';
+      const map = new mapboxgl.Map({
+          container: 'map',
+          style: '{{ env.mapbox_style }}',
+          center: {lat: 56.5405969, lon: -4.1580719 },
+          zoom: 11,
+          cooperativeGestures: true,
+          maxBounds: bounds,
+      });
+      map.scrollZoom.disable();
+      // Add zoom and rotation controls to the map.
+      map.addControl(new mapboxgl.NavigationControl());
+
+      // disable map rotation using right click + drag
+      map.dragRotate.disable();
+      
+      // disable map rotation using touch rotation gesture
+      map.touchZoomRotate.disableRotation();
+
+      {% if route.bounds %}
+        map.fitBounds({{ route.bounds | dump | safe }}, {
+          padding: 120
+        });
+      {% endif %} 
+
+      // Read in the data
+      const multiLineString = {{ route.multiLineString | dump | safe }}
+
+      // A single point that animates along the route.
+      // Coordinates are initially set to origin.
+      const mapPoints = {
+        'type': 'FeatureCollection',
+        'features': multiLineString.geometry.coordinates.map(path => ({
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Point',
+            'coordinates': ''
+          }
+        }))
+      }
+
+      map.on('load', () => {
+
+        // Add the route line
+        map.addSource('route', {
+          'type': 'geojson',
+          'data': multiLineString
+        })
+
+        map.addLayer({
+          'id': 'routeLayer',
+          'type': 'line',
+          'source': 'route',
+          'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          'paint': {
+            'line-color': '#012433',
+            'line-width': 2,
+            'line-opacity': 0.8
+          }
+        });
+
+        // Add a point to animate along the route
+        map.addSource('points', {
+          'type': 'geojson',
+          'data': mapPoints 
+        });
+
+        map.addLayer({
+          'id': 'points',
+          'source': 'points',
+          'type': 'circle',
+          'paint': {
+            'circle-radius': 6.75,
+            'circle-color': '#049DE0'
+          }
+        });
+
+        map.on('mouseenter', 'routeLayer', (e) => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', 'routeLayer', (e) => {
+          map.getCanvas().style.cursor = '';
+        });
+  
+        // Elevation Chart
+        
+        const ctx = document.getElementById('chart_div')
+        const labels = [{% for point in route.maxLength %}{{ point.x }}{% if not loop.last %},{% endif %}{% endfor %}]
+        const data = {
+          labels: labels,
+          datasets: [
+            {% for path in route.paths %}
+              {
+                label: 'Elevation',
+                data: [{% for point in path.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
+                fill: false,
+                tension: 0.25,
+                borderColor: '#012433',
+              }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+
+        const chart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: {
+            scales: {
+              x: {
+                ticks: {
+                  autoSkip: false,
+                  minRotation: 45,
+                  callback: function(value, index, ticks) {
+                    const points = Math.floor(ticks.length/20)
+                    if (index % points === 0) {
+                        return this.getLabelForValue(value).toFixed(1) + ' km';
+                    }
+                  }
+                }
+              },
+              y: {
+                ticks: {
+                  callback: function(value, index, ticks) {
+                    return this.getLabelForValue(value) + ' m';
+                  }
+                }
+              }
+            },
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              },
+              tooltip: {
+                mode: 'x',
+                intersect: false,
+                position: 'nearest',
+                filter: function (tooltipItem, currentIndex, tooltipItems) {
+                  return tooltipItems[currentIndex].datasetIndex !== tooltipItems[currentIndex - 1]?.datasetIndex
+                },
+                callbacks: {
+                  title: function(context) {
+                    let formattedTitle = context[0].label ? context[0].label + ' km' : '';
+                    return formattedTitle;
+                  },
+                  label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                      label += context.parsed.y.toFixed(0) + ' m';
+                    }
+                    return label;
+                  },
+                  beforeLabel: (e) => {
+                    // Highlight corresponding point on map
+                    multiLineString.geometry.coordinates.forEach((path, idx) => {
+                      const coords = path[e.dataIndex]
+                      if (coords) {
+                        mapPoints.features[idx].geometry.coordinates = coords.slice(0,2)
+                      } else {
+                        mapPoints.features[idx].geometry.coordinates = ''
+                      }
+                    })
+                    map.getSource('points').setData(mapPoints)
+                  },
+                }
+              }
+            },
+            parsing: {
+              xAxisKey: 'x',
+              yAxisKey: 'y'
+            },
+            elements: {
+              point: {
+                pointRadius: 0
+              }
+            }
+          },
+        })
+
+        const chartArea = chart.chartArea
+        const tooltip = chart.tooltip
+        
+        // Highlight point on elevation line
+        map.on('click', (e) => {
+          const selected = turfPoint(e.lngLat.toArray())
+          const snapped = turfNearestPointOnLine(multiLineString, selected, {units: 'kilometers'});
+
+          // mapPoints.features[0].geometry.coordinates = snapped.geometry.coordinates;
+          // map.getSource('points').setData(mapPoints);
+
+          chart.setActiveElements(
+            [{datasetIndex: {{ route.maxLengthIDX  }}, index: snapped.properties.index}],
+          )
+          
+          tooltip.setActiveElements(
+            [{datasetIndex: {{ route.maxLengthIDX  }}, index: snapped.properties.index}],
+            {x: 0, y: 0}
+          )
+          chart.update()
+        })
+      })
+
+    </script>
+  {% endjsbundle %}
+  {% endif %}

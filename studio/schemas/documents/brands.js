@@ -46,7 +46,6 @@ export default {
       name: 'review',
       type: 'review',
       title: 'Review',
-      validation: Rule =>Rule.required()
     },
     {
       name: 'banner',
@@ -72,5 +71,14 @@ export default {
       title: 'Their Description',
       validation: Rule =>Rule.required()
     },
+    {
+      name: 'showProducts',
+      type: 'boolean',
+      title: 'Show Products',
+      validation: Rule =>Rule.required()
+    },
   ],
+  initialValue: {
+    showProducts: false
+  }
 }

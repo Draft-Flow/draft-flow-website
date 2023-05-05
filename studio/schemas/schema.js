@@ -4,6 +4,7 @@ import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
 import brands from './documents/brands'
 import shop from './documents/products'
+import routeCategories from './documents/routeCategories'
 
 // Object types
 import category from './objects/category'
@@ -30,6 +31,7 @@ export default [
   route,
   brands,
   shop,
+  routeCategories,
   seo,
   path,
   review,

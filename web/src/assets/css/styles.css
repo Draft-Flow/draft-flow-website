@@ -289,7 +289,11 @@ header.stuck .icons svg {
 }
 
 .mapboxgl-popup-content {
-  @apply w-60 bg-df-blue-dark text-base p-4 !important;
+  @apply w-60 text-df-tan bg-df-blue-dark text-base p-4 leading-tight !important;
+}
+
+.mapboxgl-popup-content small {
+  @apply mt-2 grid grid-cols-2 gap-6 text-center;
 }
 
 .mapboxgl-popup-close-button {

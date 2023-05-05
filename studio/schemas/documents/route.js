@@ -33,6 +33,7 @@ export default {
       type: 'string',
       title: 'Title',
       group: ['basics'],
+      validation: Rule =>Rule.required()
     },
     {
       name: 'slug',
@@ -45,6 +46,7 @@ export default {
         maxLength: 96,
       },
       group: ['basics'],
+      validation: Rule =>Rule.required()
     },
     // Description
     {
@@ -73,6 +75,13 @@ export default {
       title: 'Body',
       group: ['description'],
     },
+    {
+      name: 'area',
+      type: 'file',
+      title: 'Area',
+      description:
+        'A GeoJSON file for the area of the place.',
+    },
     // Paths
     {
       name: 'paths',
@@ -80,6 +89,7 @@ export default {
       title: 'Paths',
       of: [{type: 'path'}],
       group: ['gpx'],
+      validation: Rule =>Rule.required().min(1)
     },
   ],
   orderings: [

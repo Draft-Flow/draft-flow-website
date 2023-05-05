@@ -1,6 +1,7 @@
 import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
+import { colorInput } from "@sanity/color-input";
 
 import schemas from './schemas/schema'
 import deskStructure from './desk-structure/deskStructure'
@@ -17,6 +18,7 @@ export default defineConfig({
       structure: deskStructure
     }),
     visionTool(),
+    colorInput(),
   ],
   tools: (prev, context) => {
     const isAdmin = context.currentUser.roles

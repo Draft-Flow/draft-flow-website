@@ -23,6 +23,7 @@
         {{ brand.intro | safe }}
         <a href="#info">Read More</a>
       </div>
+      {% if brand.showProducts %}
       <h2 class="clear-both text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-shadow text-df-orange font-black uppercase text-center -rotate-3 -skew-x-3 mb-4 lg:mb-8 font-df-sans">Products</h2>
       <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-8">
       {% for product in collections.products | brandFilter(brand.id) %}
@@ -41,7 +42,10 @@
         </li>
       {% endfor %}
       </ul>
-      <div class="mx-auto text-sm text-center max-w-sm mt-4">Looking for something else from {{ title }}? We'd be happy to get it in stock. Please <a class="font-bold text-df-blue" href="/contact/">get in touch</a></div>
+      <div class="mx-auto text-sm text-center max-w-sm mt-4">
+        Looking for something else from {{ title }}? We'd be happy to get it in stock. Please <a class="font-bold text-df-blue" href="/contact/">get in touch</a>
+      </div>
+      {% endif %}
       <div class="clear-both mt-8 lg:mt-16">
         <h2 id="info" class="pt-24 -mt-24 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-shadow font-df-sans text-df-orange font-black uppercase text-center -rotate-3 -skew-x-3 mb-4 lg:mb-8">
           About
@@ -60,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-between mt-6 pt-6 font-df uppercase border-t border-df-black lg:text-2xl">
+      <div class="flex justify-between my-6 py-6 font-df uppercase border-t border-df-black lg:text-2xl">
         <a class="flex items-center" href="{% if pagination.previousPageHref %}{{ pagination.previousPageHref }}{% else %}{{ pagination.lastPageHref }}{% endif %}"><span class="inline-block mr-1 text-2xl lg:text-4xl">&#8604;</span> Previous Brand</a>
         <a class="flex items-center" href="{% if pagination.nextPageHref %}{{ pagination.nextPageHref }}{% else %}{{ pagination.firstPageHref }}{% endif %}">Next Brand <span class="inline-block ml-1  text-2xl lg:text-4xl">&#8605;</span></a>
       </div>
