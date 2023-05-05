@@ -1,6 +1,7 @@
 const turf = require('@turf/turf')
 
-const routeMeta = (coordinates) => {
+const routeMeta = (coordinates = []) => {
+
   let elevation = null
   let totalDistance = 0
   let elevationGain = 0

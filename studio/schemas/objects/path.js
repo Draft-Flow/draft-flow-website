@@ -16,6 +16,15 @@ export default {
       rows: 1,
     },
     {
+      name: 'category',
+      type: 'reference',
+      title: 'Category',
+      to: {
+        type: 'routeCategory',
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'gpxRoute',
       type: 'file',
       title: 'GPX Route',
