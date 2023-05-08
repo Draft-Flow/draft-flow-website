@@ -12,5 +12,15 @@ export default {
       type: 'bike',
       title: 'Bike'
     },
+    {
+      name: 'price',
+      type: 'number',
+      title: 'Price'
+    },
+    {
+      name: 'altPrice',
+      type: 'string',
+      title: 'Alt Price'
+    }
   ]
 }
