@@ -1,4 +1,5 @@
 // Document schemas
+import refurbBike from './documents/refurb-bikes'
 import route from './documents/route'
 import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
@@ -13,6 +14,7 @@ import basicPortableText from './objects/basicPortableText'
 import bioPortableText from './objects/bioPortableText'
 import excerptPortableText from './objects/excerptPortableText'
 import seo from './objects/seo'
+import bike from './objects/bike'
 import path from './objects/path'
 import review from './objects/review'
 import social from './objects/social'
@@ -28,11 +30,13 @@ import sku from './objects/sku'
 export default [
   siteSettings,
   staticPages,
+  refurbBike,
   route,
   brands,
   shop,
   routeCategories,
   seo,
+  bike,
   path,
   review,
   social,
