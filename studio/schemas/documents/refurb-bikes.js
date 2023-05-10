@@ -22,5 +22,11 @@ export default {
       type: 'string',
       title: 'Alt Price'
     }
-  ]
+  ],
+  preview: {
+    select: {
+      media: 'bike.images[0]',
+      title: 'bike.name',
+    },
+  },
 }

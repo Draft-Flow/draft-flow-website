@@ -19,12 +19,13 @@
       import 'mapbox-gl/dist/mapbox-gl.css'
       import {point as turfPoint} from '@turf/helpers'
       import turfNearestPointOnLine from '@turf/nearest-point-on-line'
+      import { COLORS } from '../src/utils/constants'
       
       const bounds = [
         [-8.753647457231656, 55.82850219537345],
         [1.5709850395825953, 61.080390501274735]
       ];
-
+      
       mapboxgl.accessToken = '{{ env.mapbox_token }}';
       const map = new mapboxgl.Map({
           container: 'map',
@@ -53,17 +54,35 @@
       // Read in the data
       const multiLineString = {{ route.multiLineString | dump | safe }}
 
-      // A single point that animates along the route.
+      // Points that animates along each route.
       // Coordinates are initially set to origin.
       const mapPoints = {
         'type': 'FeatureCollection',
-        'features': multiLineString.geometry.coordinates.map(path => ({
-          'type': 'Feature',
-          'geometry': {
-            'type': 'Point',
-            'coordinates': ''
-          }
-        }))
+        'features': [
+          {% for path in route.paths %}
+          {
+            'type': 'Feature',
+            'geometry': {
+              'type': 'Point',
+              'coordinates': ''
+            },
+            'properties': {
+              'description': '{{ path.lineString.properties.name }}',
+              'color': '{{ path.lineString.properties.color }}'
+            }
+          }{% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
+      }
+      
+      const routes = {
+        'type': 'FeatureCollection',
+        'features': [
+          {% for path in route.paths %}
+          {{ path.lineString | dump | safe }}
+          {% if not loop.last %},{% endif %}
+          {% endfor %}
+        ]
       }
 
       map.on('load', () => {
@@ -71,7 +90,7 @@
         // Add the route line
         map.addSource('route', {
           'type': 'geojson',
-          'data': multiLineString
+          'data': routes
         })
 
         map.addLayer({
@@ -83,7 +102,8 @@
             'line-cap': 'round'
           },
           'paint': {
-            'line-color': '#012433',
+            'line-color': ['get', 'color'],
+            'line-offset': ['get', 'offset'],
             'line-width': 2,
             'line-opacity': 0.8
           }
@@ -100,8 +120,10 @@
           'source': 'points',
           'type': 'circle',
           'paint': {
-            'circle-radius': 6.75,
-            'circle-color': '#049DE0'
+            'circle-radius': 3.75,
+            'circle-color': '#000000',
+            'circle-stroke-width': 4.5,
+            'circle-stroke-color': ['get', 'color']
           }
         });
 
@@ -113,8 +135,7 @@
           map.getCanvas().style.cursor = '';
         });
   
-        // Elevation Chart
-        
+        // Elevation Chart  
         const ctx = document.getElementById('chart_div')
         const labels = [{% for point in route.maxLength %}{{ point.x }}{% if not loop.last %},{% endif %}{% endfor %}]
         const data = {
@@ -126,7 +147,7 @@
                 data: [{% for point in path.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
                 fill: false,
                 tension: 0.25,
-                borderColor: '#012433',
+                borderColor: {{ 'COLORS[' + loop.index0 + ' % (COLORS.length - 1) ]' }},
               }{% if not loop.last %},{% endif %}
             {% endfor %}
           ]
@@ -185,13 +206,14 @@
                     return label;
                   },
                   beforeLabel: (e) => {
+                    const { dataIndex } = e
                     // Highlight corresponding point on map
-                    multiLineString.geometry.coordinates.forEach((path, idx) => {
-                      const coords = path[e.dataIndex]
+                    mapPoints.features.forEach((point, idx) => {
+                      const coords = routes.features[idx].geometry.coordinates[dataIndex]
                       if (coords) {
-                        mapPoints.features[idx].geometry.coordinates = coords.slice(0,2)
+                        point.geometry.coordinates = coords.slice(0,2)
                       } else {
-                        mapPoints.features[idx].geometry.coordinates = ''
+                        point.geometry.coordinates = ''
                       }
                     })
                     map.getSource('points').setData(mapPoints)
@@ -217,10 +239,7 @@
         // Highlight point on elevation line
         map.on('click', (e) => {
           const selected = turfPoint(e.lngLat.toArray())
-          const snapped = turfNearestPointOnLine(multiLineString, selected, {units: 'kilometers'});
-
-          // mapPoints.features[0].geometry.coordinates = snapped.geometry.coordinates;
-          // map.getSource('points').setData(mapPoints);
+          const snapped = turfNearestPointOnLine(multiLineString, selected, {units: 'kilometers'})
 
           chart.setActiveElements(
             [{datasetIndex: {{ route.maxLengthIDX  }}, index: snapped.properties.index}],
