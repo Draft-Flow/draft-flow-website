@@ -9,6 +9,7 @@ const { toHTML } = require('@portabletext/to-html')
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
 const generateRouteMeta = require('../utils/generateRouteMeta')
+const { COLORS } = require('../utils/constants')
 
 const generateRoute = async (route) => {
   try {
@@ -55,7 +56,8 @@ const generateRoute = async (route) => {
             slug: route.slug,
             distance: totalDistance,
             ascent: elevationGain,
-            color: path.category.color,
+            color: COLORS[idx % (COLORS.length - 1)],
+            offset: idx
           })
         }
 
@@ -112,6 +114,7 @@ const getRoutes = async () => {
       alt
     },
     paths[] {
+      "id": gpxRoute.asset->_id,
       title,
       description,
       "gpx": gpxRoute.asset->url,
