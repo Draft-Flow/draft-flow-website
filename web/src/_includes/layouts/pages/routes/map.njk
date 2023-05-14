@@ -1,12 +1,33 @@
-  <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded-t">
+  <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded-t flex flex-col md:flex-row">
     {# <div id="layerlist">
       <button data-map-style="{{ env.mapbox_style }}" class="active">Outdoor</button>
       <button data-map-style="{{ env.mapbox_style_satellite }}">Satellite</button>
     </div> #}
-    <div id='map' class="aspect-square sm:aspect-video w-full"></div>
+    <div id='map' class="aspect-video w-full md:w-3/5 order-2 md:order-1"></div>
+    <ul class="flex-1 grid gap-4 grid-cols-1 order-1 md:ml-8 md:order-2">
+      {% for path in route.paths %}
+        <li style="border-top: 5px solid {{ path.lineString.properties.color }}">
+          <strong class="block mt-2 mb-3">{{ path.lineString.properties.name }}</strong>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <div class="uppercase font-bold text-sm">Distance</div>
+              <div>{{ path.lineString.properties.distance.toFixed(2) }}km</div>
+            </div>
+            <div>
+              <div class="uppercase font-bold text-sm">Ascent</div>
+              <div>{{ path.elevationGain.toFixed(0) }}m</div>
+            </div>
+            <div>
+              <div class="uppercase font-bold text-sm">Descent</div>
+              <div>{{ path.elevationLoss.toFixed(0) }}m</div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
   <div class="relative p-2 lg:p-4 bg-pg-tan-lightest rounded-b w-full h-60">
-    <canvas id="chart_div"></canvas>
+    <canvas id="chart_div" class="h-60 w-full"></canvas>
   </div>
   
   {% if route.paths %}
@@ -47,7 +68,7 @@
 
       {% if route.bounds %}
         map.fitBounds({{ route.bounds | dump | safe }}, {
-          padding: 120
+          padding: 40
         });
       {% endif %} 
 
@@ -68,7 +89,8 @@
             },
             'properties': {
               'description': '{{ path.lineString.properties.name }}',
-              'color': '{{ path.lineString.properties.color }}'
+              'color': '{{ path.lineString.properties.color }}',
+              'offset': '{{ path.lineString.properties.offset }}'
             }
           }{% if not loop.last %},{% endif %}
           {% endfor %}
@@ -104,7 +126,7 @@
           'paint': {
             'line-color': ['get', 'color'],
             'line-offset': ['get', 'offset'],
-            'line-width': 2,
+            'line-width': 3,
             'line-opacity': 0.8
           }
         });
@@ -143,11 +165,12 @@
           datasets: [
             {% for path in route.paths %}
               {
-                label: 'Elevation',
+                label: '{{ path.lineString.properties.name | safe }}',
                 data: [{% for point in path.elevation %}{{ point.y }}{% if not loop.last %},{% endif %}{% endfor %}],
                 fill: false,
                 tension: 0.25,
-                borderColor: {{ 'COLORS[' + loop.index0 + ' % (COLORS.length - 1) ]' }},
+                borderColor: '{{ path.lineString.properties.color }}',
+                backgroundColor: '{{ path.lineString.properties.color }}',
               }{% if not loop.last %},{% endif %}
             {% endfor %}
           ]
@@ -179,12 +202,16 @@
               }
             },
             maintainAspectRatio: false,
+            responsive: true,
             plugins: {
               legend: {
                 display: false
               },
               tooltip: {
-                mode: 'x',
+                interaction: {
+                  mode: 'nearest',
+                  axis: 'x'
+                },
                 intersect: false,
                 position: 'nearest',
                 filter: function (tooltipItem, currentIndex, tooltipItems) {

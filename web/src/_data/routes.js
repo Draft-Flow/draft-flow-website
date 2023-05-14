@@ -53,11 +53,13 @@ const generateRoute = async (route) => {
         if (geoJSON) {
           lineString = turfLineString(coordinates, {
             name: path.title,
+            group: route.title,
             slug: route.slug,
             distance: totalDistance,
             ascent: elevationGain,
+            descent: elevationLoss,
             color: COLORS[idx % (COLORS.length - 1)],
-            offset: idx
+            offset: (idx * 2) % 6
           })
         }
 
@@ -103,7 +105,7 @@ const generateRoute = async (route) => {
 }
 
 const getRoutes = async () => {
-  const filter = groq`*[_type == "route"]`
+  const filter = groq`*[_type == "route" &&  !(_id in path("drafts.**"))]`
   const projection = groq`{
     "id": _id,
     title,

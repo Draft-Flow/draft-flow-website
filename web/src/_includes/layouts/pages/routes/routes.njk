@@ -16,7 +16,7 @@
       {% endset %}
       {% if route.data.route.mainImage %}
         <div class="w-full vintage-banner">
-        {% image bannerSrc, route.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'aspect-video w-full' %}
+        {% image bannerSrc, route.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'aspect-video object-cover w-full' %}
         </div>
       {% endif %}
       <div class="w-full h-full absolute top-0 left-0 flex items-center justify-center bg-gradient-to-b from-df-tan/40 via-df-tan/80 to-df-tan/40">
@@ -108,10 +108,11 @@
           .setLngLat(e.lngLat)
           .setHTML(`
             <a class="popup-title" href="${e.features[0].properties.slug}">
-              ${ e.features[0].properties.name}<br>
+              ${ e.features[0].properties.group }: ${ e.features[0].properties.name }<br>
               <small>
                 <span>${ e.features[0].properties.distance.toFixed(0)}km &#8594;</span>
                 <span>${ e.features[0].properties.ascent.toFixed(0)}m &#8599;</span>
+                <span>${ e.features[0].properties.descent.toFixed(0)}m &#8600;</span>
               </small>
             </a>
           `)
