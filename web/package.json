@@ -50,7 +50,7 @@
     "@sanity/image-url": "^1.0.1",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
-    "chart.js": "^3.8.0",
+    "chart.js": "^4.3.0",
     "dotenv": "^16.0.1",
     "esbuild": "^0.14.46",
     "groq": "^2.29.3",
