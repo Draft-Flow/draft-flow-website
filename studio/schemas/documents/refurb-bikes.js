@@ -21,7 +21,7 @@ export default {
       name: 'altPrice',
       type: 'string',
       title: 'Alt Price'
-    }
+    },
   ],
   preview: {
     select: {
