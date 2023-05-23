@@ -37,6 +37,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
   eleventyConfig.addPassthroughCopy('src/static/fonts/**/*')
   eleventyConfig.addPassthroughCopy('src/static/images/**/*')
+  eleventyConfig.addPassthroughCopy({'src/static/apple-developer-merchantid-domain-association': './.well-known/apple-developer-merchantid-domain-association'})
 
   eleventyConfig.on('eleventy.after', async () => {
     const srcDir = `${INPUT}/static/bundles`
