@@ -136,6 +136,10 @@ module.exports = function (eleventyConfig) {
   // Get YouTube Video ID
   eleventyConfig.addFilter('videoID', (url) => getYouTubeId(url))
 
+  // Get Available Items
+  eleventyConfig.addFilter('available', (data) => data.filter(item => item.available === true ))
+  eleventyConfig.addFilter('unavailable', (data) => data.filter(item => item.available === false ))
+
   // Get page
   eleventyConfig.addFilter('getPage', getPageFilter)
 

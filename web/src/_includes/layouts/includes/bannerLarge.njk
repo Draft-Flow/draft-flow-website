@@ -11,7 +11,7 @@
     {% if bannerImage %}
       {{ bannerImage }}
     {% elif bannerSrc %}
-      {% bannerImage bannerSrc, product.banner.alt %}
+      {% bannerImage bannerSrc, bannerTitle %}
     {% endif %}
   </div>
   <div class="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-df-tan via-df-tan/50 to-df-tan/20 flex items-center">
