@@ -1,0 +1,51 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set crumbsJSON = collections.shop | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+{% set bannerTitle = title %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-7xl w-full py-20">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+      {% for subcategory in collections.subcategories | categoryFilter(eleventyNavigation.key) %}
+        <li data-type="card" class="relative aspect-video overflow-hidden">
+          {% if subcategory.data.banner.ref %}
+            <div class="absolute h-full flex vintage-banner">
+            {% set imageSrc %}
+              {% imageBannerUrlFor subcategory.data.banner.ref, 1000 %}
+            {% endset %}
+            {% image imageSrc, subcategory.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full' %}
+            </div>
+          {% endif %}
+          <div class="w-full h-full absolute top-0 left-0 flex items-center justify-center bg-gradient-to-b from-df-tan/40 via-df-tan/80 to-df-tan/40">
+            <a class="w-full px-2 lg:px-4 flex justify-center text-4xl text-shadow font-df-sans text-df-orange font-black uppercase" href="{{ subcategory.url }}">
+              {{ subcategory.data.title }}
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+      <ul class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-8">
+      {% for product in collections.products | categoryParentFilter(eleventyNavigation.key) %}
+        <li data-type="card" class="bg-white pt-2 pb-1 px-2 rounded-sm relative flex flex-col overflow-hidden">
+          <a class="block w-full text-center font-df-sans font-bold uppercase text-2xl text-df-orange py-1" href="{{ product.url }}">
+            {{ product.data.title }}
+          </a>
+          <div class="aspect-video mt-auto">
+          {% if product.data.options[0].images[0] %}
+            {% image product.data.options[0].images[0], product.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [1500, 1000], 'object-cover w-full' %}
+          {% endif %}
+          </div>
+          <div class="text-center font-df uppercase text-sm text-df-gray py-1">
+            {{ product.data.oneLiner }}
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}
