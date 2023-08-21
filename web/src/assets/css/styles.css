@@ -116,8 +116,8 @@ header.stuck .icons svg {
     @apply mb-4 lg:mb-6 leading-snug;
   }
 
-  .parent-description p a,
-  .parent-description li a {
+  .parent-description p a:not(.cta),
+  .parent-description li a:not(.cta) {
     @apply underline text-df-orange-xdark italic font-medium hover:text-df-orange-dark;
   }
 
@@ -164,7 +164,7 @@ header.stuck .icons svg {
   @apply text-justify;
 }
 
-.cta {
+a.cta {
   @apply h-[1.8em] inline-flex flex-col justify-center items-center text-center font-df-sans font-bold text-lg lg:text-2xl pl-[0.5em] pr-[0.25em] pt-[0.2em] uppercase relative bg-df-blue text-white whitespace-nowrap transition-colors duration-100;
 }
 

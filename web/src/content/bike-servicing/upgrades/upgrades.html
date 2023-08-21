@@ -15,17 +15,21 @@ _**Take your bike and riding to the next level**_
 
 Looking to upgrade your riding? An update to your bike's components can completely change your riding. A fresh set of wheels or tyres, updated drivetrain, hydraulic brakes, new suspension, bike bags for a big adventure, or even a different handlebar can drastically change how your bike performs. 
 
-We're an official dealer for a [wide range of top bike and outdoor brands](/brands/) and can help with any bike modifications desired. We highly recommend the brands we carry and are more than happy to give honest gear advice. Click a brand below to learn more. 
+We're an official dealer for a wide range of top bike and outdoor brands and can help with any desired bike modifications. We highly recommend the brands we carry and are more than happy to give honest gear advice. 
 <ul class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-4 md:gap-8">
 {% for brand in collections.brand_pages %}
 {% set imageSrc %}
     {% imageUrlFor brand.data.brand.logo.ref, 900 %}
 {% endset %}
-<li class="flex justify-center items-center px-8 sm:px-0">
+<li class="flex justify-center items-center px-8 sm:px-0 mb-8 md:mb-16">
     <a href="{{ brand.url }}" title="{{ brand.data.title }}">
         {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
     </a>
 </li>
 {% endfor %}
 </ul>
+
+_**Suspension Servicing**_
+
+We're an authorized <a href="https://www.tftuned.com/">TF Tuned</a> dealer. When your suspension fork, seatpost, or shock needs servicing or upgrading, we'll get it back into action fast. We handle the removal, shipping to TF Tuned, and reassembly of your suspension. 
 
