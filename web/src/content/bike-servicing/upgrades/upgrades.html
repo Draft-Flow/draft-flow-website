@@ -17,13 +17,13 @@ Looking to upgrade your riding? An update to your bike's components can complete
 
 We're an official dealer for a [wide range of top bike and outdoor brands](/brands/) and can help with any bike modifications desired. We highly recommend the brands we carry and are more than happy to give honest gear advice. Click a brand below to learn more. 
 <ul class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-4 md:gap-8">
-{% for brand in collections.brand_pages %}
+{% for brand in brands %}
 {% set imageSrc %}
-    {% imageUrlFor brand.data.brand.logo.ref, 900 %}
+    {% imageUrlFor brand.logo.ref, 900 %}
 {% endset %}
 <li class="flex justify-center items-center px-8 sm:px-0">
     <a href="{{ brand.url }}" title="{{ brand.data.title }}">
-        {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
+        {% image imageSrc, brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
     </a>
 </li>
 {% endfor %}

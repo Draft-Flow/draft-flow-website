@@ -90,6 +90,12 @@ module.exports = function (eleventyConfig) {
     }).render(content);
   });
 
+  eleventyConfig.addFilter('permalinkNotFalse', function (items) {
+    return items.filter( item => {
+      return (item.data.permalink !== false)
+    })
+  })
+
   // Convert Sanity block content into HTML
   eleventyConfig.addFilter('blocksToHTML', (value) => {
     return toHTML(value, { components: serializers })
@@ -117,7 +123,7 @@ module.exports = function (eleventyConfig) {
   // Category Filter
   eleventyConfig.addFilter('categoryFilter', (collection, category) => {
     if (!category) return collection;
-      const filtered = collection.filter(item => item.data.eleventyNavigation.parent == category)
+      const filtered = collection.filter(item => item.parent.categoryID === category)
       return filtered;
   })
 

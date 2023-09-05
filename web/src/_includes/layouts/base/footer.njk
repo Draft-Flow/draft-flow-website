@@ -6,20 +6,15 @@
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods from</h3>
             <ul class="list-style-none mt-4 md:mt-8 w-full flex justify-center flex-wrap items-center mb-8">
-                {% for brand in collections.brand_pages | shuffle(8) %}
+                {% for brand in brands | shuffle(8) %}
                 {% set imageSrc %}
-                    {% imageUrlFor brand.data.brand.logo.ref, 1000 %}
+                    {% imageUrlFor brand.logo.ref, 1000 %}
                 {% endset %}
                 <li class="flex justify-center m-2 md:m-4">
-                    <a href="{{ brand.url }}">
-                        {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 200px, 400px", null, 'eager', null, [400, 700], 'h-6 md:h-10 xl:h-14 w-auto' %}
-                    </a>
+                        {% image imageSrc, brand.logo.alt, "(max-width: 640px) 200px, 400px", null, 'eager', null, [400, 700], 'h-6 md:h-10 xl:h-14 w-auto' %}
                 </li>
                 {% endfor %}
             </ul>
-            <div>
-                And many more great brands - <a class="hover:underline text-df-blue font-bold" href="/brands">View All</a>
-            </div>
         </div>
     </div>
     <div id="subscribe" class="px-2 lg:px-4 py-12 md:py-16 border-t-2 border-df-gray bg-df-gray">

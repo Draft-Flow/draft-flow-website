@@ -2,7 +2,8 @@ const Image = require('@11ty/eleventy-img')
 
 const bannerImageShortcode = async (
   src,
-  alt = ''
+  alt = '',
+  lazy = 'true'
 ) => {
   if (alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
@@ -34,7 +35,7 @@ const bannerImageShortcode = async (
         height="auto"
         class="w-full h-full object-cover"
         alt="${alt}"
-        loading="lazy"
+        loading="${lazy}"
         decoding="async"
         fetchPriority="high">
     </picture>`

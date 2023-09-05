@@ -15,14 +15,14 @@
         <p> We believe in the brands we sell, and rely on them ourselves. The brands below make quality gear that we highly recommend. Click a brand to learn more.</p>
       </div>
       <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-        {% for brand in collections.brand_pages %}
+        {% for brand in brands %}
         {% set imageSrc %}
-            {% imageUrlFor brand.data.brand.logo.ref, 900 %}
+            {% imageUrlFor brand.logo.ref, 900 %}
         {% endset %}
         <li class="flex justify-center items-center px-8 sm:px-0">
-            <a href="{{ brand.url }}" title="{{ brand.data.title }}">
-                {% image imageSrc, brand.data.brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
-            </a>
+            {# <a href="{{ brand.url }}" title="{{ brand.data.title }}"> #}
+                {% image imageSrc, brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
+            {# </a> #}
         </li>
         {% endfor %}
       </ul>

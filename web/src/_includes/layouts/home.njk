@@ -6,7 +6,7 @@
   {text: 'Quality Guaranteed', color: 'bg-df-black'},
   {text: 'Genuine Parts', color: 'bg-df-orange-dark'},
   {text: 'Simple Pricing', color: 'bg-df-blue'},
-  {text: 'Fully Insured', color: 'bg-df-black'}
+  {text: 'Speedy Service', color: 'bg-df-black'}
 ]%}
 
 {% block content %}
@@ -23,16 +23,16 @@
       </li>
       {% endfor %}
     </ul>
-    <div class="relative">
-      <div class="w-full mt-2 lg:mt-0 vintage opacity-60 z-10 pb-20 md:pb-0">
-        {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models' %}
+    <div class="relative w-full">
+      <div class="w-full mt-2 lg:mt-0 vintage opacity-60 z-10 pb-20 md:pb-0 aspect-[1.75/1] sm:aspect-[2/1] md:aspect-[5/2]">
+        {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', false %}
       </div>
-      <div class="w-full bottom-0 md:bottom-[15%] absolute px-2 lg:px-4 flex flex-col justify-end items-center bg-gradient-to-b from-df-tan/0 via-df-tan/50 to-df-tan/80 pt-12 pb-20 -mb-20">
+      <div class="w-full bottom-0 md:bottom-[15%] absolute px-2 lg:px-4 flex flex-col justify-end items-center bg-gradient-to-b from-df-tan/0 via-df-tan/50 to-df-tan/80 pt-12 pb-12 -mb-12 w-full">
         <a class="cta large" href="/bike-servicing/servicing/">
           View Services
         </a> 
-        <div class="justify-self-end">
-          <blockquote class="font-script rotate-[-6deg] skew-x-[6deg] text-3xl md:text-4xl xl:text-6xl text-center leading-6 text-gray-800 whitespace-pre-line">
+        <div class="justify-self-end w-full">
+          <blockquote class="font-script rotate-[-6deg] skew-x-[6deg] text-3xl md:text-4xl xl:text-6xl text-center leading-6 text-gray-800 whitespace-pre-line w-full">
           Top-notch service supplied, for&nbsp;whatever&nbsp;you&nbsp;ride
           </blockquote>
         </div>
@@ -41,9 +41,9 @@
   </div>
 
   {# Shop #}
-  <div>
+  {# <div>
     <a class="flex justify-center items-center h-48 text-4xl" href="/shop/">Shop</a>
-  </div>
+  </div> #}
 
   {# Up-Cycle Program #}
   <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-16 border-t-2 border-df-gray">
@@ -113,7 +113,7 @@
     </script>
   </div>
 
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:py-8 border-t border-zinc-400 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-8">
+  {# <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:py-8 border-t border-zinc-400 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-8">
     <div class="col-span-3">
       <h2>Social Rides</h2>
     </div>
@@ -123,7 +123,7 @@
     <div class="col-span-3">
       <h2>Social Rides</h2>
     </div>
-  </div>
+  </div> #}
 {% endblock %}
 
 {% block scripts %}

@@ -9,9 +9,13 @@
     alias: "product",
     data: "products",
     size: 1,
-    addAllPagesToCollections: true
+    addAllPagesToCollections: true,
+    before: function(paginationData) {
+      return paginationData.filter(entry => entry.url);
+    }
   },
-  permalink: data => `shop/${data.product.slug}/index.html`,
+  permalink: false,
+  <!-- permalink: data => `shop/${data.product.slug}/index.html`, -->
   eleventyComputed: {
     title: data => data.product.name,
     body: data => data.product.body,

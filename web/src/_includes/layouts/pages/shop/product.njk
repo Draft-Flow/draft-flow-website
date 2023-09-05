@@ -36,9 +36,7 @@
           {% endfor %}
           {% endif %}
         </ul>
-        <a href="/brands/{{ brand.slug }}/">
             {% image logoSrc, brand.logo.alt, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-8 md:h-14 w-auto' %}
-        </a>
       </div>
       <h2 class="text-3xl font-bold font-df-sans uppercase order-1 md:order-2 md:row-span-1 leading-7">
         <span class="block lg:inline text-zinc-500">{{ brand.name }}</span> {{ title }}

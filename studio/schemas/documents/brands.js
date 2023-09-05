@@ -63,13 +63,13 @@ export default {
       name: 'ourDescription',
       type: 'bodyPortableText',
       title: 'Our Description',
-      validation: Rule =>Rule.required()
+      // validation: Rule =>Rule.required()
     },
     {
       name: 'theirDescription',
       type: 'bodyPortableText',
       title: 'Their Description',
-      validation: Rule =>Rule.required()
+      // validation: Rule =>Rule.required()
     },
     {
       name: 'showProducts',
