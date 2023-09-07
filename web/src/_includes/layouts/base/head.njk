@@ -39,12 +39,7 @@
     </style>
 
     <!-- CSS -->
-    {% set css %}
-    {% include "_site/css/styles.css" %}
-    {% endset %}
-    <style>
-        {{ css | cssmin | safe }}
-    </style>
+    <link rel="stylesheet" href="/css/styles.css">
 
     <meta name="generator" content="Eleventy">
     <meta name="Description" content="{{ description or renderData.description or metadata.description }}">

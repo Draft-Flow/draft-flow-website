@@ -1,5 +1,4 @@
 const util = require('util')
-const CleanCSS = require('clean-css')
 const fse = require('fs-extra')
 const { toHTML } = require('@portabletext/to-html')
 const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
@@ -107,11 +106,6 @@ module.exports = function (eleventyConfig) {
   // Extract route data
   // Shuffle collection into random order
   eleventyConfig.addFilter('routesData', routesDataFilter)
-
-  // Minify CSS
-  eleventyConfig.addFilter('cssmin', (code) => {
-    return new CleanCSS({}).minify(code).styles
-  })
 
    // Page Child Filter
    eleventyConfig.addFilter('childFilter', (collection, key) => {
