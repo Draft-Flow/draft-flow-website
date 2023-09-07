@@ -3,9 +3,7 @@ const Image = require('@11ty/eleventy-img')
 const bannerImageShortcode = async (
   src,
   alt = '',
-  sizes = '100vw',
-  classes = null,
-  priority = 'auto'
+  lazy = 'true'
 ) => {
   if (alt === undefined) {
     // You bet we throw an error on missing alt (alt="" works okay)
@@ -22,24 +20,24 @@ const bannerImageShortcode = async (
     },
   })
 
-  return `<picture class="flex h-full">
+  return `<picture class="w-full h-full">
     ${Object.values(metadata)
       .map(
         (imageFormat) =>
           `<source type="${imageFormat[0].sourceType}" srcset="${imageFormat
             .map((entry) => entry.srcset)
-            .join(', ')}" sizes="${sizes}">`
+            .join(', ')}" sizes="(max-width: 0px) 100vw">`
       )
       .join('\n')}
       <img
         src="${metadata.jpeg[0].url}"
         width="100%"
         height="auto"
-        ${classes !== null ? `class="${classes}"` : ''}
+        class="w-full h-full object-cover"
         alt="${alt}"
-        loading="lazy"
+        loading="${lazy}"
         decoding="async"
-        fetchPriority="${priority}">
+        fetchPriority="high">
     </picture>`
 }
 

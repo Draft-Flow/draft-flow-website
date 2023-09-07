@@ -14,7 +14,17 @@ export default {
       rows: 1,
     },
     {
+      name: 'facebook',
+      type: 'text',
+      rows: 1,
+    },
+    {
       name: 'komoot',
+      type: 'text',
+      rows: 1,
+    },
+    {
+      name: 'whatsapp',
       type: 'text',
       rows: 1,
     },

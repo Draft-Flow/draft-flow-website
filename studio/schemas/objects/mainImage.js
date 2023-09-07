@@ -7,37 +7,18 @@ export default {
   },
   fields: [
     {
-      name: 'location',
-      type: 'geopoint',
-      title: 'Location',
-      options: {
-        isHighlighted: true,
-      },
-    },
-    {
-      name: 'caption',
-      type: 'string',
-      title: 'Caption',
-      options: {
-        isHighlighted: true,
-      },
-    },
-    {
       name: 'alt',
       type: 'string',
       title: 'Alternative text',
       description: 'Important for SEO and accessiblity.',
       validation: (Rule) =>
-        Rule.error('You have to fill out the alternative text.').required(),
-      options: {
-        isHighlighted: true,
-      },
+        Rule.custom((value, { parent }) => parent?.asset && !value ? 'Alt text is required' : true) 
     },
   ],
   preview: {
     select: {
       imageUrl: 'asset.url',
-      title: 'caption',
+      title: 'alt',
     },
   },
 }

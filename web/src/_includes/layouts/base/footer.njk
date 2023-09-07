@@ -1,24 +1,109 @@
-<footer class="text-center text-stone-100">
-    <div class="bg-df-blue px-4 lg:px-8 pt-4 pt-12 lg:pt-20 pb-12">
-        {# <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-90">
-            <ul class="grid grid-rows-1 grid-flow-col gap-4">
-                <li>Company #{{ metadata.company.number }}</li>
-                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
+{% set secondaryNavPages = collections.secondary | eleventyNavigation %}
+{% set tertiaryNavPages = collections.tertiary | eleventyNavigation %}
+
+<footer class="text-df-gray">
+    <div class="px-2 lg:px-4 py-4 py-6 lg:py-10 border-t border-df-gray text-center">
+        <div class="mx-auto flex flex-col">
+            <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods from</h3>
+            <ul class="list-style-none mt-4 md:mt-8 w-full flex justify-center flex-wrap items-center mb-8">
+                {% for brand in brands | shuffle(8) %}
+                {% set imageSrc %}
+                    {% imageUrlFor brand.logo.ref, 1000 %}
+                {% endset %}
+                <li class="flex justify-center m-2 md:m-4">
+                        {% image imageSrc, brand.logo.alt, "(max-width: 640px) 200px, 400px", null, 'eager', null, [400, 700], 'h-6 md:h-10 xl:h-14 w-auto' %}
+                </li>
+                {% endfor %}
             </ul>
-            <div class="flex items-center text-right">
-                <span>Crafted in Aberfeldy, Scotland<br>by Brett DeWoody</span>
-                {% svgIcon 'src/assets/icons/scotland.svg', 'w-16 sm:w-20 lg:w-28 fill-white' %}
+        </div>
+    </div>
+    <div id="subscribe" class="px-2 lg:px-4 py-12 md:py-16 border-t-2 border-df-gray bg-df-gray">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-center lg:items-center text-center lg:text-left">
+            <h3 class="font-df-sans leading-7 text-df-tan flex flex-col lg:justify-center font-black uppercase text-2xl tracking-wide mb-2">
+                <span class="text-base font-medium">Subscribe to  the</span>
+                {{ metadata.title }} Flyer
+                <span class="text-sm uppercase font-normal">For discounts, events, and more</span>
+            </h3>
+            {% include 'src/_includes/layouts/includes/newsletterForm.njk' %}
+        </div>
+        <div class="subscribe-notice hidden max-w-prose mx-auto text-center my-4 text-df-tan font-sans text-xs uppercase ">
+            {% include 'src/_includes/layouts/includes/newsletterNotice.njk' %}
+        </div>
+    </div>
+    <div class="px-2 lg:px-4 py-6 bg-df-black text-neutral-100">
+        <div class="text-lg max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start opacity-80">
+            <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
+                <li class="lg:h-full">
+                    <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialTwitter.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://facebook.com/{{ metadata.social.facebook }}" title="Facebook - @{{ metadata.social.facebook }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialFacebook.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://wa.me/message/{{ metadata.social.whatsapp }}" title="WhatsApp - {{ metadata.social.whatsapp }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-neutral-100 w-5 h-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="tel:{{ metadata.contact.phone }}" title="Phone - {{ metadata.contact.phone }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-neutral-100 w-5 h-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-neutral-100 w-6 h-6' %}</a>
+                </li>
+            </ul>
+            <ul class="grid grid-cols-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+                {%- for item in secondaryNavPages -%}
+                <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <ul class="grid grid-rows-1 grid-flow-col gap-8 mb-12 md:mb-0 grayscale contrast-0 opacity-60">
+                <li>
+                    <a href="https://www.cytech.training/">
+                        {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.cycleassociation.uk/">
+                        {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                    </a>
+                </li>
+            </ul>
+            <div class="flex items-center text-right text-sm md:text-base opacity-80">
+                <span>Made in Aberfeldy, Scotland<br>Website by Brett DeWoody</span>
+                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
             </div>
         </div>
-        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-between mt-16 opacity-90">
-            <ul class="grid grid-cols-2 sm:grid-cols-4 gap-y-4 justify-center order-1 lg:order-2 mb-4 lg:mb-0">
-                <li><a class="mx-2 sm:mx-4" href="/accessibility/">Accessibility</a></li>
-                <li><a class="mx-2 sm:mx-4" href="/privacy-policy/">Privacy Policy</a></li>
-                <li><a class="mx-2 sm:mx-4" href="/terms-and-conditions/">Terms & Conditions</a></li>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-16 opacity-80 text-center">
+            <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
+                {%- for item in tertiaryNavPages -%}
+                <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                {% endfor %}
             </ul>
-        </div> #}
-        <div class="text-sm text-center opacity-90 mt-8 pb-20">
-            &copy; {% year %} {{ metadata.company.name }}<br/>
+        </div>
+        <div class="flex justify-center text-sm opacity-80 mt-8 text-center">
+            <ul class="list-style-none grid grid-flow-row sm:grid-flow-col auto-cols-min whitespace-nowrap gap-x-4 gap-y-2">
+                <li>&copy; {% year %} {{ metadata.company.name }}</li>
+                <li>
+                    <a href="https://find-and-update.company-information.service.gov.uk/company/{{ metadata.company.number }}">Company #{{ metadata.company.number }}</a></li>
+                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
+            </ul>
         </div>
     </div>
 </footer>
+
+<script>
+    const subscribeEmail = document.querySelector('#subscribe .subscribe-email')
+    const subscribeNotice = document.querySelector('#subscribe .subscribe-notice')
+
+    subscribeEmail.addEventListener('input', (e) => {
+        if (e.target.validity.valid) {
+            subscribeNotice.classList.remove('hidden')
+        }
+    })
+</script>

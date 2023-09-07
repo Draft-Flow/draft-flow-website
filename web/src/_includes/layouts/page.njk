@@ -1,12 +1,19 @@
 {% extends 'layouts/base/index.njk' %}
 
-{%- set pageContent = pages | getPage(pageID) -%}
+{% set bannerSrc = bannerImage %}
+{% set bannerTitle = title %}
+
+{% set crumbsJSON = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
 
 {% block content %}
   <section class="flex justify-center px-2 lg:px-4">
-    <div class="max-w-6xl w-full py-20">
-      <div class="description">
-        {{ pageContent.content | blocksToHTML | safe }}
+    <div class="max-w-7xl w-full py-12 lg:py-20">
+      <div class="parent-description">
+        {{ content | md | safe }}
       </div>
     </div>
   </section>

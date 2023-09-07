@@ -1,23 +1,37 @@
 module.exports = {
-  content: ['./src/**/*.njk', './src/**/*.md'],
+  content: ['./src/**/*.njk', './src/**/*.md', './src/**/*.html', './src/utils/shortcodes/**/*.js'],
   theme: {
     extend: {
       colors: {
+        'df-black': {
+          DEFAULT: '#131319',
+          light: '#333333'
+        },
         'df-blue': {
-          DEFAULT: '#121E44',
-          dark: '#121E44'
+          DEFAULT: '#1F3579',
+          dark: '#121E44',
+          light: '#2A3C77'
+        },
+        'df-yellow': {
+          DEFAULT: '#E8AD14'
+        },
+        'df-orange':  {
+          DEFAULT: '#F85707',
+          dark: '#C24D13',
+          xdark: '#A14010'
+        },
+        'df-gray': {
+          DEFAULT: '#2f2f2f',
+          dark: '#282829',
+          light: '#636363'
         },
         'df-tan': {
-          lightest: '#FFFCF3',
-          light: '#F3F0E8',
-          DEFAULT: '#EDEAE0',
-          dark: '#B2B0AA',
+          DEFAULT: '#f0eee3',
+          dark: '#EBE8E1',
+          darkest: '#B2AC9F'
         },
       },
       backgroundImage: {
-        tread: "url('/static/images/bartread.webp')",
-        'tread-white': "url('/static/images/bartread-white.webp')",
-        email: "url('/static/images/email.webp')",
       },
       backgroundSize: {
         72: '18rem',
@@ -26,9 +40,11 @@ module.exports = {
       spacing: {
         200: '50rem',
       },
-    },
-    fontFamily: {
-      pg: ['"Jost"', '"Franklin Gothic Medium"', '"Franklin Gothic"', '"ITC Franklin Gothic"', 'Arial', 'sans-serif'],
+      fontFamily: {
+        df: ['Norwester', 'Arial', 'sans-serif'],
+        'df-sans': ['Overpass', 'sans-serif'],
+        script: ['Yellowtail', '"Brush Script MT"', 'cursive']
+      },
     },
   },
   plugins: [],

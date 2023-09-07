@@ -1,0 +1,192 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+<section class="flex justify-center px-2 lg:px-4">
+  <div class="max-w-7xl w-full py-12 lg:py-20">
+    <p class="text-xl lg:text-3xl text-center">Aberfeldy and the surrounding area has a ride for every style of rider. From road to gravel, bikepacking, and trail. Check the map and links below for our recommendations on places to ride, or <a href="/contact/" class="font-semibold text-df-blue underline">contact us</a> for info on other routes.</p>
+    
+    <div id='map' class="aspect-video w-full my-8"></div>
+    
+    <h3 class="font-bold text-center text-2xl lg:text-4xl">Routes and Riding Areas</h3>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 mt-4">
+    {% for route in collections.route_pages %}
+    <li data-type="card" class="relative aspect-video overflow-hidden">
+      {% set bannerSrc %}
+        {% imageBannerUrlFor route.data.route.mainImage.ref, 2000 %}
+      {% endset %}
+      {% if route.data.route.mainImage %}
+        <div class="w-full vintage-banner">
+        {% image bannerSrc, route.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'aspect-video object-cover w-full' %}
+        </div>
+      {% endif %}
+      <div class="w-full h-full absolute top-0 left-0 flex items-center justify-center bg-gradient-to-b from-df-tan/40 via-df-tan/80 to-df-tan/40">
+        <a class="w-full px-2 lg:px-4 flex justify-center text-center text-4xl text-shadow font-df-sans text-df-orange font-black uppercase" href="{{ route.url }}">
+          {{ route.data.title | safe }}
+        </a>
+      </div>
+      <div class="absolute bottom-2 left-2 font-semibold uppercase">
+      {% if route.data.title.includes('↔') %}
+        <p>{{ route.data.route.paths.length }} Routes</p>
+      {% elif route.data.route.paths.length > 1 %}
+        <p>{{ route.data.route.paths.length }} Trails</p>
+      {% else %}
+        <p>
+          {{ route.data.route.paths[0].totalDistance.toFixed(2) }}km • 
+          {{ route.data.route.paths[0].elevationGain.toFixed(0) }}m Elev Gain
+        </p>
+      {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% jsbundle 'route', true | safe %}
+  <script>
+    import mapboxgl from 'mapbox-gl'
+    import 'mapbox-gl/dist/mapbox-gl.css'
+    const LAYER_AREAS = 'routes-areas'
+    const LAYER_ROUTES = 'routes-layer'
+    const LAYER_ACTIVE = 'routes-active'
+    const bounds = [
+      [-8.753647457231656, 55.82850219537345],
+      [1.5709850395825953, 61.080390501274735]
+    ];
+    mapboxgl.accessToken = '{{ env.mapbox_token }}';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: '{{ env.mapbox_style }}',
+        center: {lat: 56.6230466, lon: -3.8761111 },
+        zoom: 10,
+        minZoom: 8,
+        maxZoom: 12,
+        cooperativeGestures: true,
+        maxBounds: bounds,
+    });
+    map.scrollZoom.disable();
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+    let hoveredStateId = null;
+    map.on('load', () => {
+        map.addSource('routes', {
+        type: 'geojson',
+        data: '{{ env.url }}/routesGeoJSON.json',
+        generateId: true
+      })
+      map.addLayer({
+        'id': LAYER_ROUTES,
+        'type': 'line',
+        'source': 'routes',
+        'filter': ['==', '$type', 'LineString'],
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-width': [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            4, 3
+          ],
+          'line-opacity': 0.9,
+          'line-color': ['get', 'color'],
+        }
+      })
+      map.addLayer({
+        'id': LAYER_AREAS,
+        'type': 'fill',
+        'source': 'routes',
+        'filter': ['==', '$type', 'Polygon'],
+        'paint': {
+          'fill-color': '#888888',
+          'fill-opacity': 0.6
+        },
+      })
+      map.on('click', LAYER_ROUTES, (e) => {
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <a class="popup-title" href="${e.features[0].properties.slug}">
+              ${ e.features[0].properties.group }: ${ e.features[0].properties.name }<br>
+              <small>
+                <span>${ e.features[0].properties.distance.toFixed(0)}km &#8594;</span>
+                <span>${ e.features[0].properties.ascent.toFixed(0)}m &#8599;</span>
+                <span>${ e.features[0].properties.descent.toFixed(0)}m &#8600;</span>
+              </small>
+            </a>
+          `)
+          .addTo(map)
+      });
+      map.on('click', LAYER_AREAS, (e) => {
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <a class="popup-title" href="${e.features[0].properties.slug}">
+              ${ e.features[0].properties.name}
+            </a>
+          `)
+          .addTo(map)
+      });
+      // Change the cursor to a pointer when
+      // the mouse is over the states layer.
+      map.on('mouseenter', LAYER_ROUTES, (e) => {
+        map.getCanvas().style.cursor = 'pointer';
+        if (e.features.length > 0) {
+          if (hoveredStateId !== null) {
+            map.setFeatureState({
+              source: 'states', id: hoveredStateId
+            }, { hover: false });
+          }
+        }
+        hoveredStateId = e.features[0].id
+        drawActiveStateLayer(e.features[0])
+        map.setFeatureState({ 
+          source: 'routes', id: hoveredStateId 
+        }, { hover: true });
+
+      });
+      
+      // Change the cursor back to a pointer
+      // when it leaves the states layer.
+      map.on('mouseleave', LAYER_ROUTES, (e) => {
+        map.getCanvas().style.cursor = '';
+        // If there's an active layer, remove it
+        if (map.getLayer(LAYER_ACTIVE) !== 'undefined') {
+          map.removeLayer(LAYER_ACTIVE)
+          map.removeSource(LAYER_ACTIVE)
+        }
+        if (hoveredStateId !== null) {
+          map.setFeatureState({
+            source: 'routes', id: hoveredStateId
+            }, { hover: false });
+        }
+  
+        hoveredStateId = null;
+      });
+
+      // Move route layer to top, over area layer
+      map.moveLayer(LAYER_ROUTES);
+
+      // Move the active layer to the top
+      const drawActiveStateLayer = (feature) => {
+        map
+          .addLayer({
+            id: LAYER_ACTIVE,
+            type: 'line',
+            source: {
+              type: 'geojson',
+              data: feature
+            },
+            paint: {
+              'line-color': map.getPaintProperty(LAYER_ROUTES, 'line-color'),
+              'line-width': 4,
+              'line-opacity': 1
+            },
+          });
+      }
+    })
+</script>
+{% endjsbundle %}
+
+{% endblock %}

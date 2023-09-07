@@ -55,18 +55,12 @@ export default {
       type: 'mainImage',
     },
     {
-      type: 'youtube',
-    },
-    {
       type: 'file',
       fields: [
         {
           name: 'name',
           type: 'string',
           title: 'Name',
-          options: {
-            isHighlighted: true,
-          },
           validation: (Rule) => Rule.required(),
         },
       ],

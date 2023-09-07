@@ -13,6 +13,11 @@ export default {
       title: 'Title',
     },
     {
+      name: 'url',
+      type: 'string',
+      title: 'URL',
+    },
+    {
       name: 'tagline',
       type: 'string',
       title: 'Tagline',
@@ -46,9 +51,6 @@ export default {
           description: 'Important for SEO and accessiblity.',
           validation: (Rule) =>
             Rule.error('You have to fill out the alternative text.').required(),
-          options: {
-            isHighlighted: true,
-          },
         },
       ],
     },
@@ -88,6 +90,36 @@ export default {
           name: 'email',
           type: 'string',
           title: 'Email Address',
+        },
+        {
+          name: 'url',
+          type: 'string',
+          title: 'URL',
+        },
+        {
+          name: 'address',
+          type: 'string',
+          title: 'Street Address',
+        },
+        {
+          name: 'city',
+          type: 'string',
+          title: 'City',
+        },
+        {
+          name: 'region',
+          type: 'string',
+          title: 'Region',
+        },
+        {
+          name: 'postalCode',
+          type: 'string',
+          title: 'Postal Code',
+        },
+        {
+          name: 'country',
+          type: 'string',
+          title: 'Country',
         },
       ],
     },
