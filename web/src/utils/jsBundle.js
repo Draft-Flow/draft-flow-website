@@ -10,7 +10,7 @@ const jsBundle = (code, name, defer) => {
 
   const bundles = esbuild.buildSync({
     entryPoints: [tmp],
-    entryNames: '[name]-[hash]',
+    entryNames: '[name]',
     outdir: `${inputDir}static/bundles/`,
     metafile: true,
     minify: true,

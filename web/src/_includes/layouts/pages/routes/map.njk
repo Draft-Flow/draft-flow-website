@@ -31,7 +31,7 @@
   </div>
   
   {% if route.paths %}
-  {% jsbundle 'route', true | safe %}
+  {% jsbundle route.id, true | safe %}
     <script>
       import {Tooltip} from 'chart.js'
       import Chart from 'chart.js/auto'
