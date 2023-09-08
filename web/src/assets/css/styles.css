@@ -83,7 +83,11 @@ header.stuck .icons svg {
   @apply bg-df-black text-df-tan z-40;
 }
 
-
+.nav-item:hover > .subnav,
+.nav-item > a:hover + .subnav,
+.nav-item:focus-within > .subnav {
+  @apply grid sm:flex;
+}
 
 .nav-item-active {
   
