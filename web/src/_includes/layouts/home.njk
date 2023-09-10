@@ -137,7 +137,7 @@
     "https://example.com/photos/16x9/photo.jpg"
    ],
   "@id": "{{ metadata.url }}",
-  "name": "{{ metadata.title }}",
+  "name": "{{ metadata.title | safe }}",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "{{ metadata.contact.address }}",
@@ -190,7 +190,7 @@
       "opens": "16:00",
       "closes": "22:00"
     }
-  ],
+  ]
 }
 </script>
 {% endblock %}
