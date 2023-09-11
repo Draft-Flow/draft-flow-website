@@ -41,7 +41,7 @@ const generateRoute = async (route) => {
         for (const coord of coordinates) {
           llBounds.extend(coord)
         }
-        const { elevation, elevationGain, elevationLoss, totalDistance } =
+        const { elevation, gradient, elevationGain, elevationLoss, totalDistance } =
         generateRouteMeta(coordinates)
 
         if (!maxLength || elevation.length > maxLength.length) {
@@ -64,10 +64,13 @@ const generateRoute = async (route) => {
         }
 
         return {
+          title: path.title,
           elevation,
+          gradient,
           elevationGain,
           elevationLoss,
           totalDistance,
+          description: path.description ? toHTML(path.description, { components: serializers }) : '',
           geoJSON,
           lineString,
           simpleLineString: turfSimplify(lineString, {tolerance: 0.0003, highQuality: false}),
@@ -110,7 +113,8 @@ const getRoutes = async () => {
     "id": _id,
     title,
     "slug": slug.current,
-    website,
+    description,
+    excerpt,
     mainImage {
       "ref": asset._ref,
       alt

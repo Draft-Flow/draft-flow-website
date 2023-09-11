@@ -20,11 +20,9 @@ const jsBundle = (code, name, defer) => {
 
   try {
     bundles.outputFiles.forEach((bundle) => {
-      if (!fs.existsSync(bundle.path)) {
-        fs.writeFileSync(bundle.path, bundle.contents)
-        // eslint-disable-next-line
-        console.log('Created ', bundle.path)
-      }
+      fs.writeFileSync(bundle.path, bundle.contents)
+      // eslint-disable-next-line
+      console.log('Created ', bundle.path)
     })
   } catch (err) {
     // eslint-disable-next-line

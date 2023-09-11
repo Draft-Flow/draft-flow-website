@@ -1,4 +1,4 @@
-  <div class="w-full p-2 lg:p-4 bg-pg-tan-lightest rounded-t flex flex-col md:flex-row">
+  <div class="w-full py-2 lg:py-4 bg-pg-tan-lightest rounded-t flex flex-col md:flex-row">
     {# <div id="layerlist">
       <button data-map-style="{{ env.mapbox_style }}" class="active">Outdoor</button>
       <button data-map-style="{{ env.mapbox_style_satellite }}">Satellite</button>
@@ -7,7 +7,7 @@
     <ul class="flex-1 grid gap-4 grid-cols-1 order-1 md:ml-8 md:order-2">
       {% for path in route.paths %}
         <li style="border-top: 5px solid {{ path.lineString.properties.color }}">
-          <strong class="block mt-2 mb-3">{{ path.lineString.properties.name }}</strong>
+          <strong class="block mt-2 mb-3">{{ path.title }}</strong>
           <div class="grid grid-cols-3 gap-4">
             <div>
               <div class="uppercase font-bold text-sm">Distance</div>
@@ -230,6 +230,7 @@
                     if (context.parsed.y !== null) {
                       label += context.parsed.y.toFixed(0) + ' m';
                     }
+                  
                     return label;
                   },
                   beforeLabel: (e) => {

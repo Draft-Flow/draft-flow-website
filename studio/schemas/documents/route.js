@@ -50,12 +50,6 @@ export default {
     },
     // Description
     {
-      name: 'website',
-      type: 'url',
-      title: 'Website',
-      group: ['basics'],
-    },
-    {
       name: 'mainImage',
       type: 'mainImage',
       title: 'Main image',

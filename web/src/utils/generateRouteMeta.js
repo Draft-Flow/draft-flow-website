@@ -10,6 +10,7 @@ const routeMeta = (coordinates = []) => {
   elevation = coordinates.map((gpxPoint, idx, elevations) => {
     const prevGPXPoint = elevations[idx - 1]
     let distanceDiff = 0
+    let gradient = null
 
     if (idx > 0) {
       const from = turf.point([prevGPXPoint[0], prevGPXPoint[1]])
@@ -22,12 +23,15 @@ const routeMeta = (coordinates = []) => {
       } else {
         elevationLoss -= elevationDiff
       }
+
+      gradient = (elevationDiff/(distanceDiff*1000)*100).toFixed(1)
     }
     totalDistance += distanceDiff
 
     return {
       x: Number(totalDistance.toFixed(2)),
       y: Number(gpxPoint[2].toFixed(0)),
+      z: Number(gradient)
     }
   })
 
