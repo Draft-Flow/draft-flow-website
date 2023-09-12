@@ -4,9 +4,9 @@
       <button data-map-style="{{ env.mapbox_style_satellite }}">Satellite</button>
     </div> #}
     <div id='map' class="aspect-video w-full md:w-3/5 order-2 md:order-1"></div>
-    <ul class="flex-1 grid gap-4 grid-cols-1 order-1 md:ml-8 md:order-2">
+    <ul class="flex-1 grid gap-4 grid-cols-1 order-1 md:ml-8 md:order-2 mb-4 md:mb-0">
       {% for path in route.paths %}
-        <li style="border-top: 5px solid {{ path.lineString.properties.color }}">
+        <li class="pl-4 border-l-8 max-h-28" style="border-left-color: {{ path.lineString.properties.color }}">
           <strong class="block mt-2 mb-3">{{ path.title }}</strong>
           <div class="grid grid-cols-3 gap-4">
             <div>

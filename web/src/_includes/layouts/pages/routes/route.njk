@@ -16,14 +16,16 @@
 {% block content %}
 <section class="flex justify-center px-2 lg:px-4">
   <div class="max-w-7xl w-full mt-8 sm:mt-12 lg:mt-16">
-    {{ route.excerpt | safe }}
+    <div class="text-xl md:text-3xl md:w-3/4">{{ route.excerpt | safe }}</div>
     {% include './map.njk' %}
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+    <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 text-base mb-8">
       {% for path in route.paths %}
+      {% if path.description %}
       <li>
-        <strong>{{ path.title }}</strong>
+        <h3 class="font-bold text-lg">{{ path.title }}</h3>
         {{ path.description | safe }}
       </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </div>
