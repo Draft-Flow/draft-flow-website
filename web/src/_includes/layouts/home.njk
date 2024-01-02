@@ -3,7 +3,7 @@
 {%- set pageContent = pages | getPage(pageID) -%}
 
 {% set features = [
-  {text: 'Quality Guaranteed', color: 'bg-df-black'},
+  {text: 'Tools for DIY', color: 'bg-df-black'},
   {text: 'Genuine Parts', color: 'bg-df-orange-dark'},
   {text: 'Simple Pricing', color: 'bg-df-blue'},
   {text: 'Speedy Service', color: 'bg-df-black'}
@@ -11,10 +11,10 @@
 
 {% block content %}
   <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
-    <h1 class="text-center text-4xl sm:text-5xl lg:text-6xl flex flex-col md:flex-row font-df-sans z-20 px-1 rotate-[-6deg] skew-x-[-6deg]">
-      <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
+    <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row font-df-sans z-20 px-1 rotate-[-6deg] skew-x-[-6deg]">
+      <span class="text-shadow text-df-orange font-black uppercase">Cycle Workshop</span>
       <span class="block leading-none font-normal sm:leading-none ml-1 mr-2 -mt-2 font-script -rotate-12 skew-x-12 scale-[0.65]">and</span>
-      <span class="text-shadow text-df-orange font-black uppercase">Custom Builds</span>
+      <span class="text-shadow text-df-orange font-black uppercase">Expert Servicing</span>
     </h1>
      <ul class="relative mt-4 lg:mt-2 rotate-[-6deg] skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}

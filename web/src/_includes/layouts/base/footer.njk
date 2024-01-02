@@ -55,7 +55,7 @@
                     <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-neutral-100 w-6 h-6' %}</a>
                 </li>
             </ul>
-            <ul class="grid grid-cols-2 sm:grid-rows-1 grid-flow-col auto-cols-min gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+            <ul class="grid grid-cols-2 sm:grid-rows-1 grid-flow-col grid-cols-[min-content_1fr] gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
                 {%- for item in secondaryNavPages -%}
                 <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}

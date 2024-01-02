@@ -13,7 +13,7 @@
         <div class="w-6 h-6 hidden" id="navClose">{% svgIcon 'src/assets/icons/navClose.svg', 'w-auto h-auto stroke-df-black' %}</div>
       </button>
       <a id="logo" href="{{ '/' | url }}" class="text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-df uppercase flex leading-4 items-center -rotate-3 -skew-x-3">
-        Draft <span class="inline-block text-base md:text-xl lg:text-2xl ml-1 md:-my-1 mr-1 leading-2 outlined">&</span> Flow
+        Draft <span class="inline-block text-base md:text-xl lg:text-2xl ml-1 md:-my-1 mr-1 leading-2 outlined font-bold">&</span> Flow
       </a>
     </div>
     <nav class="hidden w-full sm:absolute sm:top-0 xl:top-2 h-20 sm:flex flex-wrap sm:items-end grow sm:grow-0 text-df-tan sm:text-df-gray transition-all duration-150 ease-linear" id="nav">
@@ -22,7 +22,7 @@
         {% set firstHalf = loop.index <= 2 %}
           {% if loop.index == 3 %}<li class="hidden sm:block w-24 sm:w-32 lg:w-72"></li> {% endif %}
           <li class="nav-item relative sm:flex-1 flex flex-col sm:flex-row mb-4 sm:mb-0 pb-1 sm:pb-0 leading-6 hover:z-40 focus-within:z-40 {% if firstHalf %}sm:justify-start{% else %}sm:justify-end{% endif %} {% if item.url == page.url %}nav-item-active{% endif %} border-b border-df-tan/10 sm:border-0">
-            <a href="{{ item.url | url }}" class="text-center relative inline-flex justify-center sm:pt-4 sm:pb-4 sm:px-3 z-20 hover:bg-df-black hover:text-df-tan sm:items-center items-start" {% if item.url == page.url %}aria-current="page"{% endif %}>{{ item.title }}</a>
+            <a href="{{ item.url | url }}" class="text-center relative inline-flex justify-center sm:pt-4 sm:pb-4 sm:px-4 z-20 hover:bg-df-black hover:text-df-tan sm:items-center items-start" {% if item.url == page.url %}aria-current="page"{% endif %}>{{ item.title }}</a>
             {% if item.children.length > 0 %}
             <ul class="subnav list-style-none grid grid-cols-2 gap-x-4 gap-y-1 sm:flex justify-center sm:justify-start sm:hidden sm:flex-col sm:absolute sm:top-[calc(100%-2px)] sm:px-4 mt-4 sm:mt-0 sm:py-2 font-df-sans text-df-tan font-medium bg-df-black text-base sm:text-2xl leading-5 z-10">
               {% for child in item.children %}
