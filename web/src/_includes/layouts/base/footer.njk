@@ -2,7 +2,7 @@
 {% set tertiaryNavPages = collections.tertiary | eleventyNavigation %}
 
 <footer class="text-df-gray">
-    <div class="px-2 lg:px-4 py-4 py-6 lg:py-10 border-t border-df-gray text-center">
+    <div class="px-2 lg:px-4 py-4 md:my-6 lg:py-10 border-t border-df-gray text-center">
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods from</h3>
             <ul class="list-style-none mt-4 md:mt-8 w-full flex justify-center flex-wrap items-center mb-8">
@@ -30,7 +30,7 @@
             {% include 'src/_includes/layouts/includes/newsletterNotice.njk' %}
         </div>
     </div>
-    <div class="px-2 lg:px-4 py-6 bg-df-black text-neutral-100">
+    <div class="px-2 lg:px-4 py-6 lg:pb-12 bg-df-black text-neutral-100">
         <div class="text-lg max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start opacity-80">
             <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
                 <li class="lg:h-full">
@@ -57,32 +57,41 @@
             </ul>
             <ul class="grid grid-cols-2 sm:grid-rows-1 grid-flow-col grid-cols-[min-content_1fr] gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
                 {%- for item in secondaryNavPages -%}
-                <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                <li><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>
-        <div class="mb-4 mt-8 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <ul class="grid grid-rows-1 grid-flow-col gap-8 mb-12 md:mb-0 grayscale contrast-0 opacity-60">
-                <li>
-                    <a href="https://www.cytech.training/">
-                        {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.cycleassociation.uk/">
-                        {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
-                    </a>
-                </li>
-            </ul>
-            <div class="flex items-center text-right text-sm md:text-base opacity-80">
+        <div class="mb-4 mt-8 lg:mt-12 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <div class="order-2 sm:order-1 mt-4 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-30 mb-4 sm:mb-0">Proud members of</div>
+                <ul class="grid grid-rows-1 grid-flow-col gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0 opacity-60">
+                    <li>
+                        <a href="https://www.cytech.training/">
+                            {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cycleassociation.uk/">
+                            {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="order-1 sm:order-2 flex items-center text-right text-sm opacity-80 mb-4 sm:mb-0">
                 <span>Made in Aberfeldy, Scotland<br>Website by Brett DeWoody</span>
                 {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
             </div>
         </div>
-        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-16 opacity-80 text-center">
+        <div>
+            <p class="text-center uppercase opacity-30 text-xs font-bold mt-12 mb-4">With Support From</p>
+            <ul class="flex justify-center opacity-20">
+                <a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}</a>
+            </ul>
+        </div>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 lg:mt-16 opacity-80 text-center">
             <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
                 {%- for item in tertiaryNavPages -%}
-                <li><a class="whitespace-nowrap text-center" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                <li><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -95,6 +104,7 @@
             </ul>
         </div>
     </div>
+    
 </footer>
 
 <script>
