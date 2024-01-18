@@ -46,19 +46,15 @@ header.open #social {
 }
 
 header.stuck {
-  @apply h-16 sm:h-16 border-b border-df-gray/25 bg-df-black;
+  @apply h-16 sm:h-20 border-b border-df-gray/25 bg-df-black;
 }
 
 header.stuck #nav {
-  @apply sm:-translate-y-4 xl:-translate-y-6 text-df-tan;
-}
-
-header.stuck .nav-items {
-  @apply sm:text-xl lg:text-2xl;
+  @apply sm:-translate-y-3 xl:-translate-y-4 text-df-tan;
 }
 
 header.stuck #logobar {
-  @apply sm:-translate-y-4 md:-translate-y-3 lg:-translate-y-4 xl:scale-75 text-df-tan;
+  @apply sm:-translate-y-2 md:-translate-y-1 lg:-translate-y-1 lg:scale-90 xl:scale-75 text-df-tan;
 }
 
 header.stuck #logobar svg {
@@ -114,6 +110,10 @@ header.stuck .icons svg {
 
   .parent-description p {
     @apply mb-4 lg:mb-6 leading-snug;
+  }
+
+  .parent-description ul {
+    @apply list-disc ml-6 -mt-2 mb-4;
   }
 
   .parent-description p a,

@@ -7,13 +7,14 @@
 <div id="sentinel" class="absolute top-0"></div>
 <header id="header" class="fixed z-50 top-0 w-screen h-16 sm:h-auto text-pg-tan-light flex flex-col items-center transition-all duration-150 ease-linear">
   <div id="navbar" class="w-full relative mx-4 max-w-7xl text-center lg:text-left flex flex-col lg:justify-between sm:items-center">
-    <div id="logobar" class="relative sm:absolute sm:top-8 md:top-6 p-4 sm:p-0 h-16 sm:h-auto flex justify-between lg:justify-center items-center z-10 transition-all duration-150 ease-linear origin-top">
+    <div id="logobar" class="relative sm:absolute top-1 sm:top-6 md:top-4 p-4 sm:p-0 h-16 sm:h-auto flex justify-between lg:justify-center items-center z-10 transition-all duration-150 ease-linear origin-top">
       <button class="inline sm:hidden w-6 h-6" id="navToggle" aria-haspopup="true" aria-controls="nav" aria-label="Menu">
         <div class="w-6 h-6" id="navOpen">{% svgIcon 'src/assets/icons/navToggle.svg', 'w-full h-full stroke-df-black' %}</div>
         <div class="w-6 h-6 hidden" id="navClose">{% svgIcon 'src/assets/icons/navClose.svg', 'w-auto h-auto stroke-df-black' %}</div>
       </button>
-      <a id="logo" href="{{ '/' | url }}" class="text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-df uppercase flex leading-4 items-center -rotate-3 -skew-x-3">
-        Draft <span class="inline-block text-base md:text-xl lg:text-2xl ml-1 md:-my-1 mr-1 leading-2 outlined font-bold">&</span> Flow
+      <a id="logo" href="{{ '/' | url }}" class="text-center ">
+        <div class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-df uppercase flex leading-4 items-center -rotate-3 -skew-x-3">Draft <span class="inline-block text-base md:text-xl lg:text-2xl ml-1 md:-my-1 mr-1 leading-2 outlined font-bold">&</span> Flow</div>
+        <div class="mt-2 md:mt-0 lg:mt-0 text-xs lg:text-base font-df font-medium uppercase tracking-wider">Community Cycle Workshop</div>
       </a>
     </div>
     <nav class="hidden w-full sm:absolute sm:top-0 xl:top-2 h-20 sm:flex flex-wrap sm:items-end grow sm:grow-0 text-df-tan sm:text-df-gray transition-all duration-150 ease-linear" id="nav">
