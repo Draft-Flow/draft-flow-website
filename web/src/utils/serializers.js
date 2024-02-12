@@ -1,6 +1,7 @@
 const { getFileAsset } = require('@sanity/asset-utils')
 
 const { sanity } = require('../client-config')
+const urlFor = require('./imageUrl') 
 
 // Learn more on https://www.sanity.io/docs/guides/introduction-to-portable-text
 module.exports = {
@@ -15,5 +16,9 @@ module.exports = {
       const fileURL = getFileAsset(value.asset, sanity).url
       return `<div class="file-wrapper"><a href="${fileURL}?dl=" download>${value.name}</a></div>`
     },
+    mainImage: ({ value}) => {
+      const imageUrl = urlFor(value.asset).width(1000).url()
+      return `<img class="w-full" src="${imageUrl}" alt="${value.alt}" loading="lazy" />`
+    }
   },
 }

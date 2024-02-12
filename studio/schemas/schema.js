@@ -3,6 +3,7 @@ import refurbBike from './documents/refurb-bikes'
 import route from './documents/route'
 import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
+import newsArticle from './documents/newsArticle'
 import brands from './documents/brands'
 import shop from './documents/products'
 import routeCategories from './documents/routeCategories'
@@ -30,6 +31,7 @@ import sku from './objects/sku'
 export default [
   siteSettings,
   staticPages,
+  newsArticle,
   refurbBike,
   route,
   brands,

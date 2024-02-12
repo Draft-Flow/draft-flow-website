@@ -1,0 +1,21 @@
+---
+layout: layouts/pages/news/newsArticle
+tags:
+  - news
+  - news_pages
+pagination:
+  alias: article
+  data: news
+  size: 1
+  addAllPagesToCollections: true
+permalink: "/news/{{ article.slug }}/index.html"
+eleventyComputed:
+  id: "{{ article.id }}"
+  title: "{{ article.title }}"
+  banner: "{{ article.banner }}"
+  url: "{{ article.slug }}"
+  eleventyNavigation:
+    parent: "News"
+    key: "{{ title }}"
+    title: "{{ title }}"
+---

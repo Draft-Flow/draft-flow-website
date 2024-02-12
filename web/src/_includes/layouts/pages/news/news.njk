@@ -1,0 +1,29 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set crumbsJSON = collections.news | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+{% set bannerTitle = title %}
+{% set bannerSrc = 'src/static/images/banner-brands.jpg' %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
+
+{% block content %}
+<section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-7xl w-full py-20">
+      <div class="pageContent">
+        
+      </div>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
+        {% for article in collections.news_pages %}
+        <li class="flex justify-center items-center px-8 sm:px-0">
+            <a href="{{ article.data.url }}">
+               {{article.data.title | safe }}
+               
+            </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}
