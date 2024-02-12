@@ -8,7 +8,7 @@ pagination:
   data: news
   size: 1
   addAllPagesToCollections: true
-permalink: "/news/{{ article.slug }}/index.html"
+permalink: "/news/{{ article.slug | safe }}/index.html"
 eleventyComputed:
   id: "{{ article.id }}"
   title: "{{ article.title }}"
