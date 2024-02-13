@@ -54,7 +54,7 @@
     <meta property="og:url" content="{{ env.url }}{{ page.url }}" />
     <meta property="og:description" content="{{ description or metadata.description }}" />
     {% set ogImage %}{% imageBannerUrlFor banner, 1000 %}{% endset %}
-    <meta property="og:image" content="{% if ogImage != "undefined" %}{{ogImage}}{% else %}{{env.url + "/static/img/logo.png" }}{% endif %}" />
+    <meta property="og:image" content="{% if ogImage != "undefined" %}{{ogImage}}{% else %}{{env.url + "/static/logos/draftandflow-square.png" }}{% endif %}" />
     <meta property="og:type" content="article" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
