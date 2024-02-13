@@ -18,7 +18,7 @@ module.exports = {
     },
     mainImage: ({ value}) => {
       const imageUrl = urlFor(value.asset).width(1000).url()
-      return `<img class="w-full" src="${imageUrl}" alt="${value.alt}" loading="lazy" />`
+      return `<img class="w-full mb-4 mt-2" src="${imageUrl}" alt="${value.alt}" loading="lazy" />`
     }
   },
 }

@@ -12,7 +12,8 @@ permalink: "/news/{{ article.slug | safe }}/index.html"
 eleventyComputed:
   id: "{{ article.id }}"
   title: "{{ article.title }}"
-  banner: "{{ article.banner }}"
+  banner: "{{ article.banner.ref }}"
+  description: "{{ article.seo.description | escape | safe }}"
   eleventyNavigation:
     parent: "News"
     key: "{{ title }}"

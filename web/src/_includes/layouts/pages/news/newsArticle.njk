@@ -1,8 +1,8 @@
 {% extends 'layouts/base/index.njk' %}
 
-{% if article.banner.ref %}
+{% if banner %}
 {% set bannerSrc %}
-  {% imageBannerUrlFor article.banner.ref, 2000 %}
+  {% imageBannerUrlFor banner, 2000 %}
 {% endset %}
 {% endif %}
 
