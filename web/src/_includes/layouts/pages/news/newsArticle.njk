@@ -37,17 +37,17 @@
   <script type="application/ld+json">
     { "@context": "https://schema.org", 
     "@type": "Article",
-    "headline": "{{article.title}}",
+    "headline": "{{article.title | safe}}",
     "alternativeHeadline": "This article is also about robots and stuff",
     "image": "{% if ogImage != "undefined" %}{{ogImage}}{% else %}{{env.url + "/static/logos/draftandflow-square.png" }}{% endif %}",
     "author": {
       "@type": "Organization",
-      "name": "{{metadata.title}}",
+      "name": "{{metadata.title | safe}}",
       "url": "{{ env.url }}"
     },  
     "genre": "bikes", 
     "keywords": "bikes aberfeldy scotland gravel mountain road bikepacking",  
-    "publisher": "{{metadata.title}}",
+    "publisher": "{{metadata.title | safe}}",
     "url": "{{ env.url }}{{ page.url }}",
     "datePublished": "{{page.date}}",
     "dateCreated": "{{page.date}}",
