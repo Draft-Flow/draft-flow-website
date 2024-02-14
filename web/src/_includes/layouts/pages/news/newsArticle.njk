@@ -33,13 +33,18 @@
     </div>
   </section>
 
+  {% set ogImage %}{% imageBannerUrlFor banner, 1000 %}{% endset %}
   <script type="application/ld+json">
     { "@context": "https://schema.org", 
     "@type": "Article",
     "headline": "{{article.title}}",
     "alternativeHeadline": "This article is also about robots and stuff",
     "image": "{% if ogImage != "undefined" %}{{ogImage}}{% else %}{{env.url + "/static/logos/draftandflow-square.png" }}{% endif %}",
-    "author": "{{metadata.title}}",  
+    "author": {
+      "@type": "Organization",
+      "name": "{{metadata.title}}",
+      "url": "{{ env.url }}"
+    },  
     "genre": "bikes", 
     "keywords": "bikes aberfeldy scotland gravel mountain road bikepacking",  
     "publisher": "{{metadata.title}}",
