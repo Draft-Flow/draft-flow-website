@@ -11,9 +11,10 @@ pagination:
 permalink: "/news/{{ article.slug | safe }}/index.html"
 eleventyComputed:
   id: "{{ article.id }}"
-  title: "{{ article.title }}"
+  title: "{{ article.title | safe }}"
   banner: "{{ article.banner.ref }}"
   description: "{{ article.seo.description | escape | safe }}"
+  updatedAt: "{{ article.updatedAt }}"
   eleventyNavigation:
     parent: "News"
     key: "{{ title }}"

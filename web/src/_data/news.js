@@ -35,7 +35,8 @@ const getNews = async () => {
       "ref": asset._ref,
       alt
     },
-    content
+    content,
+    "updatedAt": _updatedAt
   }`
 
   const order = '| order(_createdAt desc)'

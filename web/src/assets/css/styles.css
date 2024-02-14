@@ -116,6 +116,10 @@ header.stuck .icons svg {
     @apply list-disc ml-6 -mt-2 mb-4;
   }
 
+  .parent-description li {
+    @apply mb-2;
+  }
+
   .parent-description p a,
   .parent-description li a {
     @apply underline text-df-orange-xdark italic font-medium hover:text-df-orange-dark;

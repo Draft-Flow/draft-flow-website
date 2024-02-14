@@ -32,4 +32,23 @@
       </div>
     </div>
   </section>
+
+  <script type="application/ld+json">
+    { "@context": "https://schema.org", 
+    "@type": "Article",
+    "headline": "{{article.title}}",
+    "alternativeHeadline": "This article is also about robots and stuff",
+    "image": "{% if ogImage != "undefined" %}{{ogImage}}{% else %}{{env.url + "/static/logos/draftandflow-square.png" }}{% endif %}",
+    "author": "{{metadata.title}}",  
+    "genre": "bikes", 
+    "keywords": "bikes aberfeldy scotland gravel mountain road bikepacking",  
+    "publisher": "{{metadata.title}}",
+    "url": "{{ env.url }}{{ page.url }}",
+    "datePublished": "{{page.date}}",
+    "dateCreated": "{{page.date}}",
+    "dateModified": "{{ article.updatedAt }}",
+    "description": "{{ description or metadata.description }}",
+    "articleBody": "{{ article.content | striptags(true) }}"
+    }
+  </script>
 {% endblock %}
