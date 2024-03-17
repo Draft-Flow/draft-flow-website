@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.njk', './src/**/*.md', './src/**/*.html', './src/utils/shortcodes/**/*.js'],
+  content: ['./src/**/*.njk', './src/**/*.md', './src/**/*.html', './src/utils/shortcodes/**/*.js', './src/utils/serializers.js', './src/_data/**/*.js'],
   theme: {
     extend: {
       colors: {
