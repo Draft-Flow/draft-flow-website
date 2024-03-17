@@ -4,6 +4,7 @@ const { toHTML } = require('@portabletext/to-html')
 const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 const getYouTubeId = require('get-youtube-id')
 const markdownIt = require('markdown-it')
+const { format } = require('date-fns')
 
 const imageURL = require('./src/utils/shortcodes/shortcodeImageURL')
 const bannerImageURL = require('./src/utils/shortcodes/shortcodeBannerURL')
@@ -146,8 +147,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('getPage', getPageFilter)
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter('htmlDateString', (dateObj, format) => {
-    return format(dateObj, format || 'yyyy-LL-dd')
+  eleventyConfig.addFilter('htmlDateString', (dateObj, dateFormat) => {
+    return format(new Date(dateObj), dateFormat || 'yyyy-LL-dd')
   })
 
   // If production, minify HTML output

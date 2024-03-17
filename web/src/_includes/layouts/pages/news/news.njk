@@ -15,11 +15,11 @@
         
       </div>
       <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-        {% for article in collections.news_pages %}
-        <li class="flex justify-center items-center px-8 sm:px-0">
+        {% for article in collections.news_pages | reverse %}
+        <li class="flex justify-center px-8 sm:px-0">
             <a href="{{ article.url  | safe }}">
-               {{article.data.title | safe }}
-               
+              <small>{{ article.data.date | htmlDateString('PP') }}</small>
+              <h3>{{article.data.title | safe }}</h3>
             </a>
         </li>
         {% endfor %}

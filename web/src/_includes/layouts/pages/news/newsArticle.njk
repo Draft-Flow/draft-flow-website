@@ -23,11 +23,13 @@
           {{ article.content | safe }}
         </div>
         <div class="order-1 md:order-2 md:ml-12 w-full md:w-60 text-base my-4 md:my-0 mx-auto md:ml-8 leading-snug">
+          {% if article.cta.title %}
           <div class="text-center px-3 py-4 bg-neutral-300 rounded-sm">
             <h3 class="font-bold mb-3">{{ article.cta.title }}</h3>
             <div class="mb-4">{{ article.cta.text | safe }}</div>
             <a class="cta small" href="{{article.cta.buttonLink}}">{{article.cta.buttonText}}</a>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>

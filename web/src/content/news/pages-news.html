@@ -14,6 +14,7 @@ eleventyComputed:
   title: "{{ article.title | safe }}"
   banner: "{{ article.banner.ref }}"
   description: "{{ article.seo.description | escape | safe }}"
+  date: "{{ article.createdAt }}"
   updatedAt: "{{ article.updatedAt }}"
   eleventyNavigation:
     parent: "News"

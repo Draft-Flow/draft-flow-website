@@ -36,7 +36,8 @@ const getNews = async () => {
       alt
     },
     content,
-    "updatedAt": _updatedAt
+    "updatedAt": _updatedAt,
+    "createdAt": _createdAt
   }`
 
   const order = '| order(_createdAt desc)'

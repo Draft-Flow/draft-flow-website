@@ -4,7 +4,7 @@ const crumbs = (json) => {
     return `<a class="block ${idx === arr.length - 1 ? 'font-df-sans mt-1' : ''}" href="${link.url}">${link.title}</a>`
   })
 
-  return `<div class="text-sm sm:text-base lg:text-xl text-zinc-300 font-df leading-4 font-medium uppercase flex items-center">${[homeLink, ...jsonLinks].join('<div class="mx-1 text-base lg:text-lg leading-3">&rarrc;</div>')}</div>`
+  return `<div class="text-sm sm:text-base lg:text-xl text-zinc-300 font-df leading-4 font-medium uppercase flex items-center">${[homeLink, ...jsonLinks].join('<div class="mx-1 text-base lg:text-lg leading-3">&rarrw;</div>')}</div>`
 }
 
 module.exports = crumbs
