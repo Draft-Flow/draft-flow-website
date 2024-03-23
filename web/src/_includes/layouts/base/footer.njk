@@ -61,38 +61,56 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="mb-4 mt-8 lg:mt-12 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
-            <div class="order-2 sm:order-1 mt-4 lg:mt-0">
-                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-30 mb-4 sm:mb-0">Proud members of</div>
-                <ul class="grid grid-rows-1 grid-flow-col gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0 opacity-60">
+        <div class="mb-4 mt-8 lg:mt-12 sm:mx-4 lg:mx-auto max-w-6xl flex flex-col sm:flex-row justify-between items-center">
+            <div class="mt-6 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-30 mb-4 sm:mb-0">Certified by</div>
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0 opacity-80">
                     <li>
                         <a href="https://www.cytech.training/">
-                            {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.cycleassociation.uk/">
-                            {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.scottishadventure.org/">
-                            {% image 'src/static/logos/scottishadventureclublogo.png', 'Scottish Adventure Club', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 md:h-20 w-auto' %}
+                            {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 lg:h-20 w-auto' %}
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="order-1 sm:order-2 flex items-center text-right text-sm opacity-80 mb-4 sm:mb-0">
-                <span>Made in Aberfeldy, Scotland<br>Website by Brett DeWoody</span>
-                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
+            <div class="mt-6 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-30 mb-4 sm:mb-0">Proud members of</div>
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0 opacity-80">
+                    <li>
+                        <a href="https://www.cycleassociation.uk/">
+                            {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 lg:h-20 w-auto' %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.scottishadventure.org/">
+                            {% image 'src/static/logos/scottishadventureclublogo.png', 'Scottish Adventure Club', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 lg:h-20 w-auto' %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-6 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-30 mb-4 sm:mb-0">With Support from</div>
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0 opacity-80">
+                    <li><a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 lg:h-20 w-auto' %}</a></li>
+                    <li><a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 lg:h-20 w-auto' %}</a></li>
+                </ul>
             </div>
         </div>
-        <div>
-            <p class="text-center uppercase opacity-30 text-xs font-bold mt-12 mb-4">With Support From</p>
-            <ul class="flex justify-center opacity-20">
-                <a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 md:h-20 w-auto' %}</a>
-                <a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 md:h-20 w-auto' %}</a>
-            </ul>
+        <div class="mb-4 mt-8 lg:mt-12 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-80">
+            <div class="text-center sm:text-left sm:mr-12 mb-6 sm:mb-0 text-sm">
+                <p class="mb-2">Draft & Flow C.I.C. is a Community Interest Company registered in Scotland, Company Number {{ metadata.company.number }}.</p>
+                <p>Our aim is to get more people riding, and keep them riding, through:</p>
+                <ul class="list-disc flex flex-wrap justify-center sm:block mb-2">
+                    <li class="ml-4">Accessible cycle servicing</li>
+                    <li class="ml-4">Cycle maintenance education</li>
+                    <li class="ml-4">Local riding info</li>
+                    <li class="ml-4">Providing an inclusive, social space for connecting around cycles</li>
+                </ul> 
+                <p><a class="underline" href="/about/">Learn more about our goals <span class="text-lg">&rArr;</span></a></p>
+            </div>
+            <div class="order-1 sm:order-2 flex items-center text-right text-sm mb-4 sm:mb-0">
+                <span class="whitespace-nowrap">Made in Aberfeldy, Scotland<br/><small>Website by Brett DeWoody</small></span>
+                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
+            </div>
         </div>
         <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 lg:mt-16 opacity-80 text-center">
             <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
@@ -110,7 +128,7 @@
             </ul>
         </div>
     </div>
-    <div class="bg-zinc-700 text-sm ">
+    <div class="bg-sky-950 text-sm ">
         <div class="flex flex-col items-center justify-center py-2 text-zinc-500">
             <div class="flex align-items-center italic mb-2">
                 {% svgIcon 'src/assets/icons/draftandflowlabs.svg', 'fill-black w-4' %}
