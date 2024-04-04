@@ -10,14 +10,14 @@
 
 {% block content %}
 <section class="flex justify-center px-2 lg:px-4">
-    <div class="max-w-7xl w-full py-20">
-      <div class="pageContent">
-        
+    <div class="max-w-7xl w-full py-10">
+      <div class="parent-description">
+        {{ content | md | safe }}
       </div>
-      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
+      <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
         {% for article in collections.news_pages | reverse %}
-        <li class="flex justify-center px-8 sm:px-0">
-            <a href="{{ article.url  | safe }}">
+        <li class="w-full flex justify-center sm:px-8 sm:px-0">
+            <a class="w-full" href="{{ article.url  | safe }}">
               <small>{{ article.data.date | htmlDateString('PP') }}</small>
               <h3>{{article.data.title | safe }}</h3>
             </a>
