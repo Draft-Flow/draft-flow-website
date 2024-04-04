@@ -99,7 +99,12 @@ export default {
         {
           name: 'address',
           type: 'string',
-          title: 'Street Address',
+          title: 'Street Address 1',
+        },
+        {
+          name: 'address2',
+          type: 'string',
+          title: 'Street Address 2',
         },
         {
           name: 'city',
