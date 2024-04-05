@@ -23,7 +23,7 @@
         {% endif %}
         <li class="w-full flex justify-center">
             <a class="w-full" href="{{ article.url  | safe }}">
-              <h3 class="block font-bold text-center mb-1 min-h-[40px] leading-4">{{article.data.title | safe }}</h3>
+              <h3 class="block font-bold text-center mb-2 sm:min-h-[40px] leading-4">{{article.data.title | safe }}</h3>
               <div class="w-full h-auto">
           {% image article.data.firstImage, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
               </div>
