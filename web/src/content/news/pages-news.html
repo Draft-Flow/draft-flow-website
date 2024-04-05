@@ -13,6 +13,7 @@ eleventyComputed:
   id: "{{ article.id }}"
   title: "{{ article.title | safe }}"
   banner: "{{ article.banner.ref }}"
+  firstImage: "{{ article.firstImage }}"
   description: "{{ article.seo.description | escape | safe }}"
   date: "{{ article.createdAt }}"
   updatedAt: "{{ article.updatedAt }}"

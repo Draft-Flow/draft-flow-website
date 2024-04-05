@@ -9,6 +9,7 @@ const generateDoc = async (doc) => {
   return {
     ...doc,
     content: doc.content ? toHTML(doc.content, { components: serializers }) : null, 
+    firstImage: doc.firstImage.imageUrl,
     cta: doc.cta ? ({
       ...doc.cta,
       text: doc.cta.text ? toHTML(doc.cta.text, { components: serializers }) : null
@@ -36,6 +37,10 @@ const getNews = async () => {
       alt
     },
     content,
+    "firstImage": content[]{
+      ...,
+      "imageUrl": asset->url
+    }[_type == "mainImage"][0],
     "updatedAt": _updatedAt,
     "createdAt": _createdAt
   }`

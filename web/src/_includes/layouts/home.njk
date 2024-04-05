@@ -45,16 +45,6 @@
     <a class="flex justify-center items-center h-48 text-4xl" href="/shop/">Shop</a>
   </div> #}
 
-  {# Bike Survey #}
-  {# Up-Cycle Program #}
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-16 border-t-2 border-df-gray text-center">
-    <h2 class="text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
-      <span class="text-shadow text-df-orange font-black uppercase">Aberfeldy Cycle Workshop Survey</span>
-    </h2>
-    <p class="max-w-prose mx-auto mt-2 mb-6">We're looking for your feedback on opening a community cycle workshop in Aberfeldy.</p>
-    <a class="bg-df-blue text-white px-4 py-2 text-xl font-bold hover:bg-df-black" href="https://forms.gle/dsHxFKArpspMmn7t9">Take the Survey</a>
-  </div>
-
   {# Up-Cycle Program #}
   <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-16 border-t-2 border-df-gray">
     <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
@@ -121,6 +111,31 @@
       refurbObserver.observe(refurbSentinelEl)
       /* Refurb Images - END */
     </script>
+  </div>
+
+  {# News #}
+  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-16 border-t-2 border-df-gray text-center">
+    <h2 class="text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
+      <span class="text-shadow text-df-orange font-black uppercase">News & Updates</span>
+    </h2>
+     <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
+        {% for article in collections.news_pages | reverse %}
+        {% if article.data.banner %}
+        {% set articleImageSrc %}
+          {% imageBannerUrlFor article.data.banner, 2000 %}
+        {% endset %}
+        {% endif %}
+        <li class="w-full flex justify-center">
+            <a class="w-full" href="{{ article.url  | safe }}">
+              <h3 class="block font-bold text-center mb-1 min-h-[40px] leading-4">{{article.data.title | safe }}</h3>
+              <div class="w-full h-auto">
+          {% image article.data.firstImage, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
+              </div>
+              <small>{{ article.data.date | htmlDateString('PP') }}</small>
+            </a>
+        </li>
+        {% endfor %}
+      </ul>
   </div>
 
   {# <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:py-8 border-t border-zinc-400 grid grid-rows-2 md:grid-rows-1 grid-cols-1 md:grid-cols-8">
