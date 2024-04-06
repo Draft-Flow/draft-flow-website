@@ -1,4 +1,5 @@
 import { FaShoppingCart } from 'react-icons/fa'
+import generateSlug from '../utils/generateSlug'
 
 export default {
   name: 'shop',
@@ -37,10 +38,7 @@ export default {
       title: 'Slug',
       options: {
         source: 'name',
-        slugify: input => input
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .slice(0, 200)
+        slugify: input => generateSlug(input)
       },
       group: 'general'
     },

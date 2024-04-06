@@ -14,11 +14,11 @@ module.exports = {
       </div>`,
     file: ({ value }) => {
       const fileURL = getFileAsset(value.asset, sanity).url
-      return `<div class="file-wrapper"><a href="${fileURL}?dl=" download>${value.name}</a></div>`
+      return `<div class="file-wrapper "><a href="${fileURL}?dl=" download>${value.name}</a></div>`
     },
     mainImage: ({ value}) => {
       const imageUrl = urlFor(value.asset).width(1000).url()
-      return `<img class="aspect-auto mb-4 mt-2 mx-auto max-h-96" src="${imageUrl}" alt="${value.alt}" loading="lazy" />`
+      return `<img class="aspect-auto mb-4 mt-2 mx-auto max-h-96 p-1 md:p-2 border-double border-4 border-df-gray" src="${imageUrl}" alt="${value.alt}" loading="lazy" />`
     }
   },
 }

@@ -1,4 +1,5 @@
 import { FaRegNewspaper } from 'react-icons/fa'
+import generateSlug from '../utils/generateSlug'
 
 export default {
   name: 'news',
@@ -18,10 +19,7 @@ export default {
       title: 'Slug',
       options: {
         source: 'title',
-        slugify: input => input
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .slice(0, 200)
+        slugify: input => generateSlug(input)
       }
     },
     {

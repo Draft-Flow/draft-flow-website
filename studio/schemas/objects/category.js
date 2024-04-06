@@ -1,4 +1,5 @@
 import {FiTag} from 'react-icons/fi'
+import generateSlug from '../utils/generateSlug'
 
 export default {
   name: 'category',
@@ -24,10 +25,7 @@ export default {
       hidden: ({document}) => !document?.parent,
       options: {
         source: 'title',
-        slugify: input => input
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .slice(0, 200),
+        slugify: input => generateSlug(input),
         isUnique: async (slug, context) => {
           const {document, getClient} = context
           const client = getClient({apiVersion: '2022-12-07'})
