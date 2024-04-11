@@ -112,12 +112,17 @@ header.stuck .icons svg {
     @apply mb-4 lg:mb-6 leading-snug;
   }
 
-  .parent-description ul {
+  .parent-description ul
+  .parent-description ol {
     @apply list-disc ml-6 -mt-2 mb-4;
   }
 
   .parent-description li {
     @apply mb-2;
+  }
+
+  .parent-description h2 {
+    @apply font-medium text-xl lg:text-2xl mb-2 mt-4;
   }
 
   .parent-description p a,

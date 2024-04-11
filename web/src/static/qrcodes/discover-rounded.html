@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Styling</title>
+    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+</head>
+<body>
+<div id="canvas"></div>
+<script type="text/javascript">
+
+    const qrCode = new QRCodeStyling({
+        width: 400,
+        height: 400,
+        type: "svg",
+        data: "https://draftandflow.com/discover/",
+        image: "/static/logos/draftandflowcropped.png",
+        dotsOptions: {
+            color: "#000000",
+            type: "rounded"
+        },
+        backgroundOptions: {
+            color: "#ffffff",
+        },
+        cornersSquareOptions: {
+            type: 'rounded'
+        },
+        cornersDotOptions: {
+            type: 'rounded'
+        },
+        imageOptions: {
+            crossOrigin: "anonymous",
+            margin: 0
+        }
+    });
+
+    qrCode.append(document.getElementById("canvas"));
+    qrCode.download({ name: "discover-rounded", extension: "svg" });
+
+</script>
+
+</body>
+</html>

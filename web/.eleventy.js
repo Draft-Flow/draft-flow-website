@@ -39,6 +39,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/static/_redirects': './_redirects' })
   eleventyConfig.addPassthroughCopy({ 'src/static/sw.js': './sw.js' })
   eleventyConfig.addPassthroughCopy({ 'src/static/favicon/**/*': '.' })
+  eleventyConfig.addPassthroughCopy({ 'src/static/qrcodes/**/*': './qrcodes/' })
   eleventyConfig.addPassthroughCopy({'src/static/apple-developer-merchantid-domain-association': './.well-known/apple-developer-merchantid-domain-association'})
   eleventyConfig.addPassthroughCopy({'src/static/logos/**/*': './static/logos/'})
   eleventyConfig.addPassthroughCopy({'src/static/fonts/**/*': './static/fonts/'})

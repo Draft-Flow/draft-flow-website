@@ -45,7 +45,7 @@ const getNews = async () => {
     "createdAt": _createdAt
   }`
 
-  const order = '| order(_createdAt desc)'
+  const order = '| order(createdAt desc)'
   const query = [filter, projection, order].join(' ')
   const docs = await client.fetch(query).catch((err) => {
     // eslint-disable-next-line
