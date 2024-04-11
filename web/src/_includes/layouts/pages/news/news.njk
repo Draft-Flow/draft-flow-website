@@ -15,7 +15,7 @@
         {{ content | md | safe }}
       </div>
       <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
-        {% for article in collections.news_pages | reverse %}
+        {% for article in collections.news_pages %}
         {% if article.data.banner %}
         {% set articleImageSrc %}
           {% imageBannerUrlFor article.data.banner, 2000 %}
