@@ -10,9 +10,9 @@
 <script type="text/javascript">
 
     const qrCode = new QRCodeStyling({
-        width: 400,
-        height: 400,
-        type: "svg",
+        width: 6000,
+        height: 6000,
+        type: "png",
         data: "https://draftandflow.com/discover/",
         image: "/static/logos/draftandflowcropped.png",
         dotsOptions: {
@@ -35,7 +35,7 @@
     });
 
     qrCode.append(document.getElementById("canvas"));
-    qrCode.download({ name: "discover-rounded", extension: "svg" });
+    qrCode.download({ name: "discover-rounded", extension: "png" });
 
 </script>
 
