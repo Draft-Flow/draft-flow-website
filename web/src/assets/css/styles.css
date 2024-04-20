@@ -165,10 +165,19 @@ header.stuck .icons svg {
   @apply text-transparent;
 }
 
+
 .text-shadow {
-  letter-spacing: 3px;
-  -webkit-text-stroke: 2px #000000;
+  letter-spacing: 2px;
+  -webkit-text-stroke: 1px #000000;
   text-shadow: -1px 0px 0 #000000, -1px 1px 0 #000000;
+}
+
+
+@media screen(md) {
+.text-shadow {
+    letter-spacing: 3px;
+    -webkit-text-stroke: 2px #000000;
+  }
 }
 
 .text-justify-center {
