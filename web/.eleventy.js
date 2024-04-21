@@ -14,6 +14,7 @@ const bannerImageShortcode = require('./src/utils/shortcodes/shortcodeBannerImag
 const inlineSVGShortcode = require('./src/utils/shortcodes/shortcodeInlineSVG')
 const crumbShortcode = require('./src/utils/shortcodes/shortcodeCrumbs')
 const shuffleFilter = require('./src/utils/filters/shuffle')
+const brandShuffleFilter = require('./src/utils/filters/brandShuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
 const getPageFilter = require('./src/utils/filters/getPage')
 const urlFor = require('./src/utils/imageUrl')
@@ -104,6 +105,9 @@ module.exports = function (eleventyConfig) {
 
   // Shuffle collection into random order
   eleventyConfig.addFilter('shuffle', shuffleFilter)
+
+    // Shuffle a brand into random order
+    eleventyConfig.addFilter('brandShuffle', brandShuffleFilter)
 
   // Extract route data
   // Shuffle collection into random order

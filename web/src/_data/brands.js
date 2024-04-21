@@ -5,12 +5,12 @@ const serializers = require('../utils/serializers')
 
 const generateDoc = async (doc) => {
   try {
-  return {
-    ...doc,
-    intro: doc.ourDescription ? toHTML(doc.ourDescription[0], { components: serializers }) : '', 
-    ourDescription: doc.ourDescription ? toHTML(doc.ourDescription.slice(1), { components: serializers }) : '',
-    theirDescription: toHTML(doc.theirDescription, { components: serializers })
-  }
+    return {
+      ...doc,
+      intro: doc.ourDescription ? toHTML(doc.ourDescription[0], { components: serializers }) : '', 
+      ourDescription: doc.ourDescription ? toHTML(doc.ourDescription.slice(1), { components: serializers }) : '',
+      theirDescription: toHTML(doc.theirDescription, { components: serializers })
+    }
   } catch (err) {
     // eslint-disable-next-line
     console.error(err)
@@ -28,6 +28,7 @@ const getBrands = async () => {
       alt
     },
     website,
+    primary,
     seo {
       title, 
       description
@@ -55,7 +56,6 @@ const getBrands = async () => {
       return brand
     })
   )
-  
   return prepareDocs
 }
 

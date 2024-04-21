@@ -36,6 +36,12 @@ export default {
       validation: Rule =>Rule.required()
     },
     {
+      name: 'primary',
+      type: 'boolean',
+      title: 'Primary',
+      validation: Rule =>Rule.required()
+    },
+    {
       name: 'seo',
       type: 'seo',
       title: 'SEO',
@@ -49,13 +55,13 @@ export default {
       name: 'banner',
       type: 'mainImage',
       title: 'Banner Image',
-      validation: Rule =>Rule.required()
+      // validation: Rule =>Rule.required()
     },
     {
       name: 'oneLiner',
       type: 'string',
       title: 'One-liner',
-      validation: Rule =>Rule.required().max(50).error('A one-liner of max 50 characters is required'),
+      // validation: Rule =>Rule.required().max(50).error('A one-liner of max 50 characters is required'),
     },
     {
       name: 'ourDescription',
@@ -77,6 +83,7 @@ export default {
     },
   ],
   initialValue: {
+    primary: false,
     showProducts: false
   }
 }

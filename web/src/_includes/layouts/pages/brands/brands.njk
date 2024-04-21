@@ -12,10 +12,10 @@
   <section class="flex justify-center px-2 lg:px-4">
     <div class="max-w-7xl w-full py-20">
       <div class="pageContent">
-        <p> We believe in the brands we sell, and rely on them ourselves. The brands below make quality gear that we highly recommend. Click a brand to learn more.</p>
+        <p> We believe in the brands we sell, and rely on them ourselves. The brands below make quality gear that we highly recommend.</p>
       </div>
       <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-        {% for brand in brands %}
+        {% for brand in brands | brandShuffle(brands.length) %}
         {% set imageSrc %}
             {% imageUrlFor brand.logo.ref, 900 %}
         {% endset %}
