@@ -10,11 +10,11 @@
 <script type="text/javascript">
 
     const qrCode = new QRCodeStyling({
-        width: 6000,
-        height: 6000,
+        width: 10000,
+        height: 10000,
         type: "png",
         data: "https://draftandflow.com/discover/",
-        image: "/static/logos/draftandflowcropped.png",
+        image: "/static/logos/draftandflowlogo-dark-cropped.svg",
         dotsOptions: {
             color: "#000000",
             type: "rounded"
@@ -23,14 +23,14 @@
             color: "#ffffff",
         },
         cornersSquareOptions: {
-            type: 'rounded'
+            type: 'extra-rounded'
         },
         cornersDotOptions: {
-            type: 'rounded'
+            type: 'square'
         },
         imageOptions: {
             crossOrigin: "anonymous",
-            margin: 0
+            margin: 100
         }
     });
 
