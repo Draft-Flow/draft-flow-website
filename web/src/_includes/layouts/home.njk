@@ -11,12 +11,12 @@
 
 {% block content %}
   <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
-    <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col md:flex-row font-df-sans z-20 px-1 rotate-[-6deg] skew-x-[-10deg] 2xl:pt-12 leading-7">
+    <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col md:flex-row font-df-sans z-20 px-1 -rotate-3 skew-x-[-6deg] 2xl:pt-12 leading-7">
       <span class="text-shadow text-df-orange font-black uppercase px-1">Community</span>
       {# <span class="block leading-none font-normal sm:leading-none ml-1 mr-2 -mt-2 font-script -rotate-12 skew-x-12 scale-[0.65]">and</span> #}
       <span class="text-shadow text-df-orange font-black uppercase px-1">Cycle Workshop</span>
     </h1>
-     <ul class="relative mt-4 lg:mt-2 rotate-[-6deg] skew-x-[-10deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
+     <ul class="relative mt-4 lg:mt-2 -rotate-3 skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}
       <li class="py-1 md:py-3 px-2 md:px-4 {{ feature.color }}">
         <span class="block opacity-80">{{ feature.text }}</span>
