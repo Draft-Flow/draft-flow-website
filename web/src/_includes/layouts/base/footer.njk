@@ -11,7 +11,7 @@
                     {% imageUrlFor brand.logo.ref, 1000 %}
                 {% endset %}
                 <li class="flex justify-center m-2 md:mx-4 lg:my-4">
-                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), min-width: 1024px", null, 'eager', null, [250, 500], 'h-6 md:h-8 xl:h-10 w-auto' %}
+                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), (min-width: 1024px)", null, 'eager', null, [150, 300], 'h-6 md:h-8 xl:h-10 w-auto' %}
                 </li>
                 {% endfor %}
             </ul>
@@ -85,7 +85,7 @@
                 <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
                     <li>
                         <a href="https://www.cytech.training/">
-                            {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
+                            {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
                         </a>
                     </li>
                 </ul>
@@ -95,7 +95,7 @@
                 <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
                     <li>
                         <a href="https://www.cycleassociation.uk/">
-                            {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
+                            {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
                         </a>
                     </li>
                     <li>
@@ -108,8 +108,8 @@
             <div class="mt-6 lg:mt-0">
                 <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">With Support from</div>
                 <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
-                    <li><a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto  transition-opacity opacity-60 hover:opacity-100' %}</a></li>
-                    <li><a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                    <li><a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto  transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                    <li><a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
                 </ul>
             </div>
         </div>
