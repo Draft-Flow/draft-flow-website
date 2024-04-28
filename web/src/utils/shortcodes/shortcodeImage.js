@@ -14,7 +14,7 @@ const imageShortcode = async (
 ) => {
   const metadata = await Image(src, {
     widths: widths || [300, 600],
-    formats: animated ? ['webp', 'gif'] : formats || ['avif', 'png'],
+    formats: animated ? ['webp', 'gif'] : formats || ['webp', 'png'],
     outputDir: path.join('_site', 'img'),
     sharpOptions: {
       animated: animated || false
