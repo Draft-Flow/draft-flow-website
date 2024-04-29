@@ -5,13 +5,13 @@
     <div class="px-2 lg:px-4 py-4 md:my-6 lg:py-10 border-t border-df-gray text-center">
         <div class="mx-auto flex flex-col">
             <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods from</h3>
-            <ul class="list-style-none mt-4 md:mt-8 w-full flex justify-center flex-wrap items-center mb-8">
-                {% for brand in brands | brandShuffle(10) %}
+            <ul class="list-style-none mt-4 md:mt-8 w-full grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 grid-flow-rows gap-8 sm:gap-4 md:gap-6 xl:gap-8 mb-8">
+                {% for brand in brands | brandShuffle(12) %}
                 {% set imageSrc %}
                     {% imageUrlFor brand.logo.ref, 1000 %}
                 {% endset %}
-                <li class="flex justify-center m-2 md:mx-4 lg:my-4">
-                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), (min-width: 1024px)", null, 'eager', null, [150, 300], 'h-6 md:h-8 xl:h-10 w-auto' %}
+                <li class="flex justify-center items-center m-2 md:mx-4 lg:my-4">
+                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), (min-width: 1024px)", null, 'eager', null, [150, 300], 'w-auto' %}
                 </li>
                 {% endfor %}
             </ul>

@@ -112,15 +112,16 @@ header.stuck .icons svg {
     @apply mb-4 lg:mb-6 leading-snug;
   }
 
-  .parent-description ul {
+  .parent-description ul:not(.list-none) {
     @apply list-disc ml-6 -mt-2 mb-4;
   }
 
-  .parent-description ol {
+  .parent-description ol:not(.list-none) {
     @apply list-decimal ml-6 -mt-2 mb-4;
   }
 
-  .parent-description li {
+  .parent-description ul:not(.list-none) li,
+  .parent-description ol:not(.list-none) li {
     @apply mb-2;
   }
 
