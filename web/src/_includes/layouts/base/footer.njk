@@ -79,10 +79,10 @@
                 {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
             </div>
         </div>
-        <div class="mb-4 lg:mt-12 sm:mx-4 lg:mx-auto max-w-6xl flex flex-col sm:flex-row justify-between items-center">
+        <div class="mb-4 lg:mt-12 sm:mx-4 lg:mx-auto max-w-6xl flex flex-col sm:flex-row justify-between">
             <div class="mt-6 lg:mt-0">
                 <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">Certified by</div>
-                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 justify-center sm:justify-start mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
                     <li>
                         <a href="https://www.cytech.training/">
                             {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
@@ -92,7 +92,7 @@
             </div>
             <div class="mt-6 lg:mt-0">
                 <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">Proud members of</div>
-                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 justify-center sm:justify-start mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
                     <li>
                         <a href="https://www.cycleassociation.uk/">
                             {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
@@ -107,9 +107,10 @@
             </div>
             <div class="mt-6 lg:mt-0">
                 <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">With Support from</div>
-                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
+                <ul class="flex flex-wrap sm:grid sm:grid-rows-2 sm:grid-cols-funders gap-4 lg:gap-8 justify-center sm:justify-start mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
                     <li><a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto  transition-opacity opacity-60 hover:opacity-100' %}</a></li>
-                    <li><a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                    <li class="justify-self-end"><a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                    <li><a href="https://www.enchantedforest.org.uk/the-trust/">{% image 'src/static/logos/theenchantedforest.png', 'Funded by The Enchanged Forest Trust', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 lg:h-16 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
                 </ul>
             </div>
         </div>

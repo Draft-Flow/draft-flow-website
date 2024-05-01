@@ -45,6 +45,10 @@ module.exports = {
         'df-sans': ['Overpass', 'sans-serif'],
         script: ['Yellowtail', '"Brush Script MT"', 'cursive']
       },
+      gridTemplateColumns: {
+        // Complex site-specific column configuration
+        'funders': '1fr max-content',
+      }
     },
   },
   plugins: [],
