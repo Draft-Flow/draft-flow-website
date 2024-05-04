@@ -11,7 +11,7 @@
                     {% imageUrlFor brand.logo.ref, 1000 %}
                 {% endset %}
                 <li class="flex justify-center items-center m-2 md:mx-4 lg:my-4">
-                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), (min-width: 1024px)", null, 'eager', null, [150, 300], 'w-auto' %}
+                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), (min-width: 1024px)", null, 'eager', null, [150, 300], 'w-auto max-h-10' %}
                 </li>
                 {% endfor %}
             </ul>

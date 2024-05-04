@@ -17,14 +17,14 @@ Looking to upgrade your riding? An update to your bike's components can complete
 
 We're an official dealer for a [wide range of top bike and outdoor brands](/bike-servicing/upgrades/) and can help with any bike modifications desired. We highly recommend the brands we carry and are more than happy to give honest gear advice. 
 
-<ul class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-6 md:gap-8 md:gap-y-4 list-none mt-8 ml-0">
+<ul class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-6 md:gap-8 md:gap-y-6 list-none mt-8 ml-0">
 {% for brand in brands | brandShuffle %}
 {% set imageSrc %}
     {% imageUrlFor brand.logo.ref, 900 %}
 {% endset %}
 <li class="flex justify-center items-center">
     <!-- <a href="{{ brand.url }}" title="{{ brand.data.title }}"> -->
-        {% image imageSrc, brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto' %}
+        {% image imageSrc, brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto max-h-12' %}
     <!-- </a> -->
 </li>
 {% endfor %}
