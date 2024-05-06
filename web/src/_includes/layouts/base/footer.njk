@@ -62,9 +62,9 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="mt-8 lg:mt-12 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-80">
-            <div class="flex flex-col justify-center sm:justify-start sm:mr-12 mb-6 sm:mb-0 text-sm w-96 sm:w-auto">
-                <p class="mb-2 text-center sm:text-left">Draft & Flow C.I.C. is a Community Interest Company registered in Scotland, Company Number {{ metadata.company.number }}.</p>
+        <div class="mt-8 lg:mt-12 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-80 max-w-80">
+            <div class="flex flex-col justify-center sm:justify-start sm:mr-12 mb-6 sm:mb-0 text-sm sm:w-auto">
+                <p class="mb-2 text-center sm:text-left">Draft & Flow C.I.C. is a Community Interest Company, Schedule 2, registered in Scotland, Company Number {{ metadata.company.number }}. 100% of our profits are reinvested into improving the workshop, our services, and cycling initiatives in the Aberfeldy area.</p>
                 <p class="text-center sm:text-left">Our aim is to get more people riding, and keep them riding, by providing:</p>
                 <ul class="list-disc inline-flex flex-col flex-wrap sm:block mb-2">
                     <li class="ml-4">Accessible cycle servicing</li>
@@ -132,7 +132,7 @@
             </ul>
         </div>
         <div class="flex justify-center text-sm opacity-80 mt-8 text-center">
-            <ul class="list-style-none grid grid-flow-row sm:grid-flow-col auto-cols-min whitespace-nowrap gap-x-4 gap-y-2">
+            <ul class="list-style-none grid grid-flow-row sm:grid-flow-col auto-cols-min whitespace-nowrap gap-x-4 sm:gap-y-2">
                 <li>&copy; {% year %} {{ metadata.company.name }}</li>
                 <li>
                     <a href="https://find-and-update.company-information.service.gov.uk/company/{{ metadata.company.number }}">Company #{{ metadata.company.number }}</a></li>
