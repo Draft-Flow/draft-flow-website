@@ -29,11 +29,11 @@ header.open #nav {
 }
 
 header.open #logobar {
-  @apply sm:-translate-y-4 md:-translate-y-3 lg:-translate-y-4 xl:scale-75 text-df-tan;
+  @apply sm:-translate-y-4 md:-translate-y-3 lg:-translate-y-4 xl:scale-75 text-df-tan-darkest;
 }
 
 header.open #logobar svg {
-  @apply stroke-df-tan;
+  @apply stroke-df-tan-darkest;
 } 
 
 header.open #logo span {
@@ -50,7 +50,7 @@ header.stuck {
 }
 
 header.stuck #nav {
-  @apply sm:-translate-y-3 xl:-translate-y-4 text-df-tan;
+  @apply sm:-translate-y-3 xl:-translate-y-4 text-df-tan-darkest;
 }
 
 header.stuck #logobar {
@@ -58,16 +58,20 @@ header.stuck #logobar {
 }
 
 header.stuck #logobar svg {
-  @apply stroke-df-tan;
+  @apply stroke-df-tan-darkest;
 } 
 
+header.stuck #logo {
+  @apply text-df-tan-darkest;
+}
+
 header.stuck #logo span {
-  @apply text-transparent;
-  -webkit-text-stroke: 1px #f0eee3;
+  @apply text-df-tan-darkest;
+  -webkit-text-stroke: 1px #FFEFCB;
 }
 
 header.stuck .icons svg {
-  @apply fill-df-tan;
+  @apply fill-df-tan-darkest;
 }
 
 .logo-item-active {
@@ -76,7 +80,7 @@ header.stuck .icons svg {
 
 .nav-item:hover > a,
 .nav-item:focus-within > a {
-  @apply bg-df-black text-df-tan z-40;
+  @apply bg-df-black text-df-tan-darkest z-40;
 }
 
 .nav-item:hover > .subnav,

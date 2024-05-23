@@ -28,7 +28,7 @@ module.exports = {
         'df-tan': {
           DEFAULT: '#f0eee3',
           dark: '#EBE8E1',
-          darkest: '#B2AC9F'
+          darkest: '#FFEFCB'
         },
       },
       backgroundImage: {
