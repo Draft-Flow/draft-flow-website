@@ -46,7 +46,7 @@ header.open #social {
 }
 
 header.stuck {
-  @apply h-16 sm:h-20 border-b border-df-gray/25 bg-df-black;
+  @apply h-16 sm:h-20 shadow-sm shadow-df-gray/50 bg-df-black;
 }
 
 header.stuck #nav {
