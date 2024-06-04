@@ -130,7 +130,11 @@ header.stuck .icons svg {
   }
 
   .parent-description h2 {
-    @apply font-medium text-2xl lg:text-3xl mb-2 mt-4;
+    @apply font-medium font-df-sans font-bold text-center text-3xl lg:text-4xl uppercase mb-2 mt-4;
+  }
+
+  .parent-description h3 {
+    @apply font-medium font-df-sans font-bold text-center text-2xl lg:text-3xl uppercase mb-2 mt-4;
   }
 
   .parent-description p a,
@@ -144,7 +148,11 @@ header.stuck .icons svg {
   }
 
   .simple-description h2 {
-    @apply font-medium text-xl lg:text-2xl mb-2 mt-4;
+    @apply font-df-sans uppercase text-center font-bold text-xl lg:text-2xl mb-2 mt-4;
+  }
+
+  .simple-description h3 {
+    @apply font-df-sans uppercase text-center font-bold text-xl lg:text-2xl mb-2 mt-4;
   }
 
   .simple-description p {
