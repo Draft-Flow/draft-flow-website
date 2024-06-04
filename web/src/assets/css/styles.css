@@ -137,6 +137,10 @@ header.stuck .icons svg {
     @apply font-medium font-df-sans font-bold text-center text-2xl lg:text-3xl uppercase mb-2 mt-4;
   }
 
+  .parent-description h4 {
+    @apply font-df-sans uppercase text-center font-bold text-lg lg:text-xl mb-2 mt-4;
+  }
+
   .parent-description p a,
   .parent-description li a {
     @apply underline text-df-orange-xdark italic font-medium hover:text-df-orange-dark;
