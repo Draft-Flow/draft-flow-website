@@ -59,6 +59,7 @@
     "cssnano": "^6.0.1",
     "dotenv": "^16.0.1",
     "esbuild": "^0.14.46",
+    "googleapis": "^139.0.0",
     "groq": "^2.29.3",
     "html-minifier": "^4.0.0",
     "mapbox-gl": "^2.9.1",
