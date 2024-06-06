@@ -1,0 +1,6 @@
+[[redirects]]
+from = "/api/reservations/:loc"
+to = "/.netlify/functions/bike-reservations"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "bike-reservations"

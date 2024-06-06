@@ -148,7 +148,7 @@ header.stuck .icons svg {
 
   /* Simple description */
   .simple-description h1 {
-    @apply text-center font-bold text-2xl lg:text-4xl mb-4;
+    @apply font-df-sans text-center font-bold text-2xl lg:text-4xl mb-4;
   }
 
   .simple-description h2 {
@@ -174,6 +174,15 @@ header.stuck .icons svg {
   .simple-description ol {
     @apply list-decimal ml-6 -mt-2 mb-4;
   }
+}
+
+/* Course Content */
+.course-content p {
+  @apply pb-4 max-w-prose;
+}
+
+.course-content p:first-of-type {
+  @apply text-2xl;
 }
 
 /* Utility Styles */

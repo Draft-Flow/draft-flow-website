@@ -1,0 +1,9 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {% for path in route.paths %}
+    {{ path.lineString | dump | safe }}
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

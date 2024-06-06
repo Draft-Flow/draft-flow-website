@@ -1,0 +1,34 @@
+---
+layout: layouts/page.njk
+bannerImage: src/static/images/banner-upgrades.jpg
+title: Parts & Upgrades
+tags:
+  - main
+eleventyNavigation:
+  parent: Service
+  key: Upgrades
+  title: Parts & Upgrades
+  order: 4
+---
+
+_**Take your bike and riding to the next level**_
+
+Looking to upgrade your riding? An update to your bike's components can completely change your riding. A fresh set of wheels or tyres, updated drivetrain, hydraulic brakes, new suspension, bike bags for a big adventure, or even a different handlebar can drastically change how your bike performs. 
+
+We're an official dealer for a [wide range of top bike and outdoor brands](/bike-servicing/upgrades/) and can help with any bike modifications desired. We highly recommend the brands we carry and are more than happy to give honest gear advice. 
+
+<ul class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-6 md:gap-8 md:gap-y-6 list-none mt-8 ml-0">
+{% for brand in brands | brandShuffle %}
+{% set imageSrc %}
+    {% imageUrlFor brand.logo.ref, 900 %}
+{% endset %}
+<li class="flex justify-center items-center">
+    <!-- <a href="{{ brand.url }}" title="{{ brand.data.title }}"> -->
+        {% image imageSrc, brand.logo.alt, "(max-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 900], 'w-full h-auto max-h-12' %}
+    <!-- </a> -->
+</li>
+{% endfor %}
+</ul>
+
+<p class="max-w-md mx-auto text-sm mt-8 text-center">Looking for a brand you don't see above? We have relationships with a range of other brands we can order from. Please <a class="font-bold text-df-blue hover:underline" href="/contact/">get in touch</a> if you're looking for something else.</p>
+

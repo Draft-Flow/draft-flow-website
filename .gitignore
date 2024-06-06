@@ -19,3 +19,6 @@ yarn.lock
 # Generated hash data
 /web/src/_data/hash.json
  
+# Local Netlify folder
+netlify/functions/bike-reservations/**
+!netlify/functions/bike-reservations/index.js

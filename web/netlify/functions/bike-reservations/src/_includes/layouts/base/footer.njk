@@ -1,0 +1,168 @@
+{% set secondaryNavPages = collections.secondary | eleventyNavigation %}
+{% set tertiaryNavPages = collections.tertiary | eleventyNavigation %}
+
+<footer class="text-df-gray">
+    <div class="px-2 lg:px-4 py-4 md:my-6 lg:py-10 border-t border-df-gray text-center">
+        <div class="mx-auto flex flex-col">
+            <h3 class="font-df-sans font-black uppercase text-2xl tracking-wide">Genuine Goods from</h3>
+            <ul class="list-style-none mt-4 md:mt-8 w-full grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 grid-flow-rows gap-x-8 gap-y-2 sm:gap-x-4 md:gap-x-6 xl:gap-x-8 mb-8 px-8 md:px-0">
+                {% for brand in brands | brandShuffle(12) %}
+                {% set imageSrc %}
+                    {% imageUrlFor brand.logo.ref, 1000 %}
+                {% endset %}
+                <li class="flex justify-center items-center m-2 md:mx-4 lg:my-4">
+                        {% image imageSrc, brand.logo.alt, "(max-width: 640px), (min-width: 1024px)", null, 'eager', null, [150, 300], 'w-auto max-h-10' %}
+                </li>
+                {% endfor %}
+            </ul>
+            <p>&hellip;and many <a class="underline" href="/bike-servicing/upgrades/">more quality brands</a></p>
+        </div>
+    </div>
+    <div id="subscribe" class="px-2 lg:px-4 py-12 md:py-16 border-t-2 border-df-gray bg-df-gray">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-center lg:items-center text-center lg:text-left">
+            <h3 class="font-df-sans leading-7 text-df-tan flex flex-col lg:justify-center font-black uppercase text-2xl tracking-wide mb-2">
+                <span class="text-base font-medium">Subscribe to  the</span>
+                {{ metadata.title }} Flyer
+                <span class="text-sm uppercase font-normal">For discounts, events, and more</span>
+            </h3>
+            {% include 'src/_includes/layouts/includes/newsletterForm.njk' %}
+        </div>
+        <div class="subscribe-notice hidden max-w-prose mx-auto text-center my-4 text-df-tan font-sans text-xs uppercase ">
+            {% include 'src/_includes/layouts/includes/newsletterNotice.njk' %}
+        </div>
+    </div>
+    <div class="px-2 lg:px-4 py-6 lg:pb-12 bg-df-black text-neutral-100">
+        <div class="text-lg max-w-6xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start opacity-80">
+            <ul class="grid grid-rows-1 grid-flow-col auto-cols-min gap-4 mb-4 lg:mb-0 whitespace-nowrap">
+                <li class="lg:h-full">
+                    <a href="https://www.komoot.com/user/{{ metadata.social.komoot }}" title="Komoot - {{ metadata.social.komoot }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialKomoot.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://www.instagram.com/{{ metadata.social.instagram }}/" title="Instagram - @{{ metadata.social.instagram }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialInstagram.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://twitter.com/{{ metadata.social.twitter }}" title="Twitter - @{{ metadata.social.twitter }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialX.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://facebook.com/{{ metadata.social.facebook }}" title="Facebook - @{{ metadata.social.facebook }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialFacebook.svg', 'fill-neutral-100 w-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="https://wa.me/message/{{ metadata.social.whatsapp }}" title="WhatsApp - {{ metadata.social.whatsapp }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-neutral-100 w-5 h-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="tel:{{ metadata.contact.phone }}" title="Phone - {{ metadata.contact.phone }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-neutral-100 w-5 h-5' %}</a>
+                </li>
+                <li class="lg:h-full">
+                    <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-neutral-100 w-6 h-6' %}</a>
+                </li>
+            </ul>
+            <ul class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col grid-cols-[min-content_1fr] gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+                {%- for item in secondaryNavPages -%}
+                <li><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="mt-8 lg:mt-12 max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center opacity-80 max-w-80">
+            <div class="flex flex-col max-w-prose justify-center sm:justify-start sm:mr-12 lg:mr-20 mb-6 sm:mb-0 text-sm sm:w-auto">
+                <p class="mb-2 text-center sm:text-left">Draft & Flow C.I.C. is a Community Interest Company, Schedule 2, registered in Scotland, Company Number {{ metadata.company.number }}. 100% of our profits are reinvested into improving the workshop, enhancing our cycle services, and supporting cycling initiatives in the Aberfeldy area.</p>
+                <p class="text-center sm:text-left">Our aim is to get more people riding, and keep them riding, by providing:</p>
+                <ul class="list-disc inline-flex flex-col flex-wrap sm:block mb-2">
+                    <li class="ml-4">Accessible cycle servicing</li>
+                    <li class="ml-4">Cycle maintenance education</li>
+                    <li class="ml-4">Local riding info</li>
+                    <li class="ml-4">An inclusive, social space for connecting around cycles</li>
+                </ul> 
+                <p><a class="underline flex items-center justify-center sm:justify-start" href="/about/">Learn more about our goals {% svgIcon 'src/assets/icons/link.svg', 'inline fill-neutral-100 w-5 ml-2' %}</a></p>
+            </div>
+            <div class="order-1 sm:order-2 flex items-center text-right text-sm mb-4 sm:mb-0">
+                <span class="whitespace-nowrap">Made in Aberfeldy, Scotland<br/><small>Website by Brett DeWoody</small></span>
+                {% svgIcon 'src/assets/icons/scotland.svg', 'w-20 sm:w-24 lg:w-28 fill-neutral-100' %}
+            </div>
+        </div>
+        <div class="mb-4 lg:mt-12 sm:mx-4 lg:mx-auto max-w-6xl flex flex-col sm:flex-row justify-between">
+            <div class="mt-6 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">Certified by</div>
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 justify-center sm:justify-start mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
+                    <li>
+                        <a href="https://www.cytech.training/">
+                            {% image 'src/static/logos/cytechlogo.png', 'CyTech', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-6 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">Proud members of</div>
+                <ul class="grid grid-rows-1 grid-flow-col gap-4 lg:gap-8 justify-center sm:justify-start mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
+                    <li>
+                        <a href="https://www.cycleassociation.uk/">
+                            {% image 'src/static/logos/actlogo.png', 'Association of Cycle Traders', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.scottishadventure.org/">
+                            {% image 'src/static/logos/scottishadventureclublogo.png', 'Scottish Adventure Club', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-6 lg:mt-0">
+                <div class="text-center sm:text-left block text-xs font-bold uppercase opacity-60 mb-4 sm:mb-0">With Support from</div>
+                <ul class="flex flex-wrap sm:grid sm:grid-rows-2 sm:grid-cols-funders gap-4 lg:gap-8 justify-center sm:justify-start mt-4 lg:mb-12 md:mb-0 grayscale contrast-0">
+                    <li><a href="https://www.firstport.org.uk/">{% image 'src/static/logos/firstportlogo.png', 'Firstport', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto  transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                    <li class="justify-self-end"><a href="https://pkc.communitychoices.scot/budgets/2">{% image 'src/static/logos/pkc-greenlivingfund.png', 'PKC Green Living Fund', "(min-width: 20em), (min-width: 60em)", null, 'eager', null, [200, 300], 'h-12 mx-2 lg:h-20 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                    <li><a href="https://www.enchantedforest.org.uk/the-trust/">{% image 'src/static/logos/theenchantedforest.png', 'Funded by The Enchanged Forest Trust', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 lg:h-16 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 opacity-80 text-center">
+            <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
+                {%- for item in tertiaryNavPages -%}
+                <li><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 opacity-80 text-center">
+            <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 gap-y-2 sm:gap-y-2 justify-center mb-4 lg:mb-0">
+                <li>
+                    <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="https://maps.app.goo.gl/E5EVdseh8kJkP38T8">{% svgIcon 'src/assets/icons/socialLocation.svg', 'fill-df-tan mr-2 w-6 h-6' %}{{metadata.contact.address2}} | {{metadata.contact.city}} | {{metadata.contact.postalCode}}</a>
+                </li>
+                <li>
+                    <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="tel:{{ metadata.contact.phone }}">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan mr-2 w-5 h-5' %}{{metadata.contact.phone}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="flex justify-center text-sm opacity-80 mt-8 text-center">
+            <ul class="list-style-none grid grid-flow-row sm:grid-flow-col auto-cols-min whitespace-nowrap gap-x-4 sm:gap-y-2">
+                <li>&copy; {% year %} {{ metadata.company.name }}</li>
+                <li>
+                    <a href="https://find-and-update.company-information.service.gov.uk/company/{{ metadata.company.number }}">Company #{{ metadata.company.number }}</a></li>
+                {% if metadata.company.vat  %}<li>VAT #{{ metadata.company.vat }}</li>{% endif %}
+            </ul>
+        </div>
+    </div>
+    {# <div class="bg-sky-950 text-sm ">
+        <div class="flex flex-col items-center justify-center py-2 text-zinc-500">
+            <div class="flex align-items-center italic mb-2">
+                {% svgIcon 'src/assets/icons/draftandflowlabs.svg', 'fill-black w-4' %}
+                <div class="mx-2">Draft & Flow Labs</div>
+                {% svgIcon 'src/assets/icons/draftandflowlabs.svg', 'fill-black w-4' %}
+            </div>
+            <div>
+                <a class="flex" href="https://chat.openai.com/g/g-wGSyrqepV-bike-repair-assist-bot">{% svgIcon 'src/assets/icons/draftandflowassistbot.svg', 'fill-zinc-500 w-4 mr-2' %} 
+            Bike Repair Assist-bot
+            </a>
+            </div>
+        </div>
+    </div> #}
+</footer>
+
+<script>
+    const subscribeEmail = document.querySelector('#subscribe .subscribe-email')
+    const subscribeNotice = document.querySelector('#subscribe .subscribe-notice')
+
+    subscribeEmail.addEventListener('input', (e) => {
+        if (e.target.validity.valid) {
+            subscribeNotice.classList.remove('hidden')
+        }
+    })
+</script>

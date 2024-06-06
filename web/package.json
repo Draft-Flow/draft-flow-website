@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean:site": "rimraf _site",
+    "clean:bundles": "rimraf ./static/bundles/*",
     "start": "npm run dev",
-    "css-watch": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css -w",
-    "css-build": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css --minify",
-    "build": "rimraf _site && npm run css-build && ELEVENTY_ENV=production eleventy",
-    "dev": "rimraf ./static/bundles/* && NODE_ENV=development concurrently \"node hash\" \"npx eleventy --watch --serve\" \"npm:css-watch\"",
+    "node:hash": "node hash",
+    "dev:eleventy": "npx eleventy --watch --serve --port=8888",
+    "css:watch": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css -w",
+    "css:build": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css --minify",
+    "build": "clean:site && npm run css:build && ELEVENTY_ENV=production eleventy",
+    "dev": "NODE_ENV=development npm-run-all clean:bundles -p node:hash dev:eleventy css:watch",
     "debug": "DEBUG=* npx eleventy",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --ext .js . --fix",
@@ -16,16 +20,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Highland-Perthshire-Cycling/perthshire-gravel.git"
+    "url": "https://github.com/Draft-Flow/draft-flow-website.git"
   },
   "author": "Draft & Flow",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel/issues"
+    "url": "https://github.com/Draft-Flow/draft-flow-website/issues"
   },
-  "homepage": "https://github.com/Highland-Perthshire-Cycling/perthshire-gravel#readme",
+  "homepage": "https://github.com/Draft-Flow/draft-flow-website",
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.2",
+    "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@googlemaps/google-maps-services-js": "^3.3.13",
     "@sanity/block-content-to-markdown": "^0.0.5",
@@ -38,7 +42,8 @@
     "fs-extra": "^10.1.0",
     "get-youtube-id": "^1.0.1",
     "markdown-it": "^13.0.1",
-    "rimraf": "^2.7.1"
+    "rimraf": "^2.7.1",
+    "slugify": "^1.6.6"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^2.0.1",
