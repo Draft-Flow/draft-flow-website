@@ -11,7 +11,7 @@
     "dev:eleventy": "npx eleventy --watch --serve --port=8888",
     "css:watch": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css -w",
     "css:build": "npx tailwindcss -i ./src/assets/css/styles.css -o ./_site/css/styles.css --minify",
-    "build": "clean:site && npm run css:build && ELEVENTY_ENV=production eleventy",
+    "build": "npm run clean:site && npm run css:build && ELEVENTY_ENV=production eleventy",
     "dev": "NODE_ENV=development npm-run-all clean:bundles -p node:hash dev:eleventy css:watch",
     "debug": "DEBUG=* npx eleventy",
     "lint": "eslint --ext .js .",
