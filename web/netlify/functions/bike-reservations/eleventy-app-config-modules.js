@@ -13,3 +13,4 @@ require("get-youtube-id");
 require("googleapis");
 require("html-minifier");
 require("markdown-it");
+require("stripe");

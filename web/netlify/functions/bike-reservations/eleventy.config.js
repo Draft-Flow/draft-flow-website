@@ -18,10 +18,12 @@ const shuffleFilter = require('./src/utils/filters/shuffle')
 const brandShuffleFilter = require('./src/utils/filters/brandShuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
 const getPageFilter = require('./src/utils/filters/getPage')
-const getBikeReservations = require('./src/utils/filters/getBikeReservations')
 const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
 const minifyHTML = require('./src/utils/minifyHTML')
+
+const getBikeReservations = require('./src/utils/serverless/getBikeReservations')
+const createCheckoutSession = require('./src/utils/serverless/createCheckoutSession')
 
 const serializers = require('./src/utils/serializers')
 
@@ -35,7 +37,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
 		name: "bike-reservations",
 		functionsDir: "./netlify/functions/",
-	});
+	})
 
   // Watch for changes on files to force refresh and see changes
   eleventyConfig.addWatchTarget('./src/assets/css/styles.css')
@@ -166,8 +168,15 @@ module.exports = function (eleventyConfig) {
   // Get courses by title
   eleventyConfig.addFilter('coursesByTitle', (data, title) => data.filter(item => item.title === title ))
 
+  /*
+    SERVERLESS FUNCTIONS
+  */
+
   // Get bike reservations
   eleventyConfig.addAsyncFilter('reservations', getBikeReservations)
+
+  // Create Stripe checkout session
+  eleventyConfig.addAsyncFilter('checkout', createCheckoutSession)
 
   // If production, minify HTML output
   if (process.env.ELEVENTY_ENV == 'production') {
