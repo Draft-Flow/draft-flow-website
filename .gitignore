@@ -22,3 +22,6 @@ yarn.lock
 # Local Netlify folder
 netlify/functions/bike-reservations/**
 !netlify/functions/bike-reservations/index.js
+
+# Local Netlify folder
+.netlify
