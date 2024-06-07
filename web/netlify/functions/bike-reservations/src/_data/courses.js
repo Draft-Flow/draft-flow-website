@@ -8,11 +8,11 @@ const { options } = require('../utils/slugify')
 
 module.exports = async () => {
   // Create a cache and use it if available
-  const coursesCache = new AssetCache("google_calender_courses");
+  const coursesCache = new AssetCache("google_calender_courses")
 
   if (coursesCache.isCacheValid("1h")) {
-    console.log( "Using Google Calendar cache…" );
-    const courses = await coursesCache.getCachedValue();
+    console.log( "Using Google Calendar cache…" )
+    const courses = await coursesCache.getCachedValue()
     return courses;
   }
 
@@ -26,8 +26,8 @@ module.exports = async () => {
   
   jwtClient.authorize(function (err, tokens) {
     if (err) {
-      console.log(err);
-      return;
+      console.log({err});
+      return
     } else {
       console.log("Successfully connected!");
     }
@@ -57,6 +57,32 @@ module.exports = async () => {
     })
   })
  
+  // Add extended properties
+  for (let i = 0; i < 1; i++) {
+    const event = calendarCourses[i]
+    calendar.events.patch({
+      auth: jwtClient,
+      calendarId: process.env.GOOGLE_CAL_ID_COURSES,
+      eventId: event.id,
+      resource: {
+        extendedProperties: {
+          shared: {
+            price: 1000,
+            maxAttendees: 10
+          }
+        }
+      }
+    }, (err, res) => {
+      if (err) {
+        console.log('Patch error: ' + err)
+        return
+      }
+
+      console.log(res)
+    })
+    
+  }
+
   const calendarCoursesNormalized = calendarCourses.filter((course) => (
     (isValid(parseISO(course.start.dateTime)) && isValid(parseISO(course.end.dateTime)))
   )).map((course) => (

@@ -19,7 +19,7 @@
         <h2 class="font-df-sans font-black text-3xl uppercase mt-6">Upcoming Courses</h2>
         <ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {% for course in courses | coursesByTitle(title) %}
-          <li class="border">{{ course.startDate | htmlDateString('E d LLLL') }}</li>
+          <li  class="border-2 border-df-orange p-4 text-center">{{ course.startDate | htmlDateString('E d LLLL') }}</li>
         {% endfor %}  
         </ul>
       </div>
