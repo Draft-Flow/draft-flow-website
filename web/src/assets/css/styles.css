@@ -46,7 +46,7 @@ header.open #social {
 }
 
 header.stuck {
-  @apply h-16 sm:h-20 border-b border-df-gray/25 bg-df-black;
+  @apply h-16 sm:h-20 shadow-sm shadow-df-gray/50 bg-df-black;
 }
 
 header.stuck #nav {
@@ -130,7 +130,15 @@ header.stuck .icons svg {
   }
 
   .parent-description h2 {
-    @apply font-medium text-2xl lg:text-3xl mb-2 mt-4;
+    @apply font-medium font-df-sans font-bold text-center text-3xl lg:text-4xl uppercase mb-2 mt-4;
+  }
+
+  .parent-description h3 {
+    @apply font-medium font-df-sans font-bold text-center text-2xl lg:text-3xl uppercase mb-2 mt-4;
+  }
+
+  .parent-description h4 {
+    @apply font-df-sans uppercase text-center font-bold text-lg lg:text-xl mb-2 mt-4;
   }
 
   .parent-description p a,
@@ -140,11 +148,15 @@ header.stuck .icons svg {
 
   /* Simple description */
   .simple-description h1 {
-    @apply text-center font-bold text-2xl lg:text-4xl mb-4;
+    @apply font-df-sans text-center font-bold text-2xl lg:text-4xl mb-4;
   }
 
   .simple-description h2 {
-    @apply font-medium text-xl lg:text-2xl mb-2 mt-4;
+    @apply font-df-sans uppercase text-center font-bold text-xl lg:text-2xl mb-2 mt-4;
+  }
+
+  .simple-description h3 {
+    @apply font-df-sans uppercase text-center font-bold text-xl lg:text-2xl mb-2 mt-4;
   }
 
   .simple-description p {
@@ -162,6 +174,15 @@ header.stuck .icons svg {
   .simple-description ol {
     @apply list-decimal ml-6 -mt-2 mb-4;
   }
+}
+
+/* Course Content */
+.course-content p {
+  @apply pb-4 max-w-prose;
+}
+
+.course-content p:first-of-type {
+  @apply text-2xl;
 }
 
 /* Utility Styles */

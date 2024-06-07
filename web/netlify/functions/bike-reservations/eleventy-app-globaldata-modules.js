@@ -1,0 +1,16 @@
+require("@11ty/eleventy-fetch");
+require("@mapbox/togeojson");
+require("@portabletext/to-html");
+require("@sanity/asset-utils");
+require("@sanity/client");
+require("@sanity/image-url");
+require("@turf/helpers");
+require("@turf/simplify");
+require("@turf/turf");
+require("date-fns");
+require("dotenv");
+require("googleapis");
+require("groq");
+require("mapbox-gl");
+require("slugify");
+require("xmldom");

@@ -1,0 +1,3 @@
+{
+  "/api/reservations/:loc": "./src/content/api/reservations.html"
+}

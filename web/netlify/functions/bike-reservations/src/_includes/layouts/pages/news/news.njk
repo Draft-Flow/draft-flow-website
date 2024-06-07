@@ -1,0 +1,37 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set crumbsJSON = collections.news | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+{% set bannerTitle = title %}
+{% set bannerSrc = 'src/static/images/banner-brands.jpg' %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
+
+{% block content %}
+<section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-7xl w-full py-10">
+      <div class="parent-description text-center">
+        {{ content | md | safe }}
+      </div>
+      <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
+        {% for article in collections.news_pages %}
+        {% if article.data.banner %}
+        {% set articleImageSrc %}
+          {% imageBannerUrlFor article.data.banner, 2000 %}
+        {% endset %}
+        {% endif %}
+        <li class="w-full flex justify-center">
+            <a class="w-full" href="{{ article.url  | safe }}">
+              <h3 class="block font-bold text-center mb-2 sm:min-h-[40px] leading-4">{{article.data.title | safe }}</h3>
+              <div class="w-full h-auto p-1 md:p-2 border-double border-4 border-df-gray">
+          {% image article.data.firstImage, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
+              </div>
+              <small>{{ article.data.date | htmlDateString('PP') }}</small>
+            </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}

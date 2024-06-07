@@ -1,0 +1,27 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set crumbsJSON = collections.shop | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+{% set bannerTitle = title %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-7xl w-full py-20">
+
+      <ul class="w-full grid grid-cols-1">
+      {% for category in collections.categories %}
+        {# Only show top-level categories #}
+        {% if category.data.eleventyNavigation.parent == "Shop" %}
+        <li class="">
+          <a class="h-24 flex justify-center items-center" href="{{ category.url }}">
+            {{ category.data.title | safe }}
+          </a></li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endblock %}
