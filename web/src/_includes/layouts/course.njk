@@ -16,7 +16,7 @@
       <div class="course-content sm:col-span-2 lg:col-span-3">
         <h2 class="font-df-sans font-black text-3xl uppercase">About the course</h2>
         {{ content | md | safe }}
-        <h2 class="font-df-sans font-black text-3xl uppercase mt-6">Upcoming Courses</h2>
+        <h2 class="font-df-sans font-black text-3xl uppercase mt-6 mb-2">Upcoming Courses</h2>
         <ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {% for course in courses | coursesByTitle(title) %}
           <li  class="border-2 border-df-orange p-4 text-center">{{ course.startDate | htmlDateString('E d LLLL') }}</li>
@@ -26,7 +26,7 @@
       <div class="sm:col-span-2 lg:col-span-1">
         <div class="md:w-60 text-base my-4 md:my-0 mx-auto md:ml-8 text-center leading-snug">
           <div class="flex md:flex-col items-center px-3 py-4 bg-neutral-300 rounded-sm">
-            <h4 class="font-df-sans font-bold uppercase">Upcoming Courses</h4>
+            <h4 class="font-df-sans font-bold uppercase mb-2">Upcoming Courses</h4>
             <ul class="list-none">
             {% for course in courses | coursesByTitle(title) %}
               <li>{{ course.startDate | htmlDateString('E d LLLL') }}</li>
