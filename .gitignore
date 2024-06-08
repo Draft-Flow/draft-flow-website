@@ -20,8 +20,8 @@ yarn.lock
 /web/src/_data/hash.json
  
 # Local Netlify folder
-netlify/functions/bike-reservations/**
-!netlify/functions/bike-reservations/index.js
+netlify/functions/**/*
+!netlify/functions/**/index.js
 
 # Local Netlify folder
 .netlify
