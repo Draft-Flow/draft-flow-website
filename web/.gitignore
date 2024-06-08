@@ -1,2 +1,6 @@
 # Local Netlify folder
 .netlify
+
+# Eleventy Serverless files
+netlify/functions/**/*
+!netlify/functions/**/index.js */
