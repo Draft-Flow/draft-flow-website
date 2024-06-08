@@ -5,6 +5,7 @@ import siteSettings from './documents/siteSettings'
 import staticPages from './documents/staticPages'
 import newsArticle from './documents/newsArticle'
 import brands from './documents/brands'
+import events from './documents/events'
 import shop from './documents/products'
 import routeCategories from './documents/routeCategories'
 
@@ -35,6 +36,7 @@ export default [
   refurbBike,
   route,
   brands,
+  events,
   shop,
   routeCategories,
   seo,
