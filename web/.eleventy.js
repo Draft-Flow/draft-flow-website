@@ -34,11 +34,6 @@ const OUTPUT = '_site'
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin)
 
-  eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
-		name: "bike-reservations",
-		functionsDir: "./netlify/functions/",
-	})
-
   // Watch for changes on files to force refresh and see changes
   eleventyConfig.addWatchTarget('./src/assets/css/styles.css')
   eleventyConfig.addWatchTarget('./src/static/sw.js')
