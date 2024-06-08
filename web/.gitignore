@@ -3,4 +3,4 @@
 
 # Eleventy Serverless files
 netlify/functions/**/*
-!netlify/functions/**/index.js */
+!netlify/functions/**/index.js
