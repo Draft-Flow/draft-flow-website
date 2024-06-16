@@ -14,6 +14,7 @@ export default defineConfig({
   title: 'Draft & Flow',
   projectId: '0y7bneb2',
   dataset: 'production',
+  icon: Logo,
   plugins: [
     deskTool({
       structure: deskStructure
@@ -33,11 +34,6 @@ export default defineConfig({
     types: schemas,
     templates: initialValueTemplates
   },
-  studio: {
-    components: {
-      logo: Logo
-    }
-  },
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
@@ -48,13 +44,16 @@ export default defineConfig({
     actions: (prev, { schemaType }) => {
       if (schemaType === 'settings') {
         return prev.filter(({ action }) => !['unpublish', 'delete','duplicate'].includes(action))
-      } else if (schemaType === 'events') {
+      }
+      
+      if (schemaType === 'events') {
         return prev.map((originalAction) =>
           originalAction.action === 'publish'
             ? eventsAction(originalAction)
             : originalAction
         )
       }
+
       return prev
     }
   },
