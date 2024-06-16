@@ -23,6 +23,12 @@ export default {
       }
     },
     {
+      name: 'price',
+      type: 'number',
+      title: 'Price',
+      description: 'Cost for the course',
+    },
+    {
       name: 'seo',
       type: 'seo',
       title: 'SEO',
@@ -38,12 +44,13 @@ export default {
       type: 'array',
       title: 'Dates',
       options: {
-        sortable: false
+        sortable: true
       },
       of: [
         {
           name: 'courseDate',
           type: 'object',
+          icon: FaCalendarDay,
           fields: [
             {
               name: 'startDate',
