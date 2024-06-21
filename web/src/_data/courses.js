@@ -7,7 +7,7 @@ const generateDoc = async (doc) => {
   try {
     return {
       ...doc,
-      permalink: `/courses/${doc.slug}`,
+      permalink: `/courses/${doc.slug}/index.html`,
       content: doc.content ? toHTML(doc.content, { components: serializers }) : '', 
     }
   } catch (err) {
