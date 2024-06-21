@@ -14,7 +14,7 @@ eleventyComputed:
   title: "{{ course.title }}"
 tags:
   - courses
-permalink: "{{ course.permalink }}"
+permalink: {{ course.permalink }}
 ---
 
 {{ course.content | safe }}
