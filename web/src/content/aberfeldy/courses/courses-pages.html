@@ -1,19 +1,19 @@
 ---
-  layout: layouts/course.njk
-  bannerImage: src/static/images/banner-diy.jpg
-  pagination:
-    data: "courses"
-    size: 1
-    alias: course
-    addAllPagesToCollections: true
-  eleventyComputed:
-    eleventyNavigation:
-      parent: Courses
-      title: "{{ course.title }}"
-      key: "{{ course.title }}"
+layout: layouts/course.njk
+bannerImage: src/static/images/banner-diy.jpg
+pagination:
+  data: "courses"
+  size: 1
+  alias: course
+  addAllPagesToCollections: true
+eleventyComputed:
+  eleventyNavigation:
+    parent: Courses
     title: "{{ course.title }}"
-  tags: ["courses"]
-  permalink: "{{ course.permalink }}"
+    key: "{{ course.title }}"
+  title: "{{ course.title }}"
+tags: ["courses"]
+permalink: "{{ course.permalink }}"
 ---
 
 {{ course.content | safe }}
