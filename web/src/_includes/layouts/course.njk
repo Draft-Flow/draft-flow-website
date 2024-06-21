@@ -18,8 +18,12 @@
         {{ content | md | safe }}
         <h2 class="font-df-sans font-black text-3xl uppercase mt-6 mb-2">Upcoming Courses</h2>
         <ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {% for course in courses | coursesByTitle(title) %}
-          <li  class="border-2 border-df-orange p-4 text-center">{{ course.startDate | htmlDateString('E d LLLL') }}</li>
+        {% for date in course.dates %}
+          <li  class="border-2 border-df-orange p-4 text-center">
+            {# <a class="checkout" data-courseId="{{course.id}}" data-courseDate="{{date.startDate}}"> #}
+              {{ date.startDate | htmlDateString('E d LLLL') }}
+            {# </a> #}
+          </li>
         {% endfor %}  
         </ul>
       </div>
@@ -32,4 +36,38 @@
         </div>
       </div>
   </section>
+
+  {% jsbundle course.slug, true | safe %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkoutButtons = document.querySelectorAll('.checkout');
+      console.log(checkoutButtons)
+      checkoutButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const courseID = button.dataset.courseid;
+          const courseDate = button.dataset.coursedate;
+          button.disabled = true;
+          fetch('https://api.draftandflow.com/.netlify/functions/create-stripe-checkout', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ courseID, courseDate, page: "{{metadata.url}}{{page.url}}" })
+          }).then(response => {
+            if (response.ok) {
+              return response.json()
+            }
+            throw new Error('Network response was not ok.');
+          }).then(data => {
+            window.location.href = data.url;
+          }).catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+          });
+        });
+      });
+    });
+  </script>
+  {% endjsbundle %}
+
 {% endblock %}

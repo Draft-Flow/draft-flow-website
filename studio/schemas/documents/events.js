@@ -53,14 +53,28 @@ export default {
           icon: FaCalendarDay,
           fields: [
             {
+              name: 'available',
+              type: 'number',
+              title: 'Spots Available',
+              validation: rule=>rule.required().max(25)
+            },
+            {
               name: 'startDate',
               type: 'datetime',
               title: 'Start Date',
+              validation: rule=>rule.required().min(new Date().toISOString()),
+              options: {
+                timeStep: 15
+              }
             },
             {
               name: 'endDate',
               type: 'datetime',
               title: 'End Date',
+              validation: rule => rule.required().min(rule.valueOfField('startDate')),
+              options: {
+                timeStep: 15
+              }
             }
           ],
           preview: {

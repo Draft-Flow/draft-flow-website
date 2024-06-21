@@ -20,12 +20,12 @@ Subscribe to [our newsletter](/newsletter/) to be notified of upcoming courses, 
 
 ## Upcoming Courses
 <ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-x-10">
-{% for course in collections.courses %}
+{% for course in courses %}
   <li class="text-lg">
     <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.data.title }}</h5>
-    <small><strong>Next:</strong> {{ course.data.course.startDate | htmlDateString('E d LLL') }}</small>
-    <p>{{ course.data.course.summary }}</p>
-    <a href="{{ course.url }}" class="text-primary hover:text-primary-dark">Learn More</a>
+    <small><strong>Next:</strong> {{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
+    <p>{{ course.title }}</p>
+    <a href="{{ course.permalink }}" class="text-primary hover:text-primary-dark">Learn More</a>
   </li>
 {% endfor %}
 </ul>
