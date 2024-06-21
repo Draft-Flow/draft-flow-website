@@ -5,19 +5,6 @@
   pagination: {
     data: "courses",
     size: 1,
-    before: function(paginationData, fullData) {
-      const uniques = new Set()
-      return paginationData.filter(entry => {
-        if (uniques.has(entry.title)) {
-          // If permalink already exists, return null to skip the page
-          return false
-        } else {
-          // Add permalink to the set and return it
-          uniques.add(entry.title)
-          return true
-        }
-      })
-    },
     alias: "course",
     addAllPagesToCollections: true,
   },
@@ -34,4 +21,4 @@
 }
 ---
 
-{{ course.description }}
+{{ course.content | safe }}

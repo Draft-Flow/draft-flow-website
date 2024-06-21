@@ -4,6 +4,7 @@ import { visionTool } from '@sanity/vision'
 import { colorInput } from "@sanity/color-input";
 
 import schemas from './schemas/schema'
+import eventsAction from './actions/events'
 import deskStructure from './desk-structure/deskStructure'
 import initialValueTemplates from './initial-value-templates'
 import Logo from './logo/Logo'
@@ -13,6 +14,7 @@ export default defineConfig({
   title: 'Draft & Flow',
   projectId: '0y7bneb2',
   dataset: 'production',
+  icon: Logo,
   plugins: [
     deskTool({
       structure: deskStructure
@@ -32,15 +34,10 @@ export default defineConfig({
     types: schemas,
     templates: initialValueTemplates
   },
-  studio: {
-    components: {
-      logo: Logo
-    }
-  },
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId != 'settings')
+        return prev.filter((templateItem) => templateItem.templateId !== 'settings')
       }
       return prev
     },
@@ -48,7 +45,16 @@ export default defineConfig({
       if (schemaType === 'settings') {
         return prev.filter(({ action }) => !['unpublish', 'delete','duplicate'].includes(action))
       }
+      
+      if (schemaType === 'events') {
+        return prev.map((originalAction) =>
+          originalAction.action === 'publish'
+            ? eventsAction(originalAction)
+            : originalAction
+        )
+      }
+
       return prev
-    },
+    }
   },
 })
