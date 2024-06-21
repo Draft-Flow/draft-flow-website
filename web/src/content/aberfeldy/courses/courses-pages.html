@@ -2,7 +2,7 @@
 layout: layouts/course.njk
 bannerImage: src/static/images/banner-diy.jpg
 pagination:
-  data: "courses"
+  data: courses
   size: 1
   alias: course
   addAllPagesToCollections: true
@@ -12,7 +12,8 @@ eleventyComputed:
     title: "{{ course.title }}"
     key: "{{ course.title }}"
   title: "{{ course.title }}"
-tags: ["courses"]
+tags:
+  - courses
 permalink: "{{ course.permalink }}"
 ---
 
