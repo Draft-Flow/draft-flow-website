@@ -9,7 +9,7 @@ const generateDoc = async (doc) => {
   return {
     ...doc,
     content: doc.content ? toHTML(doc.content, { components: serializers }) : null, 
-    firstImage: doc.firstImage.imageUrl,
+    firstImage: doc.firstImage?.imageUrl || doc.banner.ref,
     cta: doc.cta ? ({
       ...doc.cta,
       text: doc.cta.text ? toHTML(doc.cta.text, { components: serializers }) : null
