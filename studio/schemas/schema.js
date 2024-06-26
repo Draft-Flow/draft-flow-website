@@ -6,6 +6,7 @@ import staticPages from './documents/staticPages'
 import newsArticle from './documents/newsArticle'
 import brands from './documents/brands'
 import events from './documents/events'
+import hireBike from './documents/hireBikes'
 import shop from './documents/products'
 import routeCategories from './documents/routeCategories'
 
@@ -31,12 +32,13 @@ import sku from './objects/sku'
 // Then we give our schema to the builder and provide the result to Sanity
 export default [
   siteSettings,
+  events,
+  hireBike,
   staticPages,
   newsArticle,
   refurbBike,
   route,
   brands,
-  events,
   shop,
   routeCategories,
   seo,

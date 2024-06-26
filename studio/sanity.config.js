@@ -1,7 +1,7 @@
 import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
-import { colorInput } from "@sanity/color-input";
+import { colorInput } from "@sanity/color-input"
 
 import schemas from './schemas/schema'
 import eventsAction from './actions/events'

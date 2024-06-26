@@ -8,8 +8,8 @@
     "node": "v20.11.0"
   },
   "workspaces": [
-    "studio",
-    "web"
+    "web",
+    "studio"
   ],
   "scripts": {
     "start": "npm run dev --workspaces",

@@ -14,23 +14,31 @@
   <section class="flex justify-center px-2 lg:px-4">
     <div class="max-w-7xl w-full mx-auto mt-8 md:mt-12 mb-8 grid grid-cols-1 sm:grid-cols-4 gap-8">
       <div class="course-content sm:col-span-2 lg:col-span-3">
-        <h2 class="font-df-sans font-black text-3xl uppercase">About the course</h2>
+        <h2 class="font-df-sans font-black text-3xl uppercase">Course: {{title}}</h2>
+        <p>{{ intro | safe }}</p>
         {{ content | md | safe }}
-        <h2 class="font-df-sans font-black text-3xl uppercase mt-6 mb-2">Upcoming Courses</h2>
+        <h2 class="font-df-sans font-black text-3xl uppercase mt-6 ">Upcoming Dates</h2>
+        {% if course.dates.length === 0 %}
+        <p>No upcoming dates for this course. <a href="/contact/">Contact us</a> to express interest in this course.</p>
+        {% else %}
+        <small class="block mb-2">Click a date to book your place</small>
         <ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {% for date in course.dates %}
-          <li  class="border-2 border-df-orange p-4 text-center">
-            {# <a class="checkout" data-courseId="{{course.id}}" data-courseDate="{{date.startDate}}"> #}
-              {{ date.startDate | htmlDateString('E d LLLL') }}
-            {# </a> #}
+          <li>
+            <button class="checkout w-full flex flex-col border-2 border-df-orange p-4 text-center" data-courseId="{{course.id}}" data-courseDate="{{date.startDate | htmlDateString('Pp')}}">
+              <strong class="mx-auto">{{ date.startDate | htmlDateString('E d LLLL') }}</strong>
+              <strong class="mx-auto">{{ date.startDate | htmlDateString('H:mm') }} - {{ date.endDate | htmlDateString('H:mm') }}</strong>
+              <small class="uppercase mx-auto">Book Now</small>
+            </button>
           </li>
         {% endfor %}  
         </ul>
+        {% endif %}
       </div>
       <div class="sm:col-span-2 lg:col-span-1">
         <div class="md:w-60 text-base my-4 md:my-0 mx-auto md:ml-8 text-center leading-snug">
           <div class="flex flex-col items-center px-3 py-4 bg-neutral-300 rounded-sm">
-            <h4 class="font-df-sans font-bold uppercase mb-2">Support the workshop</h4>
+            <h4 class="font-df-sans font-bold uppercase mb-2">Want a discount?</h4>
             Become a member of the Community Cycle Workshop to receive discounts on courses, and support the workshop.<a href="/membership/" class="font-bold text-df-orange-dark hover:underline">Become a member</a>.
           </div>
         </div>
@@ -41,7 +49,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const checkoutButtons = document.querySelectorAll('.checkout');
-      console.log(checkoutButtons)
+      
       checkoutButtons.forEach(button => {
         button.addEventListener('click', function() {
           const courseID = button.dataset.courseid;

@@ -22,6 +22,7 @@ const getCourses = async () => {
     "id": _id,
     title,
     "slug": slug.current,
+    intro,
     content,
     price,
     dates []{

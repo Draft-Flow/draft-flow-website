@@ -12,6 +12,7 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
+      validation: rule=>rule.required()
     },
     {
       name: 'slug',
@@ -20,13 +21,15 @@ export default {
       options: {
         source: 'title',
         slugify: input => generateSlug(input)
-      }
+      },
+      validation: rule=>rule.required()
     },
     {
       name: 'price',
       type: 'number',
       title: 'Price',
       description: 'Cost for the course',
+      validation: rule=>rule.required()
     },
     {
       name: 'seo',
@@ -94,9 +97,16 @@ export default {
       ]
     },
     {
+      name: 'intro',
+      type: 'text',
+      title: 'Intro',
+      validation: rule=>rule.required()
+    },
+    {
       name: 'content',
       type: 'bodyPortableText',
       title: 'Content',
+      validation: rule=>rule.required()
     }
   ],
 }

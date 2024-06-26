@@ -185,6 +185,12 @@ header.stuck .icons svg {
   @apply text-2xl;
 }
 
+.course-content button.checkout {
+  &:disabled {
+    @apply  bg-gray-400 opacity-70 text-df-gray cursor-wait;
+  }
+}
+
 /* Utility Styles */
 .outlined {
   -webkit-text-stroke: 1px #000000;
