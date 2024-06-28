@@ -114,6 +114,9 @@
                 </ul>
             </div>
         </div>
+        <div class="flex justify-center opacity-80 text-sm my-6 px-4">
+            <a href="https://climate.stripe.com/4lS2Lm" class="flex flex-col sm:flex-row justify-center items-center hover:underline text-center">{% svgIcon 'src/assets/icons/stripeClimateBadge.svg', 'fill-df-tan mr-2 w-4 h-4' %}<p>We contribute 1% of our sales revenue to remove C0<sub class="mr-1">2</sub> from the atmosphere</p></a>
+        </div>
         <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 opacity-80 text-center">
             <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
                 {%- for item in tertiaryNavPages -%}
@@ -124,7 +127,7 @@
         <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 opacity-80 text-center">
             <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 gap-y-2 sm:gap-y-2 justify-center mb-4 lg:mb-0">
                 <li>
-                    <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="https://maps.app.goo.gl/E5EVdseh8kJkP38T8">{% svgIcon 'src/assets/icons/socialLocation.svg', 'fill-df-tan mr-2 w-6 h-6' %}{{metadata.contact.address2}} | {{metadata.contact.city}} | {{metadata.contact.postalCode}}</a>
+                    <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="https://maps.app.goo.gl/E5EVdseh8kJkP38T8">{% svgIcon 'src/assets/icons/socialLocation.svg', 'fill-df-tan mr-2 w-6 h-6' %}{{metadata.contact.address}}, {{metadata.contact.address2}} | {{metadata.contact.city}} | {{metadata.contact.postalCode}}</a>
                 </li>
                 <li>
                     <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="tel:{{ metadata.contact.phone }}">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan mr-2 w-5 h-5' %}{{metadata.contact.phone}}</a>
