@@ -1,0 +1,97 @@
+{% extends 'layouts/base/index.njk' %}
+
+{% set bannerSubtitle = "Bike Hire" %}
+{% set bannerSrc = bannerImage %}
+{% set bannerTitle = title %}
+
+{% set crumbsJSON = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+
+{% block banner %}
+  {% include 'src/_includes/layouts/includes/bannerSmall.njk' %}
+{% endblock %}
+
+{% block content %}
+  <section class="flex justify-center px-2 lg:px-4">
+    <div class="max-w-7xl w-full mx-auto mt-8 md:mt-12 mb-8 grid grid-cols-1 sm:grid-cols-4 gap-8">
+      {{ content | md | safe }}
+      {{ bike | dump }}
+      <form id="bike-hire-form" class="w-full">
+        <div class="h-10 w-full">
+          <select
+            id="timeslotsDropdown"
+            multiple="multiple"
+            placeholder="Select your bike hire time slots"
+            class="flex h-full w-full"></select>
+        </div>
+        <button class="w-full mt-4" type="submit">Hire Bike</button>
+      </form>
+    </div>
+  </section>
+     
+  {% jsbundle bike.slug, true | safe %}
+    <script>
+      import { multipleSelect } from 'multiple-select-vanilla'
+      import 'multiple-select-vanilla/dist/styles/css/multiple-select.css'
+      import { format } from 'date-fns'
+
+      const bikeHireForm = document.querySelector('#bike-hire-form')
+      bikeHireForm.onsubmit = (e) => {
+        e.preventDefault()
+        const selectedTimes = Array.from(document.querySelectorAll('#timeslotsDropdown option:checked')).map(option => option.value)
+
+        fetch('https://api.draftandflow.com/.netlify/functions/create-bike-hire-checkout', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              selectedTimes,
+              bike: "{{ title }}",
+              bikeID: "{{ bike.id }}",
+              page: "{{ metadata.url }}{{ page.url }}"
+            })
+          }).then(response => {
+            if (response.ok) {
+              return response.json()
+            }
+            throw new Error('Network response was not ok.');
+          }).then(data => {
+            window.location.href = data.url;
+          }).catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+          });
+      }
+
+      const timeSlotDropdown = document.querySelector('#timeslotsDropdown')
+      fetch('https://api.draftandflow.com/.netlify/functions/get-bike-availability', {
+              method: 'POST',
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ calendarID: "{{ bike.calendarID }}" })
+            }).then(response => {
+              if (response.ok) {
+                return response.json()
+              }
+              throw new Error('Network response was not ok.');
+            }).then(data => {
+              data.timeSlots.forEach(slot => {
+                const option = document.createElement('option')
+                option.value = slot.start
+                option.text = `${format(new Date(slot.start), "eee, d LLLL | p") } - ${format(new Date(slot.end), "p")}`
+                timeSlotDropdown.appendChild(option)
+              })
+              multipleSelect('#timeslotsDropdown',
+              {
+                selectAll: false
+              })
+            }).catch(error => {
+              console.error('There was a problem with your fetch operation:', error);
+            });
+
+          
+    </script>
+  {% endjsbundle %}
+{% endblock %}
