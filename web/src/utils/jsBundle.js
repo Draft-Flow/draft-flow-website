@@ -6,7 +6,11 @@ const jsBundle = (code, name, defer) => {
   const tmp = `tmp/${name}.js`
   const lines = code.split('\n')
   const stripped = lines.slice(2, -2)
-  fs.writeFileSync(tmp, stripped.join('\n'))
+  try {
+    fs.writeFileSync(tmp, stripped.join('\n'))
+  } catch(err) {
+    console.log({err})
+  }
 
   const bundles = esbuild.buildSync({
     entryPoints: [tmp],
