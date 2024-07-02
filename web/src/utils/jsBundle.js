@@ -7,7 +7,7 @@ const jsBundle = (code, name, defer) => {
   const lines = code.split('\n')
   const stripped = lines.slice(2, -2)
   try {
-    fs.writeFileSync(tmp, stripped.join('\n'))
+    fs.writeFileSync(tmp, stripped.join('\n'), { flag: 'w' })
   } catch(err) {
     console.log({err})
   }
@@ -24,7 +24,7 @@ const jsBundle = (code, name, defer) => {
 
   try {
     bundles.outputFiles.forEach((bundle) => {
-      fs.writeFileSync(bundle.path, bundle.contents)
+      fs.writeFileSync(bundle.path, bundle.contents, { flag: 'w' })
       // eslint-disable-next-line
       console.log('Created ', bundle.path)
     })
