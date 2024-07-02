@@ -1,9 +1,10 @@
 const fs = require('fs')
+const path = require('path')
 const esbuild = require('esbuild')
 
 const jsBundle = (code, name, defer) => {
   const inputDir = 'src/'
-  const tmp = `tmp/${name}.js`
+  const tmp = path.resolve(path.join(process.cwd(), 'tmp', `${name}.js`))
   const lines = code.split('\n')
   const stripped = lines.slice(2, -2)
   try {
