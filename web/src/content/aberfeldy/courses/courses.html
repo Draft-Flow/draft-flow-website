@@ -9,7 +9,7 @@ eleventyNavigation:
   key: Courses
   title: Education Courses
   crumb: Courses
-  order: 1
+  order: 2
 ---
 
 _**Educational courses on bike maintenance**_
@@ -19,12 +19,12 @@ Cycle service education is a key part of our mission to empower people to mainta
 Subscribe to [our newsletter](/newsletter/) to be notified of upcoming courses, and become a [member](/membership/) to get discounts on courses.
 
 ## Upcoming Courses
-<ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-x-10">
+<ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 my-4">
 {% for course in courses %}
-  <li class="text-lg">
-    <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.data.title }}</h5>
-    <small><strong>Next:</strong> {{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
-    <p>{{ course.title }}</p>
+  <li class="text-lg" data-type="card">
+    <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.title }}</h5>
+    <p>{{ course.intro }}</p>
+    <small class="block"><strong>Next:</strong> {{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
     <a href="{{ course.permalink }}" class="text-primary hover:text-primary-dark">Learn More</a>
   </li>
 {% endfor %}
