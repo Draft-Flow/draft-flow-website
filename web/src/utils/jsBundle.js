@@ -5,7 +5,7 @@ const esbuild = require('esbuild')
 const jsBundle = (code, name, defer) => {
   if (!fs.existsSync(path.join(process.cwd(), 'tmp'))){
     fs.mkdirSync(path.join(process.cwd(), 'tmp'))
-}
+  }
 
   const inputDir = 'src/'
   const tmp = path.resolve(path.join(process.cwd(), 'tmp', `${name}.js`))
