@@ -17,6 +17,7 @@ const crumbShortcode = require('./src/utils/shortcodes/shortcodeCrumbs')
 const shuffleFilter = require('./src/utils/filters/shuffle')
 const brandShuffleFilter = require('./src/utils/filters/brandShuffle')
 const routesDataFilter = require('./src/utils/filters/routesData')
+const sortCoursesFilter = require('./src/utils/filters/sortCourses')
 const getPageFilter = require('./src/utils/filters/getPage')
 const urlFor = require('./src/utils/imageUrl')
 const jsBundle = require('./src/utils/jsBundle')
@@ -116,6 +117,10 @@ module.exports = function (eleventyConfig) {
   // Extract route data
   // Shuffle collection into random order
   eleventyConfig.addFilter('routesData', routesDataFilter)
+
+  // Next course
+  // Sort courses by next available
+  eleventyConfig.addFilter('sortCourses', sortCoursesFilter)
 
    // Page Child Filter
    eleventyConfig.addFilter('childFilter', (collection, key) => {
