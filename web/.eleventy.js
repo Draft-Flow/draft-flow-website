@@ -122,6 +122,11 @@ module.exports = function (eleventyConfig) {
   // Sort courses by next available
   eleventyConfig.addFilter('sortCourses', sortCoursesFilter)
 
+  // Limit filter
+  eleventyConfig.addFilter("limit", function (arr, limit) {
+    return arr.slice(0, limit);
+  });
+
    // Page Child Filter
    eleventyConfig.addFilter('childFilter', (collection, key) => {
     if (!key) return collection;

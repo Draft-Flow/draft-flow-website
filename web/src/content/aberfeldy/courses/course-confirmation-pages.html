@@ -1,0 +1,22 @@
+---
+layout: layouts/simple.njk
+bannerImage: src/static/images/banner-diy.jpg
+pagination:
+  data: courses
+  size: 1
+  alias: course
+  addAllPagesToCollections: false
+eleventyComputed:
+  eleventyNavigation:
+    parent: Courses
+    title: "{{ course.title }}"
+    key: "{{ course.title }}"
+  title: "{{ course.title }}"
+tags:
+  - courses
+permalink: "{{ course.permalink }}confirmed"
+---
+
+# You're all set!
+
+We'll see you at the course! If you have any questions, or changes, before the course please don't hesitate to [contact us](/contact).
