@@ -27,10 +27,3 @@ eleventyNavigation:
       </script>
   </div>
 
-{% for bike in hirebikes %}
-  <li class="text-lg">
-    <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ bike.title }}</h5>
-    <a href="{{ bike.permalink }}" class="text-primary hover:text-primary-dark">Learn More</a>
-  </li>
-{% endfor %}
-
