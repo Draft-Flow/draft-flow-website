@@ -6,7 +6,6 @@ import staticPages from './documents/staticPages'
 import newsArticle from './documents/newsArticle'
 import brands from './documents/brands'
 import events from './documents/events'
-import hireBike from './documents/hireBikes'
 import shop from './documents/products'
 import routeCategories from './documents/routeCategories'
 
@@ -33,7 +32,6 @@ import sku from './objects/sku'
 export default [
   siteSettings,
   events,
-  hireBike,
   staticPages,
   newsArticle,
   refurbBike,

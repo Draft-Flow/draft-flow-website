@@ -11,7 +11,11 @@ const jsBundle = (code, name, defer) => {
   const tmp = path.resolve(path.join(process.cwd(), 'tmp', `${name}.js`))
   const lines = code.split('\n')
   const stripped = lines.slice(2, -2)
-  fs.writeFileSync(tmp, stripped.join('\n'))
+  try {
+    fs.writeFileSync(tmp, stripped.join('\n'), { flag: 'w' })
+  } catch(err) {
+    console.log({err})
+  }
 
   const bundles = esbuild.buildSync({
     entryPoints: [tmp],
@@ -25,7 +29,7 @@ const jsBundle = (code, name, defer) => {
 
   try {
     bundles.outputFiles.forEach((bundle) => {
-      fs.writeFileSync(bundle.path, bundle.contents)
+      fs.writeFileSync(bundle.path, bundle.contents, { flag: 'w' })
       // eslint-disable-next-line
       console.log('Created ', bundle.path)
     })
