@@ -11,16 +11,19 @@ eleventyNavigation:
   order: 1
 ---
 
-## Coming soon!
-
-The Community Bike Hire scheme provides a range of bikes for hire. In partnership with Tay Valley Connections, we have several e-bikes available for hire to explore the local area. These bikes are great for trying an e-bike before purchasing, or for a fun day out with friends and family around Aberfeldy.
-
-The bikes will be available to reserve soon, so stay tuned.
-
-{% for bike in hirebikes %}
-  <li class="text-lg">
-    <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ bike.title }}</h5>
-    <a href="{{ bike.permalink }}" class="text-primary hover:text-primary-dark">Learn More</a>
-  </li>
-{% endfor %}
+<div style="width: 100%;">
+  <style>
+    iframe {
+        width: 1px;
+        min-width: 100%;
+        border-width: 0px;
+        height: 1500px;
+    }
+    </style>
+      <script type="text/javascript" src="https://rentals.hubtiger.com/assets/js/iframeSizer.min.js"></script>
+      <iframe id="rentals-iframe" src="https://rentals.hubtiger.com/rentals/reserve/HUB.C1EB4191466046C0ABC3A00E64096AA307FA35A89EEE4C9AA821705D63E6ABD8.TIGER"></iframe>
+      <script>
+          iFrameResize({ log: false}, '#rentals-iframe' );
+      </script>
+  </div>
 
