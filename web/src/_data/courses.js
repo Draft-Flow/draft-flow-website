@@ -25,7 +25,7 @@ const getCourses = async () => {
     intro,
     content,
     price,
-    dates []{
+    dates [startDate > now()] | order(startDate asc) {
       available,
       startDate,
       endDate
