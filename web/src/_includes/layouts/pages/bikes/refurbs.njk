@@ -10,71 +10,11 @@
     <h3 class="text-center mt-12 font-bold text-2xl mb-4">
       Available Refurbs
     </h3>
-    {% set availableRefurbs = refurbs | available %}
-    {% set pastRefurbs = refurbs | unavailable %}
-
-    {% if availableRefurbs.length > 0 %}
-    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {% for refurb in availableRefurbs %}
-      <li>
-        <a class="font-base text-base text-df-tan" href="/bikes/refurbs/{{ refurb.slug }}">
-          <div class="z-10 relative aspect-[4/3] mb-2 overflow-hidden">
-            <div class="w-full">
-              {% image refurb.images[0].url, refurb.name, "(min-width: 30em) 100vw" %}
-            </div>
-            <div class="w-32 text-center pt-1 text-lg pb-10 absolute -right-12 -bottom-4 bg-df-tan text-df-black font-df -rotate-45">
-            {% if refurb.price == 0 %}
-              FREE
-            {% else %}
-              £{{ refurb.price }} 
-            {% endif %}
-            </div>
-          </div>
-          <div class="relative z-20">
-          {% if refurb.altPrice %}
-            <small>or {{ refurb.altPrice }} </small><br>
-          {% endif %}
-          {{ refurb.name }}
-          </div>
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
-    {% else %}
-    <h3 class="text-center mt-4">No bikes available at this time</h3>
-    {% endif %}
-
-    {% if pastRefurbs.length > 0 %}
-    <h3 class="text-center mt-12 font-bold text-2xl mb-4">
-      Past Refurbs
-    </h3>
-    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {% for refurb in pastRefurbs %}
-      <li>
-        <a class="font-base text-base text-df-tan" href="/bikes/refurbs/{{ refurb.slug }}">
-          <div class="z-10 relative aspect-[4/3] mb-2 overflow-hidden">
-            <div class="w-full">
-              {% image refurb.images[0].url, refurb.name, "(min-width: 30em) 100vw" %}
-            </div>
-            <div class="w-32 text-center pt-1 text-lg pb-10 absolute -right-12 -bottom-4 bg-df-tan text-df-black font-df -rotate-45">
-            {% if refurb.price == 0 %}
-              FREE
-            {% else %}
-              £{{ refurb.price }} 
-            {% endif %}
-            </div>
-          </div>
-          <div class="relative z-20">
-          {% if refurb.altPrice %}
-            <small>or {{ refurb.altPrice }} </small><br>
-          {% endif %}
-          {{ refurb.name }}
-          </div>
-        </a>
-      </li>
-    {% endfor %}
-    </ul>
-    {% endif %}
+    <div class="max-w-prose mx-auto"> 
+    <p>We usually have a selection of refurbed bikes available for purchase, or short-term use. Pop into the workshop to view our current offering, or just peer through window to see what we have.</p>
+    <p>Looking to upgrade your kids bike to a larger size? We'll gladly accept a swap.</p>
+    </div>
   </div>
+  
 </section>
 {% endblock %}
