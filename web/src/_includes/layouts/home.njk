@@ -3,10 +3,10 @@
 {%- set pageContent = pages | getPage(pageID) -%}
 
 {% set features = [
-  {text: 'Repairs & Servicing', color: 'bg-df-black'},
-  {text: 'Bike Hire', color: 'bg-df-orange-dark'},
-  {text: 'Cycle Education', color: 'bg-df-blue'},
-  {text: 'Parts & Gear', color: 'bg-df-black'}
+  {text: 'Repairs & Servicing', color: 'bg-df-black', link: '/bike-servicing/'},
+  {text: 'Bike Hire', color: 'bg-df-orange-dark', link: '/bikes/hire/'},
+  {text: 'Cycle Education', color: 'bg-df-blue', link: '/aberfeldy/courses/'},
+  {text: 'Parts & Gear', color: 'bg-df-black', link: '/bike-servicing/upgrades/'}
 ]%}
 
 {% block content %}
@@ -18,8 +18,10 @@
     </h1>
      <ul class="relative mt-4 lg:mt-2 -rotate-3 skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}
-      <li class="py-1 md:py-3 px-2 md:px-4 {{ feature.color }}">
+      <li class="{{ feature.color }}">
+        <a class="block py-1 md:py-3 px-2 md:px-4 hover:underline" href="{{ feature.link }}">
         <span class="block opacity-80">{{ feature.text }}</span>
+        </a>
       </li>
       {% endfor %}
     </ul>

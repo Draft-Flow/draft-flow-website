@@ -56,9 +56,9 @@
                     <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-neutral-100 w-6 h-6' %}</a>
                 </li>
             </ul>
-            <ul class="grid grid-rows-2 sm:grid-rows-1 grid-flow-col grid-cols-[min-content_1fr] gap-x-6 gap-y-4 justify-center mb-4 lg:mb-0">
+            <ul class="flex flex-wrap justify-center mb-4 lg:mb-0">
                 {%- for item in secondaryNavPages -%}
-                <li><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
+                <li class="mx-6 my-2"><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -128,7 +128,7 @@
         <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 opacity-80 text-center">
             <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 gap-y-2 sm:gap-y-2 justify-center mb-4 lg:mb-0">
                 <li>
-                    <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="https://maps.app.goo.gl/E5EVdseh8kJkP38T8">{% svgIcon 'src/assets/icons/socialLocation.svg', 'fill-df-tan mr-2 w-6 h-6' %}{{metadata.contact.address}}, {{metadata.contact.address2}} | {{metadata.contact.city}} | {{metadata.contact.postalCode}}</a>
+                    <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="https://maps.app.goo.gl/E5EVdseh8kJkP38T8">{% svgIcon 'src/assets/icons/socialLocation.svg', 'fill-df-tan mr-2 w-6 h-6' %}{{metadata.contact.address}}, {{metadata.contact.address2}}<br/> {{metadata.contact.city}} | {{metadata.contact.postalCode}}</a>
                 </li>
                 <li>
                     <a class="whitespace-nowrap text-center hover:underline flex justify-center items-center" href="tel:{{ metadata.contact.phone }}">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan mr-2 w-5 h-5' %}{{metadata.contact.phone}}</a>
