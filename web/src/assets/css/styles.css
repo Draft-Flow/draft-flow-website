@@ -356,6 +356,6 @@ header.stuck .icons svg {
 
 /* Lightspeed Button  - START */
 .ecsp-Product button {
-  @apply bg-df-blue-dark font-medium uppercase p-4 !important;
+  @apply bg-df-blue font-medium uppercase p-4 text-xl lg:text-2xl hover:bg-df-blue-dark !important;
 }
 /* Lightspeed Button  - END */
