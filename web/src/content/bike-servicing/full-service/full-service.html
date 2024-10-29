@@ -10,13 +10,11 @@ eleventyNavigation:
   title: Full Service Repairs
   order: 1
 process:
-  - title: 1. Schedule & Chat
-    text: Schedule a time to drop off your bike, and let us know what's wrong or what you'd like done - [contact us](/contact/).
-  - title: 2. Drop-off & Inspection
+  - title: 1. Drop-off & Inspection
     text: Drop off your bike. We'll inspect it, and if necessary, recommend any additional required servicing.
-  - title: 3. Quote and Servicing
-    text: We'll let you know the total cost before starting, then get to work. If any changes to service or cost arise, we'll let you know.
-  - title: 4. Pickup & Ride
+  - title: 2. Quote and Servicing
+    text: For small jobs we'll get straight to work. For larger repairs, we'll let you know the total cost before starting, then get to work. If any changes to service or cost arise, we'll let you know.
+  - title: 3. Pickup & Ride
     text: Pickup your bike and get ridin'. We hope to see you out on your bike soon!
 services:
   - name: General
@@ -146,7 +144,7 @@ services:
 <div class="mx-auto">
 
   **Our Service Process**
-  <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 leading-tight text-base md:text-lg -mt-4">
+  <ol class="grid grid-cols-1 md:grid-cols-3 gap-4 leading-tight text-base md:text-lg -mt-4">
   {% for item in process %}
   <li class="flex flex-col">
     <h4 class="font-semibold -indent-5 ml-6">{{ item.title }}</h4>
