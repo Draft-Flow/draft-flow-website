@@ -1,3 +1,5 @@
+[![Daily Build](https://github.com/Draft-Flow/draft-flow-website/actions/workflows/daily-build.yaml/badge.svg)](https://github.com/Draft-Flow/draft-flow-website/actions/workflows/daily-build.yaml)
+
 # Draft & Flow
 
 The website for Draft & Flow
