@@ -8,9 +8,9 @@ The website for Draft & Flow
 
 This repo (a monorepo) contains 2 projects:
 
-- `./web` - The PerthshireGravel.com website
+- `./web` - The Draft & Flow website
   Built with [Eleventy](https://www.11ty.dev/) - a static site generator
-- `./studio` - The PerthshireGravel.com Content Management System (CMS)  
+- `./studio` - The Draft & Flow Content Management System (CMS)  
   Built with [Sanity](https://www.sanity.io/) - a structured content platform with an open-source CMS built with React
 
 When installing dependencies, ensure you're in the correct directory - either `/`, `/studio`, or `/web` - based on where the package should be installed.
