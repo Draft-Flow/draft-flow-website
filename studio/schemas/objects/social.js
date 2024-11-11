@@ -9,11 +9,6 @@ export default {
       rows: 1,
     },
     {
-      name: 'twitter',
-      type: 'text',
-      rows: 1,
-    },
-    {
       name: 'facebook',
       type: 'text',
       rows: 1,
