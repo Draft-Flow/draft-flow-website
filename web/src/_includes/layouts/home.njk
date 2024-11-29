@@ -12,9 +12,9 @@
 {% block content %}
   <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
     <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col md:flex-row font-df-sans z-20 px-1 -rotate-3 skew-x-[-6deg] 2xl:pt-12 leading-7">
-      <span class="text-shadow text-df-orange font-black uppercase px-1">Community</span>
+      <span class="text-shadow text-df-orange font-black uppercase">Community&nbsp;</span>
       {# <span class="block leading-none font-normal sm:leading-none ml-1 mr-2 -mt-2 font-script -rotate-12 skew-x-12 scale-[0.65]">and</span> #}
-      <span class="text-shadow text-df-orange font-black uppercase px-1">Cycle Workshop</span>
+      <span class="text-shadow text-df-orange font-black uppercase">Cycle Workshop</span>
     </h1>
      <ul class="relative mt-4 lg:mt-2 -rotate-3 skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}
@@ -50,9 +50,9 @@
   {# Bike Hire #}
   <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-12 lg:pt-12 border-t-2 border-df-gray">
     <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
-      <span class="text-shadow text-df-orange font-black uppercase">E-Bike Hire</span>
+      <span class="text-shadow text-df-orange font-black uppercase">Try an E-Bike <span class="text-nowrap">(<span class="inline-flex leading-none relative -top-3 sm:-top-4 flex-col text-center text-sm font-medium"><span>For</span><span>Free</span></span>)</span></span>
     </h2>
-    <p class="max-w-prose mx-auto text-center mt-2">We offer a variety of e-bikes for hire from our shop in Aberfeldy. Our e-bikes are perfect for first-time e-bike users to test-ride an e-bike and exploring the local area.</p>
+    <p class="max-w-prose mx-auto text-center mt-2">We offer a variety of e-bikes for hire from our shop in Aberfeldy. Our e-bikes are perfect for first-time e-bike users to test-ride an e-bike and explore the local area, and can be hired anywhere from a few hours to a few days. Best of all, e-bike hires are FREE for local residents.</p>
     <div class="w-full flex justify-center mt-4">
       <a href="/bikes/hire/" class="cta large">Reserve a Bike</a>
     </div>
