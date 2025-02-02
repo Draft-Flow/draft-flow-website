@@ -5,6 +5,7 @@ const { DOMParser } = require('xmldom')
 const turfLineString = require('@turf/helpers').lineString
 const turfMultiLineString = require('@turf/helpers').multiLineString
 const turfSimplify = require('@turf/simplify')
+const {truncate} = require('@turf/turf')
 const { toHTML } = require('@portabletext/to-html')
 const client = require('../utils/sanityClient')
 const serializers = require('../utils/serializers')
@@ -30,7 +31,10 @@ const generateRoute = async (route) => {
         // Remove the unused coordTimes to reduce filesize
         delete geoJSON.features[0].properties.coordTimes
 
-        const { coordinates } = geoJSON.features[0].geometry
+        // Truncate all points to 6 decimals plaes
+        const truncated = truncate(geoJSON, { precision: 6 })
+
+        const { coordinates } = truncated.features[0].geometry
         multiLineStringCoords.push(coordinates)
         
         if (!llBounds) {
@@ -50,7 +54,7 @@ const generateRoute = async (route) => {
         }
 
         let lineString = null
-        if (geoJSON) {
+        if (truncated) {
           lineString = turfLineString(coordinates, {
             name: path.title,
             group: route.title,
@@ -71,7 +75,7 @@ const generateRoute = async (route) => {
           elevationLoss,
           totalDistance,
           description: path.description ? toHTML(path.description, { components: serializers }) : '',
-          geoJSON,
+          geoJSON: truncated,
           lineString,
           simpleLineString: turfSimplify(lineString, {tolerance: 0.0003, highQuality: false}),
         }
