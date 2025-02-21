@@ -7,6 +7,7 @@ const generateDoc = async (doc) => {
   try {
     return {
       ...doc,
+      dates: doc.dates ?? [],
       permalink: `/courses/${doc.slug}/`,
       content: doc.content ? toHTML(doc.content, { components: serializers }) : '', 
     }

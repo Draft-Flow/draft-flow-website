@@ -62,16 +62,23 @@
     <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans mb-4">
       <span class="text-shadow text-df-orange font-black uppercase">Upcoming Courses</span>
     </h2>
+    {% set sortedCourses = courses | sortCourses %}
+    {% if sortedCourses.length === 0 %}
     <ul class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-    {% for course in courses | sortCourses | limit(4) %}
+    No upcoming courses
+    {% else %}
+    {% for course in sortedCourses | limit(4) %}
+    {% if course.dates.length > 0 %}
       <li class="text-lg text-center flex flex-col" data-type="card">
         <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.title }}</h5>
         <small class="block">{{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
         <p class="leading-5 my-2">{{ course.intro }}</p>
         <a href="{{ course.permalink }}" class="text-df-blue font-bold mt-auto w-32 self-center hover:underline">Learn More</a>
       </li>
+    {% endif %}
     {% endfor %}
     </ul>
+    {% endif %}
   </div>
 
   {# Up-Cycle Program #}
