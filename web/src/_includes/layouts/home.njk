@@ -65,7 +65,7 @@
     {% set sortedCourses = courses | sortCourses %}
     {% if sortedCourses.length === 0 %}
     <ul class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-    No upcoming courses
+    <li class="text-lg text-center flex flex-col col-span-4">No upcoming courses</li>
     {% else %}
     {% for course in sortedCourses | limit(4) %}
     {% if course.dates.length > 0 %}

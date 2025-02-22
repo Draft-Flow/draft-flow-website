@@ -21,7 +21,21 @@ Subscribe to [our newsletter](/newsletter/) to be notified of upcoming courses, 
 ## Upcoming Courses
 <ul class="list-none grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 my-4">
 {% set sortedCourses = courses | sortCourses %}
-{{sortedCourses | dump}}
+
+{% if sortedCourses.length === 0 %}
+  <li class="col-span-4 text-center">No upcoming courses. <a href="/contact/">Contact us</a> to express interest in a course.</li>
+ {%else %}
+{% for course in sortedCourses %}
+  <li class="text-lg" data-type="card">
+    <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.title }}</h5>
+    <p>{{ course.intro }}</p>
+    <small class="block"><strong>Next:</strong> {{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
+    <a href="{{ course.permalink }}" class="text-primary hover:text-primary-dark">Learn More</a>
+  </li>
+{% endfor %}
+
+{% endif %}
+</ul>
 
 ## Our Courses
 
