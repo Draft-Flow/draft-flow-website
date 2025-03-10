@@ -107,11 +107,8 @@
                 <li><a href="https://www.enchantedforest.org.uk/the-trust/">{% image 'src/static/logos/theenchantedforest.png', 'Funded by The Enchanged Forest Trust', "(min-width: 20em) 50vw, 100vw", null, 'eager', null, null, 'h-12 mx-2 lg:h-16 w-auto transition-opacity opacity-60 hover:opacity-100' %}</a></li>
             </ul>
         </div>
-        <div class="flex justify-center opacity-80 text-sm my-6 px-4">
-            <a href="https://climate.stripe.com/4lS2Lm" class="flex flex-col sm:flex-row justify-center items-center hover:underline text-center">{% svgIcon 'src/assets/icons/stripeClimateBadge.svg', 'fill-df-tan mr-2 w-4 h-4' %}<p>We contribute a portion of our sales revenue to C0<sub class="mr-1">2</sub> removal</p></a>
-        </div>
         <div class="text-sm max-w-6xl mx-auto flex flex-col lg:flex-row justify-center items-center mt-8 opacity-80 text-center">
-            <ul class="grid grid-flow-row sm:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
+            <ul class="grid grid-flow-row grid-rows-2 md:grid-flow-col auto-cols-min gap-x-6 sm:gap-y-2 justify-center mb-4 lg:mb-0">
                 {%- for item in tertiaryNavPages -%}
                 <li><a class="whitespace-nowrap text-center hover:underline" href="{{ item.url | url }}">{{ item.title }}</a></li>
                 {% endfor %}
