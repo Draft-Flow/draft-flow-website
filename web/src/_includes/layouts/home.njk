@@ -11,7 +11,7 @@
 
 {% block content %}
   <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
-    <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col md:flex-row font-df-sans z-20 px-1 -rotate-3 skew-x-[-6deg] 2xl:pt-12 leading-7">
+    <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col md:flex-row font-df-sans z-20 px-1 -rotate-3 skew-x-[-6deg] 2xl:pt-8 leading-7">
       <span class="text-shadow text-df-orange font-black uppercase">Community&nbsp;</span>
       {# <span class="block leading-none font-normal sm:leading-none ml-1 mr-2 -mt-2 font-script -rotate-12 skew-x-12 scale-[0.65]">and</span> #}
       <span class="text-shadow text-df-orange font-black uppercase">Cycle Workshop</span>
@@ -26,59 +26,21 @@
       {% endfor %}
     </ul>
     <div class="relative w-full">
-      <div class="w-full mt-2 lg:mt-0 vintage opacity-60 z-10 pb-20 md:pb-0 aspect-[1.75/1] sm:aspect-[2/1] md:aspect-[5/2]">
+      <div class="w-full mt-2 lg:-mt-14 vintage opacity-25 z-10 pb-12 md:pb-0 aspect-[1.75/1] sm:aspect-[2/1] md:aspect-[6/2]">
         {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', false %}
       </div>
-      <div class="w-full bottom-0 absolute px-2 lg:px-4 flex flex-col justify-end items-center bg-gradient-to-b from-df-tan/0 via-df-tan/50 to-df-tan/80 pt-12 pb-12 -mb-12 w-full">
-        <a class="cta large" href="/bike-servicing/">
+      <div class="w-full bottom-0 absolute px-2 lg:px-4 flex flex-col justify-end items-center bg-gradient-to-b from-df-tan/0 via-df-tan/75 to-df-tan/80 pt-12 pb-12 -mb-12 w-full">
+        <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans mb-4">
+          <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
+        </h2>
+        <p class="max-w-prose mx-auto text-center mt-2">
+          We offer a range of bike services to keep your bike in top condition. From basic repairs to full servicings, our aim is to keep you riding. We also have tools and workstations available for DIY repairs.
+        </p>
+        <a class="cta large mt-4" href="/bike-servicing/">
           View Services
         </a> 
-        <div class="justify-self-end w-full mt-8 mb-4 flex items-center">
-          <blockquote class="font-script -rotate-3 skew-x-[-3deg] text-2xl md:text-3xl xl:text-4xl text-center text-gray-800 whitespace-pre-line w-full leading-6 lg:leading-4">
-            A volunteer-run bike repair, hire, and parts shop, education centre, and more
-          </blockquote>
-        </div>
       </div>
     </div>
-  </div>
-
-  {# Shop #}
-  {# <div>
-    <a class="flex justify-center items-center h-48 text-4xl" href="/shop/">Shop</a>
-  </div> #}
-
-  {# Bike Hire #}
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-12 lg:pt-12 border-t-2 border-df-gray">
-    <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
-      <span class="text-shadow text-df-orange font-black uppercase">Try an E-Bike <span class="text-nowrap">(<span class="inline-flex leading-none relative -top-3 sm:-top-4 flex-col text-center text-sm font-medium"><span>For</span><span>Free</span></span>)</span></span>
-    </h2>
-    <p class="max-w-prose mx-auto text-center mt-2">We offer a variety of e-bikes for hire from our shop in Aberfeldy. Our e-bikes are perfect for first-time e-bike users to test-ride an e-bike and explore the local area, and can be hired anywhere from a few hours to a few days. Best of all, e-bike hires are FREE for local residents.</p>
-    <div class="w-full flex justify-center mt-4">
-      <a href="/bikes/hire/" class="cta large">Reserve a Bike</a>
-    </div>
-
-  {# Upcoming Courses #}
-  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-12 lg:pt-12 border-t-2 border-df-gray">
-    <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans mb-4">
-      <span class="text-shadow text-df-orange font-black uppercase">Upcoming Courses</span>
-    </h2>
-    {% set sortedCourses = courses | sortCourses %}
-    {% if sortedCourses.length === 0 %}
-    <ul class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-    <li class="text-lg text-center flex flex-col col-span-4">No upcoming courses</li>
-    {% else %}
-    {% for course in sortedCourses | limit(4) %}
-    {% if course.dates.length > 0 %}
-      <li class="text-lg text-center flex flex-col" data-type="card">
-        <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.title }}</h5>
-        <small class="block">{{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
-        <p class="leading-5 my-2">{{ course.intro }}</p>
-        <a href="{{ course.permalink }}" class="text-df-blue font-bold mt-auto w-32 self-center hover:underline">Learn More</a>
-      </li>
-    {% endif %}
-    {% endfor %}
-    </ul>
-    {% endif %}
   </div>
 
   {# Up-Cycle Program #}
@@ -86,7 +48,7 @@
     <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
       <span class="text-shadow text-df-orange font-black uppercase">Up-Cycle Programme</span>
     </h2>
-    <p class="max-w-prose mx-auto text-center mt-2">We accept donations of bikes and bike components, refurbish them, and put them back into Aberfeldy to give everyone the opportunity to get cycling</p>
+    <p class="max-w-prose mx-auto text-center mt-2">We accept donations of bikes and bike components, refurbish them, and put them back into Aberfeldy to give everyone the opportunity to get cycling<br>(for pay-what-you-can or free)</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
       {% set program = [
           {title: '1. Donate', description: 'Drop-off your old and unused bike', image: 'src/static/images/workshop.jpg', imageAlt: 'Workshop with bike', buttonText: 'Donate a Bike', buttonLink: '/bikes/refurbs/'},
@@ -147,6 +109,45 @@
       refurbObserver.observe(refurbSentinelEl)
       /* Refurb Images - END */
     </script>
+  </div>
+
+  {# Shop #}
+  {# <div>
+    <a class="flex justify-center items-center h-48 text-4xl" href="/shop/">Shop</a>
+  </div> #}
+
+  {# Bike Hire #}
+  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-12 lg:pt-12 border-t-2 border-df-gray">
+    <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans">
+      <span class="text-shadow text-df-orange font-black uppercase">Try an E-Bike <span class="text-nowrap">(<span class="inline-flex leading-none relative -top-3 sm:-top-4 flex-col text-center text-sm font-medium"><span>For</span><span>Free</span></span>)</span></span>
+    </h2>
+    <p class="max-w-prose mx-auto text-center mt-2">We offer a variety of e-bikes for hire from our shop in Aberfeldy. Our e-bikes are perfect for first-time e-bike users to test-ride an e-bike and explore the local area, and can be hired anywhere from a few hours to a few days. Best of all, e-bike hires are FREE for local residents.</p>
+    <div class="w-full flex justify-center mt-4">
+      <a href="/bikes/hire/" class="cta large">Reserve a Bike</a>
+    </div>
+
+  {# Upcoming Courses #}
+  <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-12 lg:pt-12 border-t-2 border-df-gray">
+    <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans mb-4">
+      <span class="text-shadow text-df-orange font-black uppercase">Upcoming Courses</span>
+    </h2>
+    {% set sortedCourses = courses | sortCourses %}
+    {% if sortedCourses.length === 0 %}
+    <ul class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
+    <li class="text-lg text-center flex flex-col col-span-4">No upcoming courses</li>
+    {% else %}
+    {% for course in sortedCourses | limit(4) %}
+    {% if course.dates.length > 0 %}
+      <li class="text-lg text-center flex flex-col" data-type="card">
+        <h5 class="font-df-sans uppercase font-bold mb-0 pb-0 leading-4">{{ course.title }}</h5>
+        <small class="block">{{ course.dates[0].startDate | htmlDateString('E d LLL') }}</small>
+        <p class="leading-5 my-2">{{ course.intro }}</p>
+        <a href="{{ course.permalink }}" class="text-df-blue font-bold mt-auto w-32 self-center hover:underline">Learn More</a>
+      </li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+    {% endif %}
   </div>
 
   {# News #}
