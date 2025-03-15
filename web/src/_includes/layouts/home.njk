@@ -134,7 +134,7 @@
     {% set sortedCourses = courses | sortCourses %}
     {% if sortedCourses.length === 0 %}
     <ul class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 lg:gap-12">
-    <li class="text-lg text-center flex flex-col col-span-4">No upcoming courses</li>
+    <li class="text-lg text-center flex flex-col col-span-4">Unfortunately we have no upcoming courses scheduled, but we do offer 1-on-1 training for you and your bike. Please <a href="/contact/">contact us</a> to book a 1-on-1 session to learn how to maintain your bike.</li>
     {% else %}
     {% for course in sortedCourses | limit(4) %}
     {% if course.dates.length > 0 %}

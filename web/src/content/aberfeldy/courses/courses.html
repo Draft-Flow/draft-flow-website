@@ -23,7 +23,7 @@ Subscribe to [our newsletter](/newsletter/) to be notified of upcoming courses, 
 {% set sortedCourses = courses | sortCourses %}
 
 {% if sortedCourses.length === 0 %}
-  <li class="col-span-4 text-center">No upcoming courses. <a href="/contact/">Contact us</a> to express interest in a course.</li>
+  <li class="col-span-4 text-center">Unfortunately we have no upcoming courses scheduled, but we do offer 1-on-1 training for you and your bike. Please <a href="/contact/">contact us</a> to book a 1-on-1 session to learn how to maintain your bike.
  {%else %}
 {% for course in sortedCourses %}
   <li class="text-lg" data-type="card">
