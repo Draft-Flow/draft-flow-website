@@ -22,7 +22,7 @@ const imageShortcode = async (
   })
 
   const imageAttributes = {
-    alt,
+    alt: (alt ?? '').split('\n')[0].replace(/['"]/g, '\\$&'),
     sizes: sizes || '(min-width: 30em) 50vw, 100vw',
     loading: loading || 'lazy',
     decoding: decoding || 'async',

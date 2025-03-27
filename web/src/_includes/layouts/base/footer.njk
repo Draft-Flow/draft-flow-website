@@ -25,7 +25,7 @@
         <div>
             {% for post in instagram %}
             <a href="{{ post.permalink }}">
-            {% image post.media_url, post.caption, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 400], 'inline-block h-40 lg:h-48 w-auto aspect-[{{post.width/100}}/{{post.height/100}}]' %}
+            {% image post.media_url, post.caption or "Instagram", "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 400], 'inline-block h-40 lg:h-48 w-auto aspect-[{{post.width/100}}/{{post.height/100}}]' %}
             </a>
             {% endfor %}
         </div>
