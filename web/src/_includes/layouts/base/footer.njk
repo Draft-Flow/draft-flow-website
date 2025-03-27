@@ -18,6 +18,18 @@
             <p>&hellip;and many <a class="underline" href="/bike-servicing/upgrades/">more quality brands</a></p>
         </div>
     </div>
+    <div class="w-full whitespace-nowrap overflow-x-hidden bg-df-gray-light pb-3">
+        <div>
+            <h3 class="font-df-sans font-black text-neutral-100 uppercase text-2xl tracking-wide text-center py-4">Latest Posts</h3>
+        </div>
+        <div>
+            {% for post in instagram %}
+            <a href="{{ post.permalink }}">
+            {% image post.media_url, post.caption, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [200, 400], 'inline-block h-40 lg:h-48 w-auto aspect-[{{post.width/100}}/{{post.height/100}}]' %}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
     <div id="subscribe" class="px-2 lg:px-4 py-12 md:py-16 border-t-2 border-df-gray bg-df-gray">
         <div class="max-w-7xl mx-auto flex flex-col lg:flex-row lg:justify-center lg:items-center text-center lg:text-left">
             <h3 class="font-df-sans leading-7 text-df-tan flex flex-col lg:justify-center font-black uppercase text-2xl tracking-wide mb-2">
