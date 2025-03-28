@@ -14,5 +14,6 @@ module.exports = {
     'consistent-return': [0, 'never'],
     'no-underscore-dangle': [0, 'never'],
     'default-param-last': [0, 'never'],
+    'import/no-extraneous-dependencies': [0, {"devDependencies": true}],
   },
 }

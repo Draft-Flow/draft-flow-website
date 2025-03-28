@@ -14,6 +14,7 @@ const jsBundle = (code, name, defer) => {
   try {
     fs.writeFileSync(tmp, stripped.join('\n'), { flag: 'w' })
   } catch(err) {
+    // eslint-disable-next-line
     console.log({err})
   }
 

@@ -15,7 +15,7 @@
     "dev": "NODE_ENV=development npm-run-all clean:bundles -p node:hash dev:eleventy css:watch",
     "debug": "DEBUG=* npx eleventy",
     "lint": "eslint --ext .js .",
-    "lint:fix": "eslint --ext .js . --fix",
+    "lint:fix": "eslint --fix --ext .js .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

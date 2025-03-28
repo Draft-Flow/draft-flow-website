@@ -5,14 +5,14 @@ const today  = new Date()
 
 const generateDates = (startDate, numberOfDays) => {
   const dates = []
-  for (let i = 1; i <= numberOfDays; i++) {
+  for (let i = 1; i <= numberOfDays; i += 1) {
     dates.push(addDays(startDate, i+1))
   }
 
   return dates
 }
 
-const getBikeReservations = async (name) => { 
+const getBikeReservations = async () => { 
   const privatekey = JSON.parse(process.env.GOOGLE_KEY_FILE)
   const jwtClient = new google.auth.JWT(
     privatekey.client_email,
@@ -21,12 +21,14 @@ const getBikeReservations = async (name) => {
     ['https://www.googleapis.com/auth/calendar']
   )
   
-  jwtClient.authorize(function (err, tokens) {
+  jwtClient.authorize((err) => {
     if (err) {
-      console.log(err);
-      return;
+      // eslint-disable-next-line
+      console.log(err)
+      
     } else {
-      console.log("Successfully connected!");
+      // eslint-disable-next-line
+      console.log("Successfully connected!")
     }
     }
   )
@@ -34,29 +36,29 @@ const getBikeReservations = async (name) => {
   const dates = generateDates(today, 30)
   const formattedDates = dates.map(date => format(date, 'yyyy-MM-dd'))
 
-  const calendar = google.calendar('v3')
-  const calendarEvents = await new Promise((resolve, reject) => {
-    const events = calendar.events.list({
-      auth: jwtClient,
-      calendarId: process.env.GOOGLE_CAL_ID_BIKE_1,
-      // timeMin: formatISO(new Date()),
-      // timeMax: formatISO(addMonths(new Date(), 6)),
-      showDeleted: false,
-      maxResults: 200,
-      singleEvents: true,
-      orderBy: 'startTime',
-    }, async (err, res) => {
-      if (err) {
-        console.log('The API returned an error: ' + err)
-        reject('The API returned an error: ' + err)
-        return
-      }
+  // const calendar = google.calendar('v3')
+  // const calendarEvents = await new Promise((resolve, reject) => {
+  //   const events = calendar.events.list({
+  //     auth: jwtClient,
+  //     calendarId: process.env.GOOGLE_CAL_ID_BIKE_1,
+  //     // timeMin: formatISO(new Date()),
+  //     // timeMax: formatISO(addMonths(new Date(), 6)),
+  //     showDeleted: false,
+  //     maxResults: 200,
+  //     singleEvents: true,
+  //     orderBy: 'startTime',
+  //   }, async (err, res) => {
+  //     if (err) {
+  //       // eslint-disable-next-line
+  //       console.log(`The API returned an error: ${  err}`)
+  //       reject(`The API returned an error: ${  err}`)
+  //       return
+  //     }
 
-      const events = JSON.stringify(res.data.items)
-      resolve(events)
-    })
-  })
-  console.log(formattedDates)
+  //     const events = JSON.stringify(res.data.items)
+  //     resolve(events)
+  //   })
+  // })
   return formattedDates
 }
 

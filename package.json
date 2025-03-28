@@ -18,6 +18,8 @@
     "build-studio": "cd studio && npm run build",
     "build-web": "cd web && npm run build",
     "prettier": "prettier --write .",
+    "lint": "cd web && npm run lint",
+    "lint:fix": "cd web && npm run lint:fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

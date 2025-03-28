@@ -20,8 +20,6 @@ const createCheckoutSession = async () => {
     automatic_tax: {enabled: true},
   })
 
-  console.log({session})
-
   return session
 }
 
