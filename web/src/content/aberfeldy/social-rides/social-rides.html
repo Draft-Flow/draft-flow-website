@@ -1,5 +1,5 @@
 ---
-layout: layouts/page.njk
+layout: layouts/pages/rides/rides.njk
 bannerImage: src/static/images/banner-daftandslow.png
 title: Social Rides
 tags:
@@ -11,8 +11,45 @@ eleventyNavigation:
   order: 3
 ---
 
-Riding with others is a great way to meet new people and explore new routes (but we also understand that some people prefer to ride alone). We have a few different type of group rides:
+Riding with others is a great way to meet new people and explore new routes (but we also understand that some people prefer to ride alone). We have a few different type of group rides. Join our [Social Rides WhatsApp group](https://chat.whatsapp.com/IsTQ9nThuqY8kWxf4XLM4k) to be notified, or subscribe to the [Draft & Flow Flyer](/newsletter).
 
-<strong>Social Rides</strong>: organised by community members, happening at various times throughout the year. The routes vary each ride. And the rides are generally slow-paced to allow for socializing. Join our [Social Rides WhatsApp group](https://chat.whatsapp.com/IsTQ9nThuqY8kWxf4XLM4k) to be notified, or subscribe to the [{{ metadata.title }} Flyer](/newsletter).
-
-<strong>Brew with a View</strong>: a monthly meetup at a scenic location for a brew with a view. During the brighter months, we'll announce a location for each meetup, it's up to you to get there using your preferred mode of transport (preferrably mostly human-powered). You can go with others, or go solo, and we'll see you there! Join our [Social Rides WhatsApp group](https://chat.whatsapp.com/IsTQ9nThuqY8kWxf4XLM4k) to be notified, or subscribe to the [{{ metadata.title }} Flyer](/newsletter).
+<div class="md:grid md:grid-cols-2 md:gap-12 divide-y-2 divide-black md:divide-transparent">
+{% for ride in rides %}
+<div class="py-4">
+  <h2>{{ride.title}}</h2>
+  <div class="text-base"><p class="text-sm">{{ ride.content | safe }}</p></div>
+  {% set futureDates = ride.dates.future %}
+  {% set pastDates = ride.dates.past %}
+  <h3>Upcoming Rides</h3>
+  <div class="grid grid-cols-1 gap-4">
+  {% if not futureDates %}
+  <p class="text-center">No upcoming rides scheduled. Check back soon!</p>
+  {% else %}
+  {% for date in futureDates %}
+  {% set latlng = date.location.lat + ',' + date.location.lng %}
+  {% set locationLink = "https://www.google.com/maps/search/" + latlng %}
+  <div>
+    <a href="{{locationLink}}">
+    <h5 class="text-lg font-medium font-df-sans uppercase">
+      <span class="font-black">{{ date.startDate | htmlDateString('E d LLL HH:mm') }}</span> - {{date.title}}
+    </h5>
+    </a>
+    <div class="text-base">{{date.description | safe}}</div>
+    <div class="mt-2">
+      {% image "https://maps.googleapis.com/maps/api/staticmap?center=" + latlng + "&key=" + env.google_maps_api_key + "&size=800x200&zoom=15&scale=2&markers=color:gray%7Clabel:BwaV%7Cscale:2%7Cicon:https://draftandflow.com/static/logos/draftandflow-square-icon.png%7C" + latlng, date.title, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 800], 'w-full' %}
+      <img src="{{"https://maps.googleapis.com/maps/api/staticmap?center=" + latlng + "&key=" + env.google_maps_api_key + "&size=800x200&zoom=15&scale=2&markers=color:gray%7Clabel:BwaV%7Cscale:2%7Cicon:https://draftandflow.com/static/logos/draftandflow-square-icon.png%7C" + latlng}}" />
+    </div>
+    <div class="text-sm uppercase text-df-blue font-medium font-df-sans text-right mt-2"><a href="{{locationLink}}">View on Google Maps</a></div>
+  </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+  {% if pastDates.length > 0 %}
+  <h3>Past Rides</h3>
+  {% for date in pastDates %}
+  <p><strong>{{ date.startDate | htmlDateString('E d LLL HH:mm') }}</strong></p>
+  {% endfor %}
+  {% endif %}
+</div>
+{% endfor %}
+</div>
