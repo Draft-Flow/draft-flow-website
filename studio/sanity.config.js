@@ -2,12 +2,13 @@ import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
 import { colorInput } from "@sanity/color-input"
+import { googleMapsInput } from "@sanity/google-maps-input"
 
 import schemas from './schemas/schema'
 import eventsAction from './actions/events'
 import deskStructure from './desk-structure/deskStructure'
 import initialValueTemplates from './initial-value-templates'
-import Logo from './logo/Logo'
+import Logo from './logo/Logo.jsx'
 
 export default defineConfig({
   name: 'default',
@@ -18,6 +19,9 @@ export default defineConfig({
   plugins: [
     deskTool({
       structure: deskStructure
+    }),
+    googleMapsInput({
+      apiKey: 'AIzaSyDmshAIAKWP2EIb82i1FOt56NyiwkO6A24'
     }),
     visionTool(),
     colorInput(),
