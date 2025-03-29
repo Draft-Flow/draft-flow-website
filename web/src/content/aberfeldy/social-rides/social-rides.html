@@ -49,7 +49,7 @@ Riding with others is a great way to meet new people and explore new routes (but
   <h3>Past Rides</h3>
   {% for date in pastDates %}
   <h5 class="text-lg font-medium font-df-sans uppercase">
-    <span class="font-black">{{ date.startDate | htmlDateString('E d LLL') }}</span> - {{date.title}}
+    <span class="font-black">{{ date.startDate | htmlDateString('d LLL, YYY') }}</span> - {{date.title}}
   </h5>
   {% endfor %}
   {% endif %}

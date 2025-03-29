@@ -55,7 +55,7 @@ const getRides = async () => {
           lng
         }
       },
-      "past": dates [startDate < now()] | order(startDate asc) {
+      "past": dates [startDate < now()] | order(startDate desc) {
         title,
         description,
         startDate,
