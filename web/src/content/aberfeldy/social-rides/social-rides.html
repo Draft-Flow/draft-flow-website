@@ -13,7 +13,7 @@ eleventyNavigation:
 
 Riding with others is a great way to meet new people and explore new routes (but we also understand that some people prefer to ride alone). We have a few different type of group rides. Join our [Social Rides WhatsApp group](https://chat.whatsapp.com/IsTQ9nThuqY8kWxf4XLM4k) to be notified, or subscribe to the [Draft & Flow Flyer](/newsletter).
 
-<div class="md:grid md:grid-cols-2 md:gap-12 divide-y-2 divide-black md:divide-transparent">
+<div class="md:grid md:grid-cols-2 md:gap-12 xl:gap-16 divide-y-2 divide-black md:divide-transparent">
 {% for ride in rides %}
 <div class="py-4">
   <h2>{{ride.title}}</h2>
@@ -22,7 +22,7 @@ Riding with others is a great way to meet new people and explore new routes (but
   {% set pastDates = ride.dates.past %}
   <h3>Upcoming Rides</h3>
   <div class="grid grid-cols-1 gap-4">
-  {% if not futureDates %}
+  {% if futureDates.length == 0 %}
   <p class="text-center">No upcoming rides scheduled. Check back soon!</p>
   {% else %}
   {% for date in futureDates %}
@@ -36,7 +36,9 @@ Riding with others is a great way to meet new people and explore new routes (but
     </a>
     <div class="text-base">{{date.description | safe}}</div>
     <div class="mt-2">
-      {% image "https://maps.googleapis.com/maps/api/staticmap?center=" + latlng + "&key=" + env.google_maps_api_key + "&size=800x200&zoom=15&scale=2&markers=color:gray%7Clabel:BwaV%7Cscale:2%7Cicon:https://draftandflow.com/static/logos/draftandflowlogo-square-icon.png%7C" + latlng, date.title, "(min-width: 20em) 50vw, 100vw", null, 'eager', null, [400, 800], 'w-full' %}
+      <a href="{{locationLink}}">
+      <img src="{{"https://maps.googleapis.com/maps/api/staticmap?center=" + latlng + "&key=" + env.google_maps_api_key + "&size=800x200&zoom=15&scale=2&markers=color:gray%7Clabel:BwaV%7Cscale:2%7Cicon:https://draftandflow.com/static/logos/draftandflowlogo-square-icon.png%7C" + latlng}}" alt="{{date.title}}" />
+    </a>
     </div>
     <div class="text-sm uppercase text-df-blue font-medium font-df-sans text-right mt-2"><a href="{{locationLink}}">View on Google Maps</a></div>
   </div>
@@ -46,7 +48,9 @@ Riding with others is a great way to meet new people and explore new routes (but
   {% if pastDates.length > 0 %}
   <h3>Past Rides</h3>
   {% for date in pastDates %}
-  <p><strong>{{ date.startDate | htmlDateString('E d LLL HH:mm') }}</strong></p>
+  <h5 class="text-lg font-medium font-df-sans uppercase">
+    <span class="font-black">{{ date.startDate | htmlDateString('E d LLL') }}</span> - {{date.title}}
+  </h5>
   {% endfor %}
   {% endif %}
 </div>

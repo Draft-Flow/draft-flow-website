@@ -64,7 +64,7 @@ export default {
               name: 'startDate',
               type: 'datetime',
               title: 'Start Date',
-              validation: rule=>rule.required().min(new Date().toISOString()),
+              validation: rule=>rule.required(),
               options: {
                 timeStep: 15
               }

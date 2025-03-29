@@ -21,7 +21,7 @@ export default defineConfig({
       structure: deskStructure
     }),
     googleMapsInput({
-      apiKey: 'AIzaSyDmshAIAKWP2EIb82i1FOt56NyiwkO6A24'
+      apiKey: process.env.SANITY_STUDIO_GOOGLE_MAPS_API_KEY
     }),
     visionTool(),
     colorInput(),
