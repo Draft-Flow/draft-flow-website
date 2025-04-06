@@ -65,5 +65,8 @@ export default {
         },
       ],
     },
+    {
+      type: 'iframeEmbed',
+    }
   ],
 }

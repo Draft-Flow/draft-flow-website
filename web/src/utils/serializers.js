@@ -16,6 +16,9 @@ module.exports = {
       const fileURL = getFileAsset(value.asset, sanity).url
       return `<div class="file-wrapper "><a href="${fileURL}?dl=" download>${value.name}</a></div>`
     },
+    iframeEmbed: (props) => (
+     `<iframe src="${props.value.url}" width="100%" height="580" frameborder="0" scrolling="no"></iframe>`
+    ),
     mainImage: ({ value}) => {
       const imageUrl = urlFor(value.asset).width(1000).url()
       return `<img class="aspect-auto mb-4 mt-2 mx-auto max-h-96 p-1 md:p-2 border-double border-4 border-df-gray" src="${imageUrl}" alt="${value.alt}" loading="lazy" />`

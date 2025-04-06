@@ -26,6 +26,9 @@ import mainImage from './objects/mainImage'
 import basicImage from './objects/basicImage'
 import logoImage from './objects/logoImage'
 
+// Types
+import iframeEmbed from './types/IframeEmbed/IframeEmbed'
+
 import productOptions from './objects/productOptions'
 import sku from './objects/sku'
 
@@ -57,4 +60,5 @@ export default [
   excerptPortableText,
   productOptions,
   sku,
+  iframeEmbed
 ]
