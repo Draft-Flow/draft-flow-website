@@ -5,7 +5,8 @@ const eleventyNavigationPlugin = require('@11ty/eleventy-navigation')
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 const getYouTubeId = require('get-youtube-id')
 const markdownIt = require('markdown-it')
-const { format, parseISO} = require('date-fns')
+const { format } = require('date-fns')
+const { tz } = require('@date-fns/tz')
 
 const imageURL = require('./src/utils/shortcodes/shortcodeImageURL')
 const bannerImageURL = require('./src/utils/shortcodes/shortcodeBannerURL')
@@ -167,8 +168,7 @@ module.exports = function (eleventyConfig) {
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   eleventyConfig.addFilter('htmlDateString', (dateObj, dateFormat) => {
-    const date = parseISO(dateObj)
-    return format(date, dateFormat || 'yyyy-LL-dd')
+    return format(new Date(dateObj), dateFormat || 'yyyy-LL-dd', {in: tz('Europe/London')})
   })
 
   // Get courses by title
