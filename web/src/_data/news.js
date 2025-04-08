@@ -9,7 +9,7 @@ const generateDoc = async (doc) => {
   return {
     ...doc,
     content: doc.content ? toHTML(doc.content, { components: serializers }) : null, 
-    firstImage: doc.firstImage?.imageUrl || doc.banner.ref,
+    firstImage: doc.firstImage?.imageUrl || doc.banner?.ref || null,
     cta: doc.cta ? ({
       ...doc.cta,
       text: doc.cta.text ? toHTML(doc.cta.text, { components: serializers }) : null
@@ -35,6 +35,10 @@ const getNews = async () => {
     banner {
       "ref": asset._ref,
       alt
+    },
+    bannerText {
+      title,
+      subtitle
     },
     content,
     "firstImage": content[]{

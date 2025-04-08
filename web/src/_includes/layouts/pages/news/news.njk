@@ -15,7 +15,8 @@
         {{ content | md | safe }}
       </div>
       <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
-        {% for article in collections.news_pages %}
+        {% for article in collections.news_pages  %}
+        {% set articleImageSrc = "" %}
         {% if article.data.banner %}
         {% set articleImageSrc %}
           {% imageBannerUrlFor article.data.banner, 2000 %}
@@ -24,8 +25,16 @@
         <li class="w-full flex justify-center">
             <a class="w-full" href="{{ article.url  | safe }}">
               <h3 class="block font-bold text-center mb-2 sm:min-h-[40px] leading-4">{{article.data.title | safe }}</h3>
-              <div class="w-full h-auto p-1 md:p-2 border-double border-4 border-df-gray">
-          {% image articleImageSrc, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
+              <div class="w-full h-auto p-1 md:p-2 border-double border-4 border-df-gray aspect-video">
+                {% if articleImageSrc.length > 0 %}
+                  {% image articleImageSrc, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
+                {% else %}
+                {{article.data.bannerText }}
+                  <div class="w-full h-full flex flex-col justify-center content-center text-center bg-gray-300 hover:bg-gray-400 transition-colors">
+                    <h3 class="font-df font-medium uppercase text-5xl sm:text-3xl lg:text-4xl">{{article.data.bannerTextTitle}}</h3>
+                    <span class="font-df uppercase text-base">{{article.data.bannerTextSubTitle}}</span>
+                  </div>
+                {% endif %}
               </div>
               <small>{{ article.data.date | htmlDateString('PP') }}</small>
             </a>

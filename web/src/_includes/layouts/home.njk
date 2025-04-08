@@ -25,21 +25,36 @@
       </li>
       {% endfor %}
     </ul>
-    <div class="relative w-full">
-      <div class="w-full mt-2 lg:-mt-14 vintage opacity-25 z-10 pb-12 md:pb-0 aspect-[1.75/1] sm:aspect-[2/1] md:aspect-[6/2]">
+    <div class="absolute -z-1 top-0 md:-top-8 w-full mt-2 lg:-mt-14 vintage opacity-[.10] z-10 pb-12 md:pb-0 aspect-[1.75/1] md:aspect-[2.5/1] overflow-visible">
         {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', false %}
+    </div>
+    <div class="relative w-full z-10 w-full flex flex-col justify-end items-center pt-16 md:pt-20 lg:pt-36 pb-12 px-2 lg:px-4 -mb-12 w-full">
+      <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl mb-4 flex flex-col md:flex-row justify-center font-df-sans mb-4">
+        <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 max-w-7xl text-center">    
+        <div class="order-2 md:order-1 flex flex-col items-center">
+          <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
+            👥 1-on-1
+          </h3>
+          <p class="text-sm md:text-base max-w-prose">Learn by doing, with a mechanic by your side. Work on your own bike while learning directly from an expert. Perfect if you want to build your skills with guidance.</p>
+        </div>
+        <div class="order-1 md:order-2 flex flex-col items-center">
+          <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
+            🔧 Expert
+          </h3>
+          <p class="text-sm md:text-base max-w-prose">Leave it to the experts. Book your bike in and our experienced mechanics will take care of everything—from basic servicing to full rebuilds.</p>
+        </div>
+        <div  class="order-3 md:order-3 flex flex-col items-center">
+          <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
+            🚲 Do-It-Yourself
+          </h3>
+          <p class="text-sm md:text-base max-w-prose">For the hands-on rider who likes to get stuck in. Use our workshop space, tools, and stands to work on your own bike at your own pace. We’ll be around if you need advice, but you're in control.</p>
+        </div>
       </div>
-      <div class="w-full bottom-0 absolute px-2 lg:px-4 flex flex-col justify-end items-center bg-gradient-to-b from-df-tan/0 via-df-tan/75 to-df-tan/80 pt-12 pb-12 -mb-12 w-full">
-        <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl flex flex-col md:flex-row justify-center font-df-sans mb-4">
-          <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
-        </h2>
-        <p class="max-w-prose mx-auto text-center mt-2">
-          We offer a range of bike services to keep your bike in top condition. From basic repairs to full servicings, our aim is to keep you riding. We also have tools and workstations available for DIY repairs.
-        </p>
-        <a class="cta large mt-4" href="/bike-servicing/">
-          View Services
-        </a> 
-      </div>
+      <a class="cta mt-4 lg:mt-8" href="/bike-servicing/">
+        View Services
+      </a> 
     </div>
   </div>
 
@@ -157,6 +172,7 @@
     </h2>
      <ul class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8 lg:gap-12">
         {% for article in collections.news_pages.slice(0,3)  %}
+        {% set articleImageSrc = "" %}
         {% if article.data.banner %}
         {% set articleImageSrc %}
           {% imageBannerUrlFor article.data.banner, 2000 %}
@@ -165,8 +181,16 @@
         <li class="w-full flex justify-center">
             <a class="w-full" href="{{ article.url  | safe }}">
               <h3 class="block font-bold text-center mb-2 sm:min-h-[40px] leading-4">{{article.data.title | safe }}</h3>
-              <div class="w-full h-auto p-1 md:p-2 border-double border-4 border-df-gray">
-          {% image articleImageSrc, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
+              <div class="w-full h-auto p-1 md:p-2 border-double border-4 border-df-gray aspect-video">
+                {% if articleImageSrc.length > 0 %}
+                  {% image articleImageSrc, article.data.title, "(min-width: 640px) 100vw, 50vw", null, 'eager', null, [600, 1000], 'object-cover h-full aspect-video' %}
+                {% else %}
+                {{article.data.bannerText }}
+                  <div class="w-full h-full flex flex-col justify-center content-center text-center bg-gray-300 hover:bg-gray-400 transition-colors">
+                    <h3 class="font-df font-medium uppercase text-5xl sm:text-3xl lg:text-4xl">{{article.data.bannerTextTitle}}</h3>
+                    <span class="font-df uppercase text-base">{{article.data.bannerTextSubTitle}}</span>
+                  </div>
+                {% endif %}
               </div>
               <small>{{ article.data.date | htmlDateString('PP') }}</small>
             </a>
