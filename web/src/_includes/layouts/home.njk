@@ -10,11 +10,10 @@
 ]%}
 
 {% block content %}
-  <div class="relative aspect-[3/1] mt-24 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
-    <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col md:flex-row font-df-sans z-20 px-1 -rotate-3 skew-x-[-6deg] 2xl:pt-8 leading-7">
-      <span class="text-shadow text-df-orange font-black uppercase">Community&nbsp;</span>
-      {# <span class="block leading-none font-normal sm:leading-none ml-1 mr-2 -mt-2 font-script -rotate-12 skew-x-12 scale-[0.65]">and</span> #}
-      <span class="text-shadow text-df-orange font-black uppercase">Cycle Workshop</span>
+  <div class="relative aspect-[3/1] mt-28 sm:mt-36 md:mt-42 lg:mt-48 w-screen flex flex-col items-center">
+    <h1 class="text-center text-2xl sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl flex flex-col font-df-sans z-20 px-1 -rotate-3 skew-x-[-6deg] 2xl:pt-8 leading-0">
+      <span class="text-shadow text-df-orange font-black uppercase flex items-center self-start lg:-ml-[20%]">Getting People <small class="px-2 text-xl">on</small> Bikes</span>
+      <span class="text-shadow text-df-orange font-black uppercase flex items-center self-end lg:-mr-[20%]"><small class="px-2 text-xl">&</small> Keeping Them Riding</span>
     </h1>
      <ul class="relative mt-4 lg:mt-2 -rotate-3 skew-x-[-6deg] text-white text-center grid grid-cols-2 md:grid-cols-4 grid-flow-row auto-rows-min gap-2 uppercase text-sm lg:text-lg z-20"> 
       {% for feature in features %}
