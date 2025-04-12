@@ -29,18 +29,22 @@ Riding with others is a great way to meet new people and explore new routes (but
   {% set latlng = date.location.lat + ',' + date.location.lng %}
   {% set locationLink = "https://www.google.com/maps/search/" + latlng %}
   <div>
+  <a href="{{locationLink}}">
+  <h5 class="text-lg font-medium font-df-sans uppercase">
+    <span class="font-black">{{ date.startDate | htmlDateString('E d LLL HH:mm') }}</span> - {{date.title}}
+  </h5>
+  </a>
+  <div class="text-base">{{date.description | safe}}</div>
+  <div class="mt-2">
     <a href="{{locationLink}}">
-    <h5 class="text-lg font-medium font-df-sans uppercase">
-      <span class="font-black">{{ date.startDate | htmlDateString('E d LLL HH:mm') }}</span> - {{date.title}}
-    </h5>
-    </a>
-    <div class="text-base">{{date.description | safe}}</div>
-    <div class="mt-2">
-      <a href="{{locationLink}}">
       <img src="{{"https://maps.googleapis.com/maps/api/staticmap?center=" + latlng + "&key=" + env.google_maps_api_key + "&size=800x200&zoom=15&scale=2&markers=color:gray%7Clabel:BwaV%7Cscale:2%7Cicon:https://draftandflow.com/static/logos/draftandflowlogo-square-icon.png%7C" + latlng}}" alt="{{date.title}}" />
     </a>
-    </div>
-    <div class="text-sm uppercase text-df-blue font-medium font-df-sans text-right mt-2"><a href="{{locationLink}}">View on Google Maps</a></div>
+  </div>
+  <div class="text-sm uppercase text-df-blue font-medium font-df-sans text-right mt-2">
+    <a href="{{locationLink}}">
+      View on Google Maps
+    </a>
+  </div>
   </div>
   {% endfor %}
   </div>
@@ -55,4 +59,5 @@ Riding with others is a great way to meet new people and explore new routes (but
   {% endif %}
 </div>
 {% endfor %}
+</div>
 </div>
