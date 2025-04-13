@@ -25,37 +25,46 @@
       </li>
       {% endfor %}
     </ul>
-    <div class="absolute -z-1 top-0 md:-top-8 w-full mt-2 lg:-mt-14 vintage opacity-[.10] z-10 pb-12 md:pb-0 aspect-[1.75/1] md:aspect-[2.5/1] overflow-visible">
-        {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', false %}
-    </div>
-    <div class="relative w-full z-10 w-full flex flex-col justify-end items-center pt-16 md:pt-20 lg:pt-36 pb-12 px-2 lg:px-4 -mb-12 w-full">
-      <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl mb-4 flex flex-col md:flex-row justify-center font-df-sans mb-4">
-        <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 max-w-7xl text-center">    
-        <div class="order-2 md:order-1 flex flex-col items-center">
-          <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
-            👥 1-on-1
-          </h3>
-          <p class="text-sm md:text-base max-w-prose">Learn by doing, with a mechanic by your side. Work on your own bike while learning directly from an expert. Perfect if you want to build your skills with guidance.</p>
-        </div>
-        <div class="order-1 md:order-2 flex flex-col items-center">
-          <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
-            🔧 Expert
-          </h3>
-          <p class="text-sm md:text-base max-w-prose">Leave it to the experts. Bring your bike in and our experienced mechanics will take care of everything—from basic servicing to full rebuilds.</p>
-        </div>
-        <div  class="order-3 md:order-3 flex flex-col items-center">
-          <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
-            🚲 Do-It-Yourself
-          </h3>
-          <p class="text-sm md:text-base max-w-prose">For the hands-on rider who likes to get stuck in. Use our workshop space, tools, and stands to work on your own bike at your own pace. We’ll be around if you need advice, but you're in control.</p>
-        </div>
+    {# Abourt Us #}
+    <div class="mx-auto max-w-7xl px-2 lg:px-4 pt-6 mt-6 lg:mt-16 lg:pt-16">
+      <div class="text-center uppercase font-df-sans font-bold 2xl:pt-8 pb-2">About Draft & Flow</div>  
+      <div class="max-w-prose align-middle text-xl xl:text-2xl 2xl:text-3xl text-center">
+        <strong class="italic">Draft & Flow</strong> is a <strong class="italic">volunteer-run</strong> community cycle workshop in Aberfeldy. We are a <strong class="italic">not-for-profit</strong> organisation that aims to <strong class="italic">get people on bikes &amp; keep them riding</strong> by offering a range of cycle services including <strong class="italic">bike repairs</strong> & servicing, bike <strong class="italic">hires</strong>, pre-used bike sales, local <strong class="italic">riding info</strong>, and bike maintanance <strong class="italic">education</strong>.
       </div>
-      <a class="cta mt-4 lg:mt-8" href="/bike-servicing/">
-        View Services
-      </a> 
     </div>
+    <p class="absolute -z-1 top-0 md:-top-8 w-full mt-2 lg:-mt-14 vintage opacity-[.10] z-10 pb-12 md:pb-0 aspect-[1.75/1] md:aspect-[2.5/1] overflow-visible">
+        {% bannerImage 'src/static/images/bikes12.png', 'Service & Repairs for All Makes & Models', false %}
+    </p>
+  </div>
+
+  {# Servicing #}
+  <div class="relative w-full z-10 w-full flex flex-col justify-end items-center pt-16 mt-16 pb-12 px-2 lg:px-4 -mb-12 w-full border-t-2 border-df-gray">
+    <h2 class="text-center text-4xl sm:text-4xl lg:text-5xl mb-4 flex flex-col md:flex-row justify-center font-df-sans mb-4">
+      <span class="text-shadow text-df-orange font-black uppercase">Bike Servicing</span>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-8 max-w-7xl text-center">    
+      <div class="order-2 md:order-1 flex flex-col items-center">
+        <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
+          👥 1-on-1
+        </h3>
+        <p class="text-sm md:text-base max-w-prose">Learn by doing, with a mechanic by your side. Work on your own bike while learning directly from an expert. Perfect if you want to build your skills with guidance.</p>
+      </div>
+      <div class="order-1 md:order-2 flex flex-col items-center">
+        <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
+          🔧 Expert
+        </h3>
+        <p class="text-sm md:text-base max-w-prose">Leave it to the experts. Bring your bike in and our experienced mechanics will take care of everything—from basic servicing to full rebuilds.</p>
+      </div>
+      <div  class="order-3 md:order-3 flex flex-col items-center">
+        <h3 class="font-df-sans font-bold uppercase sm:text-xl text-2xl xl:text-3xl">
+          🚲 Do-It-Yourself
+        </h3>
+        <p class="text-sm md:text-base max-w-prose">For the hands-on rider who likes to get stuck in. Use our workshop space, tools, and stands to work on your own bike at your own pace. We’ll be around if you need advice, but you're in control.</p>
+      </div>
+    </div>
+    <a class="cta mt-4 lg:mt-8" href="/bike-servicing/">
+      View Services
+    </a> 
   </div>
 
   {# Up-Cycle Program #}
