@@ -40,9 +40,11 @@ Riding with others is a great way to meet new people and explore new routes (but
     </a>
   </div>
   <div class="text-sm uppercase text-df-blue font-medium font-df-sans text-right mt-2">
+    {% if date.komootCollection %}
     <a href="{{date.komootCollection}}">
       View on Komoot
     </a>
+    {% endif %}
   </div>
   </div>
   {% endfor %}

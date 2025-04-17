@@ -81,8 +81,7 @@ export default {
             {
               name: 'komootCollection',
               type: 'url',
-              title: 'Komoot Collection',
-              validation: rule => rule.required()
+              title: 'Komoot Collection'
             },
             {
               name: 'location',
