@@ -50,6 +50,7 @@ const getRides = async () => {
         description,
         startDate,
         endDate,
+        komootCollection,
         location {
           lat,
           lng

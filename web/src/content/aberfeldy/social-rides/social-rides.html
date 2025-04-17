@@ -27,9 +27,8 @@ Riding with others is a great way to meet new people and explore new routes (but
   {% else %}
   {% for date in futureDates %}
   {% set latlng = date.location.lat + ',' + date.location.lng %}
-  {% set locationLink = "https://www.google.com/maps/search/" + latlng %}
   <div>
-  <a href="{{locationLink}}">
+  <a href="{{date.komootCollection}}">
   <h5 class="text-lg font-medium font-df-sans uppercase">
     <span class="font-black">{{ date.startDate | htmlDateString('E d LLL HH:mm') }}</span> - {{date.title}}
   </h5>
@@ -41,7 +40,7 @@ Riding with others is a great way to meet new people and explore new routes (but
     </a>
   </div>
   <div class="text-sm uppercase text-df-blue font-medium font-df-sans text-right mt-2">
-    <a href="{{locationLink}}">
+    <a href="{{date.komootCollection}}">
       View on Google Maps
     </a>
   </div>
