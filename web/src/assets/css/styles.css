@@ -367,3 +367,51 @@ header.stuck .icons svg {
   @apply bg-df-blue font-medium uppercase p-4 text-xl lg:text-2xl hover:bg-df-blue-dark !important;
 }
 /* Lightspeed Button  - END */
+
+/* Ticker Styling */
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker-container {
+  @apply w-full overflow-hidden bg-yellow-300 font-bold font-df text-df-black uppercase absolute w-full mt-16 sm:mt-20 lg:mt-28 z-40;
+}
+.ticker-wrap {
+  @apply w-full;
+  box-sizing: content-box;
+  padding-left: 100%;
+}
+
+.ticker {
+  @apply whitespace-nowrap inline-block;
+    padding-right: 100%;
+    box-sizing: content-box;
+
+    -webkit-animation-iteration-count: infinite; 
+            animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+   -webkit-animation-name: ticker;
+           animation-name: ticker;
+    -webkit-animation-duration: 30s;
+            animation-duration: 30s;
+}
+
+.ticker:hover {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.ticker-item {
+  @apply inline-block px-4;
+}
