@@ -55,10 +55,10 @@
               <a href="https://maps.app.goo.gl/E5EVdseh8kJkP38T8" title="Location" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialLocation.svg', 'fill-df-tan sm:px-2 sm:-mt-1 sm:fill-df-black w-5 sm:w-auto sm:h-7 hover:fill-black' %}</a>
             </li>
             <li class="sm:h-full" >
-              <a href="https://wa.me/{{ metadata.social.whatsapp }}" title="WhatsApp" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-df-tan sm:px-2 sm:-mt-1 sm:fill-df-black w-4 sm:w-auto sm:h-6 hover:fill-black' %}</a>
+              <a href="https://wa.me/{{ metadata.social.whatsapp }}" title="WhatsApp: {{ metadata.social.whatsapp }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'fill-df-tan sm:px-2 sm:-mt-1 sm:fill-df-black w-4 sm:w-auto sm:h-6 hover:fill-black' %}</a>
             </li>
             <li class="sm:h-full" >
-              <a href="tel:{{ metadata.contact.phone }}" title="Phone - {{ metadata.contact.phone }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan sm:px-2 sm:-mt-1 sm:fill-df-black w-4 sm:w-auto sm:h-6 hover:fill-black' %}</a>
+              <a href="tel:{{ metadata.contact.phone }}" title="Phone: {{ metadata.contact.phone }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialPhone.svg', 'fill-df-tan sm:px-2 sm:-mt-1 sm:fill-df-black w-4 sm:w-auto sm:h-6 hover:fill-black' %}</a>
             </li>
             <li class="sm:hidden md:inline sm:h-full" >
               <a href="mailto:{{ metadata.contact.email }}" title="Email - {{ metadata.contact.email }}" class="h-full flex items-center">{% svgIcon 'src/assets/icons/socialEmail.svg', 'fill-df-tan sm:px-2 sm:-mt-1 sm:fill-df-black w-4 sm:w-auto sm:h-7 hover:fill-black' %}</a>
@@ -126,7 +126,7 @@
   <div class="ticker-wrap">
     <div class="ticker">
       <div class="ticker-item">Closed May 20 - 31 for holidays</div>
-      <div class="ticker-item">On-Call: <a href="tel:{{ metadata.contact.phone }}" title="Phone - {{ metadata.contact.phone }}">{{metadata.contact.phone}} - Limited availability due to holidays</a></div>
+      <div class="ticker-item">On-Call: <a href="tel:{{ metadata.contact.phone }}" title="Phone: {{ metadata.contact.phone }}">{{metadata.contact.phone}} - Limited availability due to holidays</a></div>
     </div>
   </div>
 </div>
