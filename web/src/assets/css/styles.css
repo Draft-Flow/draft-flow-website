@@ -383,7 +383,7 @@ header.stuck .icons svg {
 }
 
 .ticker-container {
-  @apply w-full overflow-hidden bg-yellow-300 font-bold font-df text-df-black uppercase absolute w-full mt-16 sm:mt-20 lg:mt-28 z-40;
+  @apply w-full overflow-hidden bg-yellow-300 bg-opacity-50 font-bold font-df text-df-black uppercase absolute w-full mt-16 sm:mt-20 lg:mt-28 z-40;
 }
 .ticker-wrap {
   @apply w-full;
@@ -413,5 +413,5 @@ header.stuck .icons svg {
 }
 
 .ticker-item {
-  @apply inline-block px-4;
+  @apply inline-block content-center px-4;
 }
