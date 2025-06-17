@@ -22,7 +22,7 @@ When installing dependencies, ensure you're in the correct directory - either `/
 3. Run `npm ci`
 4. Copy the `.env.development.template` file to `.env.development` for both the `/studio` and `/web` directories
 5. Fill in the necesssary environment variables in both `env.development` files
-6. Run `npm run dev` to start both the website and Sanity Studio locally
+6. Run `npm start` to start both the website and Sanity Studio locally
 7. Open the website at [localhost:8888](http://localhost:8888)
 8. Open the CMS dashboard at [locahost:3333](https://localhost:3333)
 9. Edit the files in `/web` or `/studio` to edit the website or CMS
