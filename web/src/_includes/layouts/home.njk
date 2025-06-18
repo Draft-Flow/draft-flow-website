@@ -239,9 +239,9 @@
   "@context": "https://schema.org",
   "@type": "BikeStore",
   "image": [
-    "https://example.com/photos/1x1/photo.jpg",
-    "https://example.com/photos/4x3/photo.jpg",
-    "https://example.com/photos/16x9/photo.jpg"
+    "{{ env.url + '/static/images/banner-bikes.jpg' }}",
+    "{{ env.url + '/static/images/banner-ebikes.jpg' }}",
+    "{{ env.url + '/static/images/banner-service.jpg' }}"
    ],
   "@id": "{{ metadata.url }}",
   "name": "{{ metadata.title | safe }}",
