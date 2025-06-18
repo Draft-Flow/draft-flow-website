@@ -54,7 +54,7 @@
     "datePublished": "{{page.date}}",
     "dateCreated": "{{page.date}}",
     "dateModified": "{{ article.updatedAt }}",
-    "description": "{{ description or metadata.description }}",
+    "description": "{{ seo.description or description or metadata.description }}",
     "articleBody": "{{ article.content | striptags(true) }}"
     }
   </script>
