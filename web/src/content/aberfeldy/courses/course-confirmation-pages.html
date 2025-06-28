@@ -12,6 +12,9 @@ eleventyComputed:
     title: "{{ course.title }}"
     key: "{{ course.title }}"
   title: "{{ course.title }}"
+  seo:
+    title: "Course Confirmed - {{ course.title }}"
+    description: "{{ course.intro }}"
 tags:
   - courses
 permalink: "{{ course.permalink }}confirmed"

@@ -18,6 +18,9 @@ eleventyComputed:
   banner:
     ref: "{{ subcategory.banner.ref }}"
     alt: "{{ subcategory.banner.alt }}"
+  seo:
+    title: "{{ subcategory.title }} | Shop"
+    description: "{{ subcategory.oneLiner }}"
   eleventyNavigation:
     parent: "{{ subcategory.parent.categoryID }}"
     key: "{{ subcategory.categoryID }}"

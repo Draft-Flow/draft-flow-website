@@ -13,6 +13,9 @@ eleventyComputed:
   id: "{{ refurb.id }}"
   available: "{{ refurb.available }}"
   title: "{{ refurb.name }}"
+  seo:
+    title: "{{ refurb.name }} | Refurbished Bike"
+    description: "{{ refurb.description | striptags(true) }}"
   eleventyNavigation:
     parent: "Refurbs"
     key: "{{ title }}"

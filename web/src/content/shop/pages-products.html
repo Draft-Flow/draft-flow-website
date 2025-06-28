@@ -40,6 +40,10 @@
       return null
     },
     oneLiner: data => data.product.oneLiner,
+    seo: {
+      title: data => data.product.seo?.title || `${data.product.name}`,
+      description: data => data.product.seo?.description || data.product.oneLiner
+    },
     options: data => {
       const imageURL = require('../../../src/utils/shortcodes/shortcodeImageURL.js')
       if (!data.product.options) {

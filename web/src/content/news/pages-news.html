@@ -17,6 +17,9 @@ eleventyComputed:
   bannerTextSubTitle: "{{ article.bannerText.subtitle | safe }}"
   firstImage: "{{ article.firstImage }}"
   description: "{{ article.seo.description | escape | safe }}"
+  seo:
+    title: "{{ article.seo.title | escape | safe }}"
+    description: "{{ article.seo.description | escape | safe }}"
   date: "{{ article.createdAt }}"
   updatedAt: "{{ article.updatedAt }}"
   eleventyNavigation:
