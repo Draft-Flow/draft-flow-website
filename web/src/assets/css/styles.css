@@ -78,13 +78,12 @@ header.stuck .icons svg {
   
 }
 
-.nav-item:hover > a,
-.nav-item:focus-within > a {
+.nav-item:hover > div > a,
+.nav-item:focus-within > div > a {
   @apply bg-df-black text-df-tan-darkest z-40;
 }
 
 .nav-item:hover > .subnav,
-.nav-item > a:hover + .subnav,
 .nav-item:focus-within > .subnav {
   @apply grid sm:flex;
 }
