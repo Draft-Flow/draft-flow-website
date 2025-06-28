@@ -7,15 +7,18 @@ const DEFAULT_METADATA = {
 }
 
 const getMetaData = async () => {
-  const data = await client
-    .fetch(groq`
+  try {
+    const data = await client.fetch(groq`
     *[_type == "siteSettings"] {
       ...
     }[0]
   `)
-    .catch(() => ({}))
-
-  return { ...DEFAULT_METADATA, ...(data || {}) }
+    return { ...DEFAULT_METADATA, ...(data || {}) }
+  } catch (err) {
+    // eslint-disable-next-line
+    console.error(err)
+    return DEFAULT_METADATA
+  }
 }
 
 module.exports = getMetaData
