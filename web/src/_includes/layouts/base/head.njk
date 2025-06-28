@@ -49,12 +49,12 @@
     <link rel="stylesheet" href="/css/styles.css">
 
     <meta name="generator" content="Eleventy">
-    <meta name="Description" content="{{ description or metadata.description }}">
+    <meta name="description" content="{{ seo.description or description or metadata.description }}">
     <link rel="canonical" href="{{ env.url }}{{ page.url }}" />
     <meta property="fb:app_id" content="369428899362893" />
     <meta property="og:title" content="{{ title or metadata.title | safe }}" />
     <meta property="og:url" content="{{ env.url }}{{ page.url }}" />
-    <meta property="og:description" content="{{ description or metadata.description }}" />
+    <meta property="og:description" content="{{ seo.description or description or metadata.description }}" />
     {% set ogImage %}{% imageBannerUrlFor banner, 1000 %}{% endset %}
     <meta property="og:image" content="{% if ogImage != "undefined" %}{{ogImage}}{% else %}{{env.url + "/static/logos/draftandflow-square.png" }}{% endif %}" />
     <meta property="og:type" content="article" />

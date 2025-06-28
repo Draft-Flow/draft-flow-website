@@ -11,6 +11,9 @@ pagination:
 permalink: local-routes/{{ route.slug }}/index.html
 eleventyComputed:
   title: "{{ route.title }}"
+  seo:
+    title: "{{ route.title }} | Cycling Route"
+    description: "{{ route.excerpt }}"
   eleventyNavigation:
     parent: Local Routes
     key: "{{ route.id }}"

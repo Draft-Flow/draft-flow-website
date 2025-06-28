@@ -13,6 +13,9 @@ eleventyComputed:
   title: "{{ category.title }}"
   body: "{{ category.body }}"
   oneLiner: "{{ category.oneLiner }}"
+  seo:
+    title: "{{ category.title }} | Shop"
+    description: "{{ category.oneLiner }}"
   eleventyNavigation:
     parent: "Shop"
     key: "{{ category.categoryID }}"
