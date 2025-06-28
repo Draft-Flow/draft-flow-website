@@ -46,8 +46,12 @@
           </li>
           {% endfor %}
           <li class="contact sm:hidden flex flex-col items-center gap-1 mb-4 text-base normal-case">
-            <a href="tel:{{ metadata.contact.phone }}" class="hover:underline">{{ metadata.contact.phone }}</a>
-            <a href="https://wa.me/{{ metadata.social.whatsapp }}" class="hover:underline">WhatsApp: {{ metadata.social.whatsapp }}</a>
+            <a href="tel:{{ metadata.contact.phone }}" class="hover:underline flex items-center gap-1">
+              {% svgIcon 'src/assets/icons/socialPhone.svg', 'w-4 inline-block -mt-1' %}{{ metadata.contact.phone }}
+            </a>
+            <a href="https://wa.me/{{ metadata.social.whatsapp }}" class="hover:underline flex items-center gap-1">
+              {% svgIcon 'src/assets/icons/socialWhatsApp.svg', 'w-4 inline-block -mt-1' %}{{ metadata.social.whatsapp }}
+            </a>
           </li>
           <li class="icons nav-item relative sm:flex-1 flex flex-col sm:flex-row mb-4 sm:mb-0 pb-1 sm:pb-0 leading-6 hover:z-40 focus-within:z-40" id="social">
           <ul class="w-full justify-center sm:justify-end grid grid-rows-1 grid-flow-col gap-x-2 sm:gap-x-0 lg:gap-x-2 xl:gap-x-4 gap-y-0 items-center">
