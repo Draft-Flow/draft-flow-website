@@ -89,6 +89,10 @@ header.stuck .icons svg {
   @apply grid sm:flex;
 }
 
+.subnav-toggle[aria-expanded="true"] svg {
+  @apply rotate-180;
+}
+
 .nav-item-active {
   
 }
