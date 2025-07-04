@@ -40,7 +40,7 @@
             </h3>
             {% include 'src/_includes/layouts/includes/newsletterForm.njk' %}
         </div>
-        <div class="subscribe-notice hidden max-w-prose mx-auto text-center my-4 text-df-tan font-sans text-xs uppercase ">
+        <div class="subscribe-notice max-w-prose mx-auto text-center my-4 text-df-tan font-sans text-xs uppercase ">
             {% include 'src/_includes/layouts/includes/newsletterNotice.njk' %}
         </div>
     </div>
@@ -162,13 +162,3 @@
     </div> #}
 </footer>
 
-<script>
-    const subscribeEmail = document.querySelector('#subscribe .subscribe-email')
-    const subscribeNotice = document.querySelector('#subscribe .subscribe-notice')
-
-    subscribeEmail.addEventListener('input', (e) => {
-        if (e.target.validity.valid) {
-            subscribeNotice.classList.remove('hidden')
-        }
-    })
-</script>
