@@ -12,18 +12,26 @@ const requestOptions = {
 
 const posts = await fetch(`https://graph.instagram.com/me/media?fields=id,caption,permalink,media_url,thumbnail_url,media_type,timestamp,children{media_url}&limit=20&access_token=${process.env.INSTAGRAM_TOKEN}`, requestOptions)
   .then(response => response.json())
-  .then(result => result)
   // eslint-disable-next-line
   .catch(error => console.log('error', error))
 
+if (!posts || !posts.data) {
+  console.log('Instagram data unavailable, returning empty array')
+  return []
+}
+
 const postsWithSizes = await Promise.all(
-  await posts.data.map(async (post) => {
+  posts.data.map(async (post) => {
   const file = post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url
   const image = await fetch(file)
     .then(response => response.arrayBuffer())
     // eslint-disable-next-line
     .catch(error => console.log('error', error))
-  
+
+  if (!image) {
+    return null
+  }
+
   const buffer = Buffer.from(image, "utf-8")
   const dimensions = await imageSize(buffer)
 
@@ -43,7 +51,7 @@ fetch(`https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_to
 // eslint-disable-next-line
 .catch(error => console.log('error', error))
 
-  return postsWithSizes
+  return postsWithSizes.filter(Boolean)
 }
 
 
